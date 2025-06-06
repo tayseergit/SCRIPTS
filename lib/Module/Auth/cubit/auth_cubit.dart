@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
+import 'package:lms/Helper/global_func.dart';
 import 'package:lms/Helper/http_helper.dart';
 import 'dart:convert';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -50,12 +51,8 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void validEmail(String email) {
-    final RegExp emailRegex = RegExp(
-      r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
-    );
-
-    if (email.isNotEmpty) {
-      if (emailRegex.hasMatch(email)) {
+     
+      if (GlobalFunc.validEmail(email)) {
         isEmail = true;
         showIsNotEmail = false;
         emit(IsEmail());
@@ -64,20 +61,12 @@ class AuthCubit extends Cubit<AuthState> {
         showIsNotEmail = true;
         emit(IsNotEmail());
       }
-    } else {
-      isEmail = false;
-      showIsNotEmail = false;
-      emit(IsNotEmail());
-    }
+    
   }
 
   void passwordValid({required String password}) {
     // Check length (>= 8)
-    if (password.length < 8 ||
-        !password.contains(RegExp(r'[A-Z]')) ||
-        !password.contains(RegExp(r'[a-z]')) ||
-        !password.contains(RegExp(r'[0-9]')) ||
-        !password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+    if (!GlobalFunc.passwordValid(password: password)) {
       emit((FalsePasswordFormat()));
       isPassWord = false;
     } else {
@@ -88,11 +77,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   void passwordConfValid({required String password}) {
     // Check length (>= 8)
-    if (password.length < 8 ||
-        !password.contains(RegExp(r'[A-Z]')) ||
-        !password.contains(RegExp(r'[a-z]')) ||
-        !password.contains(RegExp(r'[0-9]')) ||
-        !password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+    if (!GlobalFunc.passwordValid(password: password)) {
       emit((FalsePasswordConfirmationFormat()));
       isPassWordconf = false;
     } else {
@@ -149,8 +134,7 @@ class AuthCubit extends Cubit<AuthState> {
  
 final GoogleSignIn _googleSignIn = GoogleSignIn(
   scopes: ['email', 'profile'],
-    serverClientId: '510480483026-j9e86o6eiqv1shl90iqvbk2jp4e3ho62.apps.googleusercontent.com',
-
+ 
 );
 
 Future<void> loginWithGoogle() async {
