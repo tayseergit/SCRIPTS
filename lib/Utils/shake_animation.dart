@@ -1,34 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:snackbar_pro/snackbar_pro.dart';
+import 'package:lms/Constant/AppColors.dart';
 
-@immutable
-class ShakeWidget extends StatelessWidget {
-  final Duration duration;
-  final double deltaX;
-  final Widget child;
-  final Curve curve;
-
-  const ShakeWidget({
-    super.key,
-    this.duration = const Duration(milliseconds: 500),
-    this.deltaX = 40,
-    this.curve = Curves.bounceOut,
-    required this.child,
-  });
-
-   double shake(double animation) =>
-      2 * (0.5 - (0.5 - curve.transform(animation)).abs());
-
-  @override
-  Widget build(BuildContext context) {
-    return TweenAnimationBuilder<double>(
-      key: key,
-      tween: Tween(begin: 0.0, end: 1.0),
-      duration: duration,
-      builder: (context, animation, child) => Transform.translate(
-        offset: Offset(deltaX * shake(animation), 0),
-        child: child,
+class CustomSnackbar {
+  static void show({
+    required BuildContext context,
+    required Color fillColor,
+    required String message,
+    int duration = 4,
+  }) {
+    // Show snackbar using SnackBarPro
+    SnackBarPro.show(
+      context,
+      duration: Duration(seconds: duration),
+      config: SnackBarProConfig(
+        typingSpeed: 140,
+        showPersonFigure: false,
+        gradientColors: [fillColor, fillColor],
+        message: message,
       ),
-      child: child,
     );
   }
 }

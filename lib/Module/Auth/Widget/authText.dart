@@ -4,22 +4,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AuthText extends StatelessWidget {
   final String text;
   final double size;
-  final Color coloer;
+  final Color color;
   final FontWeight fontWeight;
   const AuthText({
     super.key,
     required this.text,
     required this.size,
-    required this.coloer,
+    required this.color,
     required this.fontWeight,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Text(text, style: TextStyle(
-      color: coloer,
-      fontSize: size.sp,
-      fontWeight: fontWeight,
-    ));
+    return Text(
+      text,
+      style: TextStyle(color: color, fontSize: size.sp, fontWeight: fontWeight),
+    );
   }
 }

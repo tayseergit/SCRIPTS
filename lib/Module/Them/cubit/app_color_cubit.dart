@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lms/Module/Auth/cubit/app_color_state.dart';
-
+import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
   ThemeCubit() : super(ThemeState.light());

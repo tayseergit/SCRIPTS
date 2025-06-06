@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/AppColors.dart';
+import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/Auth/Widget/Container.dart';
 import 'package:lms/Module/Auth/Widget/CustomTextField.dart';
 import 'package:lms/Module/Auth/Widget/authText.dart';
-import 'package:lms/Module/Auth/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class Resetpassword extends StatelessWidget {
   const Resetpassword({super.key});
@@ -14,19 +16,20 @@ class Resetpassword extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController newpassword = TextEditingController();
     final TextEditingController confirmNewPassword = TextEditingController();
+    ThemeState appColors = context.watch<ThemeCubit>().state;
     return Scaffold(
-      backgroundColor: context.watch<ThemeCubit>().state.backgroundColor,
+      backgroundColor: appColors.pageBackground,
       body: ListView(
         padding: EdgeInsets.only(top: 85, left: 19, right: 19),
         children: [
-          Image.asset('assets/images/image.png', height: 150.h, width: 150.w),
+          Image.asset(Images.logo, height: 150.h, width: 150.w),
           SizedBox(height: 16.h),
           Align(
             alignment: Alignment.center,
             child: AuthText(
               text: 'Forget Password ',
               size: 18,
-              coloer: Appcolors.primary,
+              color: appColors.primary,
               fontWeight: FontWeight.w900,
             ),
           ),
@@ -35,7 +38,7 @@ class Resetpassword extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: AuthText(
               text: 'New Password',
-              coloer: context.watch<ThemeCubit>().state.textColor,
+              color: appColors.secondText,
               size: 13,
               fontWeight: FontWeight.w400,
             ),
@@ -43,16 +46,16 @@ class Resetpassword extends StatelessWidget {
           CustomTextField(
             controller: newpassword,
             borderRadius: 5,
-            borderColor: Appcolors.textfilde,
-            fillColor: context.watch<ThemeCubit>().state.textFieldColor,
-            textColor: context.watch<ThemeCubit>().state.textColor,
+            borderColor: appColors.border,
+            fillColor: appColors.fieldBackground,
+            textColor: appColors.mainText,
           ),
           SizedBox(height: 50.h),
           Align(
             alignment: Alignment.centerLeft,
             child: AuthText(
               text: 'Confirm Password',
-              coloer: context.watch<ThemeCubit>().state.textColor,
+              color: appColors.secondText,
               size: 13,
               fontWeight: FontWeight.w400,
             ),
@@ -60,9 +63,9 @@ class Resetpassword extends StatelessWidget {
           CustomTextField(
             controller: confirmNewPassword,
             borderRadius: 5,
-            borderColor: Appcolors.textfilde,
-            fillColor: context.watch<ThemeCubit>().state.textFieldColor,
-            textColor: context.watch<ThemeCubit>().state.textColor,
+            borderColor: appColors.border,
+            fillColor: appColors.fieldBackground,
+            textColor: appColors.mainText,
           ),
           SizedBox(height: 64.h),
           Padding(
@@ -70,11 +73,11 @@ class Resetpassword extends StatelessWidget {
             child: OnBordingContainer(
               width: 223,
               height: 50,
-              color: Appcolors.primary,
+              color: appColors.primary,
               widget: AuthText(
                 text: 'Reset Password',
-                size: 20,
-                coloer: Appcolors.textprem,
+                size: 18,
+                color: appColors.mainText,
                 fontWeight: FontWeight.w700,
               ),
             ),
