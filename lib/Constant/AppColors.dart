@@ -20,6 +20,7 @@ class AppColors {
   static const Color darkText = Color(0xFFCED2E6);
   static const Color lightPrimer = Color(0x1A0061FF);
   static const Color border1 = Color(0x330F9CEF);
+  static const Color iconSearsh=Color(0xff8C8E98);
   static const Color gray = Color(0xFF888888);
   static const Color textField =
       Color(0xFF888888); // from "variable collection.gray"

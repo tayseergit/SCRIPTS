@@ -35,3 +35,40 @@ class OnBordingContainer extends StatelessWidget {
     );
   }
 }
+
+
+
+class OnBordingContainerMore extends StatelessWidget {
+  final double width;
+  final double height;
+  final Color color;
+  final Widget widget;
+  final Function()? onTap;
+
+  const OnBordingContainerMore({
+    super.key,
+    required this.width,
+    required this.height,
+    required this.color,
+    required this.widget,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(5.r),
+      child: Container(
+        width: width.w,
+        height: height.h,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(30.r),
+        ),
+        child: widget,
+      ),
+    );
+  }
+}
