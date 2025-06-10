@@ -2,17 +2,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lms/Constant/AppColors.dart';
 import 'package:lms/Constant/images.dart';
-import 'package:lms/Module/Auth/Widget/Container.dart';
-import 'package:lms/Module/Auth/Widget/authText.dart';
+import 'package:lms/Module/mainWidget/Container.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Contest/TabbuttonsforcontestCubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class Tabbuttonsforcontest extends StatelessWidget {
   const Tabbuttonsforcontest({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ThemeState appColors = context.watch<ThemeCubit>().state;
+
     final selectedTab = context.watch<TabbuttonsforcontestCubit>().state;
 
     final labels = ['Active', 'Upcoming', 'Past'];
@@ -34,7 +37,7 @@ class Tabbuttonsforcontest extends StatelessWidget {
             child: OnBordingContainer(
               width: double.infinity,
               height: 45.h,
-              color: isSelected ? AppColors.primary : Colors.grey[100]!,
+              color: isSelected ? appColors.primary : appColors.pageBackground,
               widget: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -42,34 +45,31 @@ class Tabbuttonsforcontest extends StatelessWidget {
                     icons[index],
                     width: index == 2 ? 26 : 18,
                     height: index == 2 ? 26 : 18,
-                    color:
-                        isSelected
-                            ? AppColors.white
-                            : AppColors.black,
+                    color: isSelected ? appColors.pageBackground : appColors.mainText,
                   ),
                   Text(
                     labels[index],
                     style: TextStyle(
-                      color: isSelected ? AppColors.white : AppColors.black,
+                      color: isSelected ? appColors.pageBackground : appColors.mainText,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   CircleAvatar(
-                    backgroundColor: AppColors.ok,
+                    backgroundColor: appColors.ok,
                     radius: 10,
                     child: AuthText(
                       text: counts[index].toString(),
                       size: 10,
-                      color: AppColors.black,
+                      color: appColors.mainText,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                 ],
               ),
-              onTap:
-                  () => context.read<TabbuttonsforcontestCubit>().changeTabbb(
-                    index,
-                  ),
+              onTap: () =>
+                  context.read<TabbuttonsforcontestCubit>().changeTabbb(
+                        index,
+                      ),
             ),
           ),
         );

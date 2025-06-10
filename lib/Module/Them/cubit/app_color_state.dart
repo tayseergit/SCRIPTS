@@ -18,6 +18,9 @@ class ThemeState {
   final Color secondText;
   final Color purple;
   final Color border;
+  final Color iconSearsh;
+  final Color darkText;
+  final Color orang;
 
   final Color red;
   final LinearGradient linerContainer;
@@ -42,6 +45,9 @@ class ThemeState {
     required this.mainIconColor,
     required this.seocndIconColor,
     required this.border,
+    required this.iconSearsh,
+    required this.darkText,
+    required this.orang,
     //
     required this.lightGray,
   });
@@ -61,6 +67,9 @@ class ThemeState {
       mainIconColor: const Color(0xFF151B22),
       seocndIconColor: const Color(0xFF81B9DE),
       border: const Color(0x330F9CEF),
+      iconSearsh: Color(0xff8C8E98),
+      darkText: Color(0xFFCED2E6),
+      orang: Color(0xffFF9500),
       //
       lightGray: const Color(0xFFDDDDDD),
       lihgtPrimer: const Color(0x1A0061FF),
@@ -97,6 +106,10 @@ class ThemeState {
       mainIconColor: const Color(0xFF151B22),
       seocndIconColor: const Color(0xFF81B9DE),
       border: const Color(0x330F9CEF),
+      iconSearsh: Color(0xff8C8E98),
+      darkText: Color(0xFFCED2E6),
+      orang: Color(0xffFF9500), 
+
       //
       lightGray: const Color(0xFFDDDDDD),
       lihgtPrimer: const Color(0x1A0061FF),

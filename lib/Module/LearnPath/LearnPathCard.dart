@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lms/Constant/AppColors.dart';
 import 'package:lms/Constant/images.dart';
-import 'package:lms/Module/Auth/Widget/Container.dart';
-import 'package:lms/Module/Auth/Widget/authText.dart';
+import 'package:lms/Module/mainWidget/Container.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/LearnPath/TopWaveClipper.dart' show TopWaveClipper;
+import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class Learnpathcard extends StatelessWidget {
   const Learnpathcard({super.key});
 
   @override
   Widget build(BuildContext context) {
+        ThemeState appColors = context.watch<ThemeCubit>().state;
+
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.gray, width: 1),
+        border: Border.all(color: appColors.secondText, width: 1),
         borderRadius: BorderRadius.circular(5),
       ),
       child: OnBordingContainer(
         width: 180,
         height: 250,
-        color: AppColors.white,
+        color: appColors.pageBackground,
         widget: ListView(
           children: [
             Container(
@@ -32,7 +36,7 @@ class Learnpathcard extends StatelessWidget {
                     child: Container(
                       height: 100.h,
                       width: double.infinity.w,
-                      color: Colors.blue.shade100,
+                      color: appColors.fieldBackground,
                     ),
                   ),
                   Padding(
@@ -52,11 +56,11 @@ class Learnpathcard extends StatelessWidget {
                       child: OnBordingContainer(
                         width: 60,
                         height: 40,
-                        color: AppColors.ok,
+                        color: appColors.ok,
                         widget: AuthText(
                           text: 'Free',
                           size: 12,
-                          color: AppColors.black,
+                          color: appColors.mainText,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -80,18 +84,18 @@ class Learnpathcard extends StatelessWidget {
                   OnBordingContainer(
                     width: 130,
                     height: 40,
-                    color: AppColors.primary,
+                    color: appColors.primary,
                     widget: AuthText(
                       text: 'View Path',
                       size: 20,
-                      color: AppColors.white,
+                      color: appColors.pageBackground,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                   OnBordingContainer(
                     width: 90,
                     height: 30,
-                    color: AppColors.lihgtPrimer,
+                    color: appColors.purple,
                     widget: Padding(
                       padding:  EdgeInsets.symmetric(horizontal: 7.w),
                       child: Row(
@@ -100,12 +104,12 @@ class Learnpathcard extends StatelessWidget {
                             Images.courses3,
                             width: 19.w,
                             height: 19.h,
-                            color: AppColors.black,
+                            color: appColors.mainText,
                           ),
                           SizedBox(width: 2),
                           AuthText(
                             text: '40 Hours',
-                            color: AppColors.black,
+                            color: appColors.mainText,
                             fontWeight: FontWeight.w400,
                             size: 13,
                           ),
@@ -116,7 +120,7 @@ class Learnpathcard extends StatelessWidget {
                   OnBordingContainer(
                     width: 90,
                     height: 30,
-                    color: AppColors.lihgtPrimer,
+                    color: appColors.purple,
                     widget: Padding(
                       padding:  EdgeInsets.symmetric(horizontal: 7.w),
                       child: Row(
@@ -125,12 +129,12 @@ class Learnpathcard extends StatelessWidget {
                               Images.courses2,
                               height: 19.h,
                               width: 19.w,
-                              color: AppColors.black,
+                              color: appColors.mainText,
                             ),
                             SizedBox(width: 2),
                             AuthText(
                               text: '30 vedio',
-                              color: AppColors.black,
+                              color: appColors.mainText,
                               fontWeight: FontWeight.w400,
                               size: 13,
                             ),

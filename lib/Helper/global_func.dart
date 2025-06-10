@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class GlobalFunc {
   static bool passwordValid({required String password}) {

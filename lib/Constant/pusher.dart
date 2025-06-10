@@ -1,7 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lms/Constant/AppColors.dart';
 import 'package:page_transition/page_transition.dart';
 
 // List<BoxShadow>? blueBoxShadow = [

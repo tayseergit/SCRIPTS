@@ -2,20 +2,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lms/Constant/AppColors.dart';
-import 'package:lms/Module/Auth/Widget/authText.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/LearnPath/gridViewLearnPath.dart';
 import 'package:lms/Module/MyLearn/CourseTabCubit.dart';
 import 'package:lms/Module/MyLearn/SectionCubit.dart';
 import 'package:lms/Module/MyLearn/TabButtonsss.dart';
 import 'package:lms/Module/MyLearn/gridViewMyLearn.dart';
 import 'package:lms/Module/MyLearn/mylearnMainTabButton.dart';
+import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class Mylearn extends StatelessWidget {
   const Mylearn({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ThemeState appColors = context.watch<ThemeCubit>().state;
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => SectionCubit()),
@@ -23,16 +25,16 @@ class Mylearn extends StatelessWidget {
         BlocProvider(create: (_) => PathTabCubit()),
       ],
       child: Scaffold(
-        backgroundColor:AppColors.white,
+        backgroundColor:appColors.pageBackground,
         appBar: AppBar(
           elevation: 0,
           scrolledUnderElevation: 0,
-          backgroundColor:AppColors.white,
+          backgroundColor:appColors.pageBackground,
           title: Center(
             child: AuthText(
               text: 'Learn',
               size: 24,
-              color: AppColors.black,
+              color: appColors.mainText,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -41,7 +43,7 @@ class Mylearn extends StatelessWidget {
           padding: EdgeInsets.all(16),
           child: Column(
             children: [
-              // My Courses - My Path Switch
+             
               BlocBuilder<SectionCubit, int>(
                 builder: (context, sectionIndex) {
                   return Row(
