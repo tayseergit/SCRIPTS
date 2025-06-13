@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:lms/Constant/AppColors.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_state.dart';
+ 
 class ReadMoreInlineText extends StatefulWidget {
   final String text;
   final int trimLength;
@@ -21,6 +23,8 @@ class _ReadMoreInlineTextState extends State<ReadMoreInlineText> {
 
   @override
   Widget build(BuildContext context) {
+        ThemeState appColors = context.watch<ThemeCubit>().state;
+
     final String fullText = widget.text;
     final bool isLong = fullText.length > widget.trimLength;
     final String visibleText =
@@ -30,7 +34,7 @@ class _ReadMoreInlineTextState extends State<ReadMoreInlineText> {
       text: TextSpan(
         style: TextStyle(
           fontSize: 14,
-          color: AppColors.gray,
+          color: appColors.secondText,
           fontWeight: FontWeight.w600,
         ),
         children: [
@@ -39,7 +43,7 @@ class _ReadMoreInlineTextState extends State<ReadMoreInlineText> {
             TextSpan(
               text: '... Read More',
               style: TextStyle(
-                color: AppColors.primary,
+                color: appColors.primary,
                 fontWeight: FontWeight.bold,
               ),
               recognizer: TapGestureRecognizer()

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lms/Constant/AppColors.dart';
-import 'package:lms/Constant/images.dart';
+ import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Auth/View/resetPassword.dart';
-import 'package:lms/Module/Auth/Widget/Container.dart';
-import 'package:lms/Module/Auth/Widget/CustomTextField.dart';
-import 'package:lms/Module/Auth/Widget/authText.dart';
+ 
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/Module/mainWidget/Container.dart';
+import 'package:lms/Module/mainWidget/CustomTextField.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
 
 class Forgetpassword extends StatelessWidget {
   const Forgetpassword({super.key});

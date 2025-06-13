@@ -1,9 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lms/Constant/AppColors.dart';
-import 'package:lms/Module/Auth/View/Widget/Container.dart';
+import 'package:lms/Module/mainWidget/Container.dart';
+import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class TabButtonsss extends StatelessWidget {
   final List<String> labels;
@@ -19,6 +21,7 @@ class TabButtonsss extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState appColors = context.watch<ThemeCubit>().state;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: List.generate(labels.length, (index) {
@@ -30,11 +33,11 @@ class TabButtonsss extends StatelessWidget {
             child: OnBordingContainer(
               width: double.infinity,
               height: 40.h,
-              color: isSelected ? AppColors.primary : Colors.grey[100]!,
+              color: isSelected ? appColors.primary : appColors.fieldBackground,
               widget: Text(
                 labels[index],
                 style: TextStyle(
-                  color: isSelected ? Colors.white : Colors.black,
+                  color: isSelected ? appColors.pageBackground : appColors.mainText,
                   fontWeight: FontWeight.bold,
                 ),
               ),

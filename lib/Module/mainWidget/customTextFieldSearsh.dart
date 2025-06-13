@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class Customtextfieldsearsh extends StatefulWidget {
   final TextEditingController controller;
@@ -12,7 +15,6 @@ class Customtextfieldsearsh extends StatefulWidget {
   final Color textColor;
   final Color hintColor;
   final Color fillColor;
-  final Color hintColors;
   final double borderRadius;
   final double hintFontSize;
   final String? errorText;
@@ -34,7 +36,6 @@ class Customtextfieldsearsh extends StatefulWidget {
     this.borderRadius = 12,
     this.errorText,
     this.hintText,
-    this.hintColors = Colors.black,
     this.hintFontSize = 3,
     this.hintFontWeight,
   });
@@ -54,6 +55,8 @@ class _CustomTextFieldState extends State<Customtextfieldsearsh> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState appColors = context.watch<ThemeCubit>().state;
+
     return TextField(
       controller: widget.controller,
       obscureText: _obscure,
@@ -69,13 +72,12 @@ class _CustomTextFieldState extends State<Customtextfieldsearsh> {
         hintStyle: TextStyle(
           fontSize: widget.hintFontSize,
           fontWeight: widget.hintFontWeight,
-          color: widget.hintColor,
+          color: appColors.secondText,
         ),
         filled: true,
         fillColor: widget.fillColor,
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.suffixIcon,
-
         errorText: widget.errorText,
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: widget.borderColor, width: 3.w),

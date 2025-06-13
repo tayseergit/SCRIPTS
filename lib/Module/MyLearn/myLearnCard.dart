@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lms/Constant/AppColors.dart';
 import 'package:lms/Constant/images.dart';
-import 'package:lms/Module/Auth/View/Widget/Container.dart';
-import 'package:lms/Module/Auth/View/Widget/authText.dart';
+import 'package:lms/Module/mainWidget/Container.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class Mylearncard extends StatelessWidget {
@@ -11,16 +13,17 @@ class Mylearncard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState appColors = context.watch<ThemeCubit>().state;
     double progressValue = 0.4;
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.gray, width: 1),
+        border: Border.all(color: appColors.secondText, width: 1),
         borderRadius: BorderRadius.circular(5),
       ),
       child: OnBordingContainer(
         width: 180,
         height: 250,
-        color: AppColors.white,
+        color: appColors.pageBackground,
         widget: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           child: Row(
@@ -29,7 +32,7 @@ class Mylearncard extends StatelessWidget {
                 Images.courses,
                 width: 100.w,
                 height: 100.h,
-                
+                fit: BoxFit.cover,
               ),
               SizedBox(width: 10.w),
               Column(
@@ -39,7 +42,7 @@ class Mylearncard extends StatelessWidget {
                   AuthText(
                     text: 'React js',
                     size: 18,
-                    color: AppColors.black,
+                    color: appColors.mainText,
                     fontWeight: FontWeight.w700,
                   ),
                   SizedBox(height: 6.h),
@@ -49,11 +52,11 @@ class Mylearncard extends StatelessWidget {
                       Row(
                         children: [
                           Image.asset(Images.courses2,
-                              height: 19.h, width: 19.w, color: AppColors.blue),
+                              height: 19.h, width: 19.w, color: appColors.seocndIconColor),
                           SizedBox(width: 5),
                           AuthText(
                             text: '30 vedio',
-                            color: AppColors.black,
+                            color: appColors.mainText,
                             fontWeight: FontWeight.w400,
                             size: 13,
                           ),
@@ -65,12 +68,12 @@ class Mylearncard extends StatelessWidget {
                             Images.courses3,
                             width: 19.w,
                             height: 19.h,
-                            color: AppColors.blue,
+                            color: appColors.seocndIconColor,
                           ),
                           SizedBox(width: 3),
                           AuthText(
                             text: '40 Hours',
-                            color: AppColors.black,
+                            color: appColors.mainText,
                             fontWeight: FontWeight.w400,
                             size: 13,
                           ),
@@ -85,7 +88,7 @@ class Mylearncard extends StatelessWidget {
                       OnBordingContainer(
                         width: 40,
                         height: 15,
-                        color: AppColors.darkGreen,
+                        color: appColors.darkGreen,
                         widget: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4.w),
                           child: Row(
@@ -94,7 +97,7 @@ class Mylearncard extends StatelessWidget {
                               Image.asset(Images.courses1),
                               AuthText(
                                 text: '5.0',
-                                color: AppColors.black,
+                                color: appColors.mainText,
                                 fontWeight: FontWeight.w900,
                                 size: 10,
                               ),
@@ -106,12 +109,12 @@ class Mylearncard extends StatelessWidget {
                       OnBordingContainer(
                         width: 70,
                         height: 15,
-                        color: AppColors.lihgtPrimer,
+                        color: appColors.purple,
                         widget: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 2.w),
                           child: AuthText(
                             text: 'Tayseer Matar',
-                            color: AppColors.black,
+                            color: appColors.mainText,
                             fontWeight: FontWeight.w900,
                             size: 8,
                           ),
@@ -121,7 +124,7 @@ class Mylearncard extends StatelessWidget {
                       AuthText(
                         text: 'Beginner',
                         size: 10,
-                        color: AppColors.ok,
+                        color: appColors.ok,
                         fontWeight: FontWeight.w400,
                       ),
                     ],
@@ -129,15 +132,13 @@ class Mylearncard extends StatelessWidget {
                   SizedBox(
                     height: 20.h,
                   ),
-                  // Align(
-                  //   alignment: Alignment.centerLeft,
-                  //   child:
+                 
                      LinearPercentIndicator(
                       width: 210,
                       lineHeight: 13.0,
                       percent: progressValue,
-                      backgroundColor: Colors.grey[300],
-                      progressColor: Colors.green,
+                      backgroundColor: appColors.fieldBackground,
+                      progressColor: appColors.ok,
                       animation: true,
                       animationDuration: 800,
                       barRadius: Radius.circular(10),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lms/Module/Auth/View/Widget/authText.dart';
-import 'package:lms/Constant/AppColors.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/MyLearn/SectionCubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class MainTabButton extends StatelessWidget {
   final String title;
@@ -19,6 +20,7 @@ class MainTabButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState appColors = context.watch<ThemeCubit>().state;
     final isSelected = selectedIndex == index;
 
     return Expanded(
@@ -32,12 +34,12 @@ class MainTabButton extends StatelessWidget {
               AuthText(
                 text: title,
                 size: 18,
-                color: isSelected ? AppColors.primary : AppColors.gray,
+                color: isSelected ?appColors.primary : appColors.secondText,
                 fontWeight: FontWeight.w400,
               ),
               SizedBox(height: 10.h),
               Divider(
-                color: isSelected ? AppColors.primary : AppColors.gray,
+                color: isSelected ?appColors.primary : appColors.secondText,
                 thickness: 2,
                 indent: 25,
                 endIndent: 25,

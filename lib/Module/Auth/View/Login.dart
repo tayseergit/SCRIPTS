@@ -2,21 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lms/Constant/appColors.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Auth/View/forgetPassword.dart';
 import 'package:lms/Module/Auth/View/register.dart';
-import 'package:lms/Module/Auth/Widget/Container.dart';
-import 'package:lms/Module/Auth/Widget/CustomTextField.dart';
-import 'package:lms/Module/Auth/Widget/authText.dart';
+import 'package:lms/Module/mainWidget/Container.dart';
+import 'package:lms/Module/mainWidget/CustomTextField.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
 import 'package:lms/Module/Auth/cubit/auth_state.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
-import 'package:lms/Utils/loading.dart';
-import 'package:lms/Utils/shake_animation.dart';
-
+import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/Module/mainWidget/shake_animation.dart';
+ 
 class Login extends StatelessWidget {
   const Login({super.key});
 

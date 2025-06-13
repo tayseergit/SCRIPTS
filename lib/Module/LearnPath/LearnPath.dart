@@ -2,13 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lms/Constant/AppColors.dart';
-import 'package:lms/Constant/images.dart';
+ import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/Auth/View/Widget/authText.dart';
-import 'package:lms/Module/Courses/TabButtons.dart';
-import 'package:lms/Module/Courses/TapBarCubit.dart';
-import 'package:lms/Utils/customTextFieldSearsh.dart';
-import 'package:lms/Module/LearnPath/gridViewLearnPath.dart';
+import 'package:lms/Module/Courses/View/Widget/TabButtons.dart';
+import 'package:lms/Module/Courses/View/Widget/TapBarCubit.dart';
+ import 'package:lms/Module/LearnPath/gridViewLearnPath.dart';
+import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
 
 
 class Learnpath extends StatelessWidget {
@@ -16,22 +17,24 @@ class Learnpath extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        ThemeState appColors = context.watch<ThemeCubit>().state;
+
     final search = TextEditingController();
 
     return BlocProvider(
       create: (_) => TabCubit(),
       child: Scaffold(
-        backgroundColor: AppColors.white,
+        backgroundColor: appColors.pageBackground,
         appBar: AppBar(
           scrolledUnderElevation: 0,
-          backgroundColor:AppColors.white,
+          backgroundColor:appColors.pageBackground,
           elevation: 0,
           title: Align(
             alignment: Alignment.center,
             child: AuthText(
               text: 'Learn Path',
               size: 24,
-              color: AppColors.black,
+              color: appColors.mainText,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -42,23 +45,23 @@ class Learnpath extends StatelessWidget {
             Customtextfieldsearsh(
               borderRadius: 6,
               controller: search,
-              borderColor: AppColors.primary,
+              borderColor: appColors.primary,
               prefixIcon: Icon(
                 Icons.search_outlined,
                 size: 30,
-                color: AppColors.iconSearsh,
+                color: appColors.mainIconColor,
               ),
               suffixIcon: Image.asset(
                 Images.filter,
                 width: 17.w,
                 height: 17.h,
-                color: AppColors.iconSearsh,
+                color: appColors.mainIconColor,
               ),
               hintText: 'what do you want to learn ?',
-              hintColor: AppColors.iconSearsh,
+              hintColor: appColors.secondText,
               hintFontSize: 13.sp,
               hintFontWeight: FontWeight.w600,
-              fillColor: AppColors.white
+              fillColor: appColors.mainText
             ),
             SizedBox(height: 15.h),
             const TabButtons(),
@@ -87,10 +90,7 @@ class Learnpath extends StatelessWidget {
 
   Widget _buildSimpleTab(BuildContext context, String text) {
     return Center(
-      child: Text(
-        text,
-        style: TextStyle(color: AppColors.white),
-      ),
+       
     );
   }
 }

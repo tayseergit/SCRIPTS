@@ -1,14 +1,15 @@
 // home_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lms/Constant/AppColors.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/Contest/Contest.dart';
 import 'package:lms/Module/Courses/View/Pages/Courses.dart';
-import 'package:lms/Module/LearnPath/LearnPath.dart';
+ import 'package:lms/Module/LearnPath/LearnPath.dart';
 import 'package:lms/Module/More/More.dart';
 import 'package:lms/Module/MyLearn/MyLearn.dart';
 import 'package:lms/Module/NavigationBarWidged/navigation_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class NavigationBarwidget extends StatelessWidget {
   final List<Widget> pages = [
@@ -23,6 +24,7 @@ class NavigationBarwidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState appColors = context.watch<ThemeCubit>().state;
     return BlocProvider(
       create: (_) => NavigationCubit(),
       child: BlocBuilder<NavigationCubit, int>(
@@ -34,14 +36,14 @@ class NavigationBarwidget extends StatelessWidget {
               onTap: (index) {
                 context.read<NavigationCubit>().changePage(index);
               },
-              selectedItemColor: AppColors.primary,
+              selectedItemColor: appColors.primary,
               unselectedItemColor: Colors.black,
               type: BottomNavigationBarType.fixed,
               items: [
                 BottomNavigationBarItem(
                   icon: ColorFiltered(
                     colorFilter: ColorFilter.mode(
-                      state == 0 ? AppColors.primary : AppColors.gray,
+                      state == 0 ? appColors.primary : appColors.secondText,
                       BlendMode.srcIn,
                     ),
                     child: Image.asset(
@@ -55,7 +57,7 @@ class NavigationBarwidget extends StatelessWidget {
                 BottomNavigationBarItem(
                   icon: ColorFiltered(
                     colorFilter: ColorFilter.mode(
-                      state == 1 ? AppColors.primary : AppColors.gray,
+                      state == 1 ? appColors.primary : appColors.secondText,
                       BlendMode.srcIn,
                     ),
                     child: Image.asset(
@@ -69,7 +71,7 @@ class NavigationBarwidget extends StatelessWidget {
                 BottomNavigationBarItem(
                   icon: ColorFiltered(
                     colorFilter: ColorFilter.mode(
-                      state == 2 ? AppColors.primary : AppColors.gray,
+                      state == 2 ? appColors.primary : appColors.secondText,
                       BlendMode.srcIn,
                     ),
                     child: Image.asset(
@@ -83,7 +85,7 @@ class NavigationBarwidget extends StatelessWidget {
                 BottomNavigationBarItem(
                   icon: ColorFiltered(
                     colorFilter: ColorFilter.mode(
-                      state == 3 ? AppColors.primary : AppColors.gray,
+                      state == 3 ? appColors.primary : appColors.secondText,
                       BlendMode.srcIn,
                     ),
                     child: Image.asset(
@@ -97,7 +99,7 @@ class NavigationBarwidget extends StatelessWidget {
                 BottomNavigationBarItem(
                   icon: ColorFiltered(
                     colorFilter: ColorFilter.mode(
-                      state == 4 ? AppColors.primary : AppColors.gray,
+                      state == 4 ? appColors.primary : appColors.secondText,
                       BlendMode.srcIn,
                     ),
                     child: Image.asset(

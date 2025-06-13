@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lms/Constant/AppColors.dart';
-import 'package:lms/Constant/images.dart';
+ import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/Auth/View/Widget/Container.dart';
 import 'package:lms/Module/Auth/View/Widget/authText.dart';
 import 'package:lms/Module/Contest/ReadMoreInlineText.dart';
+import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class Contestcard extends StatelessWidget {
   const Contestcard({super.key});
 
   @override
   Widget build(BuildContext context) {
+        ThemeState appColors = context.watch<ThemeCubit>().state;
+
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.gray, width: 1),
+        border: Border.all(color:appColors.pageBackground, width: 1),
         borderRadius: BorderRadius.circular(5),
       ),
       child: OnBordingContainer(
         width: 180,
         height: 250,
-        color: AppColors.white,
+        color: appColors.fieldBackground,
         widget: Padding(
           padding: EdgeInsets.only(right: 10.w, left: 10.h, top: 10),
           child: Column(
@@ -43,13 +47,13 @@ class Contestcard extends StatelessWidget {
                       AuthText(
                         text: 'Front end development',
                         size: 20,
-                        color: AppColors.black,
+                        color: appColors.mainText,
                         fontWeight: FontWeight.w700,
                       ),
                       AuthText(
                         text: 'Description:',
                         size: 15,
-                        color: AppColors.gray,
+                        color: appColors.secondText,
                         fontWeight: FontWeight.w700,
                       ),
                       Align(
@@ -64,7 +68,7 @@ class Contestcard extends StatelessWidget {
                       AuthText(
                         text: 'Type : Programming',
                         size: 15,
-                        color: AppColors.black,
+                        color: appColors.mainText,
                         fontWeight: FontWeight.w500,
                       ),
                       SizedBox(height: 8.h),
@@ -76,13 +80,13 @@ class Contestcard extends StatelessWidget {
                                 Images.contest4,
                                 height: 15,
                                 width: 15,
-                                color: AppColors.primary,
+                                color: appColors.primary,
                               ),
                               SizedBox(width: 3),
                               AuthText(
                                 text: '5/2/2024 2:00 AM',
                                 size: 14,
-                                color: AppColors.black,
+                                color: appColors.mainText,
                                 fontWeight: FontWeight.w400,
                               ),
                             ],
@@ -94,13 +98,13 @@ class Contestcard extends StatelessWidget {
                                 Images.contest5,
                                 height: 15,
                                 width: 15,
-                                color: AppColors.primary,
+                                color: appColors.primary,
                               ),
                               SizedBox(width: 3),
                               AuthText(
                                 text: '60 min',
                                 size: 14,
-                                color: AppColors.black,
+                                color: appColors.mainText,
                                 fontWeight: FontWeight.w400,
                               ),
                             ],
@@ -116,13 +120,13 @@ class Contestcard extends StatelessWidget {
                                 Images.contest6,
                                 height: 15,
                                 width: 15,
-                                color: AppColors.primary,
+                                color: appColors.primary,
                               ),
                               SizedBox(width: 3),
                               AuthText(
                                 text: '152 participant',
                                 size: 14,
-                                color: AppColors.black,
+                                color: appColors.mainText,
                                 fontWeight: FontWeight.w400,
                               ),
                             ],
@@ -131,7 +135,7 @@ class Contestcard extends StatelessWidget {
                           AuthText(
                             text: 'Questions :20',
                             size: 14,
-                            color: AppColors.black,
+                            color: appColors.mainText,
                             fontWeight: FontWeight.w400,
                           ),
                         ],
@@ -143,11 +147,11 @@ class Contestcard extends StatelessWidget {
                       OnBordingContainer(
                         width: 70,
                         height: 20,
-                        color: AppColors.ok,
+                        color: appColors.ok,
                         widget: AuthText(
                           text: 'Active',
                           size: 10,
-                          color: AppColors.black,
+                          color: appColors.mainText,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -164,7 +168,7 @@ class Contestcard extends StatelessWidget {
                             child: AuthText(
                               text: 'Join',
                               size: 15,
-                              color: AppColors.black,
+                              color: appColors.mainText,
                               fontWeight: FontWeight.w700,
                             ),
                           ),

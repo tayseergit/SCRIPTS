@@ -2,12 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lms/Constant/AppColors.dart';
-import 'package:lms/Module/Auth/View/Widget/Container.dart';
-import 'package:lms/Module/Courses/TapBarCubit.dart';
+ import 'package:lms/Module/Auth/View/Widget/Container.dart';
+import 'package:lms/Module/Courses/View/Widget/TapBarCubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
-import 'package:lms/Utils/Small_text.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
 
 class TabButtons extends StatelessWidget {
   const TabButtons({super.key});
@@ -30,10 +29,7 @@ class TabButtons extends StatelessWidget {
               width: (labels[index].length * 11).w,
               height: 40.h,
               color: isSelected ? appColors.primary : appColors.fieldBackground,
-              widget: Smalltext(
-                labels[index],
-                weight: FontWeight.w800,
-              ),
+              widget: Text(labels[index]),
               onTap: () => context.read<TabCubit>().changeTab(index),
             ),
           ),
