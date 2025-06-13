@@ -5,9 +5,8 @@ import 'package:lms/Constant/appColors.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/pusher.dart';
 import 'package:lms/Module/Auth/View/Login.dart';
-import 'package:lms/Module/Auth/View/resetPassword.dart';
-import 'package:lms/Module/Auth/View/Widget/Container.dart';
-import 'package:lms/Module/Auth/View/Widget/authText.dart';
+import 'package:lms/Module/Auth/Widget/Container.dart';
+import 'package:lms/Module/Auth/Widget/authText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/Verify/Cubite/cubit/verfiy_cubit.dart';
@@ -16,10 +15,9 @@ import 'package:lms/Utils/loading.dart';
 import 'package:lms/Utils/shake_animation.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class VerifyPage extends StatelessWidget {
+class Verify extends StatelessWidget {
   String email;
-  int registration;
-  VerifyPage({super.key, required this.email, required this.registration});
+  Verify({super.key, required this.email});
 
   @override
   Widget build(BuildContext context) {
@@ -31,25 +29,13 @@ class VerifyPage extends StatelessWidget {
         listener: (context, state) {
           print(state);
           if (state is VerifySucsses) {
-            var verifyCubit = VerifyCubit.get(context);
-
-            registration == 1
-                ? pushAndRemoveUntil(context: context, toPage: Login())
-                : pushTo(
-                    context: context,
-                    toPage: ResetpasswordPage(
-                        email: email,
-                        registration: registration,
-                        code: verifyCubit.otpController.text));
-
-            FocusScope.of(context)
-                .unfocus(); // Add this to remove keyboard focus
+            pushAndRemoveUntiTo(context: context, toPage: Login());
 
             Future.delayed(Duration(milliseconds: 700), () {
               CustomSnackbar.show(
                 context: context,
                 fillColor: appColors.primary,
-                message: "Completed",
+                message: "Register Completed",
               );
             });
           } else if (state is VerifyErrorCode) {
@@ -71,7 +57,6 @@ class VerifyPage extends StatelessWidget {
         builder: (context, state) {
           var verifyCubit = VerifyCubit.get(context);
           verifyCubit.email = email;
-          verifyCubit.registration = registration;
           return Scaffold(
             backgroundColor: appColors.pageBackground,
             body: ListView(
@@ -84,7 +69,7 @@ class VerifyPage extends StatelessWidget {
                   child: AuthText(
                     text: 'Verify Code',
                     size: 20,
-                    color: appColors.mainText,
+                    color: appColors.mainIconColor,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -93,9 +78,7 @@ class VerifyPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 50.w),
                   child: PinCodeTextField(
                     onCompleted: (value) {
-                      registration == 1
-                          ? verifyCubit.sendCode(isRegistration: true)
-                          : verifyCubit.sendCode(isRegistration: false);
+                      verifyCubit.sendCode(context);
                     },
                     onChanged: (value) {
                       verifyCubit.isCode();
@@ -122,7 +105,7 @@ class VerifyPage extends StatelessWidget {
                     textStyle: TextStyle(
                       color: appColors.mainText,
                     ),
-                    enableActiveFill: false,
+                    enableActiveFill: true,
                   ),
                 ),
                 SizedBox(height: 45.h),
@@ -139,9 +122,7 @@ class VerifyPage extends StatelessWidget {
                           )
                         : OnBordingContainer(
                             onTap: () {
-                              registration == 1
-                                  ? verifyCubit.sendCode(isRegistration: true)
-                                  : verifyCubit.sendCode(isRegistration: false);
+                              verifyCubit.sendCode(context);
                             },
                             width: 223,
                             height: 50,

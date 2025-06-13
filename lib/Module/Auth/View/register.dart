@@ -3,14 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/route_manager.dart';
- import 'package:lms/Constant/images.dart';
+import 'package:lms/Constant/appColors.dart';
+import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/Verify/Cubite/cubit/verfiy_cubit.dart';
 import 'package:lms/Module/Verify/View/verify.dart';
-import 'package:lms/Module/Auth/View/Widget/Container.dart';
-import 'package:lms/Module/Auth/View/Widget/CustomTextField.dart';
-import 'package:lms/Module/Auth/View/Widget/authText.dart';
+import 'package:lms/Module/Auth/Widget/Container.dart';
+import 'package:lms/Module/Auth/Widget/CustomTextField.dart';
+import 'package:lms/Module/Auth/Widget/authText.dart';
 import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
 import 'package:lms/Module/Auth/cubit/auth_state.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
@@ -37,10 +38,7 @@ class Register extends StatelessWidget {
               // Then navigate
               pushTo(
                   context: context,
-                  toPage: VerifyPage(
-                    email: authCubit.emailRegCtrl.text,
-                    registration: 1,
-                  ));
+                  toPage: Verify(email: authCubit.emailRegCtrl.text));
             } else if (state is SignUpError) {
               CustomSnackbar.show(
                 context: context,

@@ -53,9 +53,8 @@ dependencies:
   google_sign_in:
   firebase_core: ^2.25.4
   firebase_auth: ^4.17.8
-  water_drop_nav_bar: 
-  video_player: ^2.7.0
-
+  flutter_lints: ^5.0.0
+  percent_indicator: ^4.2.5
  
   snackbar_pro: ^1.0.1
   flutter_test:
@@ -66,9 +65,7 @@ dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
-  percent_indicator: ^4.2.5
-
+ 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -85,7 +82,6 @@ flutter:
     - assets/images/
     - assets/fonts/
     - assets/icons/
-    - assets/videos/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -99,11 +95,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: script
-      fonts:
-        - asset: assets/fonts/script.ttf
-   #   - family: Trajan Pro
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf

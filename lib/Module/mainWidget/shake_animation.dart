@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snackbar_pro/snackbar_pro.dart';
-import 'package:lms/Constant/AppColors.dart';
-
+ 
 class CustomSnackbar {
   static void show({
     required BuildContext context,

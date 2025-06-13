@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
- import 'package:lms/Utils/Small_text.dart';
+import 'package:lms/Constant/AppColors.dart';
+import 'package:lms/Utils/Small_text.dart';
 
 class DefaultFormText extends StatelessWidget {
   final String text;

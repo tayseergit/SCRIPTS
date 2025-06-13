@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
- import 'package:lms/Constant/images.dart';
+import 'package:lms/Constant/appColors.dart';
+import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Auth/View/forgetPassword.dart';
 import 'package:lms/Module/Auth/View/register.dart';
-import 'package:lms/Module/Auth/View/Widget/Container.dart';
-import 'package:lms/Module/Auth/View/Widget/CustomTextField.dart';
-import 'package:lms/Module/Auth/View/Widget/authText.dart';
+import 'package:lms/Module/Auth/Widget/Container.dart';
+import 'package:lms/Module/Auth/Widget/CustomTextField.dart';
+import 'package:lms/Module/Auth/Widget/authText.dart';
 import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
 import 'package:lms/Module/Auth/cubit/auth_state.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
@@ -146,8 +147,7 @@ class Login extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          pushTo(
-                              context: context, toPage: ForgetpasswordPage());
+                          pushTo(context: context, toPage: Forgetpassword());
                         },
                         child: AuthText(
                           text: 'Forget Password?',

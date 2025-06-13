@@ -6,11 +6,9 @@ import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Module/Auth/View/Login.dart';
 import 'package:lms/Module/Auth/View/register.dart';
 import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
-import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/Verify/Cubite/cubit/verfiy_cubit.dart';
-import 'package:lms/Module/Video/View/Page/video_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +37,7 @@ class MyApp extends StatelessWidget {
             builder: (context, child) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                home: VideoPage(assetPath: 'assets/videos/tab.mp4'),
+                home: Login(),
               );
             },
           );

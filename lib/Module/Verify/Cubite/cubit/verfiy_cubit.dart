@@ -14,7 +14,6 @@ class VerifyCubit extends Cubit<VerifyState> {
 
   final TextEditingController otpController = TextEditingController();
   String? email;
-  int? registration;
   bool iscode = false;
 
   /// validation
@@ -26,9 +25,7 @@ class VerifyCubit extends Cubit<VerifyState> {
     }
   }
 
-  void sendCode({
-     required bool isRegistration,
-  }) async {
+  void sendCode(BuildContext context) async {
     emit(VerifyLoading());
     try {
       final response = await DioHelper.postData(
@@ -36,7 +33,7 @@ class VerifyCubit extends Cubit<VerifyState> {
         postData: {
           'email': email,
           'code': otpController.text.trim(),
-          'registration': isRegistration ? "1" : "0",
+          'registration': "1",
         },
         headers: {"Accept": "application/json"},
       );
@@ -45,21 +42,22 @@ class VerifyCubit extends Cubit<VerifyState> {
 
       if (response.statusCode == 200) {
         final responseData = response.data;
-        print("token: ${responseData['token']}");
-        if (isRegistration) {
-          CacheHelper.saveData(key: "token", value: responseData['token']);
-        }
+        print("token${responseData['token']}");
+        CacheHelper.saveData(key: "token", value: responseData['token']);
         emit(VerifySucsses());
       }
     } on DioException catch (e) {
+      // Check if there's a response from the server
       if (e.response != null) {
         print("Error Status: ${e.response?.statusCode}");
+
         if (e.response?.statusCode == 401) {
           emit(VerifyErrorCode());
         } else if (e.response?.statusCode == 422) {
           emit(VerifyErrorConnection(message: "This user is already verified"));
         }
       } else {
+        // No response received (network error, timeout, etc.)
         print("Connection Error: $e");
         emit(VerifyErrorConnection(message: "Connection Error"));
       }

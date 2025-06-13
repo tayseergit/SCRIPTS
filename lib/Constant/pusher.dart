@@ -1,7 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
- import 'package:page_transition/page_transition.dart';
+import 'package:lms/Constant/AppColors.dart';
+import 'package:page_transition/page_transition.dart';
 
 // List<BoxShadow>? blueBoxShadow = [
 //   const BoxShadow(
@@ -38,17 +39,20 @@ Future<dynamic> pushTo(
       type: PageTransitionType.rightToLeft));
 }
 
-void pushAndRemoveUntil({
-  required BuildContext context,
-  required Widget toPage,
-}) {
-  Navigator.pushAndRemoveUntil(
-    context,
-    MaterialPageRoute(builder: (context) => toPage),
+void pushAndRemoveUntiTo(
+    {required BuildContext context,
+    required Widget toPage,
+    PageTransitionType? pageTransitionType,
+    int? milliseconds}) {
+  Navigator.of(context).pushAndRemoveUntil(
+    PageTransition(
+      child: toPage,
+      type: pageTransitionType ?? PageTransitionType.rightToLeft,
+      duration: Duration(milliseconds: milliseconds ?? 500),
+    ),
     (route) => false,
   );
 }
-
 
 void pushReplacement(
     {required BuildContext context,
