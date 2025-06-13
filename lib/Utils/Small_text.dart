@@ -12,7 +12,7 @@ class Smalltext extends StatelessWidget {
       this.size = 12,
       this.weight = FontWeight.w400,
       this.color,
-      this.font = "cairoBold",
+      this.font = "cairo",
       this.letterSpacing = 1});
 
   @override

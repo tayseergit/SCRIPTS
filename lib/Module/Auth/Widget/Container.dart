@@ -10,7 +10,7 @@ class OnBordingContainer extends StatelessWidget {
 
   const OnBordingContainer({
     super.key,
-    required this.width,
+    this.width=100,
     required this.height,
     required this.color,
     required this.widget,

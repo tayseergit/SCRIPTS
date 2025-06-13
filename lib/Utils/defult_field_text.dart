@@ -1,7 +1,6 @@
- import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
-import 'package:lms/Constant/AppColors.dart';
-import 'package:lms/Utils/Small_text.dart';
+ import 'package:lms/Utils/Small_text.dart';
 
 class DefaultFormText extends StatelessWidget {
   final String text;
@@ -54,7 +53,7 @@ class DefaultFormText extends StatelessWidget {
           style: TextStyle(
             fontSize: 12.sp,
             fontWeight: FontWeight.w400,
-            color: Appcolors.textprem,
+            color:Colors.black,
           ),
           decoration: InputDecoration(
             fillColor: Colors.white,

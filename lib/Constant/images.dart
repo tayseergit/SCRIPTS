@@ -2,53 +2,44 @@ class Images {
   static const String _baseImages = "assets/images/";
   static const String _baseSvgIcons = "assets/icons/";
 
-  static String filter = "${_baseImages}filter.png";
-
-  static String icr = "${_baseImages}icr.png";
-  static String offersBack = "${_baseImages}logo.png";
-  static String profile = "${_baseImages}profile.png";
-  static String error = "${_baseImages}error.png";
+  /// base
+  ///
+  static String baseLogo = "${_baseImages}LOGO_full.png";
+  static String logo = "${_baseImages}LOGO.png";
+  // others
+  static String github = "${_baseImages}github.png";
+  static String google = "${_baseImages}google.png";
 
   //////////// app's icons
-  static String appLogo = "${_baseSvgIcons}logo.svg";
-  static String appLogoWithoutName = "${_baseSvgIcons}logo_without_name.svg";
-  static String whatsApp = "${_baseSvgIcons}whatsapp.svg";
-  static String telegram = "${_baseSvgIcons}telgram.svg";
-  static String facebook = "${_baseSvgIcons}facebook.svg";
-  static String insta = "${_baseSvgIcons}insta.svg";
-  static String youtube = "${_baseSvgIcons}youtube.svg";
-  static String telephone = "${_baseSvgIcons}telephone.svg";
-  static String email = "${_baseSvgIcons}email.svg";
+  static String darkmode = "${_baseSvgIcons}dark_mode.svg";
+  static String lightmode = "${_baseSvgIcons}light_mode.svg";
+  static String login = "${_baseSvgIcons}login.svg";
 
-  static String noData = "${_baseImages}no_data.png";
-
-
-// onboarding
- static String onboard1 = "${_baseImages}onboard1.png";
-  static String onboard2 = "${_baseImages}onboard2.png";
-  static String onboard3 = "${_baseImages}onboard3.png";
-
-  // icon
-  static String more = "${_baseImages}more.png";
-  static String order = "${_baseImages}order.png";
-  static String cart = "${_baseImages}cart.png";
-  static String home = "${_baseImages}home.png";
-
-  // flags
-  static const String _baseFlags = "${_baseImages}flags/";
-  static String de = "${_baseFlags}de.svg";
-  static String es = "${_baseFlags}es.svg";
-  static String fr = "${_baseFlags}fr.svg";
-  static String gb = "${_baseFlags}gb.svg";
-  static String jb = "${_baseFlags}jp.svg";
-  static String pt = "${_baseFlags}pt.svg";
-  static String se = "${_baseFlags}se.svg";
-
-  static String tr = "${_baseFlags}tr.svg";
-  static String ar = "${_baseFlags}ar.svg";
-  // offer
-  static String zh = "${_baseFlags}zh.svg";
-  static String offer1 = "${_baseImages}offer1.png";
-  static String offer2 = "${_baseImages}offer2.jpg";
-  static String offer3 = "${_baseImages}offer3.png";
+  ///////app Image
+  static String filter = "${_baseImages}Filter.png";
+  static String courses = "${_baseImages}test1.png";
+  static String courses1 = "${_baseImages}Stars.png";
+  static String courses2 = "${_baseImages}courseIcon1.png";
+  static String courses3 = "${_baseImages}courseIcon2.png";
+  static String navBarCourse = "${_baseImages}courses.png";
+  static String navBarlearnPath = "${_baseImages}learnPath.png";
+  static String navBarContest = "${_baseImages}constest.png";
+  static String navBarmyLearn = "${_baseImages}myLearn.png";
+  static String navBarMore = "${_baseImages}more.png";
+  static String learnPath1 = "${_baseImages}test2.png";
+  static String contest1 = "${_baseImages}contest1.png";
+  static String contest2 = "${_baseImages}contest2.png";
+  static String contest3 = "${_baseImages}contest3.png";
+  static String contest4 = "${_baseImages}contest4.png";
+  static String contest5 = "${_baseImages}contest5.png";
+  static String contest6 = "${_baseImages}contest6.png";
+  static String contest7 = "${_baseImages}contest7.png";
+  static String editProfile = "${_baseImages}EditProfile.png";
+  static String changePassword = "${_baseImages}ChangePassword.png";
+  static String setting = "${_baseImages}Setting.png";
+  static String friend = "${_baseImages}Friend.png";
+  static String participants = "${_baseImages}Participants.png";
+  static String teacher = "${_baseImages}Teacher.png";
+  static String allProject = "${_baseImages}AllProject.png";
+  static String myProject = "${_baseImages}MyProject.png";
 }

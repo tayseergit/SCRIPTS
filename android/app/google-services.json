@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "510480483026",
+    "project_id": "lmsproject-2ece8",
+    "storage_bucket": "lmsproject-2ece8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510480483026:android:2d80c6eaf87b5f9628a30b",
+        "android_client_info": {
+          "package_name": "com.example.lms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6BHjmfGnomMB1-nZ15S7aNBHVwzU3uUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

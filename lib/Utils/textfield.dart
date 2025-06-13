@@ -1,5 +1,7 @@
  import 'package:flutter/material.dart';
-import 'package:lms/Constant/AppColors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class Textfield extends StatelessWidget {
   Textfield({
@@ -23,13 +25,15 @@ class Textfield extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        ThemeState appColors = context.watch<ThemeCubit>().state;
+
     return TextFormField(
       style: TextStyle(
         fontSize: 10,
         fontWeight: FontWeight.bold,
         letterSpacing: 2,
       ),
-      cursorColor: Appcolors.textfilde,
+      cursorColor: appColors.secondText,
       cursorWidth: 5,
       textAlign: textalign,
       controller: controller,
