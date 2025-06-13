@@ -5,3 +5,8 @@ class TabCubit extends Cubit<int> {
 
   void changeTab(int index) => emit(index);
 }
+class TabCubitProfile extends Cubit<int> {
+  TabCubitProfile() : super(0); 
+
+  void changeTab(int index) => emit(index);
+}

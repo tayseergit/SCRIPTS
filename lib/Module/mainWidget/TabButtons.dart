@@ -41,3 +41,45 @@ class TabButtons extends StatelessWidget {
     );
   }
 }
+class TabButtonsProfile extends StatelessWidget {
+  const TabButtonsProfile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    ThemeState appColors = context.watch<ThemeCubit>().state;
+    final selectedTab = context.watch<TabCubitProfile>().state;
+
+    final labels = ['Certificates', 'Acheivement', 'My Contest', 'statices'];
+
+    return Container(
+      decoration: BoxDecoration(
+        color: appColors.fieldBackground,
+        borderRadius: BorderRadius.all(Radius.circular(5.r))
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start, 
+        children: List.generate(labels.length, (index) {
+          final isSelected = selectedTab == index;
+      
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 3.5.w),
+            child:  OnBordingContainer(
+                width: (labels[index].length *8).w , 
+                height: 40.h,
+                color: isSelected ? appColors.pageBackground : appColors.fieldBackground,
+                widget: Text(
+                  labels[index],
+                  style: TextStyle(
+                    color: isSelected ? appColors.mainText : appColors.mainText,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onTap: () => context.read<TabCubitProfile>().changeTab(index),
+              ),
+            
+          );
+        }),
+      ),
+    );
+  }
+}
