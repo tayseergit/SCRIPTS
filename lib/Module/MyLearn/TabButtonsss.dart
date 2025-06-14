@@ -30,14 +30,16 @@ class TabButtonsss extends StatelessWidget {
         return Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.w),
-            child: OnBordingContainer(
+            child: OnBoardingContainer(
               width: double.infinity,
               height: 40.h,
               color: isSelected ? appColors.primary : appColors.fieldBackground,
               widget: Text(
                 labels[index],
                 style: TextStyle(
-                  color: isSelected ? appColors.pageBackground : appColors.mainText,
+                  color: isSelected
+                      ? appColors.pageBackground
+                      : appColors.mainText,
                   fontWeight: FontWeight.bold,
                 ),
               ),

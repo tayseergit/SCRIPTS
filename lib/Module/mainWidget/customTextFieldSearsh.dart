@@ -1,90 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
-class Customtextfieldsearsh extends StatefulWidget {
+class Customtextfieldsearsh extends StatelessWidget {
   final TextEditingController controller;
   final bool obscureText;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final TextInputType keyboardType;
   final void Function(String)? onChanged;
-  final Color borderColor;
-  final Color textColor;
-  final Color hintColor;
-  final Color fillColor;
-  final double borderRadius;
-  final double hintFontSize;
   final String? errorText;
   final String? hintText;
-  final FontWeight? hintFontWeight;
+  final double borderRadius;
+  final double hintFontSize;
+  final FontWeight hintFontWeight;
+  final Color? fillColor;
+  final Color? hintColor;
+  final Color? borderColor;
 
   const Customtextfieldsearsh({
     super.key,
     required this.controller,
     this.obscureText = false,
     this.suffixIcon,
-    this.fillColor = Colors.grey,
     this.prefixIcon,
     this.keyboardType = TextInputType.text,
     this.onChanged,
-    this.borderColor = const Color(0xFFCCCCCC),
-    this.textColor = Colors.black,
-    this.hintColor = Colors.grey,
-    this.borderRadius = 12,
     this.errorText,
     this.hintText,
-    this.hintFontSize = 3,
-    this.hintFontWeight,
+    this.borderRadius = 6.0,
+    this.hintFontSize = 14.0,
+    this.hintFontWeight = FontWeight.normal,
+    this.borderColor,
+    this.fillColor,
+    this.hintColor,
   });
 
   @override
-  State<Customtextfieldsearsh> createState() => _CustomTextFieldState();
-}
-
-class _CustomTextFieldState extends State<Customtextfieldsearsh> {
-  late bool _obscure;
-
-  @override
-  void initState() {
-    super.initState();
-    _obscure = widget.obscureText;
-  }
-
-  @override
   Widget build(BuildContext context) {
-    ThemeState appColors = context.watch<ThemeCubit>().state;
+    final ThemeState appColors = context.watch<ThemeCubit>().state;
 
     return TextField(
-      controller: widget.controller,
-      obscureText: _obscure,
-      keyboardType: widget.keyboardType,
-      onChanged: widget.onChanged,
-      style: TextStyle(color: widget.textColor),
+      controller: controller,
+      obscureText: obscureText,
+      keyboardType: keyboardType,
+      onChanged: onChanged,
+      style: TextStyle(color: appColors.mainText),
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 14,
-          horizontal: 16,
-        ),
-        hintText: widget.hintText,
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+        hintText: hintText,
         hintStyle: TextStyle(
-          fontSize: widget.hintFontSize,
-          fontWeight: widget.hintFontWeight,
+          fontSize: hintFontSize,
+          fontWeight: hintFontWeight,
           color: appColors.secondText,
         ),
         filled: true,
-        fillColor: widget.fillColor,
-        prefixIcon: widget.prefixIcon,
-        suffixIcon: widget.suffixIcon,
-        errorText: widget.errorText,
+        fillColor: appColors.pageBackground,
+        prefixIcon: prefixIcon ??
+            Icon(
+              Icons.search,
+              color: appColors.mainIconColor,
+            ),
+        suffixIcon: suffixIcon ??
+            Image.asset(
+              Images.filter,
+              width: 17.w,
+              height: 17.h,
+              color: appColors.mainIconColor,
+            ),
+        errorText: errorText,
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: widget.borderColor, width: 3.w),
-          borderRadius: BorderRadius.circular(widget.borderRadius),
+          borderSide: BorderSide(color: appColors.border, width: 4.w),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: widget.borderColor, width: 2.5.w),
+          borderSide: BorderSide(color: appColors.border, width: 2.5.w),
         ),
       ),
     );

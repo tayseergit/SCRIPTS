@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
- import 'package:lms/Constant/images.dart';
+import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Auth/View/Login.dart';
- 
+import 'package:lms/Module/mainWidget/Container.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/Verify/Cubite/cubit/verfiy_cubit.dart';
 import 'package:lms/Module/Verify/Cubite/cubit/verfiy_state.dart';
-import 'package:lms/Module/mainWidget/Container.dart';
-import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/shake_animation.dart';
- 
+
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class Verify extends StatelessWidget {
@@ -121,7 +120,7 @@ class Verify extends StatelessWidget {
                               width: 50,
                             ),
                           )
-                        : OnBordingContainer(
+                        : OnBoardingContainer(
                             onTap: () {
                               verifyCubit.sendCode(context);
                             },

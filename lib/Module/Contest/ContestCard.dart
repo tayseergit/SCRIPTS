@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
- import 'package:lms/Constant/images.dart';
-import 'package:lms/Module/Auth/View/Widget/Container.dart';
-import 'package:lms/Module/Auth/View/Widget/authText.dart';
-import 'package:lms/Module/Contest/ReadMoreInlineText.dart';
+import 'package:lms/Constant/images.dart';
+import 'package:lms/Module/mainWidget/Container.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/Module/mainWidget/ReadMoreInlineText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
@@ -13,17 +13,17 @@ class Contestcard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        ThemeState appColors = context.watch<ThemeCubit>().state;
+    ThemeState appColors = context.watch<ThemeCubit>().state;
 
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color:appColors.pageBackground, width: 1),
+        border: Border.all(color: appColors.secondText, width: 1),
         borderRadius: BorderRadius.circular(5),
       ),
-      child: OnBordingContainer(
+      child: OnBoardingContainer(
         width: 180,
         height: 250,
-        color: appColors.fieldBackground,
+        color: appColors.pageBackground,
         widget: Padding(
           padding: EdgeInsets.only(right: 10.w, left: 10.h, top: 10),
           child: Column(
@@ -144,7 +144,7 @@ class Contestcard extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      OnBordingContainer(
+                      OnBoardingContainer(
                         width: 70,
                         height: 20,
                         color: appColors.ok,

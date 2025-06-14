@@ -20,7 +20,7 @@ class Mylearncard extends StatelessWidget {
         border: Border.all(color: appColors.secondText, width: 1),
         borderRadius: BorderRadius.circular(5),
       ),
-      child: OnBordingContainer(
+      child: OnBoardingContainer(
         width: 180,
         height: 250,
         color: appColors.pageBackground,
@@ -52,7 +52,9 @@ class Mylearncard extends StatelessWidget {
                       Row(
                         children: [
                           Image.asset(Images.courses2,
-                              height: 19.h, width: 19.w, color: appColors.seocndIconColor),
+                              height: 19.h,
+                              width: 19.w,
+                              color: appColors.seocndIconColor),
                           SizedBox(width: 5),
                           AuthText(
                             text: '30 vedio',
@@ -85,7 +87,7 @@ class Mylearncard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      OnBordingContainer(
+                      OnBoardingContainer(
                         width: 40,
                         height: 15,
                         color: appColors.darkGreen,
@@ -106,7 +108,7 @@ class Mylearncard extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 10.w),
-                      OnBordingContainer(
+                      OnBoardingContainer(
                         width: 70,
                         height: 15,
                         color: appColors.purple,
@@ -132,17 +134,17 @@ class Mylearncard extends StatelessWidget {
                   SizedBox(
                     height: 20.h,
                   ),
-                 
-                     LinearPercentIndicator(
-                      width: 210,
-                      lineHeight: 13.0,
-                      percent: progressValue,
-                      backgroundColor: appColors.fieldBackground,
-                      progressColor: appColors.ok,
-                      animation: true,
-                      animationDuration: 800,
-                      barRadius: Radius.circular(10),
-                    ),
+
+                  LinearPercentIndicator(
+                    width: 210,
+                    lineHeight: 13.0,
+                    percent: progressValue,
+                    backgroundColor: appColors.fieldBackground,
+                    progressColor: appColors.ok,
+                    animation: true,
+                    animationDuration: 800,
+                    barRadius: Radius.circular(10),
+                  ),
                   // ),
                 ],
               ),

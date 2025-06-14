@@ -69,3 +69,69 @@ class _ReadMoreInlineTextState extends State<ReadMoreInlineText> {
     );
   }
 }
+
+class ReadMoreInlineTextProject extends StatefulWidget {
+  final String text;
+  final int trimLength;
+
+  const ReadMoreInlineTextProject({
+    super.key,
+    required this.text,
+    this.trimLength = 400,
+  });
+
+  @override
+  State<ReadMoreInlineTextProject> createState() => _ReadMoreInlineTextProject();
+}
+
+class _ReadMoreInlineTextProject extends State<ReadMoreInlineTextProject> {
+  bool _isExpanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    ThemeState appColors = context.watch<ThemeCubit>().state;
+
+    final String fullText = widget.text;
+    final bool isLong = fullText.length > widget.trimLength;
+    final String visibleText = !_isExpanded && isLong
+        ? fullText.substring(0, widget.trimLength)
+        : fullText;
+
+    return RichText(
+      text: TextSpan(
+        style: TextStyle(
+          fontSize: 10,
+          color: appColors.secondText,
+          fontWeight: FontWeight.w600,
+        ),
+        children: [
+          TextSpan(text: visibleText),
+          if (!_isExpanded && isLong)
+            TextSpan(
+              text: '... Read More',
+              style: TextStyle(
+                color: appColors.primary,
+                fontWeight: FontWeight.bold,
+              ),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      title: const Text('Details'),
+                      content: Text(fullText),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('Close'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+            ),
+        ],
+      ),
+    );
+  }
+}

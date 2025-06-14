@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Helper/cach_helper.dart';
-import 'package:lms/Module/Auth/View/Login.dart';
-import 'package:lms/Module/Auth/View/register.dart';
 import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
+import 'package:lms/Module/Courses/View/Pages/courses_page.dart';
+import 'package:lms/Module/LearnPath/View/Pages/learn_path_page.dart';
+import 'package:lms/Module/More/more_page.dart';
+import 'package:lms/Module/StudentsProfile/profile.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
-import 'package:lms/Module/Verify/Cubite/cubit/verfiy_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
         BlocProvider(create: (_) => AuthCubit()),
+        // BlocProvider(create: (_) => TabCubitProfile()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
             builder: (context, child) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                home: Login(),
+                home: More(),
               );
             },
           );
@@ -46,4 +48,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// project-510480483026

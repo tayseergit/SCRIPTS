@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
- import 'package:lms/Constant/images.dart';
+import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/CustomTextField.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
-
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
@@ -70,7 +69,7 @@ class Resetpassword extends StatelessWidget {
           SizedBox(height: 64.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 45.w),
-            child: OnBordingContainer(
+            child: OnBoardingContainer(
               width: 223,
               height: 50,
               color: appColors.primary,

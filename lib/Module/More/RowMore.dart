@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:lms/Module/Auth/View/Widget/authText.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
@@ -24,8 +23,7 @@ class Rowmore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        ThemeState appColors = context.watch<ThemeCubit>().state;
-
+    ThemeState appColors = context.watch<ThemeCubit>().state;
     return Padding(
       padding:  EdgeInsets.symmetric(horizontal: 10.w),
       child: InkWell(

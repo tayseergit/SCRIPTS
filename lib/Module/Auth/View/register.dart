@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/route_manager.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
-import 'package:lms/Module/Verify/Cubite/cubit/verfiy_cubit.dart';
 import 'package:lms/Module/Verify/View/verify.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/CustomTextField.dart';
@@ -16,7 +14,6 @@ import 'package:lms/Module/Auth/cubit/auth_state.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/shake_animation.dart';
- 
 
 class Register extends StatelessWidget {
   Register({super.key});
@@ -128,7 +125,7 @@ class Register extends StatelessWidget {
                   SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 110),
-                    child: OnBordingContainer(
+                    child: OnBoardingContainer(
                       width: 100,
                       height: 40,
                       color: appColors.primary,
@@ -151,7 +148,7 @@ class Register extends StatelessWidget {
                               Border.all(color: appColors.border, width: 1.5.w),
                           borderRadius: BorderRadius.circular(5.r),
                         ),
-                        child: OnBordingContainer(
+                        child: OnBoardingContainer(
                           width: 170,
                           height: 50,
                           color: appColors.fieldBackground,
@@ -187,7 +184,7 @@ class Register extends StatelessWidget {
                             ),
                             borderRadius: BorderRadius.circular(5.r),
                           ),
-                          child: OnBordingContainer(
+                          child: OnBoardingContainer(
                             height: 50.h,
                             color: appColors.fieldBackground,
                             widget: Row(
@@ -354,7 +351,7 @@ class Register extends StatelessWidget {
                                 width: 50,
                               ),
                             )
-                          : OnBordingContainer(
+                          : OnBoardingContainer(
                               width: 300,
                               height: 50,
                               color: appColors.primary,

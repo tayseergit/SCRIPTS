@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
- import 'package:lms/Constant/images.dart';
-import 'package:lms/Module/Auth/View/Widget/Container.dart';
-import 'package:lms/Module/Auth/View/Widget/authText.dart';
+import 'package:lms/Constant/images.dart';
+import 'package:lms/Module/mainWidget/Container.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Contest/TabbuttonsforcontestCubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
@@ -14,7 +14,7 @@ class Tabbuttonsforcontest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        ThemeState appColors = context.watch<ThemeCubit>().state;
+    ThemeState appColors = context.watch<ThemeCubit>().state;
 
     final selectedTab = context.watch<TabbuttonsforcontestCubit>().state;
 
@@ -34,10 +34,10 @@ class Tabbuttonsforcontest extends StatelessWidget {
         return Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.w),
-            child: OnBordingContainer(
+            child: OnBoardingContainer(
               width: double.infinity,
               height: 45.h,
-              color: isSelected ? appColors.primary : Colors.grey[100]!,
+              color: isSelected ? appColors.primary : appColors.pageBackground,
               widget: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -45,15 +45,16 @@ class Tabbuttonsforcontest extends StatelessWidget {
                     icons[index],
                     width: index == 2 ? 26 : 18,
                     height: index == 2 ? 26 : 18,
-                    color:
-                        isSelected
-                            ? Colors.white
-                            : Colors.black,
+                    color: isSelected
+                        ? appColors.pageBackground
+                        : appColors.mainText,
                   ),
                   Text(
                     labels[index],
                     style: TextStyle(
-                      color: isSelected ? Colors.white : Colors.black,
+                      color: isSelected
+                          ? appColors.pageBackground
+                          : appColors.mainText,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -69,10 +70,10 @@ class Tabbuttonsforcontest extends StatelessWidget {
                   ),
                 ],
               ),
-              onTap:
-                  () => context.read<TabbuttonsforcontestCubit>().changeTabbb(
-                    index,
-                  ),
+              onTap: () =>
+                  context.read<TabbuttonsforcontestCubit>().changeTabbb(
+                        index,
+                      ),
             ),
           ),
         );

@@ -1,8 +1,9 @@
+// lib/Module/Courses/page/courses_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
-import 'package:lms/Module/LearnPath/gridViewLearnPath.dart';
+import 'package:lms/Module/LearnPath/View/Widget/gridViewLearnPath.dart';
 import 'package:lms/Module/MyLearn/CourseTabCubit.dart';
 import 'package:lms/Module/MyLearn/SectionCubit.dart';
 import 'package:lms/Module/MyLearn/TabButtonsss.dart';

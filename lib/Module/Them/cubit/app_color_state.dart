@@ -18,6 +18,9 @@ class ThemeState {
   final Color secondText;
   final Color purple;
   final Color border;
+  final Color iconSearsh;
+  final Color darkText;
+  final Color orang;
 
   final Color red;
   final LinearGradient linerContainer;
@@ -42,6 +45,9 @@ class ThemeState {
     required this.mainIconColor,
     required this.seocndIconColor,
     required this.border,
+    required this.iconSearsh,
+    required this.darkText,
+    required this.orang,
     //
     required this.lightGray,
   });
@@ -61,9 +67,12 @@ class ThemeState {
       mainIconColor: const Color(0xFF151B22),
       seocndIconColor: const Color(0xFF81B9DE),
       border: const Color(0x330F9CEF),
+      iconSearsh: Color(0xff8C8E98),
+      darkText: Color(0xFFCED2E6),
+      orang: Color(0xffFF9500),
       //
       lightGray: const Color(0xFFDDDDDD),
-      lihgtPrimer: const Color(0x1A0061FF),
+      lihgtPrimer: const Color.fromARGB(127, 107, 201, 255),
       // Gradients
       linerContainer: const LinearGradient(
         begin: Alignment.topCenter,
@@ -71,9 +80,9 @@ class ThemeState {
         colors: [Color(0xFFFFFFFF), Color(0xFF248BF5)],
       ),
       linear: const LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [Color(0xFFFFFFFF), Color(0xFF248BF5)],
+        begin: Alignment.bottomCenter,
+        end: Alignment.topCenter,
+        colors: [Color(0xFFFFFFFF), Color(0xA06BC8FF)],
       ),
       linerImage: const LinearGradient(
         begin: Alignment.topCenter,
@@ -97,19 +106,27 @@ class ThemeState {
       mainIconColor: const Color(0xFF151B22),
       seocndIconColor: const Color(0xFF81B9DE),
       border: const Color(0x330F9CEF),
+      iconSearsh: Color(0xff8C8E98),
+      darkText: Color(0xFFCED2E6),
+      orang: Color(0xffFF9500),
+
       //
       lightGray: const Color(0xFFDDDDDD),
       lihgtPrimer: const Color(0x1A0061FF),
+
       // Gradients
       linerContainer: const LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
+        begin: Alignment.bottomCenter,
+        end: Alignment.topCenter,
         colors: [Color(0xFFFFFFFF), Color(0xFF248BF5)],
       ),
-      linear: const LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [Color(0xFFFFFFFF), Color(0xFF248BF5)],
+      linear: LinearGradient(
+        begin: Alignment.bottomCenter,
+        end: Alignment.topCenter,
+        colors: [
+          Color(0x806BC8FF),
+          Color(0xFFFFFFFF),
+        ],
       ),
       linerImage: const LinearGradient(
         begin: Alignment.topCenter,

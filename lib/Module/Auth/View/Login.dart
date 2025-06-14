@@ -14,8 +14,10 @@ import 'package:lms/Module/Auth/cubit/auth_state.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
+
+import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/mainWidget/shake_animation.dart';
- 
+
 class Login extends StatelessWidget {
   const Login({super.key});
 
@@ -190,7 +192,7 @@ class Login extends StatelessWidget {
                               width: 50,
                             ),
                           )
-                        : OnBordingContainer(
+                        : OnBoardingContainer(
                             width: 300,
                             height: 50,
                             color: appColors.primary,
@@ -232,7 +234,7 @@ class Login extends StatelessWidget {
                             ),
                             borderRadius: BorderRadius.circular(5.r),
                           ),
-                          child: OnBordingContainer(
+                          child: OnBoardingContainer(
                             onTap: () {
                               authCubit.loginWithGoogle();
                             },
@@ -271,7 +273,7 @@ class Login extends StatelessWidget {
                             ),
                             borderRadius: BorderRadius.circular(5.r),
                           ),
-                          child: OnBordingContainer(
+                          child: OnBoardingContainer(
                             height: 50.h,
                             color: appColors.fieldBackground,
                             widget: Row(

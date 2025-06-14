@@ -16,42 +16,40 @@ class Cursescard extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: appColors.secondText, width: 1),
-        borderRadius: BorderRadius.circular(5),
+        border: Border.all(color: appColors.lihgtPrimer, width: 2.w),
+        borderRadius: BorderRadius.circular(5.r),
       ),
-      child: OnBordingContainer(
-        width: 180,
-        height: 250,
+      child: OnBoardingContainer(
+        width: 180.w,
+        height: 250.h,
         color: appColors.pageBackground,
         widget: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 5.w),
+          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 5.h,
-              ),
               Stack(
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(5.r),
                     child: Image.asset(
                       Images.courses,
-                      width: 165,
-                      height: 100,
+                      width: double.infinity,
+                      height: 100.h,
                       fit: BoxFit.cover,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 3, left: 3),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: OnBordingContainer(
-                        width: 35,
-                        height: 18,
-                        color: appColors.ok,
-                        widget: AuthText(
+                  Positioned(
+                    top: 5.h,
+                    left: 5.w,
+                    child: OnBoardingContainer(
+                      width: 40.w,
+                      height: 20.h,
+                      color: appColors.ok,
+                      widget: Center(
+                        child: AuthText(
                           text: 'Free',
-                          size: 14,
+                          size: 12.sp,
                           color: appColors.mainText,
                           fontWeight: FontWeight.w700,
                         ),
@@ -60,26 +58,23 @@ class Cursescard extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 6.h),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: AuthText(
-                  text: 'Vue js',
-                  color: appColors.mainText,
-                  size: 20,
-                  fontWeight: FontWeight.w700,
-                ),
+              SizedBox(height: 2.h),
+              AuthText(
+                text: 'Vue js',
+                color: appColors.mainText,
+                size: 20.sp,
+                fontWeight: FontWeight.w700,
+                maxLines: 1,
               ),
-              SizedBox(height: 10),
+              // SizedBox(height: 10.h),
               Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  OnBordingContainer(
-                    width: 40,
-                    height: 20,
+                  OnBoardingContainer(
+                    width: 50.w,
+                    height: 25.h,
                     color: appColors.darkGreen,
                     widget: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 4.w),
+                      padding: EdgeInsets.symmetric(horizontal: 6.w),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -92,59 +87,56 @@ class Cursescard extends StatelessWidget {
                             text: '5.0',
                             color: appColors.mainText,
                             fontWeight: FontWeight.w900,
-                            size: 10,
+                            size: 12.sp,
                           ),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                    decoration: BoxDecoration(
-                      color: appColors.purple,
-                      borderRadius: BorderRadius.circular(5.r),
-                    ),
-                    child: AuthText(
-                      text: 'Tayseer Matar baraa ', 
-                      color: appColors.mainText,
-                      fontWeight: FontWeight.w900,
-                      size: 8,
+                  SizedBox(width: 10.w),
+                  Flexible(
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
+                      decoration: BoxDecoration(
+                        color: appColors.purple,
+                        borderRadius: BorderRadius.circular(5.r),
+                      ),
+                      child: AuthText(
+                        text: 'Tayseer Matar baraa',
+                        color: appColors.mainText,
+                        fontWeight: FontWeight.w900,
+                        size: 12.sp,
+                      ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(
-                height: 5.h,
+              SizedBox(height: 2.h),
+              AuthText(
+                text: 'Beginner',
+                size: 14.sp,
+                color: appColors.darkGreen,
+                fontWeight: FontWeight.w400,
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: AuthText(
-                  text: 'Beginner',
-                  size: 13,
-                  color: appColors.darkGreen,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(height: 5.h),
+              SizedBox(height: 8.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      Image.asset(Images.courses2,
-                          height: 19.h,
-                          width: 19.w,
-                          color: appColors.seocndIconColor),
-                      SizedBox(width: 5),
+                      Image.asset(
+                        Images.courses2,
+                        height: 19.h,
+                        width: 19.w,
+                        color: appColors.seocndIconColor,
+                      ),
+                      SizedBox(width: 5.w),
                       AuthText(
-                        text: '30 vedio',
+                        text: '30 videos',
                         color: appColors.mainText,
                         fontWeight: FontWeight.w400,
-                        size: 13,
+                        size: 10.sp,
                       ),
                     ],
                   ),
@@ -156,12 +148,12 @@ class Cursescard extends StatelessWidget {
                         height: 19.h,
                         color: appColors.seocndIconColor,
                       ),
-                      SizedBox(width: 3),
+                      SizedBox(width: 5.w),
                       AuthText(
                         text: '40 Hours',
                         color: appColors.mainText,
                         fontWeight: FontWeight.w400,
-                        size: 13,
+                        size: 10.sp,
                       ),
                     ],
                   ),

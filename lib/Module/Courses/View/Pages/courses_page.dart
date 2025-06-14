@@ -5,11 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/mainWidget/TabButtons.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
-import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
-import 'package:lms/Module/Courses/View/Widget/TapBarCubit.dart';
-import 'package:lms/Module/Courses/View/Widget/gridViewCourses.dart';
+ import 'package:lms/Module/Courses/View/Widget/TapBar_Cubit.dart';
+import 'package:lms/Module/Courses/View/Widget/grid_View_Courses.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
 
 class CoursesPage extends StatelessWidget {
   const CoursesPage({super.key});
@@ -41,24 +41,7 @@ class CoursesPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
           children: [
             Customtextfieldsearsh(
-              borderRadius: 6,
-              controller: search,
-              borderColor: appColors.primary,
-              prefixIcon: Icon(
-                Icons.search_outlined,
-                size: 30,
-                color: appColors.mainText,
-              ),
-              suffixIcon: Image.asset(
-                Images.filter,
-                width: 17.w,
-                height: 17.h,
-                color: appColors.mainText,
-              ),
-              hintText: 'what do you want to learn ?',
-              hintFontSize: 13.sp,
-              hintFontWeight: FontWeight.w600,
-              fillColor: appColors.pageBackground,
+               controller: search,
             ),
             SizedBox(height: 15.h),
             const TabButtons(),

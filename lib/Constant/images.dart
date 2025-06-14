@@ -42,4 +42,9 @@ class Images {
   static String teacher = "${_baseImages}Teacher.png";
   static String allProject = "${_baseImages}AllProject.png";
   static String myProject = "${_baseImages}MyProject.png";
+  static String addapaymentmethod = "${_baseImages}Addapaymentmethod.png";
+  static String deletehistory = "${_baseImages}Deletehistory.png";
+  static String language = "${_baseImages}Language.png";
+  static String logout = "${_baseImages}Logout.png";
+  
 }

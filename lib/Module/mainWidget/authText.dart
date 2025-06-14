@@ -6,19 +6,30 @@ class AuthText extends StatelessWidget {
   final double size;
   final Color color;
   final FontWeight fontWeight;
+  final int? maxLines;
+  final TextOverflow? overflow;
+
   const AuthText({
-    super.key,
+    Key? key,
     required this.text,
     required this.size,
     required this.color,
     required this.fontWeight,
-  });
+    this.maxLines = 1,
+    this.overflow,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(color: color, fontSize: size.sp, fontWeight: fontWeight),
+      maxLines: maxLines,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: size.sp,
+        color: color,
+        fontWeight: fontWeight,
+      ),
     );
   }
 }
