@@ -7,6 +7,7 @@ import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
 import 'package:lms/Module/Courses/TapBarCubit.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/Project/projectPage.dart';
+import 'package:lms/Module/Setting/SettingPage.dart';
 import 'package:lms/Module/StudentsProfile/profile.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
             builder: (context, child) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                home: Projectpage(),
+                home: Settingpage(),
               );
             },
           );
