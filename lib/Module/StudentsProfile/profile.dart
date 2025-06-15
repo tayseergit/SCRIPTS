@@ -27,109 +27,109 @@ class Profile extends StatelessWidget {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  Stack(
-                    children: [
-                      Image.asset(
-                        Images.courses,
-                        width: double.infinity,
-                        height: 380,
-                        fit: BoxFit.cover,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20.h, right: 15.w),
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: OnBordingContainer(
-                            width: 90,
-                            height: 25,
-                            color: appColors.darkText,
-                            widget: AuthText(
-                              text: 'Edit Profile',
-                              size: 14,
-                              color: appColors.mainText,
-                              fontWeight: FontWeight.w400,
+                    Stack(
+                      children: [
+                        Image.asset(
+                          Images.courses,
+                          width: double.infinity,
+                          height: 380,
+                          fit: BoxFit.cover,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 20.h, right: 15.w),
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: OnBordingContainer(
+                              width: 90,
+                              height: 25,
+                              color: appColors.darkText,
+                              widget: AuthText(
+                                text: 'Edit Profile',
+                                size: 14,
+                                color: appColors.mainText,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        bottom: 16,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              OnBordingContainer(
-                                width: 220,
-                                height: 68,
-                                color: appColors.primary,
-                                widget: Column(
-                                  children: [
-                                    AuthText(
-                                      text: 'Tayseer Matar',
-                                      size: 24,
-                                      color: appColors.mainText,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                    SizedBox(height: 5.h),
-                                    AuthText(
-                                      text: 'email@gmail.com',
-                                      size: 14,
-                                      color: appColors.pageBackground,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(width: 10.w),
-                              Column(
-                                children: [
-                                  OnBordingContainer(
-                                    width: 110,
-                                    height: 35,
-                                    color: appColors.orang,
-                                    widget: Align(
-                                      alignment: Alignment.center,
-                                      child: AuthText(
-                                        text: 'Intermidiate',
-                                        size: 12,
+                        Positioned(
+                          bottom: 16,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                OnBordingContainer(
+                                  width: 220,
+                                  height: 68,
+                                  color: appColors.primary,
+                                  widget: Column(
+                                    children: [
+                                      AuthText(
+                                        text: 'Tayseer Matar',
+                                        size: 24,
                                         color: appColors.mainText,
                                         fontWeight: FontWeight.w700,
                                       ),
-                                    ),
+                                      SizedBox(height: 5.h),
+                                      AuthText(
+                                        text: 'email@gmail.com',
+                                        size: 14,
+                                        color: appColors.pageBackground,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ],
                                   ),
-                                  OnBordingContainer(
-                                    width: 110,
-                                    height: 30,
-                                    color: appColors.darkText,
-                                    widget: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          Images.github,
-                                          height: 20.h,
-                                          width: 20.w,
-                                          color: appColors.mainText,
-                                        ),
-                                        SizedBox(width: 15.w),
-                                        AuthText(
-                                          text: 'GitHub',
-                                          color: appColors.mainText,
+                                ),
+                                SizedBox(width: 10.w),
+                                Column(
+                                  children: [
+                                    OnBordingContainer(
+                                      width: 110,
+                                      height: 35,
+                                      color: appColors.orang,
+                                      widget: Align(
+                                        alignment: Alignment.center,
+                                        child: AuthText(
+                                          text: 'Intermidiate',
                                           size: 12,
-                                          fontWeight: FontWeight.w400,
+                                          color: appColors.mainText,
+                                          fontWeight: FontWeight.w700,
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                    OnBordingContainer(
+                                      width: 110,
+                                      height: 30,
+                                      color: appColors.darkText,
+                                      widget: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            Images.github,
+                                            height: 20.h,
+                                            width: 20.w,
+                                            color: appColors.mainText,
+                                          ),
+                                          SizedBox(width: 15.w),
+                                          AuthText(
+                                            text: 'GitHub',
+                                            color: appColors.mainText,
+                                            size: 12,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
                   SizedBox(height: 12.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 13.w),

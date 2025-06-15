@@ -10,7 +10,7 @@ class Gridviewteacher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeState appColors = context.watch<ThemeCubit>().state;
+      ThemeState appColors = context.watch<ThemeCubit>().state;
 
     return Container(
       height: 610,

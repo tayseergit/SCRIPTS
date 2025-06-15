@@ -17,7 +17,7 @@ class Gridviewcourses extends StatelessWidget {
       child: GridView.builder(
         itemCount: 16,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 165,
+          maxCrossAxisExtent: 200,
           childAspectRatio: 0.750,
           mainAxisSpacing: 20,
           crossAxisSpacing: 20,
