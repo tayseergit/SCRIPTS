@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Auth/View/Login.dart';
+import 'package:lms/Module/Courses/View/Pages/courses_page.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
@@ -29,8 +30,10 @@ class Verify extends StatelessWidget {
         listener: (context, state) {
           print(state);
           if (state is VerifySucsses) {
-            pushAndRemoveUntiTo(context: context, toPage: Login());
-
+            var verifyCubit = VerifyCubit.get(context);
+            verifyCubit.userAuthModel?.role == "Student"
+                ? pushAndRemoveUntiTo(context: context, toPage: CoursesPage())
+                : pushAndRemoveUntiTo(context: context, toPage: CoursesPage());
             Future.delayed(Duration(milliseconds: 700), () {
               CustomSnackbar.show(
                 context: context,

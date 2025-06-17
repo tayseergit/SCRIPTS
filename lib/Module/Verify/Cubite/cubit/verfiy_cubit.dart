@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
+import 'package:lms/Module/Auth/Model/user_auth_model.dart';
 import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
 import 'package:lms/Module/Verify/Cubite/cubit/verfiy_state.dart';
 import 'package:meta/meta.dart';
@@ -11,7 +12,7 @@ import 'package:meta/meta.dart';
 class VerifyCubit extends Cubit<VerifyState> {
   VerifyCubit() : super(VerifyCubitInitial());
   static VerifyCubit get(BuildContext context) => BlocProvider.of(context);
-
+  UserAuthModel ?userAuthModel;
   final TextEditingController otpController = TextEditingController();
   String? email;
   bool iscode = false;
@@ -42,8 +43,10 @@ class VerifyCubit extends Cubit<VerifyState> {
 
       if (response.statusCode == 200) {
         final responseData = response.data;
-        print("token${responseData['token']}");
-        CacheHelper.saveData(key: "token", value: responseData['token']);
+        userAuthModel = UserAuthModel.fromJson(response.data);
+        CacheHelper.saveData(key: "token", value: userAuthModel?.token);
+        CacheHelper.saveData(key: "role", value: userAuthModel?.role);
+
         emit(VerifySucsses());
       }
     } on DioException catch (e) {

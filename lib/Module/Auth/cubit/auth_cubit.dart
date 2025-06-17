@@ -7,13 +7,14 @@ import 'package:lms/Helper/global_func.dart';
 import 'dart:convert';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dio/dio.dart';
+import 'package:lms/Module/Auth/Model/user_auth_model.dart';
 
 import 'package:lms/Module/Auth/cubit/auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
   static AuthCubit get(BuildContext context) => BlocProvider.of(context);
-
+  UserAuthModel? userAuthModel;
   // LOGIN
   TextEditingController emailLogctrl = TextEditingController(
     text: "eng.tayseermatar@gmail.com",
@@ -50,17 +51,15 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void validEmail(String email) {
-     
-      if (GlobalFunc.validEmail(email)) {
-        isEmail = true;
-        showIsNotEmail = false;
-        emit(IsEmail());
-      } else {
-        isEmail = false;
-        showIsNotEmail = true;
-        emit(IsNotEmail());
-      }
-    
+    if (GlobalFunc.validEmail(email)) {
+      isEmail = true;
+      showIsNotEmail = false;
+      emit(IsEmail());
+    } else {
+      isEmail = false;
+      showIsNotEmail = true;
+      emit(IsNotEmail());
+    }
   }
 
   void passwordValid({required String password}) {
@@ -106,7 +105,11 @@ class AuthCubit extends Cubit<AuthState> {
         print("Status Code: ${response.statusCode}");
 
         if (response.statusCode == 200) {
-          final responseData = response.data;
+          userAuthModel = UserAuthModel.fromJson(response.data);
+          CacheHelper.saveData(key: "token", value: userAuthModel?.token);
+          CacheHelper.saveData(key: "role", value: userAuthModel?.role);
+
+          print('token${userAuthModel?.token}');
           emit(LogInsucess());
         }
       } on DioException catch (e) {
@@ -130,55 +133,51 @@ class AuthCubit extends Cubit<AuthState> {
 
 //// google login
   ///
- 
-final GoogleSignIn _googleSignIn = GoogleSignIn(
-  scopes: ['email', 'profile'],
- 
-);
 
-Future<void> loginWithGoogle() async {
-  try {
-    print("🔹 Signing in with Google...");
-    final GoogleSignInAccount? account = await _googleSignIn.signIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: ['email', 'profile'],
+  );
 
-    if (account == null) {
-      print("🔸 User cancelled sign-in.");
-      return;
+  Future<void> loginWithGoogle() async {
+    try {
+      print("🔹 Signing in with Google...");
+      final GoogleSignInAccount? account = await _googleSignIn.signIn();
+
+      if (account == null) {
+        print("🔸 User cancelled sign-in.");
+        return;
+      }
+
+      print("🔹 Getting auth tokens...");
+      final GoogleSignInAuthentication auth = await account.authentication;
+
+      final idToken = auth.idToken;
+      final accessToken = auth.accessToken;
+
+      if (idToken == null || accessToken == null) {
+        print("❌ Missing idToken or accessToken.");
+        return;
+      }
+
+      print("🔹 idToken: $idToken");
+      print("🔹 accessToken: $accessToken");
+
+      final response = await DioHelper.postData(
+        url: "auth/google",
+        postData: {
+          'id_token': idToken,
+        },
+        headers: {
+          "Accept": "application/json",
+          "Authorization": "Bearer $accessToken",
+        },
+      );
+
+      print("✅ Backend Response: ${response.data}");
+    } catch (e) {
+      print("❗ Error during Google Sign-In: $e");
     }
-
-    print("🔹 Getting auth tokens...");
-    final GoogleSignInAuthentication auth = await account.authentication;
-
-    final idToken = auth.idToken;
-    final accessToken = auth.accessToken;
-
-    if (idToken == null || accessToken == null) {
-      print("❌ Missing idToken or accessToken.");
-      return;
-    }
-
-    print("🔹 idToken: $idToken");
-    print("🔹 accessToken: $accessToken");
-
-   final response = await DioHelper.postData(
-  url: "auth/google",
-  postData: {
-    'id_token': idToken,
-  },
-  headers: {
-    "Accept": "application/json",
-    "Authorization": "Bearer $accessToken",
-  },
-);
-
-
-    print("✅ Backend Response: ${response.data}");
-  } catch (e) {
-    print("❗ Error during Google Sign-In: $e");
   }
-}
-
-
 
 //////////   signup
   void signUp() async {

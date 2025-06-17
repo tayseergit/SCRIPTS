@@ -127,8 +127,8 @@ class Cursescard extends StatelessWidget {
                     children: [
                       Image.asset(
                         Images.courses2,
-                        height: 19.h,
-                        width: 19.w,
+                        height: 18.h,
+                        width: 18.w,
                         color: appColors.seocndIconColor,
                       ),
                       SizedBox(width: 5.w),
@@ -144,8 +144,8 @@ class Cursescard extends StatelessWidget {
                     children: [
                       Image.asset(
                         Images.courses3,
-                        width: 19.w,
-                        height: 19.h,
+                        width: 18.w,
+                        height: 18.h,
                         color: appColors.seocndIconColor,
                       ),
                       SizedBox(width: 5.w),

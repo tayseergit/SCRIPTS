@@ -6,6 +6,8 @@ import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Auth/View/forgetPassword.dart';
 import 'package:lms/Module/Auth/View/register.dart';
+import 'package:lms/Module/Courses/View/Pages/courses_page.dart';
+import 'package:lms/Module/LearnPath/View/Pages/learn_path_page.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/CustomTextField.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
@@ -26,17 +28,23 @@ class Login extends StatelessWidget {
     ThemeState appColors = context.watch<ThemeCubit>().state;
 
     return BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
+      AuthCubit authCubit = AuthCubit.get(context);
+
       print(state);
       if (state is LogInsucess) {
-        pushTo(context: context, toPage: Register());
-
-        Future.delayed(Duration(milliseconds: 700), () {
-          CustomSnackbar.show(
+        pushAndRemoveUntiTo(
             context: context,
-            fillColor: appColors.ok,
-            message: "Login Completed",
-          );
-        });
+            toPage: authCubit.userAuthModel?.role == "teacher"
+                ? CoursesPage()
+                : Learnpath());
+
+        // Future.delayed(Duration(milliseconds: 700), () {
+        //   CustomSnackbar.show(
+        //     context: context,
+        //     fillColor: appColors.ok,
+        //     message: "Login Completed",
+        //   );
+        // });
       } else if (state is CheckInfo) {
         CustomSnackbar.show(
           context: context,

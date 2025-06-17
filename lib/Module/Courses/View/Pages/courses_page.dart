@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/mainWidget/TabButtons.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
- import 'package:lms/Module/Courses/View/Widget/TapBar_Cubit.dart';
+import 'package:lms/Module/Courses/View/Widget/TapBar_Cubit.dart';
 import 'package:lms/Module/Courses/View/Widget/grid_View_Courses.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
@@ -22,6 +23,7 @@ class CoursesPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => TabCubit(),
       child: Scaffold(
+        // bottomNavigationBar: NavigationBarwidget (),
         backgroundColor: appColors.pageBackground,
         appBar: AppBar(
           scrolledUnderElevation: 0,
@@ -41,10 +43,10 @@ class CoursesPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
           children: [
             Customtextfieldsearsh(
-               controller: search,
+              controller: search,
             ),
             SizedBox(height: 15.h),
-            const TabButtons(),
+              TabButtons(),
             SizedBox(height: 10.h),
             BlocBuilder<TabCubit, int>(
               builder: (context, state) {
