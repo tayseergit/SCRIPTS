@@ -8,6 +8,7 @@ import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/TeacherProfile/teacherProfilePage.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/Module/leaderboardforpastcontest/leaderboardforpastcontestPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
             builder: (context, child) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                home: TeacherProfilePage(),
+                home: Leaderboardforpastcontestpage(),
               );
             },
           );

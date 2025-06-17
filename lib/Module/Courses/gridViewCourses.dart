@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Module/Courses/coursesCard.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
@@ -12,18 +13,19 @@ class Gridviewcourses extends StatelessWidget {
     ThemeState appColors = context.watch<ThemeCubit>().state;
 
     return Container(
-      height: 510,
+      height: 510.h, // Responsive height
       color: appColors.pageBackground,
       child: GridView.builder(
+        // padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
         itemCount: 16,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200,
-          childAspectRatio: 0.750,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
+          maxCrossAxisExtent: 180.w, // Responsive max width per card
+          childAspectRatio: 180.w / 250.h, // Match the card's actual aspect
+          mainAxisSpacing: 12.h, // Responsive vertical spacing
+          crossAxisSpacing: 12.w, // Responsive horizontal spacing
         ),
         itemBuilder: (ctx, index) {
-          return Cursescard();
+          return const Cursescard();
         },
       ),
     );

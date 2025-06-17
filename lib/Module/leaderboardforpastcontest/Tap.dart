@@ -12,7 +12,7 @@ class Tap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
-    final selectedTab = context.watch<Tapcubit>().state;
+    final selectedTab = context.watch<TapLeadercubit>().state;
 
     final labels = ['All', 'Favorite'];
 
@@ -23,23 +23,22 @@ class Tap extends StatelessWidget {
           labels.length,
           (index) {
             final isSelected = selectedTab == index;
-
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 3.5.w),
               child: OnBordingContainer(
                 width: (labels[index].length * 13).w,
                 height: 40.h,
-                color: isSelected ? appColors.pageBackground : appColors.fieldBackground,
+                color: isSelected
+                    ? appColors.pageBackground
+                    : appColors.fieldBackground,
                 widget: Text(
                   labels[index],
                   style: TextStyle(
-                    color: isSelected
-                        ? appColors.mainText
-                        : appColors.mainText,
+                    color: isSelected ? appColors.mainText : appColors.mainText,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onTap: () => context.read<Tapcubit>().changeTab(index),
+                onTap: () => context.read<TapLeadercubit>().changeTab(index),
               ),
             );
           },
