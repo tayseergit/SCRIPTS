@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
- import 'package:lms/Module/LearnPath/View/Widget/LearnPathCard.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/Module/UserFriend/UserFriendCard.dart';
 
-class Gridviewlearnpath extends StatelessWidget {
-  const Gridviewlearnpath({super.key});
+class GridViewUserFriend extends StatelessWidget {
+  const GridViewUserFriend({super.key});
 
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
+
     return Container(
-      height: 520,
+      height: 570,
       color: appColors.pageBackground,
       child: GridView.builder(
-        itemCount: 5,
+        padding: EdgeInsets.only(top: 17.h),
+        itemCount: 16,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 400,
-          childAspectRatio: 1,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
+          maxCrossAxisExtent: 200,
+          childAspectRatio: 0.95,
+          mainAxisSpacing: 15,
+          crossAxisSpacing: 15
         ),
         itemBuilder: (ctx, index) {
-          return Learnpathcard();
+          return Userfriendcard();
         },
       ),
     );

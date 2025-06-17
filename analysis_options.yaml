@@ -10,6 +10,7 @@
 analyzer:
   errors:
     avoid_print: ignore
+    deprecated_member_use: ignore
     file_names: ignore
     must_be_immutable: ignore
     prefer_final_fields: ignore

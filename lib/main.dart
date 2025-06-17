@@ -10,9 +10,11 @@ import 'package:lms/Module/LearnPath/View/Pages/learn_path_page.dart';
 import 'package:lms/Module/More/more_page.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/Startup/View/Screen/splash_screen.dart';
-import 'package:lms/Module/StudentsProfile/profile.dart';
-import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/StudentsProfile/profileCard.dart';
+import 'package:lms/Module/StudentsProfile/student_profile_pagedart';
+ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/Module/leaderboardforpastcontest/leaderboardforpastcontestPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +33,6 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
         BlocProvider(create: (_) => AuthCubit()),
-        // BlocProvider(create: (_) => TabCubitProfile()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
             builder: (context, child) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                home: SplashScreen(),
+                home: Profile(),
               );
             },
           );
