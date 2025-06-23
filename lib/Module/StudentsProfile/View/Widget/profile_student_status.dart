@@ -17,18 +17,18 @@ class Profilestate extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: appColors.primary),
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(5.r),
       ),
       child: OnBoardingContainer(
         width: 80,
-        height: 40,
+        height: 50,
         color: appColors.pageBackground,
         widget: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AuthText(
               text: title,
-              size: 8,
+              size: 8.sp,
               color: appColors.mainText,
               fontWeight: FontWeight.w700,
             ),

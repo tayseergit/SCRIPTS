@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 class DioHelper {
-  static String baseUrl = "http://192.168.137.205:8000";
+  static String baseUrl = "http://192.168.1.16:8000";
   static String baseUrlApi = "$baseUrl/api/";
 
   static final Dio _dio = Dio(

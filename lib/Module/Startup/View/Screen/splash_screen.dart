@@ -2,12 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Module/Auth/View/Login.dart';
-import 'package:lms/Module/Courses/View/Pages/courses_page.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 

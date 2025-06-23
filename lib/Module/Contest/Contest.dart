@@ -7,7 +7,7 @@ import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Contest/TabButtonsForContest.dart';
 import 'package:lms/Module/Contest/TabbuttonsforcontestCubit.dart';
 import 'package:lms/Module/Contest/gridViewContest.dart';
- import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
 
@@ -21,63 +21,49 @@ class Contest extends StatelessWidget {
 
     return BlocProvider(
       create: (_) => TabbuttonsforcontestCubit(),
-      child: Scaffold(
-        backgroundColor: appColors.pageBackground,
-        appBar: AppBar(
-          scrolledUnderElevation: 0,
+      child: SafeArea(
+        child: Scaffold(
           backgroundColor: appColors.pageBackground,
-          elevation: 0,
-          title: Align(
-            alignment: Alignment.center,
-            child: AuthText(
-              text: 'Contest',
-              size: 24,
-              color: appColors.mainText,
-              fontWeight: FontWeight.w700,
+          appBar: AppBar(
+            scrolledUnderElevation: 0,
+            backgroundColor: appColors.pageBackground,
+            elevation: 0,
+            title: Align(
+              alignment: Alignment.center,
+              child: AuthText(
+                text: 'Contest',
+                size: 24,
+                color: appColors.mainText,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
-        ),
-        body: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
-          children: [
-            Customtextfieldsearsh(
-                borderRadius: 6,
+          body: ListView(
+            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
+            children: [
+              Customtextfieldsearsh(
                 controller: search,
-                borderColor: appColors.primary,
-                prefixIcon: Icon(
-                  Icons.search_outlined,
-                  size: 30,
-                  color: appColors.iconSearsh,
-                ),
-                suffixIcon: Image.asset(
-                  Images.filter,
-                  width: 17.w,
-                  height: 17.h,
-                  color: appColors.iconSearsh,
-                ),
                 hintText: 'what do you want to learn ?',
-                hintColor: appColors.secondText,
-                hintFontSize: 13.sp,
-                hintFontWeight: FontWeight.w600,
-                fillColor: appColors.pageBackground),
-            SizedBox(height: 15.h),
-            const Tabbuttonsforcontest(),
-            SizedBox(height: 10.h),
-            BlocBuilder<TabbuttonsforcontestCubit, int>(
-              builder: (context, state) {
-                switch (state) {
-                  case 0:
-                    return Gridviewcontest();
-                  case 1:
-                    return _buildSimpleTab(context, 'Enroll Content');
-                  case 2:
-                    return _buildSimpleTab(context, 'Completed Content');
-                  default:
-                    return const SizedBox.shrink();
-                }
-              },
-            ),
-          ],
+              ),
+              SizedBox(height: 15.h),
+              const Tabbuttonsforcontest(),
+              SizedBox(height: 10.h),
+              BlocBuilder<TabbuttonsforcontestCubit, int>(
+                builder: (context, state) {
+                  switch (state) {
+                    case 0:
+                      return Gridviewcontest();
+                    case 1:
+                      return _buildSimpleTab(context, 'Enroll Content');
+                    case 2:
+                      return _buildSimpleTab(context, 'Completed Content');
+                    default:
+                      return const SizedBox.shrink();
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -6,7 +6,7 @@ import 'package:lms/Module/Contest/gridViewContest.dart';
 import 'package:lms/Module/Courses/View/Widget/grid_View_Courses.dart';
 import 'package:lms/Module/LearnPath/View/Widget/gridViewLearnPath.dart';
  
-import 'package:lms/Module/StudentsProfile/profileState.dart';
+import 'package:lms/Module/StudentsProfile/View/Widget/profile_student_status.dart';
 import 'package:lms/Module/TeacherProfile/TabTeacher.dart';
 import 'package:lms/Module/TeacherProfile/TabTeachercubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';

@@ -16,7 +16,7 @@ import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/shake_animation.dart';
 
 class Register extends StatelessWidget {
-  Register({super.key});
+  const Register({super.key});
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;

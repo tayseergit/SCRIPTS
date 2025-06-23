@@ -5,9 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Module/Auth/Model/user_auth_model.dart';
-import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
 import 'package:lms/Module/Verify/Cubite/cubit/verfiy_state.dart';
-import 'package:meta/meta.dart';
 
 class VerifyCubit extends Cubit<VerifyState> {
   VerifyCubit() : super(VerifyCubitInitial());
@@ -46,6 +44,7 @@ class VerifyCubit extends Cubit<VerifyState> {
         userAuthModel = UserAuthModel.fromJson(response.data);
         CacheHelper.saveData(key: "token", value: userAuthModel?.token);
         CacheHelper.saveData(key: "role", value: userAuthModel?.role);
+            CacheHelper.saveData(key: "user_id", value: userAuthModel?.userId);
 
         emit(VerifySucsses());
       }

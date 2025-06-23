@@ -25,7 +25,7 @@ class Contestcard extends StatelessWidget {
         height: 250,
         color: appColors.pageBackground,
         widget: Padding(
-          padding: EdgeInsets.only(right: 10.w, left: 10.h, top: 10),
+          padding: EdgeInsets.only(right: 10.w, left: 10.h, top: 10.h),
           child: Column(
             children: [
               ClipRRect(
@@ -33,7 +33,7 @@ class Contestcard extends StatelessWidget {
                 child: Image.asset(
                   Images.courses,
                   width: double.infinity,
-                  height: 190,
+                  height: 190.h,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -78,11 +78,11 @@ class Contestcard extends StatelessWidget {
                             children: [
                               Image.asset(
                                 Images.contest4,
-                                height: 15,
-                                width: 15,
+                                height: 15.h,
+                                width: 15.w,
                                 color: appColors.primary,
                               ),
-                              SizedBox(width: 3),
+                              SizedBox(width: 3.w),
                               AuthText(
                                 text: '5/2/2024 2:00 AM',
                                 size: 14,
@@ -91,16 +91,16 @@ class Contestcard extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(width: 30),
+                          // SizedBox(width: 30.w),
                           Row(
                             children: [
                               Image.asset(
                                 Images.contest5,
-                                height: 15,
-                                width: 15,
+                                height: 15.h,
+                                width: 15.w,
                                 color: appColors.primary,
                               ),
-                              SizedBox(width: 3),
+                              SizedBox(width: 3.w),
                               AuthText(
                                 text: '60 min',
                                 size: 14,
@@ -118,11 +118,11 @@ class Contestcard extends StatelessWidget {
                             children: [
                               Image.asset(
                                 Images.contest6,
-                                height: 15,
-                                width: 15,
+                                height: 15.h,
+                                width: 15.w,
                                 color: appColors.primary,
                               ),
-                              SizedBox(width: 3),
+                              SizedBox(width: 3.w),
                               AuthText(
                                 text: '152 participant',
                                 size: 14,
@@ -131,7 +131,7 @@ class Contestcard extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(width: 30),
+                          SizedBox(width: 30.w),
                           AuthText(
                             text: 'Questions :20',
                             size: 14,
@@ -145,8 +145,8 @@ class Contestcard extends StatelessWidget {
                   Column(
                     children: [
                       OnBoardingContainer(
-                        width: 70,
-                        height: 20,
+                        width: 70.w,
+                        height: 20.h,
                         color: appColors.ok,
                         widget: AuthText(
                           text: 'Active',
@@ -159,8 +159,8 @@ class Contestcard extends StatelessWidget {
                         children: [
                           Image.asset(
                             Images.contest7,
-                            width: 100,
-                            height: 100,
+                            width: 100.w,
+                            height: 100.h,
                           ),
                           Positioned(
                             top: 11,

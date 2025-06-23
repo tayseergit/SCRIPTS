@@ -51,11 +51,11 @@ class TabButtonsProfile extends StatelessWidget {
     ThemeState appColors = context.watch<ThemeCubit>().state;
     final selectedTab = context.watch<TabCubitProfile>().state;
 
-    final labels = ['Certificates', 'Acheivement', 'My Contest', 'statices'];
+    final labels = ['Certificates', 'Achievement', 'My Contest', 'statices'];
 
     return Container(
       decoration: BoxDecoration(
-          color: appColors.fieldBackground,
+          color: appColors.pageBackground,
           borderRadius: BorderRadius.all(Radius.circular(5.r))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -65,7 +65,7 @@ class TabButtonsProfile extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 3.5.w),
             child: OnBoardingContainer(
-              width: (labels[index].length * 8).w,
+              width: (labels[index].length * 10).w,
               height: 40.h,
               color: isSelected
                   ? appColors.pageBackground

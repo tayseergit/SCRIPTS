@@ -4,9 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Helper/global_func.dart';
-import 'dart:convert';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:dio/dio.dart';
 import 'package:lms/Module/Auth/Model/user_auth_model.dart';
 
 import 'package:lms/Module/Auth/cubit/auth_state.dart';
@@ -86,50 +84,51 @@ class AuthCubit extends Cubit<AuthState> {
 
 ////////////  login
   ///
-  void logIn() async {
-    if (emailLogctrl.text.isEmpty || passWordLogctrl.text.isEmpty) {
-      emit(LogInvalidate());
-    } else {
-      emit(LogInLoading());
+    void logIn() async {
+      if (emailLogctrl.text.isEmpty || passWordLogctrl.text.isEmpty) {
+        emit(LogInvalidate());
+      } else {
+        emit(LogInLoading());
 
-      try {
-        final response = await DioHelper.postData(
-          url: "login",
-          postData: {
-            'email': emailLogctrl.text,
-            'password': passWordLogctrl.text,
-          },
-          headers: {"Accept": "application/json"},
-        );
+        try {
+          final response = await DioHelper.postData(
+            url: "login",
+            postData: {
+              'email': emailLogctrl.text,
+              'password': passWordLogctrl.text,
+            },
+            headers: {"Accept": "application/json"},
+          );
 
-        print("Status Code: ${response.statusCode}");
+          print("Status Code: ${response.statusCode}");
 
-        if (response.statusCode == 200) {
-          userAuthModel = UserAuthModel.fromJson(response.data);
-          CacheHelper.saveData(key: "token", value: userAuthModel?.token);
-          CacheHelper.saveData(key: "role", value: userAuthModel?.role);
+          if (response.statusCode == 200) {
+            userAuthModel = UserAuthModel.fromJson(response.data);
+            CacheHelper.saveData(key: "token", value: userAuthModel?.token);
+            CacheHelper.saveData(key: "role", value: userAuthModel?.role);
+            CacheHelper.saveData(key: "user_id", value: userAuthModel?.userId);
 
-          print('token${userAuthModel?.token}');
-          emit(LogInsucess());
-        }
-      } on DioException catch (e) {
-        // Check if there's a response from the server
-        if (e.response != null) {
-          print("Error Status: ${e.response?.statusCode}");
-
-          if (e.response?.statusCode == 401 || e.response?.statusCode == 422) {
-            emit(CheckInfo());
-          } else {
-            emit(LogInError(message: "error"));
+            print('token${userAuthModel?.token}');
+            emit(LogInsucess());
           }
-        } else {
-          // No response received (network error, timeout, etc.)
-          print("Connection Error: $e");
-          emit(LogInErrorConnection(message: "Connection Error"));
+        } on DioException catch (e) {
+          // Check if there's a response from the server
+          if (e.response != null) {
+            print("Error Status: ${e.response?.statusCode}");
+
+            if (e.response?.statusCode == 401 || e.response?.statusCode == 422) {
+              emit(CheckInfo());
+            } else {
+              emit(LogInError(message: "error"));
+            }
+          } else {
+            // No response received (network error, timeout, etc.)
+            print("Connection Error: $e");
+            emit(LogInErrorConnection(message: "Connection Error"));
+          }
         }
       }
     }
-  }
 
 //// google login
   ///

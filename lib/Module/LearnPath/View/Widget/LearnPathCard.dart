@@ -26,7 +26,7 @@ class Learnpathcard extends StatelessWidget {
         color: appColors.pageBackground,
         widget: ListView(
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               height: 70,
               child: Stack(

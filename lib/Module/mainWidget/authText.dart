@@ -10,14 +10,14 @@ class AuthText extends StatelessWidget {
   final TextOverflow? overflow;
 
   const AuthText({
-    Key? key,
+    super.key,
     required this.text,
     required this.size,
     required this.color,
     required this.fontWeight,
     this.maxLines = 1,
     this.overflow,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

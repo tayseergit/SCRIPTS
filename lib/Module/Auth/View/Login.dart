@@ -8,6 +8,7 @@ import 'package:lms/Module/Auth/View/forgetPassword.dart';
 import 'package:lms/Module/Auth/View/register.dart';
 import 'package:lms/Module/Courses/View/Pages/courses_page.dart';
 import 'package:lms/Module/LearnPath/View/Pages/learn_path_page.dart';
+import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/CustomTextField.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
@@ -17,7 +18,6 @@ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 
-import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/mainWidget/shake_animation.dart';
 
 class Login extends StatelessWidget {
@@ -32,11 +32,7 @@ class Login extends StatelessWidget {
 
       print(state);
       if (state is LogInsucess) {
-        pushAndRemoveUntiTo(
-            context: context,
-            toPage: authCubit.userAuthModel?.role == "teacher"
-                ? CoursesPage()
-                : Learnpath());
+        pushAndRemoveUntiTo(context: context, toPage: NavigationBarwidget());
 
         // Future.delayed(Duration(milliseconds: 700), () {
         //   CustomSnackbar.show(
