@@ -25,28 +25,29 @@ class Register extends StatelessWidget {
       child: SafeArea(
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
-            final authCubit = AuthCubit.get(context);
+            AuthCubit authCubit = context.read<AuthCubit>();
             if (state is SignUpSuccess) {
               CustomSnackbar.show(
                 fillColor: appColors.ok,
                 context: context,
                 message: "Check your email for code",
               );
-              // Then navigate
-              pushTo(
-                  context: context,
-                  toPage: Verify(email: authCubit.emailRegCtrl.text));
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                pushTo(
+                    context: context,
+                    toPage: Verify(email: authCubit.emailRegCtrl.text));
+              });
             } else if (state is SignUpError) {
-              CustomSnackbar.show(
-                context: context,
-                duration: 7,
-                fillColor: appColors.red,
-                message: state.message,
-              );
+              // CustomSnackbar.show(
+              //   context: context,
+              //   duration: 7,
+              //   fillColor: appColors.red,
+              //   message: state.message,
+              // );
             }
           },
           builder: (context, state) {
-            AuthCubit authCubit = AuthCubit.get(context);
+            final authCubit = context.watch<AuthCubit>();
             return Scaffold(
               backgroundColor: appColors.pageBackground,
               body: ListView(

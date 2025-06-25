@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/Courses/View/Widget/TapBar_Cubit.dart';
 import 'package:lms/Module/StudentsProfile/Model/student_profile_model.dart';
-import 'package:lms/Module/StudentsProfile/View/Widget/gridViewProfile.dart';
+import 'package:lms/Module/StudentsProfile/View/Widget/achievement_gridView.dart';
+import 'package:lms/Module/StudentsProfile/View/Widget/certificate_gridVeiw.dart';
+import 'package:lms/Module/StudentsProfile/View/Widget/contest_profile_widget.dart';
 import 'package:lms/Module/StudentsProfile/View/Widget/profile_student_status.dart';
 import 'package:lms/Module/StudentsProfile/cubit/student_profile_cubit.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
@@ -33,7 +35,7 @@ class StudentProfilePage extends StatelessWidget {
               context: context,
               duration: 4,
               fillColor: appColors.red,
-              message: "connection error",
+              message: state.message,
             );
           }
           if (state is ProfileSuccess) {
@@ -44,20 +46,34 @@ class StudentProfilePage extends StatelessWidget {
         builder: (context, state) {
           StudentProfileCubit studentModel = StudentProfileCubit.get(context);
 
-          return SafeArea(
-            child: Scaffold(
+          return Container(
+            color: appColors.pageBackground,
+            child: SafeArea(
+                child: Scaffold(
               backgroundColor: appColors.pageBackground,
-              body: SingleChildScrollView(
-                child: state is ProfileSuccess
-                    ? _buildProfileContent(context, appColors)
-                    : Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 50.h),
-                          child: Loading(height: 50, width: 50),
-                        ),
+              body: Builder(
+                builder: (context) {
+                  if (state is ProfileLoading) {
+                    return Center(
+                      child: SizedBox(
+                        height: 80.h,
+                        child: Loading(height: 50.h, width: 50.w),
                       ),
+                    );
+                  }
+                  if (state is ProfileError) {
+                    return Center(
+                      child: Text("Error"),
+                    );
+                  }
+                  if (state is ProfileSuccess) {
+                    return _buildProfileContent(context, appColors);
+                  } else {
+                    return _buildProfileContent(context, appColors);
+                  }
+                },
               ),
-            ),
+            )),
           );
         },
       ),
@@ -65,7 +81,7 @@ class StudentProfilePage extends StatelessWidget {
   }
 
   Widget _buildProfileContent(BuildContext context, ThemeState appColors) {
-    StudentProfileCubit studentModel = StudentProfileCubit.get(context);
+    StudentProfileCubit studentCubit = StudentProfileCubit.get(context);
 
     return Column(
       children: [
@@ -77,15 +93,18 @@ class StudentProfilePage extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: TabButtonsProfile(),
         ),
+        SizedBox(height: 12.h),
         BlocBuilder<TabCubitProfile, int>(
           builder: (context, state) {
             switch (state) {
               case 0:
-                return Gridviewprofile();
+                return CirtificateGridview(
+                  cubit: studentCubit,
+                );
               case 1:
-                return _buildSimpleTab(context, 'In Progress Content');
+                return AchievementGridview(cubit: studentCubit);
               case 2:
-                return _buildSimpleTab(context, 'Completed Content');
+                return ContestHistoryCard(cubit: studentCubit,);
               case 3:
                 return _buildSimpleTab(context, 'Watchlater Content');
               default:
@@ -140,19 +159,19 @@ class StudentProfilePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AuthText(
-                      text: studentModel.studentProfileModel!.name,
+                      text: studentModel.studentProfileModel.name,
                       size: 18.sp,
                       color: appColors.mainText,
                       fontWeight: FontWeight.w700,
                     ),
                     AuthText(
-                      text: studentModel.studentProfileModel!.email,
+                      text: studentModel.studentProfileModel.email,
                       size: 10.sp,
                       color: appColors.pageBackground,
                       fontWeight: FontWeight.w700,
                     ),
                     AuthText(
-                      text: studentModel.studentProfileModel!.joined,
+                      text: studentModel.studentProfileModel.joined,
                       size: 10.sp,
                       color: appColors.pageBackground,
                       fontWeight: FontWeight.w700,
@@ -169,7 +188,7 @@ class StudentProfilePage extends StatelessWidget {
                     color: appColors.orang,
                     widget: Center(
                       child: AuthText(
-                        text: studentModel.studentProfileModel!.level,
+                        text: studentModel.studentProfileModel.level,
                         size: 12.sp,
                         color: appColors.mainText,
                         fontWeight: FontWeight.w700,
@@ -217,17 +236,19 @@ class StudentProfilePage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Profilestate(title: 'Current Streak', value: '12 Days'),
+          Profilestate(
+              title: 'Current Streak',
+              value: '${studentModel.studentProfileModel.points} Days'),
           Profilestate(
               title: 'Course Completed',
-              value: "${studentModel.studentProfileModel!.completedCourses}"),
+              value: "${studentModel.studentProfileModel.completedCourses}"),
           Profilestate(
               title: 'Path Completed',
               value:
-                  "${studentModel.studentProfileModel!.completedLearningPaths}"),
+                  "${studentModel.studentProfileModel.completedLearningPaths}"),
           Profilestate(
               title: 'Total Points',
-              value: "${studentModel.studentProfileModel!.points}"),
+              value: "${studentModel.studentProfileModel.points}"),
         ],
       ),
     );

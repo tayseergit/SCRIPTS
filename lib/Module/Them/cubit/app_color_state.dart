@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class ThemeState {
   final bool isDarkMode;
 
@@ -20,13 +19,17 @@ class ThemeState {
   final Color iconSearsh;
   final Color darkText;
   final Color orang;
+  final Color whiteText;
+  final Color strongPrimer;
+  final Color blackGreen;
 
   final Color red;
   final LinearGradient linerContainer;
   final LinearGradient linear;
-  final LinearGradient linerImage;
 
+  final LinearGradient linerImage;
   ThemeState({
+    required this.strongPrimer,
     required this.isDarkMode,
     required this.primary,
     required this.fieldBackground,
@@ -46,7 +49,10 @@ class ThemeState {
     required this.border,
     required this.iconSearsh,
     required this.darkText,
+    required this.whiteText,
     required this.orang,
+    required this.blackGreen,
+
     //
     required this.lightGray,
   });
@@ -57,6 +63,7 @@ class ThemeState {
       primary: const Color(0xFF6BC8FF),
       fieldBackground: const Color(0x0F0F9CEF),
       pageBackground: const Color(0xFFFFFFFF),
+      whiteText: const Color(0xFFFFFFFF),
       mainText: const Color.fromARGB(255, 0, 0, 0),
       secondText: const Color(0xFF888888),
       purple: const Color(0xFFB797FF),
@@ -69,6 +76,9 @@ class ThemeState {
       iconSearsh: Color(0xff8C8E98),
       darkText: Color(0xFFCED2E6),
       orang: Color(0xffFF9500),
+      strongPrimer: const Color.fromARGB(255, 24, 112, 163),
+      blackGreen: const Color(0xFF1B4965),
+
       //
       lightGray: const Color(0xFFDDDDDD),
       lihgtPrimer: const Color.fromARGB(127, 107, 201, 255),
@@ -96,6 +106,7 @@ class ThemeState {
       primary: const Color(0xFF3D5CFF),
       fieldBackground: const Color(0x0F9CEF0F),
       pageBackground: const Color(0xff000000),
+      whiteText: const Color(0xFFffffff),
       mainText: const Color(0xFFffffff),
       secondText: const Color(0xFF888888),
       purple: const Color(0xFFB797FF),
@@ -108,6 +119,8 @@ class ThemeState {
       iconSearsh: Color(0xff8C8E98),
       darkText: Color(0xFFCED2E6),
       orang: Color(0xffFF9500),
+      strongPrimer: const Color.fromARGB(255, 24, 112, 163),
+      blackGreen: const Color(0xFF1B4965),
 
       //
       lightGray: const Color(0xFFDDDDDD),

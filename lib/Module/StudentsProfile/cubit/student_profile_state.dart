@@ -17,3 +17,38 @@ class ProfileSuccess extends StudentProfileState {
 
   ProfileSuccess(this.student);
 }
+
+/// cetificate
+
+class CertificatesLoading extends StudentProfileState {}
+
+class CertificatesError extends StudentProfileState {
+  final String message;
+  CertificatesError({required this.message});
+}
+
+class CertificatesSuccess extends StudentProfileState {}
+/// achievement
+/// 
+
+class AchievementLoading extends StudentProfileState {}
+
+class AchievementError extends StudentProfileState {
+  final String message;
+  AchievementError({required this.message});
+}
+
+class AchievementSuccess extends StudentProfileState {}
+
+
+///// 
+/// contest
+
+class ContestLoading extends StudentProfileState {}
+
+class ContestError extends StudentProfileState {
+  final String message;
+  ContestError({required this.message});
+}
+
+class ContestSuccess extends StudentProfileState {}
