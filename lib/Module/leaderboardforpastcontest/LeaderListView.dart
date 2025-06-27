@@ -127,8 +127,8 @@ class LeaderListView extends StatelessWidget {
             ),
             Column(
               children: [
-                CardLeader(),
-                CardLeader(),
+                CardLeader(index: 1,),
+                CardLeader(index: 2,),
               ],
             ),
           ],

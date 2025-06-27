@@ -24,7 +24,7 @@ class Images {
   static String navBarCourse = "${_baseImages}courses.png";
   static String navBarlearnPath = "${_baseImages}learnPath.png";
   static String navBarContest = "${_baseImages}constest.png";
-  static String navBarmyLearn = "${_baseImages}myLearn.png";
+  static String navBarProject = "${_baseImages}Project.png";
   static String navBarMore = "${_baseImages}more.png";
   static String learnPath1 = "${_baseImages}test2.png";
   static String contest1 = "${_baseImages}contest1.png";

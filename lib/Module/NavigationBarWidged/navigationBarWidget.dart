@@ -6,8 +6,8 @@ import 'package:lms/Module/Contest/Contest.dart';
 import 'package:lms/Module/Courses/Courses.dart';
 import 'package:lms/Module/LearnPath/LearnPath.dart';
 import 'package:lms/Module/More/More.dart';
-import 'package:lms/Module/MyLearn/MyLearn.dart';
 import 'package:lms/Module/NavigationBarWidged/navigation_cubit.dart';
+import 'package:lms/Module/Project/projectPage.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
@@ -16,7 +16,7 @@ class NavigationBarwidget extends StatelessWidget {
     CoursesPage(),
     Learnpath(),
     Contest(),
-    Mylearn(),
+    Projectpage(),
     More(),
   ];
 
@@ -89,12 +89,12 @@ class NavigationBarwidget extends StatelessWidget {
                       BlendMode.srcIn,
                     ),
                     child: Image.asset(
-                      Images.navBarmyLearn,
+                      Images.navBarProject,
                       width: 42,
                       height: 36,
                     ),
                   ),
-                  label: 'MyLearn',
+                  label: 'Project',
                 ),
                 BottomNavigationBarItem(
                   icon: ColorFiltered(

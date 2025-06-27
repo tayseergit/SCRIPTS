@@ -147,28 +147,41 @@ class Projectcard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10.h,),
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(  
+                      Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5.r)),
-                          border: Border.all(color: appColors.secondText,width: 1.5)
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(5.r)),
+                            border: Border.all(
+                                color: appColors.secondText, width: 1.5)),
+                        child: OnBordingContainer(
+                          width: 65,
+                          height: 15,
+                          color: appColors.pageBackground,
+                          widget: AuthText(
+                            text: 'GitHub',
+                            size: 10,
+                            color: appColors.mainText,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
-                        child: OnBordingContainer(width: 65,height: 15, color: appColors.pageBackground, widget:   AuthText(
-                          text: 'GitHub',
-                          size: 10,
-                          color: appColors.mainText,
-                          fontWeight: FontWeight.w400,
-                        ),),
                       ),
-                       OnBordingContainer(width: 65,height: 18, color: appColors.primary, widget:   AuthText(
+                      OnBordingContainer(
+                        width: 65,
+                        height: 18,
+                        color: appColors.primary,
+                        widget: AuthText(
                           text: 'View',
                           size: 10,
                           color: appColors.pageBackground,
                           fontWeight: FontWeight.w400,
-                        ),),
+                        ),
+                      ),
                     ],
                   )
                 ],
