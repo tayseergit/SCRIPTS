@@ -32,20 +32,19 @@ class Tap extends StatelessWidget {
               return GestureDetector(
                 onTap: () => context.read<TapLeadercubit>().changeTab(index),
                 child: Container(
-                  // margin: EdgeInsets.symmetric(horizontal: 2.w),
                   padding:
                       EdgeInsets.symmetric(horizontal: 14.w, vertical: 15.h),
                   decoration: BoxDecoration(
-                    color: isSelected
-                        ? appColors.primary
-                        : appColors.secondText,
+                    color:
+                        isSelected ? appColors.primary : appColors.secondText,
                     borderRadius: BorderRadius.circular(25.r),
                   ),
                   child: Text(
                     labels[index],
                     style: TextStyle(
-                      color:
-                          isSelected ? appColors.pageBackground : appColors.pageBackground,
+                      color: isSelected
+                          ? appColors.pageBackground
+                          : appColors.pageBackground,
                       fontWeight: FontWeight.w600,
                       fontSize: 13.sp,
                     ),
