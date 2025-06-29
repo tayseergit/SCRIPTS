@@ -31,8 +31,8 @@ class Customtextfieldsearsh extends StatelessWidget {
     this.onChanged,
     this.errorText,
     this.hintText,
-    this.borderRadius = 6.0,
-    this.hintFontSize = 14.0,
+    this.borderRadius = 30.0,
+    this.hintFontSize = 16.0,
     this.hintFontWeight = FontWeight.normal,
     this.borderColor,
     this.fillColor,
@@ -43,42 +43,46 @@ class Customtextfieldsearsh extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeState appColors = context.watch<ThemeCubit>().state;
 
-    return TextField(
-      controller: controller,
-      obscureText: obscureText,
-      keyboardType: keyboardType,
-      onChanged: onChanged,
-      style: TextStyle(color: appColors.mainText),
-      decoration: InputDecoration(
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-        hintText: hintText,
-        hintStyle: TextStyle(
-          fontSize: hintFontSize,
-          fontWeight: hintFontWeight,
-          color: appColors.secondText,
+    return Container(
+      decoration: BoxDecoration(
+        color: appColors.pageBackground,
+        border: Border(
+          top: BorderSide(color: appColors.border, width: 1),
+          right: BorderSide(color: appColors.border, width: 1),
+          bottom: BorderSide(color: appColors.border, width: 4),
+          left: BorderSide(color: appColors.border, width: 4),
         ),
-        filled: true,
-        fillColor: appColors.pageBackground,
-        prefixIcon: prefixIcon ??
-            Icon(
-              Icons.search,
-              color: appColors.mainIconColor,
-            ),
-        suffixIcon: suffixIcon ??
-            Image.asset(
-              Images.filter,
-              width: 17.w,
-              height: 17.h,
-              color: appColors.mainIconColor,
-            ),
-        errorText: errorText,
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: appColors.border, width: 4.w),
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: appColors.border, width: 2.5.w),
+        borderRadius: BorderRadius.circular(borderRadius.r),
+      ),
+      child: TextField(
+        controller: controller,
+        obscureText: obscureText,
+        keyboardType: keyboardType,
+        onChanged: onChanged,
+        style: TextStyle(color: appColors.mainText),
+        decoration: InputDecoration(
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+          hintText: hintText,
+          hintStyle: TextStyle(
+            fontSize: hintFontSize.sp,
+            fontWeight: hintFontWeight,
+            color: appColors.secondText,
+          ),
+          border: InputBorder.none,
+          prefixIcon: prefixIcon ??
+              Icon(
+                Icons.search,
+                color: appColors.mainIconColor,
+              ),
+          suffixIcon: suffixIcon ??
+              Image.asset(
+                Images.filter,
+                width: 17.w,
+                height: 17.h,
+                color: appColors.mainIconColor,
+              ),
+          errorText: errorText,
         ),
       ),
     );

@@ -31,12 +31,7 @@ class StudentProfilePage extends StatelessWidget {
       child: BlocConsumer<StudentProfileCubit, StudentProfileState>(
         listener: (context, state) {
           if (state is ProfileError) {
-            CustomSnackbar.show(
-              context: context,
-              duration: 4,
-              fillColor: appColors.red,
-              message: state.message,
-            );
+            
           }
           if (state is ProfileSuccess) {
             studentProfileModel = state.student;
@@ -62,8 +57,12 @@ class StudentProfilePage extends StatelessWidget {
                     );
                   }
                   if (state is ProfileError) {
-                    return Center(
-                      child: Text("Error"),
+                   return Center(
+                      child: SizedBox(
+                        height: 100.h,
+                        width: 100.w,
+                        child: Image.asset(Images.noConnection),
+                      ),
                     );
                   }
                   if (state is ProfileSuccess) {
@@ -104,7 +103,9 @@ class StudentProfilePage extends StatelessWidget {
               case 1:
                 return AchievementGridview(cubit: studentCubit);
               case 2:
-                return ContestHistoryCard(cubit: studentCubit,);
+                return ContestHistoryCard(
+                  cubit: studentCubit,
+                );
               case 3:
                 return _buildSimpleTab(context, 'Watchlater Content');
               default:

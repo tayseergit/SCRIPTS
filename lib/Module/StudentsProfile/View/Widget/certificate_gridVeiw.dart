@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/StudentsProfile/View/Widget/cetificate_card.dart';
 import 'package:lms/Module/StudentsProfile/cubit/student_profile_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 
 class CirtificateGridview extends StatefulWidget {
@@ -48,12 +50,25 @@ class _CirtificateGridviewState extends State<CirtificateGridview> {
             final certs = widget.cubit.certificateResponse?.certificates ?? [];
             if (certs.isEmpty) {
               return Center(
-                child: Text(
-                  "No Certificates",
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    color: appColors.mainText,
-                    fontWeight: FontWeight.w500,
+                child: SizedBox(
+                  height: 200.h,
+                  width: 200.w,
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        Images.noItem,
+                        height: 150.h,
+                        width: 150.w,
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      AuthText(
+                          text: "No Items",
+                          size: 16.sp,
+                          color: appColors.secondText,
+                          fontWeight: FontWeight.w500)
+                    ],
                   ),
                 ),
               );

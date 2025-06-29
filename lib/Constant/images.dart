@@ -47,4 +47,7 @@ class Images {
   static String language = "${_baseImages}Language.png";
   static String logout = "${_baseImages}Logout.png";
   static String noImage = "${_baseImages}noImage.png";
+  static String noConnection = "${_baseImages}noConnection.png";
+  static String noItem = "${_baseImages}NoItem.png";
+  static String noNotification = "${_baseImages}noNotification.png";
 }

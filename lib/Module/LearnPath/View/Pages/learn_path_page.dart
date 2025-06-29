@@ -10,8 +10,8 @@ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
 
-class Learnpath extends StatelessWidget {
-  const Learnpath({super.key});
+class LearnpathPage extends StatelessWidget {
+  const LearnpathPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class Learnpath extends StatelessWidget {
               hintText: "Learn Path",
             ),
             SizedBox(height: 15.h),
-             TabButtons(),
+            // TabButtons(),
             SizedBox(height: 10.h),
             BlocBuilder<TabCubit, int>(
               builder: (context, state) {

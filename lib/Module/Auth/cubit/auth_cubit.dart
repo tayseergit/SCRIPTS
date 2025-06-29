@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
@@ -84,99 +85,97 @@ class AuthCubit extends Cubit<AuthState> {
 
 ////////////  login
   ///
-    void logIn() async {
-      if (emailLogctrl.text.isEmpty || passWordLogctrl.text.isEmpty) {
-        emit(LogInvalidate());
-      } else {
-        emit(LogInLoading());
+  void logIn() async {
+    if (emailLogctrl.text.isEmpty || passWordLogctrl.text.isEmpty) {
+      emit(LogInvalidate());
+    } else {
+      emit(LogInLoading());
 
-        try {
-          final response = await DioHelper.postData(
-            url: "login",
-            postData: {
-              'email': emailLogctrl.text,
-              'password': passWordLogctrl.text,
-            },
-            headers: {"Accept": "application/json"},
-          );
+      try {
+        final response = await DioHelper.postData(
+          url: "login",
+          postData: {
+            'email': emailLogctrl.text,
+            'password': passWordLogctrl.text,
+          },
+          headers: {"Accept": "application/json"},
+        );
 
-          print("Status Code: ${response.statusCode}");
+        print("Status Code: ${response.statusCode}");
 
-          if (response.statusCode == 200) {
-            userAuthModel = UserAuthModel.fromJson(response.data);
-            CacheHelper.saveData(key: "token", value: userAuthModel?.token);
-            CacheHelper.saveData(key: "role", value: userAuthModel?.role);
-            CacheHelper.saveData(key: "user_id", value: userAuthModel?.userId);
+        if (response.statusCode == 200) {
+          userAuthModel = UserAuthModel.fromJson(response.data);
+          CacheHelper.saveData(key: "token", value: userAuthModel?.token);
+          CacheHelper.saveData(key: "role", value: userAuthModel?.role);
+          CacheHelper.saveData(key: "user_id", value: userAuthModel?.userId);
 
-            print('token${userAuthModel?.token}');
-            emit(LogInsucess());
-          }
-        } on DioException catch (e) {
-          // Check if there's a response from the server
-          if (e.response != null) {
-            print("Error Status: ${e.response?.statusCode}");
+          print('token${userAuthModel?.token}');
+          emit(LogInsucess());
+        }
+      } on DioException catch (e) {
+        // Check if there's a response from the server
+        if (e.response != null) {
+          print("Error Status: ${e.response?.statusCode}");
 
-            if (e.response?.statusCode == 401 || e.response?.statusCode == 422) {
-              emit(CheckInfo());
-            } else {
-              emit(LogInError(message: "error"));
-            }
+          if (e.response?.statusCode == 401 || e.response?.statusCode == 422) {
+            emit(CheckInfo());
           } else {
-            // No response received (network error, timeout, etc.)
-            print("Connection Error: $e");
-            emit(LogInErrorConnection(message: "Connection Error"));
+            emit(LogInError(message: "error"));
           }
+        } else {
+          // No response received (network error, timeout, etc.)
+          print("Connection Error: $e");
+          emit(LogInErrorConnection(message: "Connection Error"));
         }
       }
     }
+  }
 
 //// google login
   ///
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: ['email', 'profile'],
-  );
+   
+ final GoogleSignIn _googleSignIn = GoogleSignIn(
+   scopes: <String>[
+    'openid',        
+    'email',
+    'profile',      
+  ],
 
-  Future<void> loginWithGoogle() async {
-    try {
-      print("🔹 Signing in with Google...");
-      final GoogleSignInAccount? account = await _googleSignIn.signIn();
+   
+  clientId: '510480483026-vej2aqs8h63ludrdgkf5qv5mvcvet621.apps.googleusercontent.com',
+);
 
-      if (account == null) {
-        print("🔸 User cancelled sign-in.");
-        return;
-      }
 
-      print("🔹 Getting auth tokens...");
-      final GoogleSignInAuthentication auth = await account.authentication;
 
-      final idToken = auth.idToken;
-      final accessToken = auth.accessToken;
+Future<void> loginWithGoogle({bool forceChooser = false}) async {
+ try {
+    // 1️⃣ خَرْجْ المستخدم أولاً (يزيل الجلسة المخبَّأة)
+    await _googleSignIn.signOut();
 
-      if (idToken == null || accessToken == null) {
-        print("❌ Missing idToken or accessToken.");
-        return;
-      }
+    // ملاحظة: إذا كنت تريد أيضاً إلغاء ربط التطبيق من الحساب
+    // استخدم await _googleSignIn.disconnect();
 
-      print("🔹 idToken: $idToken");
-      print("🔹 accessToken: $accessToken");
+    // 2️⃣ استدعِ شاشة اختيار الحساب
+    final GoogleSignInAccount? account = await _googleSignIn.signIn();
 
-      final response = await DioHelper.postData(
-        url: "auth/google",
-        postData: {
-          'id_token': idToken,
-        },
-        headers: {
-          "Accept": "application/json",
-          "Authorization": "Bearer $accessToken",
-        },
-      );
-
-      print("✅ Backend Response: ${response.data}");
-    } catch (e) {
-      print("❗ Error during Google Sign-In: $e");
+    if (account == null) {
+      debugPrint('🔸 المستخدم ألغى العملية.');
+      return;
     }
+
+    // 3️⃣ احصل على التوكينات كالمعتاد
+    final auth = await account.authentication;
+    debugPrint('✅ ID‑Token: ${auth.idToken}');
+    debugPrint('✅ Access‑Token: ${auth.accessToken}');
+  } catch (e, st) {
+    debugPrint('❌ خطأ: $e');
+    debugPrint(st.toString());
   }
+}
+
+
+
 
 //////////   signup
   void signUp() async {

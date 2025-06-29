@@ -65,7 +65,7 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
 
     try {
       final response = await DioHelper.getData(
-        url: "users/5/certificates",
+        url: "users/$userId/certificates",
         headers: {
           "Accept": "application/json",
           "Authorization": "Bearer $token",
@@ -96,7 +96,7 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
 
     try {
       final response = await DioHelper.getData(
-        url: "users/5/achievements",
+        url: "users/$userId/achievements",
         headers: {
           "Accept": "application/json",
           "Authorization": "Bearer $token",
@@ -125,7 +125,7 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
 
     try {
       final response = await DioHelper.getData(
-        url: "users/5/contests",
+        url: "users/$userId/contests",
         headers: {
           "Accept": "application/json",
           "Authorization": "Bearer $token",

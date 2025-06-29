@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/Module/Courses/Cubit/cubit/course_cubit.dart';
+import 'package:lms/Module/MyLearn/CourseTabCubit.dart';
 import 'package:lms/Module/mainWidget/TabButtons.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Courses/View/Widget/TapBar_Cubit.dart';
@@ -16,53 +18,61 @@ class CoursesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
-    final search = TextEditingController();
-
-    return BlocProvider(
-      create: (_) => TabCubit(),
-      child: Scaffold(
-        // bottomNavigationBar: NavigationBarwidget (),
-        backgroundColor: appColors.pageBackground,
-        appBar: AppBar(
-          scrolledUnderElevation: 0,
+ 
+    return SafeArea(
+      child: BlocProvider(
+        create: (context) => CourseCubit(),
+        child: Scaffold(
           backgroundColor: appColors.pageBackground,
-          elevation: 0,
-          title: Align(
-            alignment: Alignment.center,
-            child: AuthText(
-              text: 'Courses',
-              size: 24,
-              color: appColors.mainText,
-              fontWeight: FontWeight.w700,
+          appBar: AppBar(
+            toolbarHeight: 70.h,
+            // scrolledUnderElevation: 10,
+            backgroundColor: appColors.pageBackground,
+            elevation: 0,
+            title: Align(
+              alignment: Alignment.center,
+              child: AuthText(
+                text: 'Courses',
+                size: 24,
+                color: appColors.mainText,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
-        ),
-        body: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
-          children: [
-            Customtextfieldsearsh(
-              controller: search,
-            ),
-            SizedBox(height: 15.h),
-              TabButtons(),
-            SizedBox(height: 10.h),
-            BlocBuilder<TabCubit, int>(
-              builder: (context, state) {
-                switch (state) {
-                  case 0:
-                    return Gridviewcourses();
-                  case 1:
-                    return _buildSimpleTab(context, 'Enroll Content');
-                  case 2:
-                    return _buildSimpleTab(context, 'Completed Content');
-                  case 3:
-                    return _buildSimpleTab(context, 'Watchlater Content');
-                  default:
-                    return const SizedBox.shrink();
-                }
-              },
-            ),
-          ],
+          body: BlocBuilder<CourseCubit, CourseState>(
+            builder: (context, state) {
+              CourseCubit courseCubit = context.read<CourseCubit>();
+
+              return ListView(
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
+                children: [
+                  Customtextfieldsearsh(
+                    controller: courseCubit.searchController,
+                    hintText: "choose course ?",
+                  ),
+                  SizedBox(height: 15.h),
+                  // TabButtons(cubit: courseCubit,),
+                  SizedBox(height: 10.h),
+                  BlocBuilder<TabCubit, int>(
+                    builder: (context, state) {
+                      switch (state) {
+                        case 0:
+                          return Gridviewcourses();
+                        case 1:
+                          return Gridviewcourses();
+                        case 2:
+                          return Gridviewcourses();
+                        case 3:
+                          return _buildSimpleTab(context, 'Watchlater Content');
+                        default:
+                          return const SizedBox.shrink();
+                      }
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

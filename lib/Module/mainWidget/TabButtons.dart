@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/Module/Courses/Cubit/cubit/course_cubit.dart';
 import 'package:lms/Module/Courses/View/Widget/TapBar_Cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 
 class TabButtons extends StatelessWidget {
-  const TabButtons({super.key});
+  TabButtons({super.key, required this.cubit});
+  CourseCubit cubit;
 
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
-    final selectedTab = context.watch<TabCubit>().state;
-
-    final labels = ['All', 'Enroll', 'Completed', 'Watchlater'];
+    final selectedTab = context.watch<CourseCubit>().selectedTab;
+    final labels = context.watch<CourseCubit>().labels;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.start, // حسب الحاجة

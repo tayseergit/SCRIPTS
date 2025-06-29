@@ -29,10 +29,7 @@ class Verify extends StatelessWidget {
         listener: (context, state) {
           print(state);
           if (state is VerifySucsses) {
-            var verifyCubit = VerifyCubit.get(context);
-            verifyCubit.userAuthModel?.role == "Student"
-                ? pushAndRemoveUntiTo(context: context, toPage: CoursesPage())
-                : pushAndRemoveUntiTo(context: context, toPage: CoursesPage());
+              pushAndRemoveUntiTo(context: context, toPage: CoursesPage());
             Future.delayed(Duration(milliseconds: 700), () {
               CustomSnackbar.show(
                 context: context,

@@ -26,8 +26,8 @@ class _NavigationBarwidgetState extends State<NavigationBarwidget> {
 
   final List<Widget> pages = const [
     CoursesPage(),
-    Learnpath(),
-    Contest(),
+    LearnpathPage(),
+    ContestPage(),
     Mylearn(),
     More(),
   ];

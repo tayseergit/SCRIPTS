@@ -10,8 +10,8 @@ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
 
-class Contest extends StatelessWidget {
-  const Contest({super.key});
+class ContestPage extends StatelessWidget {
+  const ContestPage({super.key});
 
   @override
   Widget build(BuildContext context) {

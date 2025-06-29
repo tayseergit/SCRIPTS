@@ -6,6 +6,7 @@ import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Auth/View/forgetPassword.dart';
 import 'package:lms/Module/Auth/View/register.dart';
+import 'package:lms/Module/LearnPath/View/Pages/learn_path_page.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/CustomTextField.dart';
@@ -30,7 +31,7 @@ class Login extends StatelessWidget {
 
       print(state);
       if (state is LogInsucess) {
-        pushAndRemoveUntiTo(context: context, toPage: NavigationBarwidget());
+        pushAndRemoveUntiTo(context: context, toPage: LearnpathPage());
 
         // Future.delayed(Duration(milliseconds: 700), () {
         //   CustomSnackbar.show(
