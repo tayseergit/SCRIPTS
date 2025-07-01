@@ -7,6 +7,7 @@ import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
 import 'package:lms/Module/LearnPathInfo/LearnPathInfoPage.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/PaidCourseInfo/PaidCourseInfoPage.dart';
+import 'package:lms/Module/PercentIndicator/PercentIndicatorPage.dart';
 import 'package:lms/Module/Project/projectPage.dart';
 import 'package:lms/Module/TeacherProfile/teacherProfilePage.dart';
 import 'package:lms/Module/Test/TestPage.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
             builder: (context, child) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                home: TestPage(),
+                home: Percentindicatorpage(),
               );
             },
           );

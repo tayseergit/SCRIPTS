@@ -5,8 +5,8 @@ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 
-class ContainerTest extends StatelessWidget {
-  const ContainerTest({super.key});
+class Questioncard extends StatelessWidget {
+  const Questioncard({super.key});
 
   @override
   Widget build(BuildContext context) {

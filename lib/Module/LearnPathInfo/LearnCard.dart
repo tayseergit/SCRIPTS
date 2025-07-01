@@ -21,7 +21,7 @@ class LearnCard extends StatelessWidget {
       child: OnBordingContainer(
         width: 180,
         height: 250,
-        color: appColors.border,
+        color: appColors.lihgtPrimer,
         widget: Padding(
           padding: EdgeInsets.symmetric(horizontal: 11.w),
           child: Row(

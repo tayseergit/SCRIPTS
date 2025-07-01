@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class ThemeState {
   final bool isDarkMode;
 
@@ -21,6 +20,7 @@ class ThemeState {
   final Color darkText;
   final Color orang;
   final Color main2;
+  final Color blue;
 
   final Color red;
   final LinearGradient linerContainer;
@@ -49,6 +49,7 @@ class ThemeState {
     required this.darkText,
     required this.orang,
     required this.main2,
+    required this.blue,
     //
     required this.lightGray,
   });
@@ -72,6 +73,7 @@ class ThemeState {
       darkText: Color(0xFFCED2E6),
       orang: Color(0xffFF9500),
       main2: Color(0xff1B4965),
+      blue: Color(0xff3A5AFE),
       //
       lightGray: const Color(0xFFDDDDDD),
       lihgtPrimer: const Color(0x1A0061FF),
@@ -110,8 +112,9 @@ class ThemeState {
       border: const Color(0x330F9CEF),
       iconSearsh: Color(0xff8C8E98),
       darkText: Color(0xFFCED2E6),
-      orang: Color(0xffFF9500), 
-      main2: Color(0xff1B4965), 
+      orang: Color(0xffFF9500),
+      main2: Color(0xff1B4965),
+      blue: Color(0xff3A5AFE),
 
       //
       lightGray: const Color(0xFFDDDDDD),

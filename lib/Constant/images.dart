@@ -46,5 +46,6 @@ class Images {
   static String deletehistory = "${_baseImages}Deletehistory.png";
   static String language = "${_baseImages}Language.png";
   static String logout = "${_baseImages}Logout.png";
-  
+  static String check = "${_baseImages}Check.png";
+  static String close = "${_baseImages}Close.png";
 }
