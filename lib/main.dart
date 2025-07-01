@@ -6,9 +6,11 @@ import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/PaidCourseInfo/PaidCourseInfoPage.dart';
+import 'package:lms/Module/Project/projectPage.dart';
 import 'package:lms/Module/TeacherProfile/teacherProfilePage.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/Module/Vedio/VideoScreen.dart';
 import 'package:lms/Module/leaderboardforpastcontest/leaderboardforpastcontestPage.dart';
 
 void main() async {
@@ -38,7 +40,7 @@ class MyApp extends StatelessWidget {
             builder: (context, child) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                home: PaidCourseInfoPage(),
+                home: VideoScreen(),
               );
             },
           );
@@ -47,4 +49,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// project-510480483026

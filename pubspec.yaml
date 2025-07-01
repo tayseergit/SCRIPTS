@@ -66,6 +66,8 @@ dependencies:
   flutter_lints: ^5.0.0
   percent_indicator: ^4.2.5
   flutter_rating_bar: ^4.0.1
+  video_player: ^2.10.0
+  chewie: ^1.11.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -83,6 +85,7 @@ flutter:
     - assets/images/
     - assets/fonts/
     - assets/icons/
+    - assets/video/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
