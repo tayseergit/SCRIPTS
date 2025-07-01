@@ -34,16 +34,16 @@ class Coursesvediocard extends StatelessWidget {
                   children: [
                     AuthText(
                       text: '01',
-                      size: 24,
+                      size: 20,
                       color: appColors.secondText,
                       fontWeight: FontWeight.w500,
                     ),
                     SizedBox(
-                      width: 10.w,
+                      width: 5.w,
                     ),
                     AuthText(
                       text: 'Welcome to the Course',
-                      size: 16,
+                      size: 15,
                       color: appColors.mainText,
                       fontWeight: FontWeight.w700,
                     ),
@@ -77,7 +77,7 @@ class Coursesvediocard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(width: 17.w,),
+            SizedBox(width: 1.w,),
             IconButton(onPressed: (){}, icon: Icon(Icons.play_circle_fill_outlined,color: appColors.primary,size: 50,))
           ],
         ),

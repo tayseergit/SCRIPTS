@@ -83,136 +83,142 @@ class VideoScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20.h),
-            BlocBuilder<CommentCubit, bool>(
-              builder: (context, isExpanded) {
-                return AnimatedSize(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.fastOutSlowIn,
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: appColors.lightGray,
-                      borderRadius: BorderRadius.circular(15.r),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 10.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 10.h),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: AuthText(
-                            text: 'Comments',
-                            size: 16,
-                            color: appColors.mainText,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        SizedBox(height: 10.h),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 20,
-                              backgroundImage: AssetImage(Images.courses),
-                            ),
-                            SizedBox(width: 10.w),
-                            AuthText(
-                              text: 'savzvxvzvzvxxvzvzvzxvxvz',
-                              size: 10,
-                              color: appColors.secondText,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 17.w),
+              child: BlocBuilder<CommentCubit, bool>(
+                builder: (context, isExpanded) {
+                  return AnimatedSize(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.fastOutSlowIn,
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: appColors.lightGray,
+                        borderRadius: BorderRadius.circular(15.r),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 10.h),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: AuthText(
+                              text: 'Comments',
+                              size: 16,
+                              color: appColors.mainText,
                               fontWeight: FontWeight.w400,
                             ),
-                            SizedBox(width: 130.w),
-                            IconButton(
-                              onPressed: () {
-                                context.read<CommentCubit>().toggleExpand();
-                              },
-                              icon: Icon(
-                                isExpanded
-                                    ? Icons.keyboard_arrow_up
-                                    : Icons.keyboard_arrow_down,
-                                size: 30,
-                              ),
-                            ),
-                          ],
-                        ),
-                        if (isExpanded) ...[
+                          ),
                           SizedBox(height: 10.h),
-                          Gridviewvedio(),
-                          SizedBox(height: 100.h),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 15.w,
-                            ),
-                            child: OnBordingContainer(
-                              width: double.infinity,
-                              height: 50,
-                              color: appColors.border,
-                              widget: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CircleAvatar(
-                                    radius: 25.r,
-                                    backgroundImage: AssetImage(
-                                      Images.courses,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20.w,
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: appColors.primary,
-                                        ),
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(
-                                            30,
-                                          ),
-                                        ),
+                          Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 20,
+                                backgroundImage: AssetImage(Images.courses),
+                              ),
+                              SizedBox(width: 10.w),
+                              AuthText(
+                                text: 'savzvxvzvzvxxvzvzvzxvxvz',
+                                size: 10,
+                                color: appColors.secondText,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              SizedBox(width: 100.w),
+                              IconButton(
+                                onPressed: () {
+                                  context.read<CommentCubit>().toggleExpand();
+                                },
+                                icon: Icon(
+                                  isExpanded
+                                      ? Icons.keyboard_arrow_up
+                                      : Icons.keyboard_arrow_down,
+                                  size: 30,
+                                ),
+                              ),
+                            ],
+                          ),
+                          if (isExpanded) ...[
+                            SizedBox(height: 10.h),
+                            Gridviewvedio(),
+                            SizedBox(height: 100.h),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 15.w,
+                              ),
+                              child: OnBordingContainer(
+                                width: double.infinity,
+                                height: 50,
+                                color: appColors.border,
+                                widget: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 25.r,
+                                      backgroundImage: AssetImage(
+                                        Images.courses,
                                       ),
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 5.w),
-                                        child: TextField(
-                                          controller: controller,
-                                          keyboardType: TextInputType.text,
-                                          style: TextStyle(
-                                            color: appColors.mainText,
+                                    ),
+                                    SizedBox(
+                                      width: 20.w,
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: appColors.primary,
                                           ),
-                                          decoration: InputDecoration(
-                                            hintText: 'Add Review',
-                                            hintStyle: TextStyle(
-                                                color: appColors.secondText),
-                                            border: InputBorder.none,
-                                            suffixIcon: IconButton(
-                                              onPressed: () {},
-                                              icon: Icon(
-                                                Icons.send,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(
+                                              30,
+                                            ),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 5.w),
+                                          child: TextField(
+                                            controller: controller,
+                                            keyboardType: TextInputType.text,
+                                            style: TextStyle(
+                                              color: appColors.mainText,
+                                            ),
+                                            decoration: InputDecoration(
+                                              hintText: 'Add Review',
+                                              hintStyle: TextStyle(
+                                                  color: appColors.secondText),
+                                              border: InputBorder.none,
+                                              suffixIcon: IconButton(
+                                                onPressed: () {},
+                                                icon: Icon(
+                                                  Icons.send,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(height: 20.h),
-                        ]
-                      ],
+                            SizedBox(height: 20.h),
+                          ]
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
             SizedBox(
               height: 12.h,
             ),
-            GridviewVediocourses(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 17.w),
+              child: GridviewVediocourses(),
+            ),
           ],
         ),
       ),
