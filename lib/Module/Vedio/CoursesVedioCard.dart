@@ -13,7 +13,7 @@ class Coursesvediocard extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
     return Scaffold(
-      backgroundColor: appColors.border,
+      backgroundColor: appColors.lihgtPrimer,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 6.h),
         child: Row(
