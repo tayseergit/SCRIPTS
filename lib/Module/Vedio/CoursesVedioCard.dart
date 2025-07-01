@@ -12,17 +12,23 @@ class Coursesvediocard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
-    return Scaffold(
-      backgroundColor: appColors.lihgtPrimer,
-      body: Padding(
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10.r)),
+        color: appColors.lihgtPrimer
+      ),
+      child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 6.h),
         child: Row(
           children: [
-            Image.asset(
-              Images.courses,
-              height: 60.h,
-              width: 60.w,
-              fit: BoxFit.cover,
+            ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(5.r)),
+              child: Image.asset(
+                Images.courses,
+                height: 60.h,
+                width: 60.w,
+                fit: BoxFit.cover,
+              ),
             ),
             SizedBox(
               width: 10.w,
