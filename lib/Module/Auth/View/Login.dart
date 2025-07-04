@@ -31,8 +31,15 @@ class Login extends StatelessWidget {
 
       print(state);
       if (state is LogInsucess) {
-        pushAndRemoveUntiTo(context: context, toPage: LearnpathPage());
-
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+              value: AuthCubit(),
+              child: Login(),
+            ),
+          ),
+        );
         // Future.delayed(Duration(milliseconds: 700), () {
         //   CustomSnackbar.show(
         //     context: context,

@@ -6,7 +6,6 @@ import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/leaderboardforpastcontest/LeaderListView.dart';
 import 'package:lms/Module/leaderboardforpastcontest/Tap.dart';
 import 'package:lms/Module/leaderboardforpastcontest/TapCubit.dart';
-import 'package:lms/Module/mainWidget/Container.dart';
 
 class Leaderboardforpastcontestpage extends StatelessWidget {
   const Leaderboardforpastcontestpage({super.key});
@@ -23,15 +22,10 @@ class Leaderboardforpastcontestpage extends StatelessWidget {
             padding: EdgeInsets.only(top: 140.h),
             children: [
               Padding(
-                padding:  EdgeInsets.only(right: 16.w),
+                padding: EdgeInsets.only(right: 20.w),
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: OnBoardingContainer(
-                    width: 150,
-                    height: 50,
-                    color: appColors.seocndIconColor,
-                    widget: Tap(),
-                  ),
+                  child: Tap(),
                 ),
               ),
               BlocBuilder<TapLeadercubit, int>(

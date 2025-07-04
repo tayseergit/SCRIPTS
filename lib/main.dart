@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Module/Auth/View/Login.dart';
 import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
+import 'package:lms/Module/Courses/View/Pages/courses_page.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/StudentsProfile/View/Pages/student_profile_page.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
             builder: (context, child) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                home: Login(),
+                // home: StudentProfilePage(),
+                home:NavigationBarwidget(),
               );
             },
           );

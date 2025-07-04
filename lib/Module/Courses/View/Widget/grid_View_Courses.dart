@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/Module/Courses/Cubit/cubit/course_cubit.dart';
 import 'package:lms/Module/Courses/View/Widget/courses_card.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class Gridviewcourses extends StatelessWidget {
-  const Gridviewcourses({super.key});
+  Gridviewcourses({super.key, required this.cubit});
+  CourseCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class Gridviewcourses extends StatelessWidget {
       color: appColors.pageBackground,
       child: GridView.builder(
         // padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
-        itemCount: 16,
+        itemCount: cubit.courseResponse!.data.courses.length,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 180.w, // Responsive max width per card
           childAspectRatio: 180.w / 250.h, // Match the card's actual aspect
@@ -25,7 +27,9 @@ class Gridviewcourses extends StatelessWidget {
           crossAxisSpacing: 12.w, // Responsive horizontal spacing
         ),
         itemBuilder: (ctx, index) {
-          return const Cursescard();
+          return Cursescard(
+            course: cubit.courseResponse!.data.courses[index],
+          );
         },
       ),
     );

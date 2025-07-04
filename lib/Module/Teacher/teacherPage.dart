@@ -29,7 +29,10 @@ class TeacherPage extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: Padding(
               padding: EdgeInsets.only(left: 150),
-              child: Customtextfieldsearsh(
+              child: Customtextfieldsearsh(onSubmit: 
+              () {
+                
+              },
                 borderRadius: 6,
                 controller: search,
                 borderColor: appColors.primary,

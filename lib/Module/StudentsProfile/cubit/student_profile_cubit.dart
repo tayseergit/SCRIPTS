@@ -23,7 +23,18 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
   late AchievementResponse achievementResponse;
   final token = CacheHelper.getData(key: "token");
   final userId = CacheHelper.getData(key: "user_id");
+  
+    final labels = ['Certificates', 'Achievement', 'My Contest', 'statices'];
+  
+  
+  int selectedTab = 0;
 
+  void changeTab(int index) {
+    selectedTab = index;
+    emit(Selected());
+  }
+
+////////
   void getProfile() async {
     print(token);
     print(userId);

@@ -85,13 +85,24 @@ class Course {
   });
 
   factory Course.fromJson(Map<String, dynamic> json) {
+    String durationString = json['course_duration'];
+    String hourNumber = '0'; // default value
+
+    if (durationString.isNotEmpty) {
+      try {
+        // Split the string by ":" and take the first part, then remove any spaces
+        hourNumber = durationString.split(':').first.trim();
+      } catch (e) {
+        print('Error parsing course duration: $e');
+      }
+    }
     return Course(
       id: json['id'],
       titleOfCourse: json['title_of_course'],
       descriptionOfCourse: json['description_of_course'],
       rate: json['rate'],
       imageOfCourse: json['image_of_course'],
-      courseDuration: json['course_duration'],
+      courseDuration: hourNumber,
       numberOfVideo: json['number_of_video'],
       videoProgress: json['video_progress'],
       numberOfTest: json['number_of_test'],

@@ -10,7 +10,7 @@ import 'package:lms/Module/Verify/Cubite/cubit/verfiy_state.dart';
 class VerifyCubit extends Cubit<VerifyState> {
   VerifyCubit() : super(VerifyCubitInitial());
   static VerifyCubit get(BuildContext context) => BlocProvider.of(context);
-  UserAuthModel ?userAuthModel;
+  UserAuthModel? userAuthModel;
   final TextEditingController otpController = TextEditingController();
   String? email;
   bool iscode = false;
@@ -44,7 +44,7 @@ class VerifyCubit extends Cubit<VerifyState> {
         userAuthModel = UserAuthModel.fromJson(response.data);
         CacheHelper.saveData(key: "token", value: userAuthModel?.token);
         CacheHelper.saveData(key: "role", value: userAuthModel?.role);
-            CacheHelper.saveData(key: "user_id", value: userAuthModel?.userId);
+        CacheHelper.saveData(key: "user_id", value: userAuthModel?.userId);
 
         emit(VerifySucsses());
       }

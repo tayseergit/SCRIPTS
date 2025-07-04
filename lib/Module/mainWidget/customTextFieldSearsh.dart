@@ -12,6 +12,8 @@ class Customtextfieldsearsh extends StatelessWidget {
   final Widget? prefixIcon;
   final TextInputType keyboardType;
   final void Function(String)? onChanged;
+  final VoidCallback? onSubmit;
+
   final String? errorText;
   final String? hintText;
   final double borderRadius;
@@ -21,23 +23,23 @@ class Customtextfieldsearsh extends StatelessWidget {
   final Color? hintColor;
   final Color? borderColor;
 
-  const Customtextfieldsearsh({
-    super.key,
-    required this.controller,
-    this.obscureText = false,
-    this.suffixIcon,
-    this.prefixIcon,
-    this.keyboardType = TextInputType.text,
-    this.onChanged,
-    this.errorText,
-    this.hintText,
-    this.borderRadius = 30.0,
-    this.hintFontSize = 16.0,
-    this.hintFontWeight = FontWeight.normal,
-    this.borderColor,
-    this.fillColor,
-    this.hintColor,
-  });
+  Customtextfieldsearsh(
+      {super.key,
+      required this.controller,
+      this.obscureText = false,
+      this.suffixIcon,
+      this.prefixIcon,
+      this.keyboardType = TextInputType.text,
+      this.onChanged,
+      this.errorText,
+      this.hintText,
+      this.borderRadius = 30.0,
+      this.hintFontSize = 16.0,
+      this.hintFontWeight = FontWeight.normal,
+      this.borderColor,
+      this.fillColor,
+      this.hintColor,
+      required this.onSubmit});
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +73,9 @@ class Customtextfieldsearsh extends StatelessWidget {
           ),
           border: InputBorder.none,
           prefixIcon: prefixIcon ??
-              Icon(
-                Icons.search,
+              IconButton(
+                onPressed: onSubmit,
+                icon: Icon(Icons.search, color: appColors.mainIconColor),
                 color: appColors.mainIconColor,
               ),
           suffixIcon: suffixIcon ??

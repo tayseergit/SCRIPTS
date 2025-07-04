@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Module/StudentsProfile/Model/CertificatesModel.dart';
-import 'package:lms/Module/StudentsProfile/View/Widget/achievements_card.dart';
-import 'package:lms/Module/StudentsProfile/View/Widget/cetificate_card.dart';
+import 'package:lms/Module/StudentsProfile/View/Widget/Cards/achievements_card.dart';
+import 'package:lms/Module/StudentsProfile/View/Widget/Cards/cetificate_card.dart';
 import 'package:lms/Module/StudentsProfile/cubit/student_profile_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/mainWidget/Errors/no-item.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 
 class AchievementGridview extends StatefulWidget {
@@ -50,16 +51,7 @@ class _AchievementGridviewState extends State<AchievementGridview> {
             final Ach_List =
                 widget.cubit.achievementResponse.achievements ?? [];
             if (Ach_List.isEmpty) {
-              return Center(
-                child: Text(
-                  "No Achievement",
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    color: appColors.mainText,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              );
+              return Center(child: NoItem());
             }
 
             return GridView.builder(

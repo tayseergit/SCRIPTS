@@ -75,7 +75,7 @@ class ThemeState {
       border: const Color(0x330F9CEF),
       iconSearsh: Color(0xff8C8E98),
       darkText: Color(0xFFCED2E6),
-      orang: Color(0xffFF9500),
+      orang: Color.fromARGB(255, 255, 186, 89),
       strongPrimer: const Color.fromARGB(255, 24, 112, 163),
       blackGreen: const Color(0xFF1B4965),
 

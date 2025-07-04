@@ -12,4 +12,5 @@ class CourseError extends CourseState {
   final String message;
   CourseError({required this.message});
 }
+class Selected extends CourseState {}
  

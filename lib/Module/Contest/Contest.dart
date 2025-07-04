@@ -41,6 +41,9 @@ class ContestPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
             children: [
               Customtextfieldsearsh(
+                onSubmit: () {
+                  
+                },
                 controller: search,
                 hintText: 'what do you want to learn ?',
               ),

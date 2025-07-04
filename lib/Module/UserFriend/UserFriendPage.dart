@@ -58,6 +58,9 @@ class UserFriendPage extends StatelessWidget {
             child: Padding(
               padding:  EdgeInsets.only(left: 150),
               child: Customtextfieldsearsh(
+                onSubmit: () {
+                  
+                },
                 borderRadius: 6,
                 controller: search,
                 borderColor: appColors.primary,

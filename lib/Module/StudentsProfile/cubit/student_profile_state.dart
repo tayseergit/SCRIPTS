@@ -52,3 +52,7 @@ class ContestError extends StudentProfileState {
 }
 
 class ContestSuccess extends StudentProfileState {}
+
+
+/// 
+class Selected extends StudentProfileState {}

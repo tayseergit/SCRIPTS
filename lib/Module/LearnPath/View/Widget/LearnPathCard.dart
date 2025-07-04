@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
-import 'package:lms/Module/LearnPath/View/Widget/TopWaveClipper.dart';
+import 'package:lms/Module/LearnPath/Model/learn_path_reaponse.dart';
+ import 'package:lms/Module/LearnPath/View/Widget/TopWaveClipper.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class Learnpathcard extends StatelessWidget {
-  const Learnpathcard({super.key});
-
+    Learnpathcard({super.key,required this.learnPath});
+  LearningPath learnPath;
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
-
+    
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: appColors.border, width: 3),
@@ -41,13 +42,7 @@ class Learnpathcard extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      'Front end development',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
+                    child: AuthText(text: learnPath.title, size: 16, color: appColors.mainText, fontWeight: FontWeight.w600)
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 30, right: 10),

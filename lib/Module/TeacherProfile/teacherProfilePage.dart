@@ -164,9 +164,9 @@ class TeacherProfilePage extends StatelessWidget {
                   builder: (context, state) {
                     switch (state) {
                       case 0:
-                        return Gridviewcourses();
+                        return Container();
                       case 1:
-                        return Gridviewlearnpath();
+                        return Container();
                       case 2:
                         return Gridviewcontest();
                       default:

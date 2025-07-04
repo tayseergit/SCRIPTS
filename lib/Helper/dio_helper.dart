@@ -2,15 +2,15 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 class DioHelper {
-  static String baseUrl = "http://192.168.1.16:8000";
+  static String baseUrl = "http://192.168.1.15:8000";
   static String baseUrlApi = "$baseUrl/api/";
 
   static final Dio _dio = Dio(
     BaseOptions(
       baseUrl: baseUrlApi,
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 10),
-      sendTimeout: const Duration(seconds: 10),
+      connectTimeout: const Duration(seconds: 5),
+      receiveTimeout: const Duration(seconds: 5),
+      sendTimeout: const Duration(seconds: 5),
       headers: {HttpHeaders.acceptHeader: "application/json"},
     ),
     // )..interceptors.add(
@@ -41,15 +41,20 @@ class DioHelper {
 
   // GET request
   static Future<Response> getData({
-    required String url,
-    Map<String, String>? headers,
-  }) async {
-    try {
-      return await _dio.get(url, options: Options(headers: headers));
-    } catch (e) {
-      rethrow;
-    }
+  required String url,
+  Map<String, String>? headers,
+  Map<String, dynamic>? params, // Add this parameter for query params
+}) async {
+  try {
+    return await _dio.get(
+      url,
+      options: Options(headers: headers),
+      queryParameters: params, // Pass the query parameters here
+    );
+  } catch (e) {
+    rethrow;
   }
+}
 
   // POST request
   static Future<Response> postData({

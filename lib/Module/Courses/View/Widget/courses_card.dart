@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Module/Courses/Model/course_response.dart';
+import 'package:lms/Module/StudentsProfile/Model/CertificatesModel.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class Cursescard extends StatelessWidget {
-  const Cursescard({super.key});
-
+  Cursescard({super.key, required this.course});
+  Course course;
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
@@ -45,10 +47,10 @@ class Cursescard extends StatelessWidget {
                     child: OnBoardingContainer(
                       width: 40.w,
                       height: 20.h,
-                      color: appColors.ok,
+                      color: course.price == 0 ? appColors.ok : appColors.orang,
                       widget: Center(
                         child: AuthText(
-                          text: 'Free',
+                          text: "${course.price}",
                           size: 12.sp,
                           color: appColors.mainText,
                           fontWeight: FontWeight.w700,
@@ -58,15 +60,15 @@ class Cursescard extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: 3.h),
               AuthText(
-                text: 'Vue js',
+                text: course.titleOfCourse,
                 color: appColors.mainText,
-                size: 20.sp,
+                size: 16.sp,
                 fontWeight: FontWeight.w700,
                 maxLines: 1,
               ),
-              // SizedBox(height: 10.h),
+              SizedBox(height: 3.h),
               Row(
                 children: [
                   OnBoardingContainer(
@@ -76,7 +78,7 @@ class Cursescard extends StatelessWidget {
                     widget: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 6.w),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Image.asset(
                             Images.courses1,
@@ -84,7 +86,7 @@ class Cursescard extends StatelessWidget {
                             height: 15.h,
                           ),
                           AuthText(
-                            text: '5.0',
+                            text: "${course.rate}",
                             color: appColors.mainText,
                             fontWeight: FontWeight.w900,
                             size: 12.sp,
@@ -97,16 +99,17 @@ class Cursescard extends StatelessWidget {
                   Flexible(
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
+                          EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
                       decoration: BoxDecoration(
                         color: appColors.purple,
                         borderRadius: BorderRadius.circular(5.r),
                       ),
                       child: AuthText(
-                        text: 'Tayseer Matar baraa',
+                        text: course.teacherName,
                         color: appColors.mainText,
                         fontWeight: FontWeight.w900,
                         size: 12.sp,
+                        maxLines: 1,
                       ),
                     ),
                   ),
@@ -114,10 +117,14 @@ class Cursescard extends StatelessWidget {
               ),
               SizedBox(height: 2.h),
               AuthText(
-                text: 'Beginner',
+                text: course.level,
                 size: 14.sp,
-                color: appColors.darkGreen,
-                fontWeight: FontWeight.w400,
+                color: course.level == "beginner"
+                    ? appColors.darkGreen
+                    : course.level == "intermediate"
+                        ? appColors.orang
+                        : appColors.red,
+                fontWeight: FontWeight.w500,
               ),
               SizedBox(height: 8.h),
               Row(
@@ -133,7 +140,7 @@ class Cursescard extends StatelessWidget {
                       ),
                       SizedBox(width: 5.w),
                       AuthText(
-                        text: '30 videos',
+                        text: '${course.numberOfVideo} videos',
                         color: appColors.mainText,
                         fontWeight: FontWeight.w400,
                         size: 10.sp,
@@ -150,7 +157,7 @@ class Cursescard extends StatelessWidget {
                       ),
                       SizedBox(width: 5.w),
                       AuthText(
-                        text: '40 Hours',
+                        text: '${course.courseDuration} Hours',
                         color: appColors.mainText,
                         fontWeight: FontWeight.w400,
                         size: 10.sp,
