@@ -64,7 +64,7 @@ class Customtextfieldsearsh extends StatelessWidget {
         style: TextStyle(color: appColors.mainText),
         decoration: InputDecoration(
           contentPadding:
-              const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+              EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
           hintText: hintText,
           hintStyle: TextStyle(
             fontSize: hintFontSize.sp,

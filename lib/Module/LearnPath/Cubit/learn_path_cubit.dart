@@ -16,7 +16,7 @@ class LearnPathCubit extends Cubit<LearnPathState> {
 
   static LearnPathCubit get(BuildContext context) => BlocProvider.of(context);
   TextEditingController searchController = TextEditingController();
-  
+
   final token = CacheHelper.getData(key: "token");
   final userId = CacheHelper.getData(key: "user_id");
 
@@ -27,6 +27,7 @@ class LearnPathCubit extends Cubit<LearnPathState> {
   void changeTab(int index) {
     selectedTab = index;
     emit(Selected());
+    getAllLearnPath();
   }
 
   void getAllLearnPath() async {
@@ -40,13 +41,12 @@ class LearnPathCubit extends Cubit<LearnPathState> {
           "Authorization": "Bearer $token",
         },
         params: {
-          // 'orderBy': '1',
+          'orderBy': 'title',
           // 'direction': '10',
           'status': selectedTab == 1
               ? "enroll"
               : selectedTab == 2
                   ? "watch_later"
-                  
                   : "all",
           'search': searchController.text.trim(),
         },
@@ -58,7 +58,7 @@ class LearnPathCubit extends Cubit<LearnPathState> {
         learningPathsResponse = LearningPathsResponse.fromJson(response.data);
         emit(LearnPathSuccess());
       }
-    }   on DioException catch (e) {
+    } on DioException catch (e) {
       if (e.response != null) {
         print("Error Status: ${e.response?.statusCode}");
         emit(LearnPathError(message: "fetching error"));

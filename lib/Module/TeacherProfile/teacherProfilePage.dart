@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
-import 'package:lms/Module/Contest/gridViewContest.dart';
+import 'package:lms/Module/Contest/View/Widget/ContestCard.dart';
+import 'package:lms/Module/Contest/View/Widget/gridViewContest.dart';
 import 'package:lms/Module/Courses/View/Widget/grid_View_Courses.dart';
 import 'package:lms/Module/LearnPath/View/Widget/gridViewLearnPath.dart';
  
@@ -168,7 +169,8 @@ class TeacherProfilePage extends StatelessWidget {
                       case 1:
                         return Container();
                       case 2:
-                        return Gridviewcontest();
+                        // return Contestcard();
+                        
                       default:
                         return const SizedBox.shrink();
                     }

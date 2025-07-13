@@ -33,7 +33,7 @@ class Images {
   static String contest4 = "${_baseImages}contest4.png";
   static String contest5 = "${_baseImages}contest5.png";
   static String contest6 = "${_baseImages}contest6.png";
-  static String contest7 = "${_baseImages}contest7.png";
+  static String cup = "${_baseImages}cup.png";
   static String editProfile = "${_baseImages}EditProfile.png";
   static String changePassword = "${_baseImages}ChangePassword.png";
   static String setting = "${_baseImages}Setting.png";

@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
-import 'package:lms/Module/Contest/Contest.dart';
+import 'package:lms/Module/Contest/View/Pages/contest_page.dart';
 import 'package:lms/Module/Courses/View/Pages/courses_page.dart';
 import 'package:lms/Module/LearnPath/View/Pages/learn_path_page.dart';
 import 'package:lms/Module/More/more_page.dart';
-  import 'package:lms/Module/NavigationBarWidged/navigation_cubit.dart';
-import 'package:lms/Module/Project/projectPage.dart';
+import 'package:lms/Module/NavigationBarWidged/navigation_cubit.dart';
+import 'package:lms/Module/Project/View/Page/projectPage.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
@@ -22,7 +22,8 @@ class NavigationBarwidget extends StatefulWidget {
 
 class _NavigationBarwidgetState extends State<NavigationBarwidget> {
   final NotchBottomBarController _controller =
-      NotchBottomBarController(index: 0);
+      NotchBottomBarController(index:0);
+
   final PageController _pageController = PageController();
 
   final List<Widget> pages = const [
@@ -105,7 +106,7 @@ class _NavigationBarwidgetState extends State<NavigationBarwidget> {
                       height: 36,
                     ),
                   ),
-                  label: 'MyLearn',
+                  label: 'Project',
                 ),
                 BottomNavigationBarItem(
                   icon: ColorFiltered(

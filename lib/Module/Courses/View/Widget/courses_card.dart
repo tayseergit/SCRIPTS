@@ -32,13 +32,32 @@ class Cursescard extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(5.r),
-                    child: Image.asset(
-                      Images.courses,
-                      width: double.infinity,
-                      height: 100.h,
-                      fit: BoxFit.cover,
+                  Container(
+                    height: 100.h,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5.r),
+                      child: (course.imageOfCourse == null &&
+                              course.imageOfCourse.isNotEmpty)
+                          ? Image.network(
+                              course.imageOfCourse,
+                              width: double.infinity,
+                              height: 100.h,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset(
+                                  Images.noImage,
+                                  width: double.infinity,
+                                  height: 100.h,
+                                  fit: BoxFit.contain,
+                                );
+                              },
+                            )
+                          : Image.asset(
+                              Images.noImage,
+                              width: double.infinity,
+                              height: 100.h,
+                              fit: BoxFit.fill,
+                            ),
                     ),
                   ),
                   Positioned(
@@ -50,8 +69,8 @@ class Cursescard extends StatelessWidget {
                       color: course.price == 0 ? appColors.ok : appColors.orang,
                       widget: Center(
                         child: AuthText(
-                          text: "${course.price}",
-                          size: 12.sp,
+                          text: "${course.price} \$",
+                          size: 10.sp,
                           color: appColors.mainText,
                           fontWeight: FontWeight.w700,
                         ),

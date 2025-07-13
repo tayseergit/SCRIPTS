@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
- import 'package:lms/Helper/cach_helper.dart';
+import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Module/Courses/Model/course_response.dart';
 
@@ -30,7 +30,7 @@ class CourseCubit extends Cubit<CourseState> {
 
   void getAllCourse() async {
     emit(CourseLoading());
- 
+
     try {
       final response = await DioHelper.getData(
         url: "courses",
@@ -66,12 +66,13 @@ class CourseCubit extends Cubit<CourseState> {
         ),
       );
     } on DioException catch (e) {
-      if (e.response != null) {
-        print("Error Status: ${e.response?.statusCode}");
-        emit(CourseError(message: "fetching error"));
+      if (e.type == DioExceptionType.connectionTimeout) {
+        emit(CourseError(message: "الاتصال بالخادم استغرق وقتًا طويلاً."));
+      } else if (e.response != null) {
+        emit(CourseError(
+            message: "حدث خطأ في السيرفر: ${e.response?.statusCode}"));
       } else {
-        print("Connection Error: $e");
-        emit(CourseError(message: "Connection Error"));
+        emit(CourseError(message: "خطأ في الاتصال: ${e.message}"));
       }
     }
   }

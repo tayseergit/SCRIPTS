@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
- import 'package:lms/Module/Project/Swich.dart';
-import 'package:lms/Module/Project/TapProject.dart';
-import 'package:lms/Module/Project/TapBarCubit.dart';
-import 'package:lms/Module/Project/TapBarPage.dart';
-import 'package:lms/Module/Project/gridViewProject.dart';
+import 'package:lms/Module/Project/View/Widget/Swich.dart';
+import 'package:lms/Module/Project/View/Widget/TapProject.dart';
+import 'package:lms/Module/Project/View/Widget/TapBarCubit.dart';
+import 'package:lms/Module/Project/View/Widget/TapBarPage.dart';
+import 'package:lms/Module/Project/View/Widget/gridViewProject.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/leaderboardforpastcontest/LeaderListView.dart';
@@ -47,40 +47,19 @@ class Projectpage extends StatelessWidget {
             children: [
               Customtextfieldsearsh(
                 onSubmit: () {
-                  
+                  // contestCubit.getContest();
                 },
-                borderRadius: 6,
                 controller: search,
-                borderColor: appColors.primary,
-                prefixIcon: Icon(
-                  Icons.search_outlined,
-                  size: 30,
-                  color: appColors.iconSearsh,
-                ),
-                suffixIcon: Image.asset(
-                  Images.filter,
-                  width: 17.w,
-                  height: 17.h,
-                  color: appColors.iconSearsh,
-                ),
-                hintText: 'what do you want to learn ?',
-                hintFontSize: 13.sp,
-                hintFontWeight: FontWeight.w600,
-                fillColor: appColors.pageBackground,
+                hintText: 'search project ...',
               ),
               SizedBox(
                 height: 20.h,
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    TabButtonsProject(),
-                    SizedBox(width: 10.w),
-                    TapProject(),
-                  ],
-                ),
-              ),
+
+              TabButtonsProject(),
+              SizedBox(width: 10.w),
+              // TapProsject(),
+
               BlocBuilder<TapbarcubitProject, int>(
                 builder: (context, state) {
                   switch (state) {

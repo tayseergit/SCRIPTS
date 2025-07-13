@@ -38,8 +38,6 @@ class CoursesPage extends StatelessWidget {
               ),
             ),
           ),
-
-          /** ----------- جسم الصفحة ------------ **/
           body: BlocConsumer<CourseCubit, CourseState>(
             listener: (context, state) {
               if (state is CourseError) {
@@ -51,14 +49,10 @@ class CoursesPage extends StatelessWidget {
             builder: (context, state) {
               final cubit = context.watch<CourseCubit>();
 
-              // 1) حالة التحميل
-
-              // 2) حالة الخطأ
               if (state is CourseError) {
                 return Center(child: NoConnection());
               }
 
-              // 3) الحالة الناجحة (CourseLoaded مثلاً)
               return ListView(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
                 children: [
@@ -71,16 +65,22 @@ class CoursesPage extends StatelessWidget {
                   ),
                   SizedBox(height: 15.h),
                   TabButtons(
-                     labels: cubit.labels,
+                    labels: cubit.labels,
                     selectedTab: cubit.selectedTab,
                     onTap: cubit.changeTab,
                   ),
                   SizedBox(height: 10.h),
                   state is CourseLoading || state is CourseInitial
                       ? SizedBox(height: 500.h, child: Center(child: Loading()))
-                      : cubit.courseResponse!.data.courses.isEmpty
-                          ? SizedBox(height: 500.h, child: NoItem())
-                          : Gridviewcourses(cubit: cubit),
+                      : state is CourseError
+                          ? SizedBox(height: 500.h, child: NoConnection())
+                          : cubit.courseResponse!.data.courses.isEmpty
+                              ? Center(
+                                  heightFactor: 2.5,
+                                  child:
+                                      SizedBox(height: 200.h, child: NoItem()),
+                                )
+                              : Gridviewcourses(cubit: cubit),
                 ],
               );
             },

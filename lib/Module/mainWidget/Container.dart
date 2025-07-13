@@ -30,7 +30,6 @@ class OnBoardingContainer extends StatelessWidget {
 
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(radius!.r),
       child: Container(
         width: width?.w,
         height: height?.h,
@@ -38,7 +37,7 @@ class OnBoardingContainer extends StatelessWidget {
         decoration: BoxDecoration(
           // border: Border.all(color: boarderColor ?? appColors.border),
           color: color,
-          borderRadius: BorderRadius.circular(5.r),
+          borderRadius: BorderRadius.circular(radius!.r),
         ),
         child: widget,
       ),

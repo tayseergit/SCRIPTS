@@ -88,20 +88,27 @@ class LearningPath {
     required this.status,
   });
 
-  factory LearningPath.fromJson(Map<String, dynamic> json) => LearningPath(
-        id: json['id'] as int,
-        title: json['title'] as String,
-        description: json['description'] as String,
-        image: json['image'] as String,
-        rate: (json['rate'] as num).toDouble(),
-        coursesCount: json['courses_count'] as int,
-        totalCoursesPrice: json['total_courses_price'].toString(),
-        teacherId: json['teacher_id'] as int,
-        teacherName: json['teacher_name'] as String,
-        teacherImage: json['teacher_image'] as String,
-        status: json['status'] as String?,
-      );
-
+  factory LearningPath.fromJson(Map<String, dynamic> json) {
+ String totalPrice = json['total_courses_price'];
+    
+     
+        totalPrice = totalPrice.split('.').first.trim();
+      
+    
+   return LearningPath(
+      id: json['id'] as int,
+      title: json['title'] as String,
+      description: json['description'] as String,
+      image: json['image'] as String,
+      rate: (json['rate'] as num).toDouble(),
+      coursesCount: json['courses_count'] as int,
+      totalCoursesPrice: totalPrice,
+      teacherId: json['teacher_id'] as int,
+      teacherName: json['teacher_name'] as String,
+      teacherImage: json['teacher_image'] as String,
+      status: json['status'] as String?,
+    );
+  }
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,

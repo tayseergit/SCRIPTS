@@ -22,6 +22,7 @@ class ThemeState {
   final Color whiteText;
   final Color strongPrimer;
   final Color blackGreen;
+  final Color blackGreenDisable;
 
   final Color red;
   final LinearGradient linerContainer;
@@ -52,6 +53,7 @@ class ThemeState {
     required this.whiteText,
     required this.orang,
     required this.blackGreen,
+    required this.blackGreenDisable,
 
     //
     required this.lightGray,
@@ -78,6 +80,7 @@ class ThemeState {
       orang: Color.fromARGB(255, 255, 186, 89),
       strongPrimer: const Color.fromARGB(255, 24, 112, 163),
       blackGreen: const Color(0xFF1B4965),
+      blackGreenDisable:  Color(0xFF1B4965).withOpacity(0.38),
 
       //
       lightGray: const Color(0xFFDDDDDD),
@@ -121,6 +124,7 @@ class ThemeState {
       orang: Color(0xffFF9500),
       strongPrimer: const Color.fromARGB(255, 24, 112, 163),
       blackGreen: const Color(0xFF1B4965),
+      blackGreenDisable: const Color(0xFF1B4965),
 
       //
       lightGray: const Color(0xFFDDDDDD),

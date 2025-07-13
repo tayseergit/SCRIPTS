@@ -28,6 +28,7 @@ class LearnpathPage extends StatelessWidget {
         child: Scaffold(
           backgroundColor: appColors.pageBackground,
           appBar: AppBar(
+            toolbarHeight: 70.h,
             elevation: 0,
             backgroundColor: appColors.pageBackground,
             centerTitle: true,
@@ -39,21 +40,14 @@ class LearnpathPage extends StatelessWidget {
             ),
           ),
           body: BlocConsumer<LearnPathCubit, LearnPathState>(
-            listener: (context, state) {
-              if (state is LearnPathError) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.message)),
-                );
-              }
-            },
+            listener: (context, state) {},
             builder: (context, state) {
               final cubit = context.watch<LearnPathCubit>();
- 
+
               if (state is LearnPathError) {
                 return Center(child: NoConnection());
               }
 
-              // 3) الحالة الناجحة (CourseLoaded مثلاً)
               return ListView(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
                 children: [
@@ -74,7 +68,9 @@ class LearnpathPage extends StatelessWidget {
                   state is LearnPathLoading || state is LearnPathInitial
                       ? SizedBox(height: 500.h, child: Center(child: Loading()))
                       : cubit.learningPathsResponse!.data.learningPaths.isEmpty
-                          ? SizedBox(height: 500.h, child: NoItem())
+                          ? Center(
+                              heightFactor: 2.5,
+                              child: SizedBox(height: 200.h, child: NoItem()))
                           : Gridviewlearnpath(
                               cubit: cubit,
                             ),

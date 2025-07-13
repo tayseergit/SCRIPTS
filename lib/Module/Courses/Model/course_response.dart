@@ -47,7 +47,7 @@ class Course {
   final int id;
   final String titleOfCourse;
   final String descriptionOfCourse;
-  final int rate;
+  final dynamic rate;
   final String imageOfCourse;
   final String courseDuration;
   final int numberOfVideo;

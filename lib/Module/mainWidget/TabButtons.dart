@@ -8,42 +8,47 @@ import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 
 class TabButtons extends StatelessWidget {
-  TabButtons({
+  const TabButtons({
     super.key,
-     
     required this.labels,
     required this.selectedTab,
     required this.onTap,
   });
-  
 
   final List<String> labels;
   final int selectedTab;
   final ValueChanged<int> onTap;
+
   @override
   Widget build(BuildContext context) {
-    ThemeState appColors = context.watch<ThemeCubit>().state;
+    final appColors = context.watch<ThemeCubit>().state;
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center, // حسب الحاجة
+      mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(labels.length, (index) {
+        final label = labels[index];
         final isSelected = selectedTab == index;
 
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 3.w),
-          child: OnBoardingContainer(
-            width: (labels[index].length * 11).w, // زيادة بسيطة لراحة النص
-            height: 40.h,
-            color: isSelected ? appColors.primary : appColors.fieldBackground,
-            widget: Text(
-              labels[index],
-              style: TextStyle(
-                color:
-                    isSelected ? appColors.pageBackground : appColors.mainText,
-                fontWeight: FontWeight.bold,
+        return Flexible(
+          flex: label.length,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 3.w),
+            child: OnBoardingContainer(
+              height: 40.h,
+              color: isSelected ? appColors.primary : appColors.fieldBackground,
+              widget: Center(
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    color: isSelected
+                        ? appColors.pageBackground
+                        : appColors.mainText,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
+              onTap: () => onTap(index),
             ),
-            onTap: () => onTap(index),
           ),
         );
       }),

@@ -2,15 +2,15 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 class DioHelper {
-  static String baseUrl = "http://192.168.1.15:8000";
+  static String baseUrl = "http://192.168.1.14:8000";
   static String baseUrlApi = "$baseUrl/api/";
 
   static final Dio _dio = Dio(
     BaseOptions(
       baseUrl: baseUrlApi,
-      connectTimeout: const Duration(seconds: 5),
-      receiveTimeout: const Duration(seconds: 5),
-      sendTimeout: const Duration(seconds: 5),
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 10),
+      sendTimeout: const Duration(seconds: 10),
       headers: {HttpHeaders.acceptHeader: "application/json"},
     ),
     // )..interceptors.add(
