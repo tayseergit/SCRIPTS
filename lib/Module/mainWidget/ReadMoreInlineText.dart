@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
@@ -81,7 +82,8 @@ class ReadMoreInlineTextProject extends StatefulWidget {
   });
 
   @override
-  State<ReadMoreInlineTextProject> createState() => _ReadMoreInlineTextProject();
+  State<ReadMoreInlineTextProject> createState() =>
+      _ReadMoreInlineTextProject();
 }
 
 class _ReadMoreInlineTextProject extends State<ReadMoreInlineTextProject> {
@@ -100,7 +102,7 @@ class _ReadMoreInlineTextProject extends State<ReadMoreInlineTextProject> {
     return RichText(
       text: TextSpan(
         style: TextStyle(
-          fontSize: 10,
+          fontSize: 13.sp,
           color: appColors.secondText,
           fontWeight: FontWeight.w600,
         ),

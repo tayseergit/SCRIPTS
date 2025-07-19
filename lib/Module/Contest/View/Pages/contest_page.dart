@@ -51,13 +51,13 @@ class ContestPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
                 child: ListView(
                   children: [
-                      Customtextfieldsearsh(
-                        onSubmit: () {
-                          contestCubit.getContest();
-                        },
-                        controller: contestCubit.searchController,
-                        hintText: 'get contest ?',
-                      ),
+                    Customtextfieldsearsh(
+                      onSubmit: () {
+                        contestCubit.getContest();
+                      },
+                      controller: contestCubit.searchController,
+                      hintText: 'get contest ?',
+                    ),
                     SizedBox(height: 15.h),
                     ContestTab(
                       contestCubit: contestCubit,
@@ -92,15 +92,18 @@ class ContestPage extends StatelessWidget {
                         }
 
                         return SizedBox(
-                          height: 500.h,
-                          child: ListView.builder(
-                            itemCount: contests.length,
-                            itemBuilder: (context, index) {
-                              return Contestcard(
-                                contest: contestCubit
-                                    .contestResponse!.contests[index],
-                              );
-                            },
+                          height: 560.h,
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 40.0),
+                            child: ListView.builder(
+                              itemCount: contests.length,
+                              itemBuilder: (context, index) {
+                                return Contestcard(
+                                  contest: contestCubit
+                                      .contestResponse!.contests[index],
+                                );
+                              },
+                            ),
                           ),
                         );
                       },

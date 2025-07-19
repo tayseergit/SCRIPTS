@@ -71,7 +71,7 @@ class LearningPath {
   final String totalCoursesPrice;
   final int teacherId;
   final String teacherName;
-  final String teacherImage;
+  final String ?teacherImage;
   final String? status; // يمكن أن يكون null
 
   LearningPath({
@@ -84,7 +84,7 @@ class LearningPath {
     required this.totalCoursesPrice,
     required this.teacherId,
     required this.teacherName,
-    required this.teacherImage,
+      this.teacherImage,
     required this.status,
   });
 
@@ -105,7 +105,7 @@ class LearningPath {
       totalCoursesPrice: totalPrice,
       teacherId: json['teacher_id'] as int,
       teacherName: json['teacher_name'] as String,
-      teacherImage: json['teacher_image'] as String,
+      teacherImage: json['teacher_image'] ,
       status: json['status'] as String?,
     );
   }

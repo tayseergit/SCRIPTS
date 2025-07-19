@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/Module/Project/Cubit/project_cubit.dart';
 import 'package:lms/Module/Project/View/Widget/TapBarCubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class TabButtonsProject extends StatelessWidget {
-  const TabButtonsProject({super.key});
-
+  TabButtonsProject({super.key, required this.cubit});
+  ProjectCubit cubit;
   @override
   Widget build(BuildContext context) {
-    final appColors = context.watch<ThemeCubit>().state;
-    final selectedTab = context.watch<TapbarcubitProject>().state;
-    final cubit = context.read<TapbarcubitProject>();
-
-    final labels = ['All', 'Web', 'Mobile', 'AI', 'Data', 'Favorite'];
+     final appColors = context.watch<ThemeCubit>().state;
+    final labels = cubit.tagResponse!.tags;
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
@@ -27,7 +25,7 @@ class TabButtonsProject extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: labels.length,
         itemBuilder: (context, index) {
-          final isSelected = selectedTab == index;
+          final isSelected = cubit.selectedTab == index;
 
           return GestureDetector(
             onTap: () => cubit.changeTab(index),
@@ -41,7 +39,7 @@ class TabButtonsProject extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  labels[index],
+                  labels[index].name,
                   style: TextStyle(
                     color: appColors.mainText,
                     fontWeight: FontWeight.w600,

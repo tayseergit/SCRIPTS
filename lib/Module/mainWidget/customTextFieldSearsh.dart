@@ -81,8 +81,8 @@ class Customtextfieldsearsh extends StatelessWidget {
           suffixIcon: suffixIcon ??
               Image.asset(
                 Images.filter,
-                width: 17.w,
-                height: 17.h,
+                width: 10.w,
+                height: 10.h,
                 color: appColors.mainIconColor,
               ),
           errorText: errorText,

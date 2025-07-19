@@ -1,9 +1,6 @@
 import 'package:equatable/equatable.dart';
- 
-abstract class ContestState extends Equatable {
-  @override
-  List<Object?> get props => [];
-}
+
+abstract class ContestState {}
 
 /// Starting point (nothing fetched yet)
 class ContestInitial extends ContestState {}
@@ -20,4 +17,5 @@ class ContestError extends ContestState {
 
   ContestError({required this.message});
 }
+
 class Selected extends ContestState {}

@@ -2,16 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Module/Project/Cubit/project_cubit.dart';
+import 'package:lms/Module/Project/Cubit/project_state.dart';
 import 'package:lms/Module/Project/View/Widget/Swich.dart';
 import 'package:lms/Module/Project/View/Widget/TapProject.dart';
 import 'package:lms/Module/Project/View/Widget/TapBarCubit.dart';
 import 'package:lms/Module/Project/View/Widget/TapBarPage.dart';
 import 'package:lms/Module/Project/View/Widget/gridViewProject.dart';
+import 'package:lms/Module/Project/View/Widget/grid_loading.dart';
+import 'package:lms/Module/Project/View/Widget/toggle_switch.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/leaderboardforpastcontest/LeaderListView.dart';
+import 'package:lms/Module/mainWidget/Errors/no-item.dart';
+import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
+import 'package:lms/Module/mainWidget/loading_container.dart';
 
 class Projectpage extends StatelessWidget {
   const Projectpage({super.key});
@@ -20,15 +27,14 @@ class Projectpage extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
     final search = TextEditingController();
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => TapbarcubitProject()),
-        BlocProvider(create: (_) => Swich()),
-      ],
-      child: Builder(builder: (context) {
-        return Scaffold(
+
+    return SafeArea(
+      child: BlocProvider(
+        create: (context) => ProjectCubit()..getProjectsTags(),
+        child: Scaffold(
           backgroundColor: appColors.pageBackground,
           appBar: AppBar(
+            toolbarHeight: 70.h,
             scrolledUnderElevation: 0,
             backgroundColor: appColors.pageBackground,
             elevation: 0,
@@ -42,74 +48,82 @@ class Projectpage extends StatelessWidget {
               ),
             ),
           ),
-          body: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            children: [
-              Customtextfieldsearsh(
-                onSubmit: () {
-                  // contestCubit.getContest();
-                },
-                controller: search,
-                hintText: 'search project ...',
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
+          body: BlocConsumer<ProjectCubit, ProjectState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              final projectCubit = context.watch<ProjectCubit>();
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SizedBox(
+                            width: 220.w,
+                            child: Customtextfieldsearsh(
+                              onSubmit: () {
+                                projectCubit.getProjects();
+                              },
+                              controller: projectCubit.searchController,
+                              hintText: 'search project ...',
+                            ),
+                          ),
 
-              TabButtonsProject(),
-              SizedBox(width: 10.w),
-              // TapProsject(),
-
-              BlocBuilder<TapbarcubitProject, int>(
-                builder: (context, state) {
-                  switch (state) {
-                    case 0:
-                      return Gridviewproject();
-                    case 1:
-                      return _buildSimpleTab(context, 'In Progress Content');
-                    case 2:
-                      return _buildSimpleTab(context, 'Completed Content');
-                    case 3:
-                      return _buildSimpleTab(context, 'Watchlater Content');
-                    default:
-                      return const SizedBox.shrink();
-                  }
-                },
-              ),
-              BlocBuilder<Swich, int>(
-                builder: (context, state) {
-                  switch (state) {
-                    case 0:
-                      return LeaderListView();
-                    case 1:
-                      return _buildSimpleTab(context, 'Enroll Content');
-                    default:
-                      return const SizedBox.shrink();
-                  }
-                },
-              ),
-            ],
+                          // Tap  Prosject(),
+                          SizedBox(
+                              height: 50.h,
+                              width: 100.w,
+                              child: ToggleExample(
+                                projectCubit: projectCubit,
+                              ))
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Builder(
+                        builder: (context) {
+                          if (state is TagsLoading) return LoadingContainer();
+                          if (state is Error || projectCubit.selectedkind == 1)
+                            return Container();
+                          return TabButtonsProject(
+                            cubit: projectCubit,
+                          );
+                        },
+                      ),
+                      SizedBox(height: 10.w),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        child: Builder(
+                          builder: (context) {
+                            print(state);
+                            if (state is ProjectLoading ||
+                                state is TagsLoading) {
+                              return GridviewLoading();
+                            } else if (state is ProjectSuccess) {
+                              if (projectCubit
+                                  .projectsResponse!.data.isNotEmpty) {
+                                return Gridviewproject(
+                                    projectModel:
+                                        projectCubit.projectsResponse!.data);
+                              } else
+                                return Center(
+                                    heightFactor: 2.5, child: NoItem());
+                            }
+                            return NoConnection();
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
-        );
-      }),
-    );
-  }
-}
-
-Widget _buildSimpleTab(BuildContext context, String text) {
-  ThemeState appColors = context.watch<ThemeCubit>().state;
-
-  return Center(
-    child: Padding(
-      padding: EdgeInsets.all(16.w),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: appColors.mainText,
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w500,
         ),
       ),
-    ),
-  );
+    );
+  }
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Module/Project/Cubit/project_cubit.dart';
+import 'package:lms/Module/Project/Model/projet_response.dart';
 import 'package:lms/Module/Project/View/Widget/RowProjectCard.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
@@ -10,183 +12,133 @@ import 'package:lms/Module/mainWidget/ReadMoreInlineText.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 
 class Projectcard extends StatelessWidget {
-  const Projectcard({super.key});
-
+  Projectcard({super.key, required this.projectModel});
+  ProjectModel projectModel;
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
-    return Scaffold(
-      backgroundColor: appColors.pageBackground,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 5.w),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5.r)),
-              border: Border.all(color: appColors.primary)),
-          child: OnBoardingContainer(
-            width: double.infinity,
-            height: double.infinity,
-            color: appColors.fieldBackground,
-            widget: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(5.r),
-                        child: Image.asset(
-                          Images.courses,
-                          width: 165,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
+    ProjectCubit projectCubit = context.watch<ProjectCubit>();
+
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(30.r)),
+        border: Border.all(color: appColors.primary),
+      ),
+      child: OnBoardingContainer(
+        radius: 30.r,
+        width: double.infinity,
+        height: double.infinity,
+        color: appColors.pageBackground.withOpacity(0.3),
+        widget: ClipRRect(
+          borderRadius: BorderRadius.circular(30.r),
+          child: Stack(
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 20.h),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: AuthText(
+                        text: projectModel.title,
+                        color: appColors.mainText,
+                        fontWeight: FontWeight.w700,
+                        size: 16,
+                        maxLines: 2,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 3.h, left: 3.w),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10.w, vertical: 4.h),
-                            decoration: BoxDecoration(
-                              color: appColors.ok,
-                              borderRadius: BorderRadius.circular(5.r),
-                            ),
-                            child: AuthText(
-                              text: 'Wep',
-                              color: appColors.pageBackground,
-                              fontWeight: FontWeight.w900,
-                              size: 8,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: AuthText(
-                      text: 'Front end development',
-                      color: appColors.mainText,
-                      fontWeight: FontWeight.w700,
-                      size: 13,
                     ),
-                  ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: AuthText(
-                      text: 'Description:',
-                      size: 10,
-                      color: appColors.secondText,
-                      fontWeight: FontWeight.w700,
+                    SizedBox(height: 5.h),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: ReadMoreInlineTextProject(
+                        text: projectModel.description,
+                        trimLength: 25,
+                      ),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: ReadMoreInlineTextProject(
-                      text:
-                          'pr  oduc t.desc  ript ion d nsk djn  csk  jdncs  kjd sjdnclkms efjsdij sdcma;sldmc;aefwoefslkdmcsldc,a;sc,dlfkeirghudfnvsldc,a;s',
-                      trimLength: 19,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Row(
-                    children: [
-                      RowProjectCard(
-                        text: 'React',
-                        appColors: appColors,
-                      ),
-                      RowProjectCard(
-                        text: 'React',
-                        appColors: appColors,
-                      ),
-                      RowProjectCard(
-                        text: 'React',
-                        appColors: appColors,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Row(
-                    children: [
+                    SizedBox(height: 10.h),
+                    if (projectModel.technologies != null)
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: CircleAvatar(
-                          radius: 15,
-                          child: Image.asset(
-                            Images.logo,
-                            width: double.infinity,
-                            height: double.infinity,
-                            fit: BoxFit.cover,
+                        child: SizedBox(
+                          height: 20.h,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: projectModel.technologies!.length,
+                            itemBuilder: (context, index) {
+                              return RowProjectCard(
+                                appColors: appColors,
+                                text: projectModel.technologies![index],
+                              );
+                            },
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 8.w,
+                    if (projectModel.technologies == null)
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: SizedBox(height: 20.h, child: Container()),
                       ),
-                      AuthText(
-                        text: 'Ahmad',
-                        size: 13,
-                        color: appColors.mainText,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5.r)),
-                            border: Border.all(
-                                color: appColors.secondText, width: 1.5)),
-                        child: OnBoardingContainer(
-                          width: 65,
-                          height: 15,
-                          color: appColors.pageBackground,
-                          widget: AuthText(
-                            text: 'GitHub',
-                            size: 10,
+                    SizedBox(height: 10.h),
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: appColors.blackGreenDisable,
+                          radius: 20.r,
+                          child: Image.asset(
+                            Images.studentImage,
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                        SizedBox(width: 8.w),
+                        Expanded(
+                          child: AuthText(
+                            text: projectModel.userName,
+                            size: 13,
                             color: appColors.mainText,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                      ),
-                      OnBoardingContainer(
-                        width: 65,
-                        height: 18,
-                        color: appColors.primary,
-                        widget: AuthText(
-                          text: 'View',
-                          size: 10,
-                          color: appColors.pageBackground,
-                          fontWeight: FontWeight.w400,
+                      ],
+                    ),
+                    SizedBox(height: 10.h),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: OnBoardingContainer(
+                            height: 30,
+                            color: appColors.blackGreen,
+                            widget: AuthText(
+                              text: 'GitHub',
+                              size: 10,
+                              color: appColors.pageBackground,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
+                        SizedBox(width: 10.w),
+                        Expanded(
+                          child: OnBoardingContainer(
+                            height: 30,
+                            color: appColors.primary,
+                            widget: AuthText(
+                              text: 'Demo',
+                              size: 10,
+                              color: appColors.pageBackground,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10.h),
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

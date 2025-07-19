@@ -1,5 +1,6 @@
-import 'dart:developer';
-import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
+import 'dart:math' as math;
+import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
+import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,11 +22,6 @@ class NavigationBarwidget extends StatefulWidget {
 }
 
 class _NavigationBarwidgetState extends State<NavigationBarwidget> {
-  final NotchBottomBarController _controller =
-      NotchBottomBarController(index:0);
-
-  final PageController _pageController = PageController();
-
   final List<Widget> pages = const [
     CoursesPage(),
     LearnpathPage(),
@@ -37,91 +33,99 @@ class _NavigationBarwidgetState extends State<NavigationBarwidget> {
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
+
     return BlocProvider(
       create: (_) => NavigationCubit(),
       child: BlocBuilder<NavigationCubit, int>(
         builder: (context, state) {
           return Scaffold(
             body: pages[state],
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: state,
+            bottomNavigationBar: CurvedNavigationBar(
+              index: state,
+              backgroundColor: appColors.pageBackground,
+              color: appColors.lihgtPrimer,
+              buttonBackgroundColor: appColors.primary,
+              height: 70.h,
+              animationDuration: Duration(milliseconds: 300),
               onTap: (index) {
                 context.read<NavigationCubit>().changePage(index);
               },
-              selectedItemColor: appColors.primary,
-              unselectedItemColor: Colors.black,
-              type: BottomNavigationBarType.fixed,
               items: [
-                BottomNavigationBarItem(
-                  icon: ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                      state == 0 ? appColors.primary : appColors.secondText,
-                      BlendMode.srcIn,
-                    ),
+                CurvedNavigationBarItem(
                     child: Image.asset(
                       Images.navBarCourse,
-                      width: 42,
-                      height: 36,
+                      width: 30.w,
+                      height: state == 0 ? 30.h : 25.h,
+                      color: state == 0
+                          ? appColors.whiteText
+                          : appColors.mainIconColor,
                     ),
-                  ),
-                  label: 'Courses',
-                ),
-                BottomNavigationBarItem(
-                  icon: ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                      state == 1 ? appColors.primary : appColors.secondText,
-                      BlendMode.srcIn,
-                    ),
+                    label: 'Courses',
+                    labelStyle: TextStyle(
+                        color: state == 0
+                            ? appColors.whiteText
+                            : appColors.mainIconColor,
+                        fontSize: 12.sp)),
+                CurvedNavigationBarItem(
                     child: Image.asset(
                       Images.navBarlearnPath,
-                      width: 42,
-                      height: 36,
+                      width: 30,
+                      height: state == 1 ? 30.h : 25.h,
+                      color: state == 1
+                          ? appColors.whiteText
+                          : appColors.mainIconColor,
                     ),
-                  ),
-                  label: 'Learn Path',
-                ),
-                BottomNavigationBarItem(
-                  icon: ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                      state == 2 ? appColors.primary : appColors.secondText,
-                      BlendMode.srcIn,
-                    ),
+                    label: 'Learn Path',
+                    labelStyle: TextStyle(
+                        color: state == 1
+                            ? appColors.whiteText
+                            : appColors.mainIconColor,
+                        fontSize: 12.sp)),
+                CurvedNavigationBarItem(
                     child: Image.asset(
                       Images.navBarContest,
-                      width: 42,
-                      height: 36,
+                      width: 30,
+                      height: state == 2 ? 30.h : 25.h,
+                      color: state == 2
+                          ? appColors.whiteText
+                          : appColors.mainIconColor,
                     ),
-                  ),
-                  label: 'contest',
-                ),
-                BottomNavigationBarItem(
-                  icon: ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                      state == 3 ? appColors.primary : appColors.secondText,
-                      BlendMode.srcIn,
-                    ),
+                    label: 'Contest',
+                    labelStyle: TextStyle(
+                        color: state == 2
+                            ? appColors.whiteText
+                            : appColors.mainIconColor,
+                        fontSize: 12.sp)),
+                CurvedNavigationBarItem(
                     child: Image.asset(
                       Images.navBarProject,
-                      width: 42,
-                      height: 36,
+                      width: 30,
+                      height: state == 3 ? 30.h : 25.h,
+                      color: state == 3
+                          ? appColors.whiteText
+                          : appColors.mainIconColor,
                     ),
-                  ),
-                  label: 'Project',
-                ),
-                BottomNavigationBarItem(
-                  icon: ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                      state == 4 ? appColors.primary : appColors.secondText,
-                      BlendMode.srcIn,
-                    ),
+                    label: 'Project',
+                    labelStyle: TextStyle(
+                        color: state == 3
+                            ? appColors.whiteText
+                            : appColors.mainIconColor,
+                        fontSize: 12.sp)),
+                CurvedNavigationBarItem(
                     child: Image.asset(
                       Images.navBarMore,
-                      width: 42,
-                      height: 36,
+                      width: 30,
+                      height: state == 4 ? 30.h : 25.h,
+                      color: state == 4
+                          ? appColors.whiteText
+                          : appColors.mainIconColor,
                     ),
-                  ),
-                  label: 'more',
-                ),
+                    label: 'More',
+                    labelStyle: TextStyle(
+                        color: state == 4
+                            ? appColors.whiteText
+                            : appColors.mainIconColor,
+                        fontSize: 12.sp)),
               ],
             ),
           );

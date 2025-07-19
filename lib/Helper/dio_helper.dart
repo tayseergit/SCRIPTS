@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 class DioHelper {
-  static String baseUrl = "http://192.168.1.14:8000";
+  static String baseUrl = "http://192.168.1.15:8000";
   static String baseUrlApi = "$baseUrl/api/";
 
   static final Dio _dio = Dio(
@@ -13,30 +13,7 @@ class DioHelper {
       sendTimeout: const Duration(seconds: 10),
       headers: {HttpHeaders.acceptHeader: "application/json"},
     ),
-    // )..interceptors.add(
-    //     InterceptorsWrapper(
-    //       onRequest: (options, handler) async {
-    //         final token = await CacheHelper.getData(key: 'token');
-    //         if (token != null) {
-    //           options.headers['Authorization'] = 'Bearer $token';
-    //         }
-    //         return handler.next(options);
-    //       },
-    //       onError: (DioError error, handler) async {
-    //         if (error.response?.statusCode == 401) {
-    //           final refreshed = await AuthCubit().refreshAccessToken();
-    //           if (refreshed) {
-    //             final token = await CacheHelper.getData(key: 'token');
-    //             final options = error.requestOptions;
-    //             options.headers['Authorization'] = 'Bearer $token';
-
-    //             final response = await _dio.fetch(options);
-    //             return handler.resolve(response);
-    //           }
-    //         }
-    //         return handler.next(error);
-    //       },
-    //     ),
+    
   );
 
   // GET request

@@ -1,15 +1,37 @@
+class ProjectsResponse {
+  final bool status;
+  final List<ProjectModel> data;
+  final Meta meta;
+
+  ProjectsResponse({
+    required this.status,
+    required this.data,
+    required this.meta,
+  });
+
+  factory ProjectsResponse.fromJson(Map<String, dynamic> json) {
+    return ProjectsResponse(
+      status: json['status'],
+      data: List<ProjectModel>.from(
+        (json['projects'] ?? []).map((x) => ProjectModel.fromJson(x)),
+      ),
+      meta: Meta.fromJson(json['meta']),
+    );
+  }
+}
+
 class ProjectModel {
   final int id;
   final String title;
   final int userId;
   final String description;
-  final String? technologies;
-  final String? links;
+  final dynamic technologies;
+  final dynamic links;
   final int likes;
   final String status;
   final int tagId;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final String createdAt;
+  final String updatedAt;
   final String userName;
   final String tagName;
 
@@ -40,10 +62,33 @@ class ProjectModel {
       likes: json['likes'],
       status: json['status'],
       tagId: json['tag_id'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      createdAt: json['created_at'],
+      updatedAt: json['updated_at'],
       userName: json['user_name'],
       tagName: json['tag_name'],
+    );
+  }
+}
+
+class Meta {
+  final int currentPage;
+  final int lastPage;
+  final int perPage;
+  final int total;
+
+  Meta({
+    required this.currentPage,
+    required this.lastPage,
+    required this.perPage,
+    required this.total,
+  });
+
+  factory Meta.fromJson(Map<String, dynamic> json) {
+    return Meta(
+      currentPage: json['current_page'],
+      lastPage: json['last_page'],
+      perPage: json['per_page'],
+      total: json['total'],
     );
   }
 }

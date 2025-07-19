@@ -58,7 +58,7 @@ class Course {
   final int price;
   final int teacherId;
   final String teacherName;
-  final String teacherImage;
+  final String ?teacherImage;
   final String? status;
   final dynamic studentPaid;
   final List<LearningPath> learningPaths;
