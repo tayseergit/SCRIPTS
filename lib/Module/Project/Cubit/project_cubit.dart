@@ -6,7 +6,7 @@ import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Module/Project/Cubit/project_state.dart';
 import 'package:lms/Module/Project/Model/projet_response.dart';
 import 'package:lms/Module/Project/Model/tag_response.dart';
- import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/Module/mainWidget/loading.dart';
 
 class ProjectCubit extends Cubit<ProjectState> {
   ProjectCubit() : super(ProjectInitial());
@@ -57,19 +57,16 @@ class ProjectCubit extends Cubit<ProjectState> {
           "Accept": "application/json",
           "Authorization": "Bearer $token",
         },
-      );
-
-      print("Status Code: ${response.statusCode}");
-
-      if (response.statusCode == 200) {
-        tagResponse = TagsResponse.fromJson(response.data);
+      ).then((value) {
+        tagResponse = TagsResponse.fromJson(value.data);
         emit(TagsSuccess());
         getProjects();
-      }
-    } on DioException catch (e) {
-      emit(Error(message: "Network error: ${e.message}"));
-      print("DioException: $e");
-      print(state);
+      }).catchError((error) {
+        emit(Error(message: "Network error: ${error.message}"));
+        print("DioException: $error");
+        print(state);
+      });
+ 
     } catch (e) {
       print("Unexpected Error: $e");
       emit(Error(message: "Unexpected error: ${e.toString()}"));
@@ -98,7 +95,7 @@ class ProjectCubit extends Cubit<ProjectState> {
 
       if (response.statusCode == 200) {
         projectsResponse = ProjectsResponse.fromJson(response.data);
-         emit(ProjectSuccess());
+        emit(ProjectSuccess());
       } else {
         emit(Error(message: 'fetching error'));
       }

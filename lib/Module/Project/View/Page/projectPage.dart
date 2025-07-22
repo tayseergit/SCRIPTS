@@ -31,6 +31,7 @@ class Projectpage extends StatelessWidget {
     return SafeArea(
       child: BlocProvider(
         create: (context) => ProjectCubit()..getProjectsTags(),
+        lazy: true,
         child: Scaffold(
           backgroundColor: appColors.pageBackground,
           appBar: AppBar(
@@ -49,7 +50,12 @@ class Projectpage extends StatelessWidget {
             ),
           ),
           body: BlocConsumer<ProjectCubit, ProjectState>(
-            listener: (context, state) {},
+            listener: (context, state) {
+              if (state is Error) {
+                print("++++++++++ $state");
+                // ScaffoldMessenger.of(context).showSnackBar(state.message);
+              }
+            },
             builder: (context, state) {
               final projectCubit = context.watch<ProjectCubit>();
               return Padding(
