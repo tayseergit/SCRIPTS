@@ -33,11 +33,7 @@ class Images {
   static String contest4 = "${baseImages}contest4.png";
   static String contest5 = "${baseImages}contest5.png";
   static String contest6 = "${baseImages}contest6.png";
-  static String cup = "${baseImages}cup.png";
-  static String projectImage = "${baseImages}projectimage.jpg";
-  static String webImage = "${baseImages}webimage.png";
-  static String mobileImage = "${baseImages}mobileimage.png";
-  static String studentImage = "${baseImages}studentimage.png";
+  static String contest7 = "${baseImages}contest7.png";
   static String editProfile = "${baseImages}EditProfile.png";
   static String changePassword = "${baseImages}ChangePassword.png";
   static String setting = "${baseImages}Setting.png";
@@ -50,9 +46,15 @@ class Images {
   static String deletehistory = "${baseImages}Deletehistory.png";
   static String language = "${baseImages}Language.png";
   static String logout = "${baseImages}Logout.png";
-  static String noImage = "${baseImages}noImage.png";
+    static String noImage = "${baseImages}noImage.png";
   static String noConnection = "${baseImages}noConnection.png";
   static String noItem = "${baseImages}NoItem.png";
-  static String noNotification = "${baseImages}noNotification.png";
-   
+  static String cup = "${baseImages}cup.png";
+  static String projectImage = "${baseImages}projectimage.jpg";
+  static String webImage = "${baseImages}webimage.png";
+  static String mobileImage = "${baseImages}mobileimage.png";
+  static String studentImage = "${baseImages}studentimage.png";
+  static String check = "${baseImages}Check.png";
+  static String close = "${baseImages}Close.png";
+  
 }
