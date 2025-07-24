@@ -26,8 +26,7 @@ class Projectpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
-    final search = TextEditingController();
-
+ 
     return SafeArea(
       child: BlocProvider(
         create: (context) => ProjectCubit()..getProjectsTags(),

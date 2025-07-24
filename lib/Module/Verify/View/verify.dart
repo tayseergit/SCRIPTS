@@ -3,7 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
+import 'package:lms/Module/Courses/Cubit/cubit/course_cubit.dart';
 import 'package:lms/Module/Courses/View/Pages/courses_page.dart';
+import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
+import 'package:lms/Module/NavigationBarWidged/navigation_cubit.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
@@ -29,7 +32,18 @@ class Verify extends StatelessWidget {
         listener: (context, state) {
           print(state);
           if (state is VerifySucsses) {
-              pushAndRemoveUntiTo(context: context, toPage: CoursesPage());
+              Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => BlocProvider.value(
+                                        value: NavigationCubit(),
+                                        child: NavigationBarwidget(),
+                                      ),
+                                    ),
+                                  );
+                                
+                              
+
             Future.delayed(Duration(milliseconds: 700), () {
               CustomSnackbar.show(
                 context: context,

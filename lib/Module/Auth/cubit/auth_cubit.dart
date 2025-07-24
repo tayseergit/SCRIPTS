@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Helper/global_func.dart';
@@ -143,7 +144,7 @@ class AuthCubit extends Cubit<AuthState> {
   ],
 
    
-  clientId: '510480483026-vej2aqs8h63ludrdgkf5qv5mvcvet621.apps.googleusercontent.com',
+  clientId:  dotenv.env['GOOGLE_CLIENT_ID'],
 );
 
 

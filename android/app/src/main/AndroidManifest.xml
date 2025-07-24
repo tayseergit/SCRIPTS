@@ -27,15 +27,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-<<<<<<< HEAD
+ 
 
         <meta-data
             android:name="com.google.android.gms.client_id"
             android:value="148038415950-dirvlakpgheikq6ail28pqluf6ijtejr.apps.googleusercontent.com" />
-
-=======
-        
->>>>>>> b698063cc6b004a7a55281419c27f4778551f698
+ 
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
