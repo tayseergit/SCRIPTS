@@ -8,6 +8,7 @@ import 'package:lms/Module/Auth/View/forgetPassword.dart';
 import 'package:lms/Module/Auth/View/register.dart';
 import 'package:lms/Module/LearnPath/View/Pages/learn_path_page.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
+import 'package:lms/Module/NavigationBarWidged/navigation_cubit.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/CustomTextField.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
@@ -31,12 +32,12 @@ class Login extends StatelessWidget {
 
       print(state);
       if (state is LogInsucess) {
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => BlocProvider.value(
-              value: AuthCubit(),
-              child: Login(),
+              value: NavigationCubit(),
+              child: NavigationBarwidget(),
             ),
           ),
         );

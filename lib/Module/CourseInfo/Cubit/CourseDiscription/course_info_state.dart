@@ -11,6 +11,11 @@ class CouresDescriptionError extends CourseInfoState {
 
   CouresDescriptionError({required this.message});
 }
+class CouresUnUthunticatedError extends CourseInfoState {
+  final String message;
+
+   CouresUnUthunticatedError({required this.message});
+}
 
 class CouresReviewLoading extends CourseInfoState {}
 

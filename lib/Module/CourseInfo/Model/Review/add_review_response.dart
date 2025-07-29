@@ -1,16 +1,16 @@
-class ReviewResponse {
+class AddReviewResponse {
   final bool successful;
   final String message;
   final ReviewData data;
 
-  ReviewResponse({
+  AddReviewResponse({
     required this.successful,
     required this.message,
     required this.data,
   });
 
-  factory ReviewResponse.fromJson(Map<String, dynamic> json) {
-    return ReviewResponse(
+  factory AddReviewResponse.fromJson(Map<String, dynamic> json) {
+    return AddReviewResponse(
       successful: json['successful'],
       message: json['message'],
       data: ReviewData.fromJson(json['data']),
@@ -19,31 +19,6 @@ class ReviewResponse {
 }
 
 class ReviewData {
-  final List<Review> reviews;
-  final int totalPages;
-  final int currentPage;
-  final bool hasMorePages;
-
-  ReviewData({
-    required this.reviews,
-    required this.totalPages,
-    required this.currentPage,
-    required this.hasMorePages,
-  });
-
-  factory ReviewData.fromJson(Map<String, dynamic> json) {
-    return ReviewData(
-      reviews: (json['reviews'] as List)
-          .map((reviewJson) => Review.fromJson(reviewJson))
-          .toList(),
-      totalPages: json['total_pages'],
-      currentPage: json['current_page'],
-      hasMorePages: json['hasMorePages'],
-    );
-  }
-}
-
-class Review {
   final int id;
   final String comment;
   final int rate;
@@ -51,7 +26,7 @@ class Review {
   final bool yourReview;
   final Student student;
 
-  Review({
+  ReviewData({
     required this.id,
     required this.comment,
     required this.rate,
@@ -60,8 +35,8 @@ class Review {
     required this.student,
   });
 
-  factory Review.fromJson(Map<String, dynamic> json) {
-    return Review(
+  factory ReviewData.fromJson(Map<String, dynamic> json) {
+    return ReviewData(
       id: json['id'],
       comment: json['comment'],
       rate: json['rate'],
@@ -75,12 +50,12 @@ class Review {
 class Student {
   final int id;
   final String name;
-  final String ?image;
+  final String? image;
 
   Student({
     required this.id,
     required this.name,
-    required this.image,
+    this.image,
   });
 
   factory Student.fromJson(Map<String, dynamic> json) {

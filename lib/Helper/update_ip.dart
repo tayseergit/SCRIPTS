@@ -1,34 +1,23 @@
 import 'dart:io';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
-  final result = await Process.run('ipconfig', []);
+  // تحميل ملف .env
+  await dotenv.load(fileName: '.env');
 
-  if (result.exitCode != 0) {
-    print('❌ Failed to run ipconfig: ${result.stderr}');
+  final ip = dotenv.env['API_IP'];
+
+  if (ip == null || ip.isEmpty) {
+    print('❌ IP not found in .env');
     return;
   }
 
-  final ipRegex = RegExp(r'IPv4 Address[.\s]*:\s*(\d{1,3}(?:\.\d{1,3}){3})');
-  final matches = ipRegex.allMatches(result.stdout.toString());
+  final selectedIp = 'http://$ip';
 
-  String? selectedIp;
+  print('✅ Loaded IP from .env: $selectedIp');
 
-  for (var match in matches) {
-    final ip = match.group(1);
-    if (ip != null && ip.startsWith('192.168.')) {
-      selectedIp = ip;
-      break;
-    }
-  }
-
-  if (selectedIp == null) {
-    print('⚠️ No local IP (192.168.x.x) found.');
-    return;
-  }
-
-  print('✅ Found IP: $selectedIp');
-//// ---------------  path of the dio file (class) ----------------
-  final dioFile = File('lib/Helper/dio_helper.dart');  
+  // ---------------  path of the dio file (class) ----------------
+  final dioFile = File('lib/Helper/dio_helper.dart');
 
   if (!dioFile.existsSync()) {
     print('❌ dio_helper.dart not found!');
@@ -37,11 +26,12 @@ void main() async {
 
   String content = await dioFile.readAsString();
 
+  // استبدال أي IP قديم بـ الجديد
   final updatedContent = content.replaceAllMapped(
     RegExp(r'http://192\.168\.\d{1,3}\.\d{1,3}'),
-    (match) => 'http://$selectedIp',
+    (match) => selectedIp,
   );
 
   await dioFile.writeAsString(updatedContent);
-  print('✅ Replaced IP in dio_helper.dart → http://$selectedIp');
+  print('✅ Replaced IP in dio_helper.dart → $selectedIp');
 }

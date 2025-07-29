@@ -129,6 +129,9 @@ class AuthCubit extends Cubit<AuthState> {
           emit(LogInErrorConnection(message: "Connection Error"));
         }
       }
+       catch (e) {
+      emit(LogInErrorConnection(message: 'Unexpected error occurred'));
+    }
     }
   }
 
@@ -205,7 +208,7 @@ Future<void> loginWithGoogle({bool forceChooser = false}) async {
           "password_confirmation": confirmPasswordCtrl.text,
           "gitHub_account": githubAccount.text,
           "bio": bioCtrl.text,
-          "fcm_token": "",
+          "fcm_token": CacheHelper.getData(key: "fcm"),
           "image": ""
         },
         headers: {"Accept": "application/json"},

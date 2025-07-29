@@ -14,35 +14,38 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 class CourseInfoCubit extends Cubit<CourseInfoState> {
   CourseInfoCubit({required this.courseId}) : super(CourseInfoInitial());
 
-
 //tags
 
   final token = CacheHelper.getData(key: "token");
   final userId = CacheHelper.getData(key: "user_id");
-  late int courseId ;
-  CourseDescriptionResponse? courseDescriptionResponse;
+  final userimg = CacheHelper.getData(key: "user_img");
 
+  late int courseId;
+  CourseDescriptionResponse? courseDescriptionResponse;
 
   void getCourseDescription() async {
     print(token);
+    print(userId);
     emit(CouresDescriptionLoading());
 
     try {
-      final response = await DioHelper.getData(
-        url: "courses/$courseId/description",
-        headers: {
-          "Accept": "application/json",
-          "Authorization": "Bearer $token",
-        },params: {
-          "page":"1"
-        }
-      );
-
-      courseDescriptionResponse =
-          CourseDescriptionResponse.fromJson(response.data);
-
-      emit(CouresDescriptionSuccess());
+      final response =
+          await DioHelper.getData(url: "courses/$courseId/description", headers: {
+        "Accept": "application/json",
+        "Authorization": "Bearer $token",
+      }, params: {
+        "page": "1"
+      });
+      if (response.statusCode == 200) {
+        courseDescriptionResponse =
+            CourseDescriptionResponse.fromJson(response.data);
+        emit(CouresDescriptionSuccess());
+      }
+      // else if (response.statusCode == 422){
+      //   emit(CouresUnUthunticatedError(message: 'Make Rigister Or Log In '));
+      // }
     } on DioException catch (dioError) {
+      // if()
       emit(CouresDescriptionError(message: dioError.message ?? 'Dio error'));
     } catch (e) {
       emit(CouresDescriptionError(message: 'Unexpected error occurred'));
@@ -50,7 +53,6 @@ class CourseInfoCubit extends Cubit<CourseInfoState> {
   }
 
   // /////////////
-
 
   void postEnrollCourse() async {
     emit(EnrollCouresLoading());

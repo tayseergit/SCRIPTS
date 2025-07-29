@@ -23,10 +23,9 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
   late AchievementResponse achievementResponse;
   final token = CacheHelper.getData(key: "token");
   final userId = CacheHelper.getData(key: "user_id");
-  
-    final labels = ['Certificates', 'Achievement', 'My Contest', 'statices'];
-  
-  
+
+  final labels = ['Certificates', 'Achievement', 'My Contest', 'statices'];
+
   int selectedTab = 0;
 
   void changeTab(int index) {
@@ -36,7 +35,7 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
 
 ////////
   void getProfile() async {
-    print(token);
+    print("sssssssssssss");
     print(userId);
     emit(ProfileLoading());
     try {
@@ -53,6 +52,10 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
       if (response.statusCode == 200) {
         studentProfileModel =
             StudentProfileModel.fromJson(response.data['user']);
+        if (studentProfileModel.image != null) {
+          CacheHelper.saveData(
+              key: "user_img", value: studentProfileModel.image);
+        }
         emit(ProfileSuccess(studentProfileModel));
       }
     } on DioException catch (e) {

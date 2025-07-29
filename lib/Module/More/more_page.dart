@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
- import 'package:lms/Module/More/TopWave_more_Clipper.dart';
+import 'package:lms/Constant/public_constant.dart';
+import 'package:lms/Module/More/TopWave_more_Clipper.dart';
+import 'package:lms/Module/StudentsProfile/View/Pages/student_profile_page.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/More/RowMore.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
@@ -71,9 +73,13 @@ class More extends StatelessWidget {
                                 height: 60,
                                 color: appColors.pageBackground,
                                 widget: Rowmore(
-                                  text: 'Edit profile',
+                                  text: 'My Profile',
                                   image: Images.editProfile,
-                                  onTapp: () {},
+                                  onTapp: () {
+                                    pushTo(
+                                        context: context,
+                                        toPage: StudentProfilePage());
+                                  },
                                   height: 25,
                                   width: 25,
                                 ),

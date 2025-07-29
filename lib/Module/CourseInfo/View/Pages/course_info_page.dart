@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/CourseInfo/Cubit/CourseDiscription/course_info_cubit.dart';
 import 'package:lms/Module/CourseInfo/Cubit/CourseDiscription/course_info_state.dart';
 import 'package:lms/Module/CourseInfo/Cubit/Reveiw/review_cubit.dart';
 import 'package:lms/Module/CourseInfo/View/Widget/Grid_course_info.dart';
-import 'package:lms/Module/CourseInfo/View/Widget/ReviewCubit.dart';
 import 'package:lms/Module/CourseInfo/View/Widget/loading.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
@@ -15,6 +15,8 @@ import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/Module/mainWidget/loading_container.dart';
+import 'package:lms/Module/mainWidget/no_auth.dart';
 
 class CourseInfoPage extends StatefulWidget {
   const CourseInfoPage({super.key, required this.courseId});
@@ -32,13 +34,13 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
   void initState() {
     super.initState();
     courseInfoCubit = CourseInfoCubit(courseId: widget.courseId);
-    reviewCubit = ReviewCubit();
+    reviewCubit = ReviewCubit(courseId: widget.courseId);
 
     // Call first API
     courseInfoCubit.getCourseDescription();
 
     // Delay second API call
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(milliseconds: 200), () {
       reviewCubit.getCourseReview();
     });
   }
@@ -56,12 +58,14 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
           listener: (context, state) {},
           builder: (context, state) {
             CourseInfoCubit courseInfoCubit = context.read<CourseInfoCubit>();
-             print(state);
+            print(state);
             if (state is CouresDescriptionLoading ||
                 state is CourseInfoInitial) {
               return const CourseInfoLoadingShimmer();
             } else if (state is CouresDescriptionError) {
               return NoConnection();
+            } else if (state is CouresUnUthunticatedError) {
+              return NoAuth();
             }
             var courseInfoData =
                 courseInfoCubit.courseDescriptionResponse!.data;
@@ -88,33 +92,42 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                     ),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 20.w, vertical: 20.h),
+                          horizontal: 10.w, vertical: 20.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              AuthText(
-                                text: courseInfoData.title,
-                                size: 20,
-                                color: appColors.mainText,
-                                fontWeight: FontWeight.w700,
-                                maxLines: 2,
+                              Expanded(
+                                flex: 3,
+                                child: AuthText(
+                                  text: courseInfoData.title,
+                                  size: 20,
+                                  color: appColors.mainText,
+                                  fontWeight: FontWeight.w700,
+                                  maxLines: 2,
+                                ),
                               ),
                               OnBoardingContainer(
-                                width: 60,
+                                // width: 60,
+
                                 height: 40,
                                 color: appColors.border,
-                                widget: AuthText(
-                                  text: courseInfoData.level,
-                                  size: 15,
-                                  color: courseInfoData.level == 'expert'
-                                      ? appColors.red
-                                      : courseInfoData.level == 'beginer'
-                                          ? appColors.ok
-                                          : appColors.orang,
-                                  fontWeight: FontWeight.w400,
+                                widget: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 5.w),
+                                  child: AuthText(
+                                    text: courseInfoData.level,
+                                    size: 15,
+                                    color:
+                                        courseInfoData.level == 'intermediate'
+                                            ? appColors.orang
+                                            : courseInfoData.level == 'beginner'
+                                                ? appColors.ok
+                                                : appColors.red,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               ),
                             ],
@@ -128,17 +141,50 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                             fontWeight: FontWeight.w400,
                           ),
                           SizedBox(height: 20.h),
-                          BlocBuilder<ReviewCubit, ReviewState>(
+                          BlocConsumer<ReviewCubit, ReviewState>(
+                            listener: (context, reviewstate) {
+                              if (reviewstate is AddReviewRequired) {
+                                customSnackBar(
+                                    context: context,
+                                    success: 0,
+                                    message: reviewstate.message);
+                              }
+                              if (reviewstate is AddReviewSuccess) {
+                                customSnackBar(
+                                    context: context,
+                                    success: 1,
+                                    message: "done");
+                              }
+                              if (reviewstate is DeleteReviewError ||
+                                  reviewstate is ReviewError ||
+                                  reviewstate is AddReviewError) {
+                                customSnackBar(
+                                    context: context,
+                                    success: 0,
+                                    message: "Error");
+                              }
+                            },
                             builder: (context, reviewstate) {
                               print(reviewstate);
                               final reviewCubit = context.read<ReviewCubit>();
+                              if (reviewstate is ReviewLoading) {
+                                return LoadingContainer(
+                                  height: 70.h,
+                                );
+                              } else if (reviewstate is ReviewError) {
+                                return Center(
+                                  child: NoConnection(
+                                    message: reviewstate.message,
+                                  ),
+                                );
+                              }
                               return AnimatedSize(
                                 duration: const Duration(milliseconds: 300),
                                 curve: Curves.fastOutSlowIn,
                                 child: Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                    color: appColors.lightGray,
+                                    color: appColors.fieldBackground,
                                     borderRadius: BorderRadius.circular(15.r),
                                   ),
                                   padding: EdgeInsets.symmetric(
@@ -162,7 +208,9 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                                             ),
                                           ),
                                           RatingBarIndicator(
-                                            rating: 2,
+                                            rating: double.tryParse(
+                                                    courseInfoData.rate) ??
+                                                0.0,
                                             itemCount: 5,
                                             itemSize: 20,
                                             itemBuilder: (context, _) =>
@@ -187,82 +235,136 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                                       SizedBox(height: 10.h),
                                       if (reviewCubit.reviewExpanded) ...[
                                         SizedBox(height: 10.h),
-                                        ReviewListView(),
-                                        SizedBox(height: 100.h),
+                                        Container(
+                                          height: 400.h,
+                                          child: ReviewListView(
+                                              reviews: reviewCubit.allReviews),
+                                        ),
                                         Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 15.w,
-                                          ),
-                                          child: OnBoardingContainer(
-                                            width: double.infinity,
-                                            height: 50,
-                                            color: appColors.border,
-                                            widget: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                CircleAvatar(
-                                                  radius: 25.r,
-                                                  backgroundImage: AssetImage(
-                                                    Images.courses,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 20.w,
-                                                ),
-                                                Expanded(
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color:
-                                                            appColors.primary,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                        Radius.circular(
-                                                          30,
-                                                        ),
-                                                      ),
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 15.w,
+                                            ),
+                                            child: OnBoardingContainer(
+                                              width: double.infinity,
+                                              widget: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  CircleAvatar(
+                                                    radius: 25.r,
+                                                    backgroundImage: AssetImage(
+                                                      Images.courses,
                                                     ),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 5.w),
-                                                      child: TextField(
-                                                        controller: reviewCubit
-                                                            .addReviewController,
-                                                        keyboardType:
-                                                            TextInputType.text,
-                                                        style: TextStyle(
-                                                          color: appColors
-                                                              .mainText,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 20.w,
+                                                  ),
+                                                  Expanded(
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color:
+                                                              appColors.primary,
                                                         ),
-                                                        decoration:
-                                                            InputDecoration(
-                                                          hintText:
-                                                              'Add Review',
-                                                          hintStyle: TextStyle(
-                                                              color: appColors
-                                                                  .secondText),
-                                                          border:
-                                                              InputBorder.none,
-                                                          suffixIcon:
-                                                              IconButton(
-                                                            onPressed: () {},
-                                                            icon: Icon(
-                                                              Icons.send,
-                                                            ),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                          Radius.circular(
+                                                            30,
                                                           ),
                                                         ),
                                                       ),
+                                                      child: Padding(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    5.w),
+                                                        child: Column(
+                                                          mainAxisSize: MainAxisSize
+                                                              .min, // Allows vertical shrink/expansion
+                                                          children: [
+                                                            TextField(
+                                                              controller:
+                                                                  reviewCubit
+                                                                      .addReviewController,
+                                                              // Important for auto-growing
+                                                              style: TextStyle(
+                                                                color: appColors
+                                                                    .mainText,
+                                                              ),
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                contentPadding:
+                                                                    EdgeInsets.only(
+                                                                        left: 10
+                                                                            .w),
+                                                                hintText: reviewCubit
+                                                                        .HasYourReview
+                                                                    ? 'Edit Your Review'
+                                                                    : "Add Review",
+                                                                hintStyle:
+                                                                    TextStyle(
+                                                                  color: appColors
+                                                                      .secondText,
+                                                                  fontSize:
+                                                                      15.sp,
+                                                                ),
+                                                                border:
+                                                                    InputBorder
+                                                                        .none,
+                                                              ),
+                                                            ),
+                                                            Align(
+                                                              alignment: Alignment
+                                                                  .centerRight,
+                                                              child: IconButton(
+                                                                onPressed: () {
+                                                                  !reviewCubit
+                                                                          .HasYourReview
+                                                                      ? reviewCubit
+                                                                          .postCourseReview()
+                                                                      : reviewCubit
+                                                                          .editCourseReview();
+                                                                },
+                                                                icon: reviewstate
+                                                                        is AddReviewLoading
+                                                                    ? Loading()
+                                                                    : Icon(Icons
+                                                                        .send),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(height: 20.h),
+                                                  SizedBox(width: 5.h),
+                                                  RatingBar.builder(
+                                                    itemSize: 20.w,
+                                                    initialRating: 0,
+                                                    minRating: 1,
+                                                    direction: Axis.vertical,
+                                                    allowHalfRating: true,
+                                                    itemCount: 5,
+                                                    itemPadding:
+                                                        const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal: 4.0),
+                                                    itemBuilder: (context, _) =>
+                                                        const Icon(
+                                                      Icons.star,
+                                                      color: Colors.amber,
+                                                    ),
+                                                    onRatingUpdate: (rating) {
+                                                      setState(() {
+                                                        reviewCubit.userRating =
+                                                            rating; // update state or controller
+                                                      });
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            )),
+                                        SizedBox(height: 10.h),
                                       ]
                                     ],
                                   ),
@@ -316,7 +418,7 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                       widget: Column(
                         children: [
                           AuthText(
-                            text: 'Mentor',
+                            text: "Mentor",
                             size: 20,
                             color: appColors.mainText,
                             fontWeight: FontWeight.w600,

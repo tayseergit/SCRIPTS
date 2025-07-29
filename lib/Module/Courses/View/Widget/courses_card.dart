@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Constant/public_constant.dart';
+import 'package:lms/Module/CourseInfo/View/Pages/course_info_page.dart';
 import 'package:lms/Module/Courses/Model/course_response.dart';
 import 'package:lms/Module/StudentsProfile/Model/CertificatesModel.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
@@ -188,7 +190,9 @@ class Cursescard extends StatelessWidget {
             ],
           ),
         ),
-        onTap: () {},
+        onTap: () {
+          pushTo(context: context, toPage: CourseInfoPage(courseId: course.id));
+        },
       ),
     );
   }

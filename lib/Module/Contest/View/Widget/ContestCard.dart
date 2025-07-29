@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Contest/Model/contest_response.dart';
+import 'package:lms/Module/CourseInfo/View/Pages/course_info_page.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/ReadMoreInlineText.dart';
@@ -167,7 +169,8 @@ class Contestcard extends StatelessWidget {
               ],
             ),
           ),
-          onTap: () {},
+          onTap: () {
+           },
         ),
       ),
     );

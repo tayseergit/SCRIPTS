@@ -6,15 +6,21 @@ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 
 class NoConnection extends StatelessWidget {
-  NoConnection({Key? key, this.height = 200, this.width = 200})
+  NoConnection(
+      {Key? key,
+      this.height = 200,
+      this.width = 200,
+      this.message = "No Connection"})
       : super(key: key);
   double height, width;
+  String message;
   @override
   Widget build(BuildContext context) {
     final appColors = context.watch<ThemeCubit>().state;
-    return SizedBox(
+    return Container(
+      color: appColors.pageBackground,
       height: height.h,
-      width: width.w,
+      // width: width.w,
       child: LayoutBuilder(
         builder: (context, constraints) {
           // المساحة المتاحة من الوالد
@@ -43,14 +49,12 @@ class NoConnection extends StatelessWidget {
               SizedBox(height: spacing),
 
               // ◀︎ النص: نجعله يتقلص أو يتمدّد داخل عرض الوالد
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                child: AuthText(
-                  text: "No Connection",
-                  size: 16.sp, // يمكن ضبطها بعامل نسبي أيضاً إن شئت
-                  color: appColors.secondText,
-                  fontWeight: FontWeight.w500,
-                ),
+
+              AuthText(
+                text: message,
+                size: 16.sp, // يمكن ضبطها بعامل نسبي أيضاً إن شئت
+                color: appColors.secondText,
+                fontWeight: FontWeight.w900,
               ),
             ],
           );

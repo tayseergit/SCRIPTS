@@ -46,7 +46,7 @@ class Images {
   static String deletehistory = "${baseImages}Deletehistory.png";
   static String language = "${baseImages}Language.png";
   static String logout = "${baseImages}Logout.png";
-    static String noImage = "${baseImages}noImage.png";
+  static String noImage = "${baseImages}noImage.png";
   static String noConnection = "${baseImages}noConnection.png";
   static String noItem = "${baseImages}NoItem.png";
   static String cup = "${baseImages}cup.png";
@@ -56,5 +56,6 @@ class Images {
   static String studentImage = "${baseImages}studentimage.png";
   static String check = "${baseImages}Check.png";
   static String close = "${baseImages}Close.png";
-  
+  static String noAtuh = "${baseImages}noAuth.png";
+  static String noProfile = "${baseImages}noProfile.png";
 }

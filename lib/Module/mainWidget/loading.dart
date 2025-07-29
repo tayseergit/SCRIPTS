@@ -19,22 +19,22 @@ class Loading extends StatelessWidget {
       child: Transform.scale(
         scale: 1,
         child: LoadingIndicator(
-            indicatorType: Indicator.ballClipRotateMultiple,
+          indicatorType: Indicator.ballClipRotateMultiple,
 
-            /// Required, The loading type of the widget
-            colors: [appColors.primary],
+          /// Required, The loading type of the widget
+          colors: [appColors.primary],
 
-            /// Optional, The color collections
-            strokeWidth: 3,
+          /// Optional, The color collections
+          strokeWidth: 3,
 
-            /// Optional, The stroke of the line, only applicable to widget which contains line
-            backgroundColor: appColors.pageBackground,
+          /// Optional, The stroke of the line, only applicable to widget which contains line
+          // backgroundColor: appColors.pageBackground,
 
-            /// Optional, Background of the widget
-            pathBackgroundColor: Colors.black
+          /// Optional, Background of the widget
+          // pathBackgroundColor: Colors.black
 
-            /// Optional, the stroke backgroundColor
-            ),
+          /// Optional, the stroke backgroundColor
+        ),
       ),
     );
   }

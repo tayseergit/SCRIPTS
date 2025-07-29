@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lms/Constant/images.dart'; 
+import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/StudentsProfile/cubit/student_profile_cubit.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
- import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 
 class MainHeader extends StatelessWidget {
-  MainHeader( {Key? key,required this.cubit}) : super(key: key);
+  MainHeader({Key? key, required this.cubit}) : super(key: key);
   StudentProfileCubit cubit;
   @override
   Widget build(BuildContext context) {
@@ -18,12 +18,19 @@ class MainHeader extends StatelessWidget {
 
     return Stack(
       children: [
-        Image.asset(
-          Images.courses,
-          width: double.infinity,
-          height: 300.h,
-          fit: BoxFit.cover,
-        ),
+        cubit.studentProfileModel.image == null
+            ? Image.asset(
+                Images.noProfile,
+                width: double.infinity,
+                height: 300.h,
+                fit: BoxFit.fitHeight,
+              )
+            : Image.network(
+                cubit.studentProfileModel.image!,
+                width: double.infinity,
+                height: 300.h,
+                fit: BoxFit.cover,
+              ),
         Padding(
           padding: EdgeInsets.only(top: 20.h, right: 15.w),
           child: Align(

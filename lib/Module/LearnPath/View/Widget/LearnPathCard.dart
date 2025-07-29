@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/LearnPath/Model/learn_path_reaponse.dart';
 import 'package:lms/Module/LearnPath/View/Widget/TopWaveClipper.dart';
+import 'package:lms/Module/LearnPathInfo/LearnPathInfoPage.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
@@ -85,28 +87,27 @@ class Learnpathcard extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 height: 200.h,
-                child:(learnPath.image == null &&
-                              learnPath.image.isNotEmpty)
-                          ? Image.network(
-                              learnPath.image,
-                              width: double.infinity,
-                              height: 100.h,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Image.asset(
-                                  Images.noImage,
-                                  width: double.infinity,
-                                  height: 100.h,
-                                  fit: BoxFit.contain,
-                                );
-                              },
-                            )
-                          : Image.asset(
-                              Images.noImage,
-                              width: double.infinity,
-                              height: 100.h,
-                              fit: BoxFit.fill,
-                            ),
+                child: (learnPath.image == null && learnPath.image.isNotEmpty)
+                    ? Image.network(
+                        learnPath.image,
+                        width: double.infinity,
+                        height: 100.h,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            Images.noImage,
+                            width: double.infinity,
+                            height: 100.h,
+                            fit: BoxFit.contain,
+                          );
+                        },
+                      )
+                    : Image.asset(
+                        Images.noImage,
+                        width: double.infinity,
+                        height: 100.h,
+                        fit: BoxFit.fill,
+                      ),
               ),
             ),
             SizedBox(height: 15.h),
@@ -167,7 +168,9 @@ class Learnpathcard extends StatelessWidget {
                 )),
           ],
         ),
-        onTap: () {},
+        onTap: () {
+          pushTo(context: context, toPage: LearnPathInfoPage());
+        },
       ),
     );
   }

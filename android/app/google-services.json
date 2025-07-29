@@ -12,15 +12,29 @@
           "package_name": "com.example.lms"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "510480483026-s54bqqefp0kjjd146sbi3c8q9uu77c0l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lms",
+            "certificate_hash": "f953c2fee5b2e292ddc4eb603977ee32a65da449"
+          }
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyD6BHjmfGnomMB1-nZ15S7aNBHVwzU3uUk"
+          "current_key": "AIzaSyBXRXj8JXrDZ8MJYAV_H8dAFGkg8JvQZok"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510480483026-vej2aqs8h63ludrdgkf5qv5mvcvet621.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

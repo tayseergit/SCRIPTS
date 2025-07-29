@@ -8,7 +8,7 @@ class OnBoardingContainer extends StatelessWidget {
   final double? width;
   final double? height;
   final double? radius;
-  final Color color;
+  final Color? color;
   final Color? boarderColor;
   final Widget widget;
   final Function()? onTap;
@@ -18,7 +18,7 @@ class OnBoardingContainer extends StatelessWidget {
     this.width,
     this.height,
     this.boarderColor,
-    required this.color,
+    this.color,
     required this.widget,
     this.onTap,
     this.radius = 5,

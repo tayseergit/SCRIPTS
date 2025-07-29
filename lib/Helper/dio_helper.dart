@@ -1,24 +1,33 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
- 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class DioHelper {
-  static String baseUrl = "http://192.168.43.116:8000";
-  static String baseUrlApi = "$baseUrl/api/";
+  static late final Dio _dio;
 
-  static final Dio _dio = Dio(
-    BaseOptions(
-      baseUrl: baseUrlApi,
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 10),
-      sendTimeout: const Duration(seconds: 10),
-      headers: {
-        HttpHeaders.acceptHeader: "application/json",
-      },
-    ),
-  );
+  static Future<void> init() async {
+    final ip = dotenv.env['API_IP'];
+    if (ip == null || ip.isEmpty) {
+      throw Exception('❌ API_IP not found in .env file');
+    }
 
-  // ✅ Custom exception wrapper
+    final baseUrl = "http://$ip:8000";
+    final baseUrlApi = "$baseUrl/api/";
+
+    _dio = Dio(
+      BaseOptions(
+        baseUrl: baseUrlApi,
+        connectTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 10),
+        sendTimeout: const Duration(seconds: 10),
+        headers: {
+          HttpHeaders.acceptHeader: "application/json",
+        },
+      ),
+    );
+  }
+
   static Exception handleDioError(dynamic error) {
     if (error is DioException) {
       if (error.type == DioExceptionType.connectionTimeout ||
@@ -42,14 +51,12 @@ class DioHelper {
     }
   }
 
-  // ✅ GET with exception handled
   static Future<Response> getData({
     required String url,
     Map<String, String>? headers,
     Map<String, dynamic>? params,
   }) async {
     try {
-     
       return await _dio.get(
         url,
         options: Options(headers: headers),
@@ -61,15 +68,15 @@ class DioHelper {
     }
   }
 
-  // ✅ POST with exception handled
   static Future<Response> postData({
     required String url,
     Map<String, dynamic>? postData,
     Map<String, String>? headers,
   }) async {
     try {
-    
-      _dio.options.headers.addAll(headers ?? {});
+      if (headers != null) {
+        _dio.options.headers.addAll(headers);
+      }
       return await _dio.post(url, data: postData);
     } catch (error) {
       print("❌ Dio POST Error: $error");
@@ -77,7 +84,6 @@ class DioHelper {
     }
   }
 
-  // ✅ Multipart with exception handled
   static Future<Response> postMultipart({
     required String url,
     required File file,
@@ -96,6 +102,42 @@ class DioHelper {
       );
     } catch (error) {
       print("❌ Dio Multipart Error: $error");
+      throw handleDioError(error);
+    }
+  }
+
+  // ✅ PUT with exception handled
+  static Future<Response> putData({
+    required String url,
+    Map<String, dynamic>? putData,
+    Map<String, String>? headers,
+  }) async {
+    try {
+      return await _dio.put(
+        url,
+        data: putData,
+        options: Options(headers: headers),
+      );
+    } catch (error) {
+      print("❌ Dio PUT Error: $error");
+      throw handleDioError(error);
+    }
+  }
+
+  // ✅ DELETE with exception handled
+  static Future<Response> deleteData({
+    required String url,
+    Map<String, String>? headers,
+    Map<String, dynamic>? params,
+  }) async {
+    try {
+      return await _dio.delete(
+        url,
+        options: Options(headers: headers),
+        queryParameters: params,
+      );
+    } catch (error) {
+      print("❌ Dio DELETE Error: $error");
       throw handleDioError(error);
     }
   }
