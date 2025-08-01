@@ -6,6 +6,7 @@ import 'package:lms/Module/Setting/NotificationSwitchCubit.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/Module/mainWidget/TopWave_more_Clipper.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 
 class Settingpage extends StatelessWidget {
@@ -23,14 +24,36 @@ class Settingpage extends StatelessWidget {
       child: Builder(builder: (context) {
         return Scaffold(
           backgroundColor: appColors.pageBackground,
-          body: ListView(
+          body: Stack(
             children: [
-              SizedBox(
-                height: 140.h,
+              ClipPath(
+                clipper: TopWaveMoreClipper(),
+                child: Container(
+                  decoration: BoxDecoration(gradient: appColors.linear),
+                  width: double.infinity,
+                  height: 220.h,
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Transform.rotate(
+                  angle: 3.1416, // 180 degrees in radians (pi)
+
+                  child: ClipPath(
+                    clipper: TopWaveMoreClipper(),
+                    child: Container(
+                      decoration: BoxDecoration(gradient: appColors.linear),
+                      width: double.infinity,
+                      height: 220.h,
+                    ),
+                  ),
+                ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                padding:
+                    EdgeInsets.symmetric(vertical: 130.h, horizontal: 20.w),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
@@ -117,6 +140,7 @@ class Settingpage extends StatelessWidget {
                                   return Switch(
                                     value: isSwitched,
                                     onChanged: (value) {
+                                      context.read<ThemeCubit>().toggleTheme();
                                       context
                                           .read<
                                               NotificationSwitchDarkModeCubit>()

@@ -65,7 +65,7 @@ class ReviewCubit extends Cubit<ReviewState> {
       if (newReviews.data.reviews.isNotEmpty) {
         allReviews.addAll(newReviews.data.reviews);
       }
-      if (allReviews[0].yourReview && allReviews.isNotEmpty)
+      if (allReviews.isNotEmpty && allReviews[0].yourReview)
         HasYourReview = true;
       else
         HasYourReview = false;
@@ -76,9 +76,8 @@ class ReviewCubit extends Cubit<ReviewState> {
       emit(ReviewError(message: message));
     } catch (e) {
       print(e.toString());
+      print("xxxxxxxxxxx");
       emit(ReviewError(message: 'Unexpected error occurred'));
-    } finally {
-      isLoading = false;
     }
   }
 
@@ -122,35 +121,35 @@ class ReviewCubit extends Cubit<ReviewState> {
 
   ///////////
   Future<void> editCourseReview() async {
-  emit(AddReviewLoading());
+    emit(AddReviewLoading());
 
-  try {
-    final response = await DioHelper.putData(
-      url: "courses/$courseId/reviews",
-      putData: {
-        "comment": addReviewController.text.trim(),
-        "rate": (userRating ?? 0.0).toInt(),
-      },
-      headers: {
-        "Accept": "application/json",
-        "Authorization": "Bearer $token",
-      },
-    );
+    try {
+      final response = await DioHelper.putData(
+        url: "courses/$courseId/reviews",
+        putData: {
+          "comment": addReviewController.text.trim(),
+          "rate": (userRating ?? 0.0).toInt(),
+        },
+        headers: {
+          "Accept": "application/json",
+          "Authorization": "Bearer $token",
+        },
+      );
 
-    // ✅ Ensure the server accepted the update
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      emit(AddReviewSuccess());
-      reset();
+      // ✅ Ensure the server accepted the update
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(AddReviewSuccess());
+        reset();
 
-      // ✅ Only after the above finishes, call getCourseReview()
-      await getCourseReview(); 
-    } else {
-      emit(AddReviewError(message: "Failed to update review"));
+        // ✅ Only after the above finishes, call getCourseReview()
+        await getCourseReview();
+      } else {
+        emit(AddReviewError(message: "Failed to update review"));
+      }
+    } catch (e) {
+      emit(AddReviewError(message: "Error"));
     }
-  } catch (e) {
-    emit(AddReviewError(message: "Error"));
   }
-}
 
   ////
   Future<void> deleteCourseReview() async {

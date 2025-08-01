@@ -20,8 +20,8 @@ class Cursescard extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: appColors.lihgtPrimer, width: 2.w),
-        borderRadius: BorderRadius.circular(5.r),
+        border: Border.all(color: appColors.border, width: 2.w),
+        borderRadius: BorderRadius.circular(35.r),
       ),
       child: OnBoardingContainer(
         width: 180.w,

@@ -7,6 +7,7 @@ import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Auth/View/forgetPassword.dart';
 import 'package:lms/Module/Auth/View/register.dart';
 import 'package:lms/Module/LearnPath/View/Pages/learn_path_page.dart';
+import 'package:lms/Module/Localization/localization.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/NavigationBarWidged/navigation_cubit.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
@@ -19,6 +20,7 @@ import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 
 import 'package:lms/Module/mainWidget/shake_animation.dart';
+import 'package:lms/generated/l10n.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -26,7 +28,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
-
+    final lang = S.of(context);
     return BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
       AuthCubit authCubit = context.read<AuthCubit>();
 
@@ -49,26 +51,14 @@ class Login extends StatelessWidget {
         //   );
         // });
       } else if (state is CheckInfo) {
-        CustomSnackbar.show(
-          context: context,
-          duration: 4,
-          fillColor: appColors.red,
-          message: "Check email or password",
-        );
+        customSnackBar(
+            context: context,
+            success: 0,
+            message: lang.check_email_or_password);
       } else if (state is LogInErrorConnection) {
-        CustomSnackbar.show(
-          context: context,
-          duration: 4,
-          fillColor: appColors.red,
-          message: state.message,
-        );
+        customSnackBar(context: context, success: 0, message: state.message);
       } else if (state is LogInError) {
-        CustomSnackbar.show(
-          context: context,
-          duration: 4,
-          fillColor: appColors.red,
-          message: state.message,
-        );
+        customSnackBar(context: context, success: 0, message: state.message);
       }
     }, builder: (context, state) {
       AuthCubit authCubit = AuthCubit.get(context);
@@ -83,17 +73,22 @@ class Login extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AuthText(
-                          text: 'En',
-                          color: appColors.mainText,
-                          size: 18,
-                          fontWeight: FontWeight.w300,
+                        InkWell(
+                          onTap: () {
+                            context.read<LocaleCubit>().toggleLocale();
+                          },
+                          child: AuthText(
+                            text: lang.en,
+                            color: appColors.mainText,
+                            size: 18,
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
                         SizedBox(
                           width: 1.w,
                         ),
                         AuthText(
-                          text: 'Login',
+                          text: lang.login,
                           color: appColors.primary,
                           size: 28,
                           fontWeight: FontWeight.w700,
@@ -122,7 +117,7 @@ class Login extends StatelessWidget {
                   Image.asset(Images.baseLogo, height: 150.h, width: 200.w),
                   SizedBox(height: 50.h),
                   AuthText(
-                    text: 'Email',
+                    text: lang.email,
                     color: appColors.secondText,
                     size: 12,
                     fontWeight: FontWeight.w400,
@@ -141,7 +136,7 @@ class Login extends StatelessWidget {
                   SizedBox(height: 10.h),
                   state is IsNotEmail
                       ? AuthText(
-                          text: 'Invalid Email',
+                          text: lang.invalid_email,
                           color: appColors.red,
                           size: 12,
                           fontWeight: FontWeight.w400,
@@ -152,7 +147,7 @@ class Login extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AuthText(
-                        text: 'Password',
+                        text: lang.password,
                         color: appColors.secondText,
                         size: 13,
                         fontWeight: FontWeight.w400,
@@ -162,7 +157,7 @@ class Login extends StatelessWidget {
                           pushTo(context: context, toPage: Forgetpassword());
                         },
                         child: AuthText(
-                          text: 'Forget Password?',
+                          text: lang.forget_password,
                           color: appColors.primary,
                           size: 12,
                           fontWeight: FontWeight.w700,
@@ -186,7 +181,7 @@ class Login extends StatelessWidget {
                   SizedBox(height: 10.h),
                   state is FalsePasswordFormat
                       ? AuthText(
-                          text: 'At least 8 char,lower,upper,symbols',
+                          text: lang.at_least_8_char_lower_upper_symbols,
                           color: Colors.red,
                           size: 12,
                           fontWeight: FontWeight.w400,
@@ -218,7 +213,7 @@ class Login extends StatelessWidget {
                                 ),
                                 SizedBox(width: 15.w),
                                 AuthText(
-                                  text: 'Login',
+                                  text: lang.login,
                                   color: appColors.mainText,
                                   size: 22,
                                   fontWeight: FontWeight.w700,
@@ -231,94 +226,97 @@ class Login extends StatelessWidget {
                           ),
                   ),
                   SizedBox(height: 33.h),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.only(
-                            right: 8.w,
-                          ), // Optional spacing between buttons
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: appColors.border,
-                              width: 1.5.w,
+                  Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: appColors.border,
+                                width: 1.5.w,
+                              ),
+                              borderRadius: BorderRadius.circular(5.r),
                             ),
-                            borderRadius: BorderRadius.circular(5.r),
-                          ),
-                          child: OnBoardingContainer(
-                            onTap: () {
-                              authCubit.loginWithGoogle();
-                            },
-                            height: 50.h,
-                            color: appColors.fieldBackground,
-                            widget: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  Images.google,
-                                  height: 20.h,
-                                  width: 20.w,
-                                  color: appColors.mainIconColor,
-                                ),
-                                SizedBox(width: 15.w),
-                                AuthText(
-                                  text: 'Google',
-                                  color: appColors.mainText,
-                                  size: 12,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.only(
-                            left: 8.w,
-                          ), // Optional spacing between buttons
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: appColors.border,
-                              width: 1.5.w,
-                            ),
-                            borderRadius: BorderRadius.circular(5.r),
-                          ),
-                          child: OnBoardingContainer(
-                            height: 50.h,
-                            color: appColors.fieldBackground,
-                            widget: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  Images.github,
-                                  height: 20.h,
-                                  width: 20.w,
-                                  color: appColors.mainIconColor,
-                                ),
-                                SizedBox(width: 15.w),
-                                AuthText(
-                                  text: 'GitHub',
-                                  color: appColors.mainText,
-                                  size: 12,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ],
+                            child: OnBoardingContainer(
+                              onTap: () {
+                                authCubit.loginWithGoogle();
+                              },
+                              height: 50.h,
+                              color: appColors.fieldBackground,
+                              widget: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    Images.google,
+                                    height: 20.h,
+                                    width: 20.w,
+                                    color: appColors.mainIconColor,
+                                  ),
+                                  SizedBox(width: 15.w),
+                                  AuthText(
+                                    text: 'Google',
+                                    color: appColors.mainText,
+                                    size: 12,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: appColors.border,
+                                width: 1.5.w,
+                              ),
+                              borderRadius: BorderRadius.circular(5.r),
+                            ),
+                            child: OnBoardingContainer(
+                              height: 50.h,
+                              color: appColors.fieldBackground,
+                              widget: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    Images.github,
+                                    height: 20.h,
+                                    width: 20.w,
+                                    color: appColors.mainIconColor,
+                                  ),
+                                  SizedBox(width: 15.w),
+                                  AuthText(
+                                    text: 'GitHub',
+                                    color: appColors.mainText,
+                                    size: 12,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 33.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       AuthText(
-                        text: 'Dont have account ? ',
+                        text: lang.dont_have_account,
                         color: appColors.mainText,
                         size: 16,
                         fontWeight: FontWeight.w400,
+                      ),
+                      SizedBox(
+                        width: 10.w,
                       ),
                       InkWell(
                         onTap: () {
@@ -328,7 +326,7 @@ class Login extends StatelessWidget {
                           );
                         },
                         child: AuthText(
-                          text: 'Register ',
+                          text: lang.register,
                           color: appColors.primary,
                           size: 17,
                           fontWeight: FontWeight.w700,

@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
+import 'package:lms/Helper/image_picker.dart';
+import 'package:lms/Module/Localization/localization.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/Verify/View/verify.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
@@ -14,11 +18,16 @@ import 'package:lms/Module/Auth/cubit/auth_state.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/shake_animation.dart';
+import 'package:lms/generated/l10n.dart';
 
 class Register extends StatelessWidget {
-  const Register({super.key});
+  Register({super.key});
+  File? selectedImage;
+
   @override
   Widget build(BuildContext context) {
+    final lang = S.of(context);
+
     ThemeState appColors = context.watch<ThemeCubit>().state;
     return Container(
       color: appColors.primary,
@@ -30,24 +39,23 @@ class Register extends StatelessWidget {
               CustomSnackbar.show(
                 fillColor: appColors.ok,
                 context: context,
-                message: "Check your email for code",
+                message: lang.code_sent,
               );
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 pushTo(
                     context: context,
-                    toPage: Verify(email: authCubit.emailRegCtrl.text));
+                    toPage: Verify(
+                      email: authCubit.emailRegCtrl.text,
+                      registretion: 1,
+                    ));
               });
             } else if (state is SignUpError) {
-              // CustomSnackbar.show(
-              //   context: context,
-              //   duration: 7,
-              //   fillColor: appColors.red,
-              //   message: state.message,
-              // );
+              customSnackBar(
+                  context: context, success: 0, message: state.message);
             }
           },
           builder: (context, state) {
-            final authCubit = context.watch<AuthCubit>();
+            final authCubit = context.read<AuthCubit>();
             return Scaffold(
               backgroundColor: appColors.pageBackground,
               body: ListView(
@@ -58,17 +66,20 @@ class Register extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AuthText(
-                          text: 'En',
-                          color: appColors.mainText,
-                          size: 18,
-                          fontWeight: FontWeight.w300,
+                        InkWell(
+                          onTap: context.read<LocaleCubit>().toggleLocale,
+                          child: AuthText(
+                            text: lang.en,
+                            color: appColors.mainText,
+                            size: 18,
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
                         SizedBox(
                           width: 1.w,
                         ),
                         AuthText(
-                          text: 'Register',
+                          text: lang.register,
                           color: appColors.primary,
                           size: 28,
                           fontWeight: FontWeight.w700,
@@ -117,105 +128,126 @@ class Register extends StatelessWidget {
                       CircleAvatar(
                         radius: 50.r,
                         backgroundColor: Colors.grey.shade200,
-                        backgroundImage: null,
-                        child:
-                            Icon(Icons.person, size: 40.sp, color: Colors.grey),
-                      ),
+                        backgroundImage: authCubit.pickedImage != null
+                            ? FileImage(File(authCubit.pickedImage!.path))
+                            : null,
+                        child: authCubit.pickedImage == null
+                            ? Icon(Icons.person,
+                                size: 40.sp, color: Colors.grey)
+                            : null,
+                      )
                     ],
                   ),
                   SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 110),
                     child: OnBoardingContainer(
-                      width: 100,
-                      height: 40,
-                      color: appColors.primary,
-                      widget: AuthText(
-                        text: 'Add image',
-                        color: appColors.mainText,
-                        size: 14,
-                        fontWeight: FontWeight.w700,
-                      ),
-                      onTap: () {},
-                    ),
+                        width: 100,
+                        height: 40,
+                        color: appColors.primary,
+                        widget: AuthText(
+                          text: lang.add_image,
+                          color: appColors.mainText,
+                          size: 14,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        onTap: () async {
+                          final xfile = await ImageService()
+                              .pickImageFromGallery(context);
+                          if (xfile != null) {
+                            final file =
+                                File(xfile.path); // ✅ correct conversion
+                            selectedImage = file;
+                            authCubit.setPickedImage(file);
+                            print('Picked: ${file.path}');
+                          }
+                        }),
                   ),
                   SizedBox(height: 36.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border:
-                              Border.all(color: appColors.border, width: 1.5.w),
-                          borderRadius: BorderRadius.circular(5.r),
-                        ),
-                        child: OnBoardingContainer(
-                          width: 170,
-                          height: 50,
-                          color: appColors.fieldBackground,
-                          widget: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                Images.google,
-                                height: 20.h,
-                                width: 20.w,
-                                color: appColors.mainText,
+                  Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: appColors.border,
+                                width: 1.5.w,
                               ),
-                              SizedBox(width: 15.w),
-                              AuthText(
-                                text: 'Google',
-                                color: appColors.mainText,
-                                size: 12,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.only(
-                            left: 8.w,
-                          ), // Optional spacing between buttons
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: appColors.border,
-                              width: 1.5.w,
+                              borderRadius: BorderRadius.circular(5.r),
                             ),
-                            borderRadius: BorderRadius.circular(5.r),
-                          ),
-                          child: OnBoardingContainer(
-                            height: 50.h,
-                            color: appColors.fieldBackground,
-                            widget: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  Images.github,
-                                  height: 20.h,
-                                  width: 20.w,
-                                  color: appColors.mainText,
-                                ),
-                                SizedBox(width: 15.w),
-                                AuthText(
-                                  text: 'GitHub',
-                                  color: appColors.mainText,
-                                  size: 12,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ],
+                            child: OnBoardingContainer(
+                              onTap: () {
+                                authCubit.loginWithGoogle();
+                              },
+                              height: 50.h,
+                              color: appColors.fieldBackground,
+                              widget: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    Images.google,
+                                    height: 20.h,
+                                    width: 20.w,
+                                    color: appColors.mainIconColor,
+                                  ),
+                                  SizedBox(width: 15.w),
+                                  AuthText(
+                                    text: 'Google',
+                                    color: appColors.mainText,
+                                    size: 12,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: appColors.border,
+                                width: 1.5.w,
+                              ),
+                              borderRadius: BorderRadius.circular(5.r),
+                            ),
+                            child: OnBoardingContainer(
+                              height: 50.h,
+                              color: appColors.fieldBackground,
+                              widget: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    Images.github,
+                                    height: 20.h,
+                                    width: 20.w,
+                                    color: appColors.mainIconColor,
+                                  ),
+                                  SizedBox(width: 15.w),
+                                  AuthText(
+                                    text: 'GitHub',
+                                    color: appColors.mainText,
+                                    size: 12,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 15.h),
                   Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: AlignmentDirectional.centerStart,
                     child: AuthText(
-                      text: 'Name',
+                      text: lang.name,
                       color: appColors.secondText,
                       size: 13,
                       fontWeight: FontWeight.w400,
@@ -230,9 +262,9 @@ class Register extends StatelessWidget {
                   ),
                   SizedBox(height: 19.h),
                   Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: AlignmentDirectional.centerStart,
                     child: AuthText(
-                      text: 'Email',
+                      text: lang.email,
                       color: appColors.secondText,
                       size: 13,
                       fontWeight: FontWeight.w400,
@@ -247,7 +279,7 @@ class Register extends StatelessWidget {
                   ),
                   state is IsNotEmail
                       ? AuthText(
-                          text: 'Invalid Email',
+                          text: lang.invalid_email,
                           color: appColors.red,
                           size: 12,
                           fontWeight: FontWeight.w400,
@@ -255,9 +287,9 @@ class Register extends StatelessWidget {
                       : Container(),
                   SizedBox(height: 19.h),
                   Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: AlignmentDirectional.centerStart,
                     child: AuthText(
-                      text: 'Password',
+                      text: lang.password,
                       color: appColors.secondText,
                       size: 13,
                       fontWeight: FontWeight.w400,
@@ -277,7 +309,7 @@ class Register extends StatelessWidget {
                       ? SizedBox(
                           height: 20.h,
                           child: AuthText(
-                            text: 'At least 8 char,lower,upper,symbols',
+                            text: lang.at_least_8_char_lower_upper_symbols,
                             color: Colors.red,
                             size: 12,
                             fontWeight: FontWeight.w400,
@@ -286,9 +318,9 @@ class Register extends StatelessWidget {
                       : Container(),
                   SizedBox(height: 19.h),
                   Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: AlignmentDirectional.centerStart,
                     child: AuthText(
-                      text: 'Confirm Password',
+                      text: lang.confirm_password,
                       color: appColors.secondText,
                       size: 13,
                       fontWeight: FontWeight.w400,
@@ -307,7 +339,7 @@ class Register extends StatelessWidget {
                       ? SizedBox(
                           height: 20.h,
                           child: AuthText(
-                            text: 'At least 8 char,lower,upper,symbols',
+                            text: lang.at_least_8_char_lower_upper_symbols,
                             color: Colors.red,
                             size: 12,
                             fontWeight: FontWeight.w400,
@@ -316,9 +348,9 @@ class Register extends StatelessWidget {
                       : Container(),
                   SizedBox(height: 19.h),
                   Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: AlignmentDirectional.centerStart,
                     child: AuthText(
-                      text: 'Bio',
+                      text: lang.bio,
                       color: appColors.secondText,
                       size: 13,
                       fontWeight: FontWeight.w400,
@@ -330,9 +362,9 @@ class Register extends StatelessWidget {
                   ),
                   SizedBox(height: 19.h),
                   Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: AlignmentDirectional.centerStart,
                     child: AuthText(
-                      text: 'Github Account',
+                      text: lang.github_account,
                       color: appColors.secondText,
                       size: 13,
                       fontWeight: FontWeight.w400,
@@ -357,13 +389,13 @@ class Register extends StatelessWidget {
                               height: 50,
                               color: appColors.primary,
                               widget: AuthText(
-                                text: 'Register',
+                                text: lang.register,
                                 color: appColors.mainText,
                                 size: 22,
                                 fontWeight: FontWeight.w700,
                               ),
                               onTap: () {
-                                authCubit.signUp();
+                                authCubit.signUp(context);
                               },
                             )),
                   SizedBox(height: 35.h),
@@ -376,7 +408,7 @@ class Register extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.center,
                         child: AuthText(
-                          text: 'OR Login',
+                          text: lang.or_login,
                           color: appColors.primary,
                           size: 15,
                           fontWeight: FontWeight.w700,

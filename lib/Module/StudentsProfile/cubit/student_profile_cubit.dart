@@ -24,13 +24,15 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
   final token = CacheHelper.getData(key: "token");
   final userId = CacheHelper.getData(key: "user_id");
 
-  final labels = ['Certificates', 'Achievement', 'My Contest', 'statices'];
+  final labels = ['Certificates', 'Achievement', 'My Contest'];
 
   int selectedTab = 0;
 
   void changeTab(int index) {
-    selectedTab = index;
-    emit(Selected());
+    if (index != selectedTab) {
+      selectedTab = index;
+      emit(Selected());
+    }
   }
 
 ////////
@@ -56,6 +58,7 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
           CacheHelper.saveData(
               key: "user_img", value: studentProfileModel.image);
         }
+        print("ddddddd${studentProfileModel.image}");
         emit(ProfileSuccess(studentProfileModel));
       }
     } on DioException catch (e) {

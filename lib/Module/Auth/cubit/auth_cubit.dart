@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,11 +12,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lms/Module/Auth/Model/user_auth_model.dart';
 
 import 'package:lms/Module/Auth/cubit/auth_state.dart';
+import 'package:lms/generated/l10n.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
   static AuthCubit get(BuildContext context) => BlocProvider.of(context);
   UserAuthModel? userAuthModel;
+  File? pickedImage;
   // LOGIN
   TextEditingController emailLogctrl = TextEditingController(
     text: "eng.tayseermatar@gmail.com",
@@ -44,6 +48,11 @@ class AuthCubit extends Cubit<AuthState> {
 
 //////////////   validation
   ///
+
+  void setPickedImage(File image) {
+    pickedImage = image;
+    emit(PickedImageUpdated()); // create this state if needed
+  }
 
   void showPassword() {
     obscuretext = !obscuretext;
@@ -87,155 +96,121 @@ class AuthCubit extends Cubit<AuthState> {
 ////////////  login
   ///
   void logIn() async {
-    if (emailLogctrl.text.isEmpty || passWordLogctrl.text.isEmpty) {
+    if (emailLogctrl.text.isEmpty ||
+        passWordLogctrl.text.isEmpty ||
+        !isPassWord ||
+        !isEmail) {
       emit(LogInvalidate());
-    } else {
-      emit(LogInLoading());
-
-      try {
-        final response = await DioHelper.postData(
-          url: "login",
-          postData: {
-            'email': emailLogctrl.text,
-            'password': passWordLogctrl.text,
-          },
-          headers: {"Accept": "application/json"},
-        );
-
-        print("Status Code: ${response.statusCode}");
-
-        if (response.statusCode == 200) {
-          userAuthModel = UserAuthModel.fromJson(response.data);
-          CacheHelper.saveData(key: "token", value: userAuthModel?.token);
-          CacheHelper.saveData(key: "role", value: userAuthModel?.role);
-          CacheHelper.saveData(key: "user_id", value: userAuthModel?.userId);
-
-          print('token${userAuthModel?.token}');
-          emit(LogInsucess());
-        }
-      } on DioException catch (e) {
-        // Check if there's a response from the server
-        if (e.response != null) {
-          print("Error Status: ${e.response?.statusCode}");
-
-          if (e.response?.statusCode == 401 || e.response?.statusCode == 422) {
-            emit(CheckInfo());
-          } else {
-            emit(LogInError(message: "error"));
-          }
-        } else {
-          // No response received (network error, timeout, etc.)
-          print("Connection Error: $e");
-          emit(LogInErrorConnection(message: "Connection Error"));
-        }
-      }
-       catch (e) {
-      emit(LogInErrorConnection(message: 'Unexpected error occurred'));
+      return;
     }
+
+    emit(LogInLoading());
+
+    final response = await DioHelper.postData(
+      url: "login",
+      postData: {
+        'email': emailLogctrl.text,
+        'password': passWordLogctrl.text,
+        "fcm_token": CacheHelper.getData(key: "fcm"),
+      },
+      headers: {"Accept": "application/json"},
+    );
+
+    print("Status Code: ${response.statusCode}");
+    print("Response Data: ${response.data}");
+
+    if (response.statusCode == 200) {
+      userAuthModel = UserAuthModel.fromJson(response.data);
+      CacheHelper.saveData(key: "token", value: userAuthModel?.token);
+      CacheHelper.saveData(key: "role", value: userAuthModel?.role);
+      CacheHelper.saveData(key: "user_id", value: userAuthModel?.userId);
+
+      print('token: ${userAuthModel?.token}');
+      emit(LogInsucess());
+    } else if (response.statusCode == 422 || response.statusCode == 401) {
+      emit(CheckInfo());
+    } else {
+      emit(LogInError(message: "Unexpected error: ${response.statusCode}"));
     }
   }
 
 //// google login
   ///
 
-   
- final GoogleSignIn _googleSignIn = GoogleSignIn(
-   scopes: <String>[
-    'openid',        
-    'email',
-    'profile',      
-  ],
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: <String>[
+      'openid',
+      'email',
+      'profile',
+    ],
+    clientId: dotenv.env['GOOGLE_CLIENT_ID'],
+  );
 
-   
-  clientId:  dotenv.env['GOOGLE_CLIENT_ID'],
-);
+  Future<void> loginWithGoogle({bool forceChooser = false}) async {
+    try {
+      // 1️⃣ خَرْجْ المستخدم أولاً (يزيل الجلسة المخبَّأة)
+      await _googleSignIn.signOut();
 
+      // ملاحظة: إذا كنت تريد أيضاً إلغاء ربط التطبيق من الحساب
+      // استخدم await _googleSignIn.disconnect();
 
+      // 2️⃣ استدعِ شاشة اختيار الحساب
+      final GoogleSignInAccount? account = await _googleSignIn.signIn();
 
-Future<void> loginWithGoogle({bool forceChooser = false}) async {
- try {
-    // 1️⃣ خَرْجْ المستخدم أولاً (يزيل الجلسة المخبَّأة)
-    await _googleSignIn.signOut();
+      if (account == null) {
+        debugPrint('🔸 المستخدم ألغى العملية.');
+        return;
+      }
 
-    // ملاحظة: إذا كنت تريد أيضاً إلغاء ربط التطبيق من الحساب
-    // استخدم await _googleSignIn.disconnect();
-
-    // 2️⃣ استدعِ شاشة اختيار الحساب
-    final GoogleSignInAccount? account = await _googleSignIn.signIn();
-
-    if (account == null) {
-      debugPrint('🔸 المستخدم ألغى العملية.');
-      return;
+      // 3️⃣ احصل على التوكينات كالمعتاد
+      final auth = await account.authentication;
+      debugPrint('✅ ID‑Token: ${auth.idToken}');
+      debugPrint('✅ Access‑Token: ${auth.accessToken}');
+    } catch (e, st) {
+      debugPrint('❌ خطأ: $e');
+      debugPrint(st.toString());
     }
-
-    // 3️⃣ احصل على التوكينات كالمعتاد
-    final auth = await account.authentication;
-    debugPrint('✅ ID‑Token: ${auth.idToken}');
-    debugPrint('✅ Access‑Token: ${auth.accessToken}');
-  } catch (e, st) {
-    debugPrint('❌ خطأ: $e');
-    debugPrint(st.toString());
   }
-}
-
-
-
 
 //////////   signup
-  void signUp() async {
-    if (nameCtrl.text.isEmpty ||
-        emailRegCtrl.text.isEmpty ||
-        passwordRegCtrl.text.isEmpty ||
-        confirmPasswordCtrl.text.isEmpty) {
-      emit(SignUpError(message: "All fields are required"));
-      return;
-    }
-
-    if (passwordRegCtrl.text != confirmPasswordCtrl.text) {
-      emit(SignUpError(message: "Passwords do not match"));
-      return;
-    }
-
+  Future<void> signUp(BuildContext context) async {
     emit(SignUpLoading());
-
     try {
-      final response = await DioHelper.postData(
+      // Build map without "image" first
+      final Map<String, dynamic> data = {
+        "name": nameCtrl.text.trim(),
+        "email": emailRegCtrl.text.trim(),
+        "password": passwordRegCtrl.text.trim(),
+        "password_confirmation": confirmPasswordCtrl.text.trim(),
+        "gitHub_account": githubAccount.text.trim(),
+        "bio": bioCtrl.text.trim(),
+        "fcm_token": CacheHelper.getData(key: "fcm"),
+      };
+
+      // Add image only if pickedImage is not null
+      if (pickedImage != null) {
+        data["image"] = await MultipartFile.fromFile(
+          pickedImage!.path,
+          filename: pickedImage!.path.split('/').last,
+        );
+      }
+      final formData = FormData.fromMap(data);
+
+      final response = await DioHelper.postFormData(
         url: "register",
-        postData: {
-          "name": nameCtrl.text.trim(),
-          "email": emailRegCtrl.text.trim(),
-          "password": passwordRegCtrl.text,
-          "password_confirmation": confirmPasswordCtrl.text,
-          "gitHub_account": githubAccount.text,
-          "bio": bioCtrl.text,
-          "fcm_token": CacheHelper.getData(key: "fcm"),
-          "image": ""
-        },
-        headers: {"Accept": "application/json"},
+        postData: formData,
       );
-      final responseData = response.data;
+      print("ffffffffffff");
 
       if (response.statusCode == 200) {
         emit(SignUpSuccess());
         print(state);
         print(response.data);
-        print("token${response.data['token']}");
-        // CacheHelper.saveData(key: "access_token", value: response.data['token']);
+      } else if (response.statusCode == 422) {
+        emit(SignUpError(message: S.of(context).email_already_exist));
       }
-    } on DioException catch (e) {
-      if (e.response != null) {
-        print("Error Status: ${e.response?.statusCode}");
-
-        if (e.response?.statusCode == 422) {
-          emit(SignUpError(
-              message: "there is already an account with this email address"));
-        } else {
-          emit(SignUpError(message: "Error"));
-        }
-      } else {
-        print("Connection Error: $e");
-        emit(SignUpError(message: "Connection Error"));
-      }
+    } catch (error) {
+      print("❌ Dio POST Error: $error");
     }
   }
 

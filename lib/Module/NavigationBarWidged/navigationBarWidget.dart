@@ -42,8 +42,8 @@ class _NavigationBarwidgetState extends State<NavigationBarwidget> {
             body: pages[state],
             bottomNavigationBar: CurvedNavigationBar(
               index: state,
-              backgroundColor: appColors.pageBackground,
-              color: appColors.lihgtPrimer,
+              backgroundColor: appColors.lihgtPrimer,
+              color: appColors.primary,
               buttonBackgroundColor: appColors.primary,
               height: 70.h,
               animationDuration: Duration(milliseconds: 300),

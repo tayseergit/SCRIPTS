@@ -43,8 +43,7 @@ class BuildProfileContent extends StatelessWidget {
                 return ContestHistoryCard(
                   cubit: cubit,
                 );
-              case 3:
-                return Container();
+
               default:
                 return const SizedBox.shrink();
             }

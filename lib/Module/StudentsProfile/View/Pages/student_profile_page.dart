@@ -22,7 +22,7 @@ class StudentProfilePage extends StatelessWidget {
   StudentProfileModel? studentProfileModel;
   @override
   Widget build(BuildContext context) {
-    final appColors = context.watch<ThemeCubit>().state;
+    final appColors = context.read<ThemeCubit>().state;
     return BlocConsumer<StudentProfileCubit, StudentProfileState>(
       listener: (context, state) {
         if (state is ProfileError) {}

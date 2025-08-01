@@ -5,6 +5,7 @@ import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Contest/Model/contest_response.dart';
 import 'package:lms/Module/CourseInfo/View/Pages/course_info_page.dart';
+import 'package:lms/Module/leaderboardforpastcontest/leaderboardforpastcontestPage.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/ReadMoreInlineText.dart';
@@ -121,6 +122,12 @@ class Contestcard extends StatelessWidget {
                                     color: appColors.whiteText,
                                     fontWeight: FontWeight.w400,
                                   ),
+                                  onTap: () {
+                                    pushTo(
+                                        context: context,
+                                        toPage:
+                                            Leaderboardforpastcontestpage());
+                                  },
                                 )
                               : Container(),
                           SizedBox(height: 10.h),
@@ -169,8 +176,7 @@ class Contestcard extends StatelessWidget {
               ],
             ),
           ),
-          onTap: () {
-           },
+          onTap: () {},
         ),
       ),
     );

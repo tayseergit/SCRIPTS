@@ -3,8 +3,7 @@
     "About this course":"",
     "Mentor":"",
     "Courses":"",
-    "Profile":"",
-    "Enroll":"",
+    "Profile":"",    "Enroll":"",
     "Buy Now":"",
     "Watch":"",
     "error occurred":"",
@@ -13,5 +12,6 @@
     "Network error":"",
     "Edit Your Review":"",
     "done":"",
-    "Error deleting":""
+    "Error deleting":"",
+    "Check email or password":""
 }

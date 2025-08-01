@@ -22,7 +22,7 @@ class Learnpathcard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: appColors.border, width: 3),
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(10.r),
       ),
       child: OnBoardingContainer(
         width: 180.w,

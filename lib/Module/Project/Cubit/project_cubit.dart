@@ -76,6 +76,7 @@ class ProjectCubit extends Cubit<ProjectState> {
   void getAllProjects() async {
     emit(ProjectLoading());
     try {
+      
       final response = await DioHelper.getData(url: "projects", headers: {
         "Accept": "application/json",
         "Authorization": "Bearer $token",

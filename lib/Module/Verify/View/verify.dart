@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
+import 'package:lms/Module/Auth/View/resetPassword.dart';
+import 'package:lms/Module/Auth/cubit/forget_password_cubit.dart';
 import 'package:lms/Module/Courses/Cubit/cubit/course_cubit.dart';
 import 'package:lms/Module/Courses/View/Pages/courses_page.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
@@ -15,15 +17,18 @@ import 'package:lms/Module/Verify/Cubite/cubit/verfiy_cubit.dart';
 import 'package:lms/Module/Verify/Cubite/cubit/verfiy_state.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/shake_animation.dart';
+import 'package:lms/generated/l10n.dart';
 
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class Verify extends StatelessWidget {
   String email;
-  Verify({super.key, required this.email});
+  int registretion;
+  Verify({super.key, required this.email, required this.registretion});
 
   @override
   Widget build(BuildContext context) {
+    var lang = S.of(context);
     ThemeState appColors = context.watch<ThemeCubit>().state;
 
     return BlocProvider(
@@ -32,38 +37,49 @@ class Verify extends StatelessWidget {
         listener: (context, state) {
           print(state);
           if (state is VerifySucsses) {
-              Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => BlocProvider.value(
-                                        value: NavigationCubit(),
-                                        child: NavigationBarwidget(),
-                                      ),
-                                    ),
-                                  );
-                                
-                              
-
-            Future.delayed(Duration(milliseconds: 700), () {
-              CustomSnackbar.show(
-                context: context,
-                fillColor: appColors.primary,
-                message: "Register Completed",
-              );
-            });
+            var verifyCubit = context.read<VerifyCubit>();
+            registretion == 1
+                ? {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BlocProvider.value(
+                            value: NavigationCubit(),
+                            child: NavigationBarwidget(),
+                          ),
+                        ),
+                      );
+                    }),
+                    Future.delayed(Duration(milliseconds: 700), () {
+                      CustomSnackbar.show(
+                        context: context,
+                        fillColor: appColors.primary,
+                        message: lang.register_completed,
+                      );
+                    })
+                  }
+                : WidgetsBinding.instance.addPostFrameCallback((_) {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider.value(
+                          value: ForgetPasswordCubit(),
+                          child: ResetPassword(
+                            code: verifyCubit.otpController.text,
+                            email: email,
+                          ),
+                        ),
+                      ),
+                      (route) => false, // Remove all previous routes
+                    );
+                  });
           } else if (state is VerifyErrorCode) {
             CustomSnackbar.show(
               context: context,
               duration: 7,
               fillColor: appColors.red,
-              message: "Error Code",
-            );
-          } else if (state is VerifyErrorConnection) {
-            CustomSnackbar.show(
-              context: context,
-              duration: 7,
-              fillColor: appColors.red,
-              message: state.message,
+              message: lang.error_code,
             );
           }
         },
@@ -80,7 +96,7 @@ class Verify extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: AuthText(
-                    text: 'Verify Code',
+                    text: lang.verify_code,
                     size: 20,
                     color: appColors.mainIconColor,
                     fontWeight: FontWeight.w700,
@@ -89,36 +105,40 @@ class Verify extends StatelessWidget {
                 SizedBox(height: 56.h),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 50.w),
-                  child: PinCodeTextField(
-                    onCompleted: (value) {
-                      verifyCubit.sendCode(context);
-                    },
-                    onChanged: (value) {
-                      verifyCubit.isCode();
-                    },
-                    controller: verifyCubit.otpController,
-                    keyboardType: TextInputType.number,
-                    appContext: context,
-                    length: 6,
-                    obscureText: false,
-                    animationType: AnimationType.fade,
-                    pinTheme: PinTheme(
-                      shape: PinCodeFieldShape.box,
-                      borderRadius: BorderRadius.circular(10),
-                      fieldHeight: 50.h,
-                      fieldWidth: 40.w,
-                      activeFillColor: appColors.fieldBackground,
-                      selectedColor: appColors.primary,
-                      selectedFillColor: appColors.fieldBackground,
-                      inactiveColor: appColors.primary,
-                      inactiveFillColor: appColors.fieldBackground,
-                      activeColor: appColors.primary,
+                  child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: PinCodeTextField(
+                      onCompleted: (value) {
+                        verifyCubit.sendCode(
+                            context: context, registration: registretion);
+                      },
+                      onChanged: (value) {
+                        verifyCubit.isCode();
+                      },
+                      controller: verifyCubit.otpController,
+                      keyboardType: TextInputType.number,
+                      appContext: context,
+                      length: 6,
+                      obscureText: false,
+                      animationType: AnimationType.fade,
+                      pinTheme: PinTheme(
+                        shape: PinCodeFieldShape.box,
+                        borderRadius: BorderRadius.circular(10),
+                        fieldHeight: 50.h,
+                        fieldWidth: 40.w,
+                        activeFillColor: appColors.fieldBackground,
+                        selectedColor: appColors.primary,
+                        selectedFillColor: appColors.fieldBackground,
+                        inactiveColor: appColors.primary,
+                        inactiveFillColor: appColors.fieldBackground,
+                        activeColor: appColors.primary,
+                      ),
+                      // backgroundColor: appColors.fieldBackground,
+                      textStyle: TextStyle(
+                        color: appColors.mainText,
+                      ),
+                      enableActiveFill: true,
                     ),
-                    backgroundColor: appColors.fieldBackground,
-                    textStyle: TextStyle(
-                      color: appColors.mainText,
-                    ),
-                    enableActiveFill: true,
                   ),
                 ),
                 SizedBox(height: 45.h),
@@ -135,13 +155,14 @@ class Verify extends StatelessWidget {
                           )
                         : OnBoardingContainer(
                             onTap: () {
-                              verifyCubit.sendCode(context);
+                              verifyCubit.sendCode(
+                                  context: context, registration: registretion);
                             },
                             width: 223,
                             height: 50,
                             color: appColors.primary,
                             widget: AuthText(
-                              text: 'Send',
+                              text: lang.send,
                               size: 20,
                               color: appColors.mainText,
                               fontWeight: FontWeight.w700,
@@ -155,7 +176,7 @@ class Verify extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: AuthText(
-                      text: 'resend code ?',
+                      text: lang.resend_code,
                       size: 18,
                       color: appColors.primary,
                       fontWeight: FontWeight.w700,

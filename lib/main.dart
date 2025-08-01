@@ -5,21 +5,33 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart'; // add this
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
+import 'package:lms/Helper/firebase_fun.dart';
 import 'package:lms/Module/Auth/View/Login.dart';
+import 'package:lms/Module/Auth/View/register.dart';
+import 'package:lms/Module/Auth/View/resetPassword.dart';
 import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
+import 'package:lms/Module/Auth/cubit/forget_password_cubit.dart';
 import 'package:lms/Module/CourseInfo/View/Pages/course_info_page.dart';
-
 import 'package:lms/Module/Courses/View/Pages/courses_page.dart';
 import 'package:lms/Module/LearnPathInfo/LearnPathInfoPage.dart';
+import 'package:lms/Module/Localization/localization.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
+import 'package:lms/Module/Setting/SettingPage.dart';
 import 'package:lms/Module/StudentsProfile/View/Pages/student_profile_page.dart';
 import 'package:lms/Module/StudentsProfile/cubit/student_profile_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/Vedio/VideoScreen.dart';
+
+// Import your generated localization file
+import 'generated/l10n.dart';
+
+// Import the locale cubit you will create:
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,8 +43,7 @@ void main() async {
   await DioHelper.init();
 
   await getFcmToken();
-  ;
-  dotenv.load();
+
   runApp(const MyApp());
 }
 
@@ -46,44 +57,39 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ThemeCubit()),
         BlocProvider(create: (_) => AuthCubit()),
         BlocProvider(create: (_) => StudentProfileCubit()..getProfile()),
+        BlocProvider(create: (_) => LocaleCubit()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
-        builder: (context, state) {
-          return ScreenUtilInit(
-            designSize: const Size(375, 812),
-            minTextAdapt: true,
-            splitScreenMode: true,
-            builder: (context, child) {
-              return MaterialApp(
-                  debugShowCheckedModeBanner: false,
-
-                  // home: Login(),
-                  home: NavigationBarwidget());
+        builder: (context, themeState) {
+          return BlocBuilder<LocaleCubit, Locale>(
+            builder: (context, locale) {
+              return ScreenUtilInit(
+                designSize: const Size(375, 812),
+                minTextAdapt: true,
+                splitScreenMode: true,
+                builder: (context, child) {
+                  return MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    locale: locale,
+                    supportedLocales: S.delegate.supportedLocales,
+                    localizationsDelegates: const [
+                      S.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    theme: themeState.isDarkMode
+                        ? ThemeData.dark()
+                        : ThemeData.light(),
+                    home:   Register(),
+                    // home: ResetPassword(code:"333085" ,email: "eng.tayseermatar@gmail.com",),
+                  );
+                },
+              );
             },
           );
         },
       ),
     );
   }
-}
-
-Future<void> requestNotificationPermission() async {
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-  if (Platform.isIOS) {
-    NotificationSettings settings = await messaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-    print('iOS permission: ${settings.authorizationStatus}');
-  } else if (Platform.isAndroid) {
-    print('Handle Android notification permission if SDK >=33');
-  }
-}
-
-Future<void> getFcmToken() async {
-  String? token = await FirebaseMessaging.instance.getToken();
-  CacheHelper.saveData(key: "fcm", value: token);
-  print("🔥 FCM Token: $token");
 }

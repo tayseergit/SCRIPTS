@@ -74,13 +74,13 @@ class ThemeState {
       red: const Color(0xFFFF3B30),
       mainIconColor: const Color(0xFF151B22),
       seocndIconColor: const Color(0xFF81B9DE),
-      border: const Color(0x330F9CEF),
+      border: const Color.fromARGB(138, 58, 143, 255),
       iconSearsh: Color(0xff8C8E98),
       darkText: Color(0xFFCED2E6),
       orang: Color.fromARGB(255, 255, 186, 89),
       strongPrimer: const Color.fromARGB(255, 24, 112, 163),
       blackGreen: const Color(0xFF1B4965),
-      blackGreenDisable:  Color(0xFF1B4965).withOpacity(0.38),
+      blackGreenDisable: Color(0xFF1B4965).withOpacity(0.38),
 
       //
       lightGray: const Color(0xFFDDDDDD),
@@ -116,9 +116,9 @@ class ThemeState {
       ok: const Color(0xFF19EC67),
       darkGreen: const Color(0xFF4DC9D1),
       red: const Color(0xFFFF3B30),
-      mainIconColor: const Color(0xFF151B22),
+      mainIconColor: const Color.fromARGB(255, 165, 185, 208),
       seocndIconColor: const Color(0xFF81B9DE),
-      border: const Color(0x330F9CEF),
+      border: const Color.fromARGB(171, 123, 145, 255),
       iconSearsh: Color(0xff8C8E98),
       darkText: Color(0xFFCED2E6),
       orang: Color(0xffFF9500),
@@ -127,8 +127,8 @@ class ThemeState {
       blackGreenDisable: const Color(0xFF1B4965),
 
       //
-      lightGray: const Color(0xFFDDDDDD),
-      lihgtPrimer: const Color(0x1A0061FF),
+      lightGray: const Color.fromARGB(135, 221, 221, 221),
+      lihgtPrimer: const Color(0x803D5DFF),
 
       // Gradients
       linerContainer: const LinearGradient(
@@ -140,8 +140,8 @@ class ThemeState {
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter,
         colors: [
-          Color(0x806BC8FF),
           Color(0xFFFFFFFF),
+          Color(0xFF3D5CFF),
         ],
       ),
       linerImage: const LinearGradient(

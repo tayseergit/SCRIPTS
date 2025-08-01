@@ -9,6 +9,7 @@ import 'package:lms/Module/CourseInfo/Cubit/CourseDiscription/course_info_state.
 import 'package:lms/Module/CourseInfo/Cubit/Reveiw/review_cubit.dart';
 import 'package:lms/Module/CourseInfo/View/Widget/Grid_course_info.dart';
 import 'package:lms/Module/CourseInfo/View/Widget/loading.dart';
+import 'package:lms/Module/TeacherProfile/teacherProfilePage.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
@@ -236,7 +237,10 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                                       if (reviewCubit.reviewExpanded) ...[
                                         SizedBox(height: 10.h),
                                         Container(
-                                          height: 400.h,
+                                          height:
+                                              reviewCubit.allReviews.isNotEmpty
+                                                  ? 400.h
+                                                  : null,
                                           child: ReviewListView(
                                               reviews: reviewCubit.allReviews),
                                         ),
@@ -462,14 +466,12 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                           SizedBox(
                             height: 15.h,
                           ),
-                          Container(
-                            height: 30.h,
+                          OnBoardingContainer(
+                            height: 40.h,
                             width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: appColors.blackGreen,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30.r))),
-                            child: Center(
+                            color: appColors.blackGreen,
+                            radius: 20.r,
+                            widget: Center(
                               child: AuthText(
                                 text: 'Profile',
                                 size: 13,
@@ -477,6 +479,11 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
+                            onTap: () {
+                              pushTo(
+                                  context: context,
+                                  toPage: TeacherProfilePage());
+                            },
                           ),
                         ],
                       ),

@@ -21,7 +21,7 @@ class CardLeader extends StatelessWidget {
       child: BlocBuilder<CardExpandCubit, bool>(
         builder: (context, isExpanded) {
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.w),
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 8.h),
               decoration: BoxDecoration(
@@ -52,7 +52,7 @@ class CardLeader extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.all(12.r),
+                      padding: EdgeInsets.all(10.r),
                       child: Column(
                         children: [
                           Row(

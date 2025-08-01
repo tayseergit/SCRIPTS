@@ -59,3 +59,4 @@ class SignUpError extends AuthState {
   final String message;
   SignUpError({required this.message});
 }
+class PickedImageUpdated extends AuthState {}

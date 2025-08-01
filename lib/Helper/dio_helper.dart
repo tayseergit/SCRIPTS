@@ -77,34 +77,55 @@ class DioHelper {
       if (headers != null) {
         _dio.options.headers.addAll(headers);
       }
-      return await _dio.post(url, data: postData);
-    } catch (error) {
-      print("❌ Dio POST Error: $error");
-      throw handleDioError(error);
-    }
-  }
-
-  static Future<Response> postMultipart({
-    required String url,
-    required File file,
-    required String fieldName,
-    Map<String, String>? headers,
-  }) async {
-    try {
-      final formData = FormData.fromMap({
-        fieldName: await MultipartFile.fromFile(file.path),
-      });
 
       return await _dio.post(
         url,
-        data: formData,
-        options: Options(headers: headers),
+        data: postData,
+        options: Options(
+          validateStatus: (status) {
+            // Allow Dio to return 422, 401, etc. as normal responses
+            return status != null && status < 500;
+          },
+        ),
       );
     } catch (error) {
-      print("❌ Dio Multipart Error: $error");
-      throw handleDioError(error);
+      print("❌ Dio POST Error: $error");
+      rethrow;
     }
   }
+static Future<Response> postFormData({
+  required String url,
+  required FormData postData,
+  Map<String, String>? headers,
+}) async {
+  try {
+    return await _dio.post(
+      url,
+      data: postData,
+      options: Options(
+        headers: headers,
+        contentType: Headers.formUrlEncodedContentType,
+         validateStatus: (status) {
+            // Allow Dio to return 422, 401, etc. as normal responses
+            return status != null && status < 500;
+          },
+      ),
+    );
+
+      
+  } on DioError catch (dioError) {
+    if (dioError.response != null) {
+      print("❌ DioError: Status ${dioError.response?.statusCode}");
+      print("❌ Response data: ${dioError.response?.data}");
+    } else {
+      print("❌ DioError: ${dioError.message}");
+    }
+    rethrow;
+  } catch (error) {
+    print("❌ Unexpected error: $error");
+    rethrow;
+  }
+}
 
   // ✅ PUT with exception handled
   static Future<Response> putData({
