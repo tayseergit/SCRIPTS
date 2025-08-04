@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Module/Localization/localization.dart';
 import 'package:lms/Module/Setting/NotificationSwitchCubit.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/TopWave_more_Clipper.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/generated/l10n.dart';
 
 class Settingpage extends StatelessWidget {
   const Settingpage({super.key});
@@ -15,6 +17,7 @@ class Settingpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
+    var lang = S.of(context);
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -76,7 +79,7 @@ class Settingpage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               AuthText(
-                                text: 'Push notifications',
+                                text: lang.push_notifications,
                                 size: 18,
                                 color: appColors.mainText,
                                 fontWeight: FontWeight.w400,
@@ -129,7 +132,7 @@ class Settingpage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               AuthText(
-                                text: 'Dark Mode',
+                                text: lang.dark_mode,
                                 size: 18,
                                 color: appColors.mainText,
                                 fontWeight: FontWeight.w400,
@@ -182,7 +185,7 @@ class Settingpage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 AuthText(
-                                    text: 'Add a payment method',
+                                    text: lang.add_a_payment_method,
                                     size: 18,
                                     color: appColors.mainText,
                                     fontWeight: FontWeight.w400),
@@ -218,12 +221,12 @@ class Settingpage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 AuthText(
-                                    text: 'Delete history',
+                                    text: lang.edit_profile,
                                     size: 18,
                                     color: appColors.mainText,
                                     fontWeight: FontWeight.w400),
                                 Image.asset(
-                                  Images.deletehistory,
+                                  Images.editProfile,
                                   width: 35,
                                   height: 35,
                                 )
@@ -245,6 +248,9 @@ class Settingpage extends StatelessWidget {
                         ),
                       ),
                       child: OnBoardingContainerMore(
+                        onTap: () {
+                          context.read<LocaleCubit>().toggleLocale();
+                        },
                           width: 330,
                           height: 60,
                           color: appColors.pageBackground,
@@ -254,7 +260,7 @@ class Settingpage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 AuthText(
-                                    text: 'Language',
+                                    text: lang.change_language,
                                     size: 18,
                                     color: appColors.mainText,
                                     fontWeight: FontWeight.w400),
@@ -290,7 +296,7 @@ class Settingpage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 AuthText(
-                                    text: 'Logout',
+                                    text: lang.logout,
                                     size: 18,
                                     color: appColors.mainText,
                                     fontWeight: FontWeight.w400),

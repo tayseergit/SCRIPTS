@@ -22,12 +22,24 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "All": MessageLookupByLibrary.simpleMessage("All"),
+    "Contest": MessageLookupByLibrary.simpleMessage("Contest"),
+    "Courses": MessageLookupByLibrary.simpleMessage("Courses"),
     "Email_not_found": MessageLookupByLibrary.simpleMessage("Email not found"),
+    "Learn_Path": MessageLookupByLibrary.simpleMessage("Learn Path"),
+    "Login_or_SignUp": MessageLookupByLibrary.simpleMessage("Login or Sign Up"),
+    "More": MessageLookupByLibrary.simpleMessage("More"),
+    "My": MessageLookupByLibrary.simpleMessage("My"),
+    "Project": MessageLookupByLibrary.simpleMessage("Project"),
     "Send_code": MessageLookupByLibrary.simpleMessage("Send code"),
     "about_this_course": MessageLookupByLibrary.simpleMessage(
       "About this course",
     ),
+    "add_a_payment_method": MessageLookupByLibrary.simpleMessage(
+      "Add a payment method",
+    ),
     "add_image": MessageLookupByLibrary.simpleMessage("Add Image"),
+    "add_new_project": MessageLookupByLibrary.simpleMessage("Add Project"),
     "add_review": MessageLookupByLibrary.simpleMessage("Add Review"),
     "all_fields_required": MessageLookupByLibrary.simpleMessage(
       "All fields are required",
@@ -38,10 +50,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "at_least_8_char_lower_upper_symbols": MessageLookupByLibrary.simpleMessage(
       "At least 8 characters, including lowercase, uppercase, and symbols",
     ),
+    "basic_information": MessageLookupByLibrary.simpleMessage(
+      "Basic Information",
+    ),
     "bio": MessageLookupByLibrary.simpleMessage("Bio"),
     "buy_now": MessageLookupByLibrary.simpleMessage("Buy Now"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "change_language": MessageLookupByLibrary.simpleMessage("Change language"),
+    "change_password": MessageLookupByLibrary.simpleMessage("Change Password"),
     "check_email_or_password": MessageLookupByLibrary.simpleMessage(
       "Check your email or password",
+    ),
+    "check_info": MessageLookupByLibrary.simpleMessage("check information"),
+    "choose_file_to_upload": MessageLookupByLibrary.simpleMessage(
+      "Choose File to upload",
     ),
     "code_sent": MessageLookupByLibrary.simpleMessage("code sendt"),
     "confirmNewPassword": MessageLookupByLibrary.simpleMessage(
@@ -54,10 +76,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Connection Error",
     ),
     "courses": MessageLookupByLibrary.simpleMessage("Courses"),
+    "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+    "delete_history": MessageLookupByLibrary.simpleMessage("Delete history"),
+    "demo_url": MessageLookupByLibrary.simpleMessage("Demo URL"),
     "done": MessageLookupByLibrary.simpleMessage("Done"),
     "dont_have_account": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account?",
     ),
+    "edit_profile": MessageLookupByLibrary.simpleMessage("Edit profile"),
     "edit_your_review": MessageLookupByLibrary.simpleMessage(
       "Edit Your Review",
     ),
@@ -67,31 +93,65 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "en": MessageLookupByLibrary.simpleMessage("Ar"),
     "enroll": MessageLookupByLibrary.simpleMessage("Enroll"),
+    "enter_demo_url": MessageLookupByLibrary.simpleMessage("Enter demo link"),
+    "enter_description": MessageLookupByLibrary.simpleMessage(
+      "Enter a brief description of your project",
+    ),
+    "enter_github_url": MessageLookupByLibrary.simpleMessage(
+      "Enter GitHub link",
+    ),
+    "enter_project_title": MessageLookupByLibrary.simpleMessage(
+      "Enter your project title",
+    ),
+    "enter_steam_url": MessageLookupByLibrary.simpleMessage("Enter Steam link"),
     "error_code": MessageLookupByLibrary.simpleMessage("wrong code"),
     "error_deleting": MessageLookupByLibrary.simpleMessage("Error deleting"),
     "error_in_server": MessageLookupByLibrary.simpleMessage(
       "Server error , Please try later.",
     ),
     "error_occurred": MessageLookupByLibrary.simpleMessage("An error occurred"),
+    "error_old_password": MessageLookupByLibrary.simpleMessage(
+      "wrong password",
+    ),
     "field_and_rating_are_required": MessageLookupByLibrary.simpleMessage(
       "Field and rating are required",
     ),
+    "fill_details": MessageLookupByLibrary.simpleMessage(
+      "Please fill in all the details of your project.",
+    ),
     "forget_password": MessageLookupByLibrary.simpleMessage("Forget Password?"),
+    "friends": MessageLookupByLibrary.simpleMessage("Friends"),
     "git_hub": MessageLookupByLibrary.simpleMessage("GitHub"),
     "github_account": MessageLookupByLibrary.simpleMessage("GitHub Account"),
+    "github_url": MessageLookupByLibrary.simpleMessage("GitHub URL"),
     "google": MessageLookupByLibrary.simpleMessage("Google"),
     "invalid_email": MessageLookupByLibrary.simpleMessage("Invalid Email"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
+    "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "mentor": MessageLookupByLibrary.simpleMessage("Mentor"),
+    "my_profile": MessageLookupByLibrary.simpleMessage("My Profile"),
     "name": MessageLookupByLibrary.simpleMessage("Name"),
     "network_error": MessageLookupByLibrary.simpleMessage("Network error"),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+    "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "old_password": MessageLookupByLibrary.simpleMessage("Old Password"),
     "or_login": MessageLookupByLibrary.simpleMessage("or login"),
+    "participants": MessageLookupByLibrary.simpleMessage("Participants"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwords_do_not_match": MessageLookupByLibrary.simpleMessage(
       "Passwords do not match",
     ),
     "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+    "project_content": MessageLookupByLibrary.simpleMessage("Project Content"),
+    "project_description": MessageLookupByLibrary.simpleMessage(
+      "Project Description",
+    ),
+    "project_kind": MessageLookupByLibrary.simpleMessage("projectkind"),
+    "project_links": MessageLookupByLibrary.simpleMessage("Project Links"),
+    "project_title": MessageLookupByLibrary.simpleMessage("Project Title"),
+    "push_notifications": MessageLookupByLibrary.simpleMessage(
+      "Push notifications",
+    ),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "register_completed": MessageLookupByLibrary.simpleMessage(
       "Register Completed",
@@ -102,7 +162,19 @@ class MessageLookup extends MessageLookupByLibrary {
       "Reset password done",
     ),
     "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+    "save_as_draft": MessageLookupByLibrary.simpleMessage("Save as draft"),
+    "search_project": MessageLookupByLibrary.simpleMessage("search project"),
+    "select_a_tag": MessageLookupByLibrary.simpleMessage("Select a tag"),
+    "select_technologies": MessageLookupByLibrary.simpleMessage(
+      "Select technologies",
+    ),
     "send": MessageLookupByLibrary.simpleMessage("Send"),
+    "setting": MessageLookupByLibrary.simpleMessage("Setting"),
+    "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+    "steam_url": MessageLookupByLibrary.simpleMessage("Steam URL"),
+    "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+    "teachers": MessageLookupByLibrary.simpleMessage("Teachers"),
+    "technologies": MessageLookupByLibrary.simpleMessage("Technologies"),
     "verify_code": MessageLookupByLibrary.simpleMessage("Verify Code"),
     "watch": MessageLookupByLibrary.simpleMessage("Watch"),
   };

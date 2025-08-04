@@ -12,10 +12,12 @@ import 'package:lms/Module/StudentsProfile/View/Widget/build_profile_content.dar
 import 'package:lms/Module/StudentsProfile/View/Widget/profile_student_status.dart';
 import 'package:lms/Module/StudentsProfile/cubit/student_profile_cubit.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
+import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/TabButtons.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
- import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/Module/mainWidget/no_auth.dart';
 
 class StudentProfilePage extends StatelessWidget {
   StudentProfilePage({super.key});
@@ -32,8 +34,9 @@ class StudentProfilePage extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        StudentProfileCubit studentProfileCubit = context.watch<StudentProfileCubit>();
-    
+        StudentProfileCubit studentProfileCubit =
+            context.watch<StudentProfileCubit>();
+
         return Container(
           color: appColors.pageBackground,
           child: SafeArea(
@@ -48,19 +51,25 @@ class StudentProfilePage extends StatelessWidget {
                       child: Loading(height: 50.h, width: 50.w),
                     ),
                   );
-                }
-                if (state is ProfileError) {
+                } else if (state is ProfileError) {
                   return Center(
                     child: SizedBox(
                       height: 100.h,
                       width: 100.w,
-                      child: Image.asset(Images.noConnection),
+                      child: NoConnection(),
+                    ),
+                  );
+                } else if (state is NoAuth) {
+                  return Center(
+                    child: SizedBox(
+                      // height: 100.h,
+                      // width: 100.w,
+                      child: NoAuthUser(),
                     ),
                   );
                 }
-                 
-                  return BuildProfileContent(cubit:  studentProfileCubit);
-                
+
+                return BuildProfileContent(cubit: studentProfileCubit);
               },
             ),
           )),
@@ -68,7 +77,4 @@ class StudentProfilePage extends StatelessWidget {
       },
     );
   }
-
-  
-
 }

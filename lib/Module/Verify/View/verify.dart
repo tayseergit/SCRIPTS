@@ -41,7 +41,7 @@ class Verify extends StatelessWidget {
             registretion == 1
                 ? {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) => BlocProvider.value(

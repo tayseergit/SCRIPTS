@@ -28,8 +28,9 @@ class CertificatesError extends StudentProfileState {
 }
 
 class CertificatesSuccess extends StudentProfileState {}
+
 /// achievement
-/// 
+///
 
 class AchievementLoading extends StudentProfileState {}
 
@@ -40,8 +41,7 @@ class AchievementError extends StudentProfileState {
 
 class AchievementSuccess extends StudentProfileState {}
 
-
-///// 
+/////
 /// contest
 
 class ContestLoading extends StudentProfileState {}
@@ -53,6 +53,7 @@ class ContestError extends StudentProfileState {
 
 class ContestSuccess extends StudentProfileState {}
 
-
-/// 
+///
 class Selected extends StudentProfileState {}
+
+class NoAuth extends StudentProfileState {}

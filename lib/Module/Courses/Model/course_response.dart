@@ -51,7 +51,7 @@ class Course {
   final String imageOfCourse;
   final String courseDuration;
   final int numberOfVideo;
-  final int videoProgress;
+  final String videoProgress;
   final int numberOfTest;
   final bool finalTestPassed;
   final String level;

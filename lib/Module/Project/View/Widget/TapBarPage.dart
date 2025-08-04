@@ -28,7 +28,7 @@ class TabButtonsProject extends StatelessWidget {
           final isSelected = cubit.selectedTab == index;
 
           return GestureDetector(
-            onTap: () => cubit.changeTab(index),
+            onTap: () => cubit.changeTab(index,context),
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 6.w),
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),

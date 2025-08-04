@@ -25,21 +25,21 @@ class Rowmore extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 10.w),
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
       child: InkWell(
         onTap: onTapp,
         child: Row(
-          
           children: [
             Image.asset(image, height: height.h, width: width.w),
-            SizedBox(width: 15.w,),
+            SizedBox(
+              width: 20.w,
+            ),
             AuthText(
               text: text,
               size: 19,
               color: appColors.mainText,
               fontWeight: FontWeight.w400,
             ),
-            
           ],
         ),
       ),

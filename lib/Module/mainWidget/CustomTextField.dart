@@ -63,6 +63,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         keyboardType: widget.keyboardType,
         onChanged: widget.onChanged,
         style: TextStyle(color: textColor),
+        textDirection: TextDirection.ltr,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(
             vertical: 14,

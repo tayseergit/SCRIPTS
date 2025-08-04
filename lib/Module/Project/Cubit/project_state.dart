@@ -17,7 +17,7 @@ class TagsLoading extends ProjectState {}
 class TagsSuccess extends ProjectState {}
 
 class Error extends ProjectState {
-  final String message;
+final String message;
 
-  Error({required this.message});
+Error({required this.message});
 }

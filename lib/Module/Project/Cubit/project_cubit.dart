@@ -7,6 +7,8 @@ import 'package:lms/Module/Project/Cubit/project_state.dart';
 import 'package:lms/Module/Project/Model/projet_response.dart';
 import 'package:lms/Module/Project/Model/tag_response.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/generated/l10n.dart';
+import 'package:path/path.dart';
 
 class ProjectCubit extends Cubit<ProjectState> {
   ProjectCubit() : super(ProjectInitial());
@@ -32,23 +34,23 @@ class ProjectCubit extends Cubit<ProjectState> {
   ];
   TagsResponse? tagResponse;
   ProjectsResponse? projectsResponse;
-  void changeTab(int index) {
+  void changeTab(int index, BuildContext context) {
     selectedTab = index;
     emit(Selected());
-    getProjects();
+    getProjects(context);
   }
 
-  void changeKind(int index) {
+  void changeKind(int index, BuildContext context) {
     selectedkind = index;
     emit(Selected());
-    getProjects();
+    getProjects(context);
   }
 
-  void getProjects() {
-    selectedkind == 0 ? getAllProjects() : getUserProject();
+  void getProjects(BuildContext context) {
+    selectedkind == 0 ? getAllProjects(context) : getUserProject(context);
   }
 
-  void getProjectsTags() async {
+  void getProjectsTags(BuildContext context) async {
     emit(TagsLoading());
     try {
       final response = await DioHelper.getData(
@@ -58,25 +60,27 @@ class ProjectCubit extends Cubit<ProjectState> {
           "Authorization": "Bearer $token",
         },
       ).then((value) {
-        tagResponse = TagsResponse.fromJson(value.data);
-        emit(TagsSuccess());
-        getProjects();
+        if (value.statusCode == 200) {
+          tagResponse = TagsResponse.fromJson(value.data);
+          emit(TagsSuccess());
+          getProjects(context);
+        } else {
+          emit(Error(message: S.of(context).error_occurred));
+        }
       }).catchError((error) {
-        emit(Error(message: "Network error: ${error.message}"));
+        emit(Error(message: S.of(context).error_occurred));
         print("DioException: $error");
         print(state);
       });
- 
     } catch (e) {
       print("Unexpected Error: $e");
-      emit(Error(message: "Unexpected error: ${e.toString()}"));
+      emit(Error(message: S.of(context).error_in_server));
     }
   }
 
-  void getAllProjects() async {
+  void getAllProjects(BuildContext context) async {
     emit(ProjectLoading());
     try {
-      
       final response = await DioHelper.getData(url: "projects", headers: {
         "Accept": "application/json",
         "Authorization": "Bearer $token",
@@ -98,20 +102,21 @@ class ProjectCubit extends Cubit<ProjectState> {
         projectsResponse = ProjectsResponse.fromJson(response.data);
         emit(ProjectSuccess());
       } else {
-        emit(Error(message: 'fetching error'));
+        emit(Error(message: S.of(context).error_occurred));
       }
     } on DioException catch (e) {
-      emit(Error(message: "Connection Error"));
+      emit(Error(message: S.of(context).error_in_server));
     }
   }
 
-  void getUserProject() async {
+  void getUserProject(BuildContext context) async {
     emit(ProjectLoading());
     try {
+      print("token");
       print(token);
       print(userId);
       final response =
-          await DioHelper.getData(url: "users/7/projects", headers: {
+          await DioHelper.getData(url: "users/$userId/projects", headers: {
         "Accept": "application/json",
         "Authorization": "Bearer $token",
       });
@@ -122,15 +127,15 @@ class ProjectCubit extends Cubit<ProjectState> {
         projectsResponse = ProjectsResponse.fromJson(response.data);
         emit(ProjectSuccess());
       } else {
-        emit(Error(message: 'fetching error'));
+        emit(Error(message: S.of(context).error_occurred));
       }
     } on DioException catch (e) {
       if (e.response != null) {
         print("Error Status: ${e.response?.statusCode}");
-        emit(Error(message: "fetching error"));
+        emit(Error(message: S.of(context).error_occurred));
       } else {
         print("Connection Error: $e");
-        emit(Error(message: "Connection Error"));
+        emit(Error(message: S.of(context).error_in_server));
       }
     }
   }

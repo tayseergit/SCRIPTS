@@ -13,6 +13,7 @@ import 'package:lms/Module/NavigationBarWidged/navigation_cubit.dart';
 import 'package:lms/Module/Project/View/Page/projectPage.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/generated/l10n.dart';
 
 class NavigationBarwidget extends StatefulWidget {
   const NavigationBarwidget({super.key});
@@ -26,14 +27,14 @@ class _NavigationBarwidgetState extends State<NavigationBarwidget> {
     CoursesPage(),
     LearnpathPage(),
     ContestPage(),
-    Projectpage(),
+    ProjectPage(),
     More(),
   ];
 
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
-
+    var lang = S.of(context);
     return BlocProvider(
       create: (_) => NavigationCubit(),
       child: BlocBuilder<NavigationCubit, int>(
@@ -42,7 +43,7 @@ class _NavigationBarwidgetState extends State<NavigationBarwidget> {
             body: pages[state],
             bottomNavigationBar: CurvedNavigationBar(
               index: state,
-              backgroundColor: appColors.lihgtPrimer,
+              backgroundColor: appColors.pageBackground,
               color: appColors.primary,
               buttonBackgroundColor: appColors.primary,
               height: 70.h,
@@ -60,7 +61,7 @@ class _NavigationBarwidgetState extends State<NavigationBarwidget> {
                           ? appColors.whiteText
                           : appColors.mainIconColor,
                     ),
-                    label: 'Courses',
+                    label: lang.courses,
                     labelStyle: TextStyle(
                         color: state == 0
                             ? appColors.whiteText
@@ -75,7 +76,7 @@ class _NavigationBarwidgetState extends State<NavigationBarwidget> {
                           ? appColors.whiteText
                           : appColors.mainIconColor,
                     ),
-                    label: 'Learn Path',
+                    label: lang.Learn_Path,
                     labelStyle: TextStyle(
                         color: state == 1
                             ? appColors.whiteText
@@ -90,7 +91,7 @@ class _NavigationBarwidgetState extends State<NavigationBarwidget> {
                           ? appColors.whiteText
                           : appColors.mainIconColor,
                     ),
-                    label: 'Contest',
+                    label: lang.Contest,
                     labelStyle: TextStyle(
                         color: state == 2
                             ? appColors.whiteText
@@ -105,7 +106,7 @@ class _NavigationBarwidgetState extends State<NavigationBarwidget> {
                           ? appColors.whiteText
                           : appColors.mainIconColor,
                     ),
-                    label: 'Project',
+                    label: lang.Project,
                     labelStyle: TextStyle(
                         color: state == 3
                             ? appColors.whiteText
@@ -120,7 +121,7 @@ class _NavigationBarwidgetState extends State<NavigationBarwidget> {
                           ? appColors.whiteText
                           : appColors.mainIconColor,
                     ),
-                    label: 'More',
+                    label: lang.More,
                     labelStyle: TextStyle(
                         color: state == 4
                             ? appColors.whiteText

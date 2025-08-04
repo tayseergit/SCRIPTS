@@ -10,6 +10,7 @@ import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Helper/global_func.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lms/Module/Auth/Model/user_auth_model.dart';
+import 'package:http_parser/http_parser.dart';
 
 import 'package:lms/Module/Auth/cubit/auth_state.dart';
 import 'package:lms/generated/l10n.dart';
@@ -54,10 +55,6 @@ class AuthCubit extends Cubit<AuthState> {
     emit(PickedImageUpdated()); // create this state if needed
   }
 
-  void showPassword() {
-    obscuretext = !obscuretext;
-    emit(ShowPassword());
-  }
 
   void validEmail(String email) {
     if (GlobalFunc.validEmail(email)) {
@@ -177,7 +174,34 @@ class AuthCubit extends Cubit<AuthState> {
     emit(SignUpLoading());
     try {
       // Build map without "image" first
-      final Map<String, dynamic> data = {
+      // final Map<String, dynamic> data = {
+      //   "name": nameCtrl.text.trim(),
+      //   "email": emailRegCtrl.text.trim(),
+      //   "password": passwordRegCtrl.text.trim(),
+      //   "password_confirmation": confirmPasswordCtrl.text.trim(),
+      //   "gitHub_account": githubAccount.text.trim(),
+      //   "bio": bioCtrl.text.trim(),
+      //   "fcm_token": CacheHelper.getData(key: "fcm"),
+      //   "image": ""
+      // };
+
+      // // Add image only if pickedImage is not null
+      // if (pickedImage != null) {
+      //   data["image"] = await MultipartFile.fromFile(
+      //     pickedImage!.path,
+      //     filename: pickedImage!.path.split('/').last,
+      //     // or 'png'
+      //   );
+      // }
+
+      // print(
+      //   pickedImage!.path,
+      // );
+      // print("fffffssssssssssss");
+
+      final response = await DioHelper.postData(
+        url: "register",
+        postData: {
         "name": nameCtrl.text.trim(),
         "email": emailRegCtrl.text.trim(),
         "password": passwordRegCtrl.text.trim(),
@@ -185,24 +209,14 @@ class AuthCubit extends Cubit<AuthState> {
         "gitHub_account": githubAccount.text.trim(),
         "bio": bioCtrl.text.trim(),
         "fcm_token": CacheHelper.getData(key: "fcm"),
-      };
-
-      // Add image only if pickedImage is not null
-      if (pickedImage != null) {
-        data["image"] = await MultipartFile.fromFile(
-          pickedImage!.path,
-          filename: pickedImage!.path.split('/').last,
-        );
-      }
-      final formData = FormData.fromMap(data);
-
-      final response = await DioHelper.postFormData(
-        url: "register",
-        postData: formData,
+        "image": ""
+      },
+    headers: {
+          'Accept': 'application/json',
+          },
+      
       );
-      print("ffffffffffff");
-
-      if (response.statusCode == 200) {
+       if (response.statusCode == 200) {
         emit(SignUpSuccess());
         print(state);
         print(response.data);

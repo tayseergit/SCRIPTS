@@ -22,12 +22,26 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "All": MessageLookupByLibrary.simpleMessage("الكل"),
+    "Contest": MessageLookupByLibrary.simpleMessage("المسابقات"),
+    "Courses": MessageLookupByLibrary.simpleMessage("الدورات"),
     "Email_not_found": MessageLookupByLibrary.simpleMessage(
       "الايميل غير موجود",
     ),
+    "Learn_Path": MessageLookupByLibrary.simpleMessage("مسار التعلم"),
+    "Login_or_SignUp": MessageLookupByLibrary.simpleMessage(
+      "تسجيل الدخول أو الاشتراك",
+    ),
+    "More": MessageLookupByLibrary.simpleMessage("المزيد"),
+    "My": MessageLookupByLibrary.simpleMessage("خاصة"),
+    "Project": MessageLookupByLibrary.simpleMessage("المشاريع"),
     "Send_code": MessageLookupByLibrary.simpleMessage("ارسال رمز التحقق"),
     "about_this_course": MessageLookupByLibrary.simpleMessage("عن هذه الدورة"),
+    "add_a_payment_method": MessageLookupByLibrary.simpleMessage(
+      "إضافة طريقة دفع",
+    ),
     "add_image": MessageLookupByLibrary.simpleMessage("إضافة صورة"),
+    "add_new_project": MessageLookupByLibrary.simpleMessage("إضافة مشروع"),
     "add_review": MessageLookupByLibrary.simpleMessage("أضف تقييمًا"),
     "all_fields_required": MessageLookupByLibrary.simpleMessage(
       "جميع الحقول مطلوبة",
@@ -36,10 +50,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "at_least_8_char_lower_upper_symbols": MessageLookupByLibrary.simpleMessage(
       "8 أحرف على الأقل، تشمل حروفًا صغيرة وكبيرة ورموزًا",
     ),
+    "basic_information": MessageLookupByLibrary.simpleMessage(
+      "المعلومات الأساسية",
+    ),
     "bio": MessageLookupByLibrary.simpleMessage("نبذة"),
     "buy_now": MessageLookupByLibrary.simpleMessage("اشترِ الآن"),
+    "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "change_language": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
+    "change_password": MessageLookupByLibrary.simpleMessage(
+      "تغيير كلمة المرور",
+    ),
     "check_email_or_password": MessageLookupByLibrary.simpleMessage(
       "تحقق من البريد الإلكتروني أو كلمة المرور",
+    ),
+    "check_info": MessageLookupByLibrary.simpleMessage("تاكد من المعلومات"),
+    "choose_file_to_upload": MessageLookupByLibrary.simpleMessage(
+      "اختر ملفًا للتحميل",
     ),
     "code_sent": MessageLookupByLibrary.simpleMessage("تم ارسال رمز التحقق"),
     "confirmNewPassword": MessageLookupByLibrary.simpleMessage(
@@ -50,8 +76,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "connection_error": MessageLookupByLibrary.simpleMessage("خطأ في الاتصال"),
     "courses": MessageLookupByLibrary.simpleMessage("الدورات"),
+    "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
+    "delete_history": MessageLookupByLibrary.simpleMessage("حذف السجل"),
+    "demo_url": MessageLookupByLibrary.simpleMessage("رابط العرض التجريبي"),
     "done": MessageLookupByLibrary.simpleMessage("تم"),
     "dont_have_account": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
+    "edit_profile": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
     "edit_your_review": MessageLookupByLibrary.simpleMessage("تعديل تقييمك"),
     "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
     "email_already_exist": MessageLookupByLibrary.simpleMessage(
@@ -59,34 +89,66 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "en": MessageLookupByLibrary.simpleMessage("En"),
     "enroll": MessageLookupByLibrary.simpleMessage("التحق"),
+    "enter_demo_url": MessageLookupByLibrary.simpleMessage(
+      "أدخل رابط العرض التجريبي",
+    ),
+    "enter_description": MessageLookupByLibrary.simpleMessage(
+      "أدخل وصفًا موجزًا لمشروعك",
+    ),
+    "enter_github_url": MessageLookupByLibrary.simpleMessage(
+      "أدخل رابط GitHub",
+    ),
+    "enter_project_title": MessageLookupByLibrary.simpleMessage(
+      "أدخل عنوان مشروعك",
+    ),
+    "enter_steam_url": MessageLookupByLibrary.simpleMessage("أدخل رابط Steam"),
     "error_code": MessageLookupByLibrary.simpleMessage("كود خاطئ"),
     "error_deleting": MessageLookupByLibrary.simpleMessage("خطأ في الحذف"),
     "error_in_server": MessageLookupByLibrary.simpleMessage(
       "خطأ في الخادم، يرجى المحاولة لاحقًا.",
     ),
     "error_occurred": MessageLookupByLibrary.simpleMessage("حدث خطأ"),
+    "error_old_password": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور غير صحيحة",
+    ),
     "field_and_rating_are_required": MessageLookupByLibrary.simpleMessage(
       "الحقل والتقييم مطلوبان",
+    ),
+    "fill_details": MessageLookupByLibrary.simpleMessage(
+      "الرجاء تعبئة جميع تفاصيل مشروعك.",
     ),
     "forget_password": MessageLookupByLibrary.simpleMessage(
       "نسيت كلمة المرور؟",
     ),
+    "friends": MessageLookupByLibrary.simpleMessage("الاصدقاء"),
     "github_account": MessageLookupByLibrary.simpleMessage("حساب GitHub"),
+    "github_url": MessageLookupByLibrary.simpleMessage("رابط GitHub"),
     "google": MessageLookupByLibrary.simpleMessage("جوجل"),
     "invalid_email": MessageLookupByLibrary.simpleMessage(
       "البريد الإلكتروني غير صالح",
     ),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+    "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "mentor": MessageLookupByLibrary.simpleMessage("المدرب"),
+    "my_profile": MessageLookupByLibrary.simpleMessage("ملفي الشخصي"),
     "name": MessageLookupByLibrary.simpleMessage("الاسم"),
     "network_error": MessageLookupByLibrary.simpleMessage("خطأ في الشبكة"),
     "newPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
+    "next": MessageLookupByLibrary.simpleMessage("التالي"),
+    "old_password": MessageLookupByLibrary.simpleMessage("كلمة المرور القديمة"),
     "or_login": MessageLookupByLibrary.simpleMessage("أو تسجيل الدخول"),
+    "participants": MessageLookupByLibrary.simpleMessage("المشاركون"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "passwords_do_not_match": MessageLookupByLibrary.simpleMessage(
       "كلمات المرور غير متطابقة",
     ),
     "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+    "project_content": MessageLookupByLibrary.simpleMessage("محتوى المشروع"),
+    "project_description": MessageLookupByLibrary.simpleMessage("وصف المشروع"),
+    "project_kind": MessageLookupByLibrary.simpleMessage("نوع المشروع"),
+    "project_links": MessageLookupByLibrary.simpleMessage("روابط المشروع"),
+    "project_title": MessageLookupByLibrary.simpleMessage("عنوان المشروع"),
+    "push_notifications": MessageLookupByLibrary.simpleMessage("إشعارات الدفع"),
     "register": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
     "register_completed": MessageLookupByLibrary.simpleMessage(
       "تم التسجيل بنجاح",
@@ -99,7 +161,19 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم إعادة تعيين كلمة المرور",
     ),
     "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
+    "save_as_draft": MessageLookupByLibrary.simpleMessage("حفظ كمسودة"),
+    "search_project": MessageLookupByLibrary.simpleMessage("ابحث عن مشروع"),
+    "select_a_tag": MessageLookupByLibrary.simpleMessage("اختر علامة"),
+    "select_technologies": MessageLookupByLibrary.simpleMessage(
+      "اختر التقنيات",
+    ),
     "send": MessageLookupByLibrary.simpleMessage("إرسال"),
+    "setting": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+    "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+    "steam_url": MessageLookupByLibrary.simpleMessage("رابط Steam"),
+    "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
+    "teachers": MessageLookupByLibrary.simpleMessage("معلمون"),
+    "technologies": MessageLookupByLibrary.simpleMessage("التقنيات"),
     "verify_code": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
     "watch": MessageLookupByLibrary.simpleMessage("مشاهدة"),
   };

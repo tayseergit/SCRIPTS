@@ -34,7 +34,7 @@ class Login extends StatelessWidget {
 
       print(state);
       if (state is LogInsucess) {
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (context) => BlocProvider.value(
@@ -42,6 +42,7 @@ class Login extends StatelessWidget {
               child: NavigationBarwidget(),
             ),
           ),
+          (route) => false,
         );
         // Future.delayed(Duration(milliseconds: 700), () {
         //   CustomSnackbar.show(

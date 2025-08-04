@@ -66,7 +66,7 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
             } else if (state is CouresDescriptionError) {
               return NoConnection();
             } else if (state is CouresUnUthunticatedError) {
-              return NoAuth();
+              return NoAuthUser();
             }
             var courseInfoData =
                 courseInfoCubit.courseDescriptionResponse!.data;

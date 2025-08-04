@@ -58,4 +58,5 @@ class Images {
   static String close = "${baseImages}Close.png";
   static String noAtuh = "${baseImages}noAuth.png";
   static String noProfile = "${baseImages}noProfile.png";
+  static String studentIcon = "${baseImages}studentIcon.png";
 }

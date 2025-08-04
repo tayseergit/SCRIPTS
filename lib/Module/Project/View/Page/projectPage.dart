@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Constant/public_constant.dart';
+import 'package:lms/Helper/cach_helper.dart';
+import 'package:lms/Module/AddProject/View/pages/add_project_page.dart';
 import 'package:lms/Module/Project/Cubit/project_cubit.dart';
 import 'package:lms/Module/Project/Cubit/project_state.dart';
 import 'package:lms/Module/Project/View/Widget/Swich.dart';
@@ -19,17 +22,19 @@ import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
 import 'package:lms/Module/mainWidget/loading_container.dart';
+import 'package:lms/Module/mainWidget/no_auth.dart';
+import 'package:lms/generated/l10n.dart';
 
-class Projectpage extends StatelessWidget {
-  const Projectpage({super.key});
+class ProjectPage extends StatelessWidget {
+  const ProjectPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
- 
+    var lang = S.of(context);
     return SafeArea(
       child: BlocProvider(
-        create: (context) => ProjectCubit()..getProjectsTags(),
+        create: (context) => ProjectCubit()..getProjectsTags(context),
         lazy: true,
         child: Scaffold(
           backgroundColor: appColors.pageBackground,
@@ -38,13 +43,53 @@ class Projectpage extends StatelessWidget {
             scrolledUnderElevation: 0,
             backgroundColor: appColors.pageBackground,
             elevation: 0,
-            title: Align(
-              alignment: Alignment.center,
-              child: AuthText(
-                text: 'Project',
-                size: 24,
-                color: appColors.mainText,
-                fontWeight: FontWeight.w700,
+            title: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  // Title at the start
+                  Expanded(
+                    child: Center(
+                      child: AuthText(
+                        text: lang.Project,
+                        size: 24.sp,
+                        color: appColors.mainText,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  // Container with text at the end
+                  InkWell(
+                    onTap: () {
+                      // CacheHelper.removeAllData();
+                      if (CacheHelper.getToken() == null) {
+                        showNoAuthDialog(context);
+                      } else {
+                        pushTo(context: context, toPage: AddProjectPage());
+                      }
+                    },
+                    child: Container(
+                      height: 40.h,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      decoration: BoxDecoration(
+                        color: appColors.lihgtPrimer, // Change color as needed
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Text(
+                          lang.add_new_project, // Change text as needed
+                          style: TextStyle(
+                            color: appColors.mainText,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -69,10 +114,10 @@ class Projectpage extends StatelessWidget {
                             width: 220.w,
                             child: Customtextfieldsearsh(
                               onSubmit: () {
-                                projectCubit.getProjects();
+                                projectCubit.getProjects(context);
                               },
                               controller: projectCubit.searchController,
-                              hintText: 'search project ...',
+                              hintText: lang.search_project,
                             ),
                           ),
 

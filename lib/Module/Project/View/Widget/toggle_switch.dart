@@ -1,10 +1,12 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Module/Project/Cubit/project_cubit.dart';
 import 'package:lms/Module/Project/Cubit/project_state.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/generated/l10n.dart';
 
 class ToggleExample extends StatelessWidget {
   final ProjectCubit projectCubit;
@@ -39,15 +41,15 @@ class ToggleExample extends StatelessWidget {
             ),
             iconBuilder: (value) {
               return Text(
-                value == 0 ? "All" : "My",
+                value == 0 ? S.of(context).All : S.of(context).My,
                 style: TextStyle(
-                  color: value == selectedKind ? Colors.white : Colors.black87,
-                  fontWeight: FontWeight.bold,
-                ),
+                    color: value == selectedKind ? Colors.white : Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 11.sp),
               );
             },
             onChanged: (i) {
-              projectCubit.changeKind(i); // Notify cubit
+              projectCubit.changeKind(i, context); // Notify cubit
             },
           ),
         );

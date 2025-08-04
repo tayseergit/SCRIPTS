@@ -22,9 +22,9 @@ class Gridviewcourses extends StatelessWidget {
         itemCount: cubit.courseResponse!.data.courses.length,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 180.w, // Responsive max width per card
-          childAspectRatio: 180.w / 250.h, // Match the card's actual aspect
+          childAspectRatio: 150.w / 250.h, // Match the card's actual aspect
           mainAxisSpacing: 12.h, // Responsive vertical spacing
-          crossAxisSpacing: 12.w, // Responsive horizontal spacing
+          crossAxisSpacing: 10.w, // Responsive horizontal spacing
         ),
         itemBuilder: (ctx, index) {
           return Cursescard(

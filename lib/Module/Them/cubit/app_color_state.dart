@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ThemeState {
-  final bool isDarkMode;
+    bool isDarkMode;
 
   final Color lihgtPrimer;
   final Color primary;
@@ -23,6 +23,9 @@ class ThemeState {
   final Color strongPrimer;
   final Color blackGreen;
   final Color blackGreenDisable;
+  final Color cyanAccent;
+  final Color shadow;
+  final Color lightfieldBackground;
 
   final Color red;
   final LinearGradient linerContainer;
@@ -53,8 +56,11 @@ class ThemeState {
     required this.whiteText,
     required this.orang,
     required this.blackGreen,
-    required this.blackGreenDisable,
 
+    required this.blackGreenDisable,
+    required this.lightfieldBackground,
+    required this.cyanAccent,
+    required this.shadow,
     //
     required this.lightGray,
   });
@@ -67,9 +73,9 @@ class ThemeState {
       pageBackground: const Color(0xFFFFFFFF),
       whiteText: const Color(0xFFFFFFFF),
       mainText: const Color.fromARGB(255, 0, 0, 0),
-      secondText: const Color(0xFF888888),
+      secondText: const Color.fromARGB(255, 119, 119, 119),
       purple: const Color(0xFFB797FF),
-      ok: const Color(0xFF19EC67),
+      ok: const Color.fromARGB(255, 21, 197, 86),
       darkGreen: const Color(0xFF4DC9D1),
       red: const Color(0xFFFF3B30),
       mainIconColor: const Color(0xFF151B22),
@@ -77,10 +83,13 @@ class ThemeState {
       border: const Color.fromARGB(138, 58, 143, 255),
       iconSearsh: Color(0xff8C8E98),
       darkText: Color(0xFFCED2E6),
-      orang: Color.fromARGB(255, 255, 186, 89),
+      orang: Color(0xFFFF6E40),
       strongPrimer: const Color.fromARGB(255, 24, 112, 163),
       blackGreen: const Color(0xFF1B4965),
       blackGreenDisable: Color(0xFF1B4965).withOpacity(0.38),
+      cyanAccent: Color(0xFF18FFFF),
+      shadow: Color.fromARGB(255, 91, 168, 168),
+      lightfieldBackground: Color.fromARGB(255, 255, 255, 255),
 
       //
       lightGray: const Color(0xFFDDDDDD),
@@ -111,7 +120,7 @@ class ThemeState {
       pageBackground: const Color(0xff000000),
       whiteText: const Color(0xFFffffff),
       mainText: const Color(0xFFffffff),
-      secondText: const Color(0xFF888888),
+      secondText: const Color.fromARGB(255, 197, 197, 197),
       purple: const Color(0xFFB797FF),
       ok: const Color(0xFF19EC67),
       darkGreen: const Color(0xFF4DC9D1),
@@ -121,10 +130,14 @@ class ThemeState {
       border: const Color.fromARGB(171, 123, 145, 255),
       iconSearsh: Color(0xff8C8E98),
       darkText: Color(0xFFCED2E6),
-      orang: Color(0xffFF9500),
+      orang: Color(0xFFFF6E40),
       strongPrimer: const Color.fromARGB(255, 24, 112, 163),
       blackGreen: const Color(0xFF1B4965),
       blackGreenDisable: const Color(0xFF1B4965),
+      cyanAccent: Color(0xFF18FFFF),
+      shadow: Color.fromARGB(255, 63, 105, 105),
+      lightfieldBackground: Color.fromARGB(255, 68, 72, 72),
+
 
       //
       lightGray: const Color.fromARGB(135, 221, 221, 221),

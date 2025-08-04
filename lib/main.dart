@@ -7,10 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'; // add this
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Helper/firebase_fun.dart';
+import 'package:lms/Module/AddProject/View/pages/add_project_page.dart';
 import 'package:lms/Module/Auth/View/Login.dart';
 import 'package:lms/Module/Auth/View/register.dart';
 import 'package:lms/Module/Auth/View/resetPassword.dart';
@@ -20,8 +22,11 @@ import 'package:lms/Module/CourseInfo/View/Pages/course_info_page.dart';
 import 'package:lms/Module/Courses/View/Pages/courses_page.dart';
 import 'package:lms/Module/LearnPathInfo/LearnPathInfoPage.dart';
 import 'package:lms/Module/Localization/localization.dart';
+import 'package:lms/Module/More/more_page.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
+import 'package:lms/Module/Project/View/Page/projectPage.dart';
 import 'package:lms/Module/Setting/SettingPage.dart';
+import 'package:lms/Module/Stripe/stripe_page.dart';
 import 'package:lms/Module/StudentsProfile/View/Pages/student_profile_page.dart';
 import 'package:lms/Module/StudentsProfile/cubit/student_profile_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
@@ -35,11 +40,14 @@ import 'generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
 
   await CacheHelper.init();
   await Firebase.initializeApp();
   await requestNotificationPermission();
-  await dotenv.load();
+  // Stripe.publishableKey = dotenv.env['STRIPE_KEY'] ?? '';
+  // await Stripe.instance.applySettings();
+
   await DioHelper.init();
 
   await getFcmToken();
@@ -81,8 +89,7 @@ class MyApp extends StatelessWidget {
                     theme: themeState.isDarkMode
                         ? ThemeData.dark()
                         : ThemeData.light(),
-                    home:   Register(),
-                    // home: ResetPassword(code:"333085" ,email: "eng.tayseermatar@gmail.com",),
+                    home: ProjectPage(),
                   );
                 },
               );

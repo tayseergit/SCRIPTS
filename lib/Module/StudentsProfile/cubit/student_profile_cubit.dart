@@ -37,8 +37,14 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
 
 ////////
   void getProfile() async {
+    print(token);
+    if (token == null) {
+      emit(NoAuth());
+      return;
+    }
     print("sssssssssssss");
     print(userId);
+    print(token);
     emit(ProfileLoading());
     try {
       final response = await DioHelper.getData(
@@ -61,6 +67,9 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
         print("ddddddd${studentProfileModel.image}");
         emit(ProfileSuccess(studentProfileModel));
       }
+      if (response.statusCode == 404) {
+        emit(NoAuth());
+      }
     } on DioException catch (e) {
       if (e.response != null) {
         print("Error Status: ${e.response?.statusCode}");
@@ -78,6 +87,10 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
   ///
   ///
   void getCirtificate() async {
+    if (token == null) {
+      emit(NoAuth());
+      return;
+    }
     emit(CertificatesLoading());
 
     try {
@@ -109,6 +122,10 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
 ////
 
   void getAchievement() async {
+    if (token == null) {
+      emit(NoAuth());
+      return;
+    }
     emit(AchievementLoading());
 
     try {
@@ -138,6 +155,10 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
   }
 
   void getMyContest() async {
+    if (token == null) {
+      emit(NoAuth());
+      return;
+    }
     emit(ContestLoading());
 
     try {

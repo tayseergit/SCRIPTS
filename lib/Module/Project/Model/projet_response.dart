@@ -30,8 +30,8 @@ class ProjectModel {
   final int likes;
   final String status;
   final int tagId;
-  final String createdAt;
-  final String updatedAt;
+  final String? createdAt;
+  final String? updatedAt;
   final String userName;
   final String tagName;
 

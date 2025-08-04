@@ -438,6 +438,406 @@ class S {
       args: [],
     );
   }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
+  }
+
+  /// `Submit`
+  String get submit {
+    return Intl.message('Submit', name: 'submit', desc: '', args: []);
+  }
+
+  /// `Old Password`
+  String get old_password {
+    return Intl.message(
+      'Old Password',
+      name: 'old_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Profile`
+  String get my_profile {
+    return Intl.message('My Profile', name: 'my_profile', desc: '', args: []);
+  }
+
+  /// `Change Password`
+  String get change_password {
+    return Intl.message(
+      'Change Password',
+      name: 'change_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Setting`
+  String get setting {
+    return Intl.message('Setting', name: 'setting', desc: '', args: []);
+  }
+
+  /// `Friends`
+  String get friends {
+    return Intl.message('Friends', name: 'friends', desc: '', args: []);
+  }
+
+  /// `Participants`
+  String get participants {
+    return Intl.message(
+      'Participants',
+      name: 'participants',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Teachers`
+  String get teachers {
+    return Intl.message('Teachers', name: 'teachers', desc: '', args: []);
+  }
+
+  /// `wrong password`
+  String get error_old_password {
+    return Intl.message(
+      'wrong password',
+      name: 'error_old_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `check information`
+  String get check_info {
+    return Intl.message(
+      'check information',
+      name: 'check_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Project`
+  String get add_new_project {
+    return Intl.message(
+      'Add Project',
+      name: 'add_new_project',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please fill in all the details of your project.`
+  String get fill_details {
+    return Intl.message(
+      'Please fill in all the details of your project.',
+      name: 'fill_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Basic Information`
+  String get basic_information {
+    return Intl.message(
+      'Basic Information',
+      name: 'basic_information',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Project Content`
+  String get project_content {
+    return Intl.message(
+      'Project Content',
+      name: 'project_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message('Settings', name: 'settings', desc: '', args: []);
+  }
+
+  /// `Choose File to upload`
+  String get choose_file_to_upload {
+    return Intl.message(
+      'Choose File to upload',
+      name: 'choose_file_to_upload',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Project Title`
+  String get project_title {
+    return Intl.message(
+      'Project Title',
+      name: 'project_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your project title`
+  String get enter_project_title {
+    return Intl.message(
+      'Enter your project title',
+      name: 'enter_project_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Project Description`
+  String get project_description {
+    return Intl.message(
+      'Project Description',
+      name: 'project_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a brief description of your project`
+  String get enter_description {
+    return Intl.message(
+      'Enter a brief description of your project',
+      name: 'enter_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `projectkind`
+  String get project_kind {
+    return Intl.message(
+      'projectkind',
+      name: 'project_kind',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a tag`
+  String get select_a_tag {
+    return Intl.message(
+      'Select a tag',
+      name: 'select_a_tag',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Technologies`
+  String get technologies {
+    return Intl.message(
+      'Technologies',
+      name: 'technologies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select technologies`
+  String get select_technologies {
+    return Intl.message(
+      'Select technologies',
+      name: 'select_technologies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Project Links`
+  String get project_links {
+    return Intl.message(
+      'Project Links',
+      name: 'project_links',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `GitHub URL`
+  String get github_url {
+    return Intl.message('GitHub URL', name: 'github_url', desc: '', args: []);
+  }
+
+  /// `Enter GitHub link`
+  String get enter_github_url {
+    return Intl.message(
+      'Enter GitHub link',
+      name: 'enter_github_url',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Demo URL`
+  String get demo_url {
+    return Intl.message('Demo URL', name: 'demo_url', desc: '', args: []);
+  }
+
+  /// `Enter demo link`
+  String get enter_demo_url {
+    return Intl.message(
+      'Enter demo link',
+      name: 'enter_demo_url',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Steam URL`
+  String get steam_url {
+    return Intl.message('Steam URL', name: 'steam_url', desc: '', args: []);
+  }
+
+  /// `Enter Steam link`
+  String get enter_steam_url {
+    return Intl.message(
+      'Enter Steam link',
+      name: 'enter_steam_url',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save as draft`
+  String get save_as_draft {
+    return Intl.message(
+      'Save as draft',
+      name: 'save_as_draft',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message('Next', name: 'next', desc: '', args: []);
+  }
+
+  /// `Login or Sign Up`
+  String get Login_or_SignUp {
+    return Intl.message(
+      'Login or Sign Up',
+      name: 'Login_or_SignUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Courses`
+  String get Courses {
+    return Intl.message('Courses', name: 'Courses', desc: '', args: []);
+  }
+
+  /// `Learn Path`
+  String get Learn_Path {
+    return Intl.message('Learn Path', name: 'Learn_Path', desc: '', args: []);
+  }
+
+  /// `Contest`
+  String get Contest {
+    return Intl.message('Contest', name: 'Contest', desc: '', args: []);
+  }
+
+  /// `Project`
+  String get Project {
+    return Intl.message('Project', name: 'Project', desc: '', args: []);
+  }
+
+  /// `More`
+  String get More {
+    return Intl.message('More', name: 'More', desc: '', args: []);
+  }
+
+  /// `Push notifications`
+  String get push_notifications {
+    return Intl.message(
+      'Push notifications',
+      name: 'push_notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Mode`
+  String get dark_mode {
+    return Intl.message('Dark Mode', name: 'dark_mode', desc: '', args: []);
+  }
+
+  /// `Add a payment method`
+  String get add_a_payment_method {
+    return Intl.message(
+      'Add a payment method',
+      name: 'add_a_payment_method',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete history`
+  String get delete_history {
+    return Intl.message(
+      'Delete history',
+      name: 'delete_history',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change language`
+  String get change_language {
+    return Intl.message(
+      'Change language',
+      name: 'change_language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message('Logout', name: 'logout', desc: '', args: []);
+  }
+
+  /// `Edit profile`
+  String get edit_profile {
+    return Intl.message(
+      'Edit profile',
+      name: 'edit_profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get All {
+    return Intl.message('All', name: 'All', desc: '', args: []);
+  }
+
+  /// `My`
+  String get My {
+    return Intl.message('My', name: 'My', desc: '', args: []);
+  }
+
+  /// `search project`
+  String get search_project {
+    return Intl.message(
+      'search project',
+      name: 'search_project',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
