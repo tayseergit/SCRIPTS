@@ -6,6 +6,7 @@ import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Auth/View/forgetPassword.dart';
 import 'package:lms/Module/Auth/View/register.dart';
+import 'package:lms/Module/Courses/Cubit/cubit/course_cubit.dart';
 import 'package:lms/Module/LearnPath/View/Pages/learn_path_page.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
@@ -35,8 +36,8 @@ class Login extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => BlocProvider.value(
-              value: AuthCubit(),
-              child: Login(),
+              value: CourseCubit(),
+              child: NavigationBarwidget(),
             ),
           ),
         );

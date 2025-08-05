@@ -39,7 +39,7 @@ class Customtextfieldsearsh extends StatelessWidget {
       this.borderColor,
       this.fillColor,
       this.hintColor,
-      required this.onSubmit});
+      this.onSubmit});
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +61,7 @@ class Customtextfieldsearsh extends StatelessWidget {
         obscureText: obscureText,
         keyboardType: keyboardType,
         onChanged: onChanged,
+        onSubmitted: (_) => onSubmit?.call(),
         style: TextStyle(color: appColors.mainText),
         decoration: InputDecoration(
           contentPadding:

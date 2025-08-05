@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 class DioHelper {
-  static String baseUrl = "http://192.168.1.14:8000";
+  static String baseUrl = "http://192.168.1.5:8000";
   static String baseUrlApi = "$baseUrl/api/";
 
   static final Dio _dio = Dio(
@@ -65,6 +65,15 @@ class DioHelper {
     _dio.options.headers.addAll(headers ?? {});
 
     return await _dio.post(url, data: postData);
+  }
+  static Future<Response> deletData({
+    required String url,
+    Map<String, dynamic>? deletData,
+    Map<String, dynamic>? headers,
+  }) async {
+    _dio.options.headers.addAll(headers ?? {});
+
+    return await _dio.delete(url, data: deletData);
   }
 
   // Multipart request

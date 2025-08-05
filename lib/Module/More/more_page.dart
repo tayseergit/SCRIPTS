@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
- import 'package:lms/Module/More/TopWave_more_Clipper.dart';
+import 'package:lms/Module/More/TopWave_more_Clipper.dart';
+import 'package:lms/Module/Participants/Cubit/Participants_cubit.dart';
+import 'package:lms/Module/Participants/View/Page/Participants_page.dart';
+import 'package:lms/Module/Teacher/Cubit/teacher_cubit.dart';
+import 'package:lms/Module/Teacher/View/Page/teacher_Page.dart';
+import 'package:lms/Module/TeacherProfile/View/Pages/teacher_profile_page.dart';
+import 'package:lms/Module/TeacherProfile/cubit/TeacherProfile/teacher_profile_cubit.dart';
+import 'package:lms/Module/UserFriend/Cubit/user_friend_cubit.dart';
+import 'package:lms/Module/UserFriend/View/Page/user_friend_page.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/More/RowMore.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
@@ -73,7 +81,18 @@ class More extends StatelessWidget {
                                 widget: Rowmore(
                                   text: 'Edit profile',
                                   image: Images.editProfile,
-                                  onTapp: () {},
+                                  onTapp: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            BlocProvider.value(
+                                          value: TeacherProfileCubit(),
+                                          child: TeacherProfilePage(),
+                                        ),
+                                      ),
+                                    );
+                                  },
                                   height: 25,
                                   width: 25,
                                 ),
@@ -151,7 +170,18 @@ class More extends StatelessWidget {
                                 widget: Rowmore(
                                   text: 'Friend',
                                   image: Images.friend,
-                                  onTapp: () {},
+                                  onTapp: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            BlocProvider.value(
+                                          value: UserFriendCubit(),
+                                          child: UserFriendPage(),
+                                        ),
+                                      ),
+                                    );
+                                  },
                                   height: 25,
                                   width: 25,
                                 ),
@@ -177,7 +207,18 @@ class More extends StatelessWidget {
                                 widget: Rowmore(
                                   text: 'Participants',
                                   image: Images.participants,
-                                  onTapp: () {},
+                                onTapp: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            BlocProvider.value(
+                                          value: ParticipantsCubit(),
+                                          child: ParticipantsPage(),
+                                        ),
+                                      ),
+                                    );
+                                  },
                                   height: 25,
                                   width: 25,
                                 ),
@@ -203,7 +244,18 @@ class More extends StatelessWidget {
                                 widget: Rowmore(
                                   text: 'Teacher ',
                                   image: Images.teacher,
-                                  onTapp: () {},
+                                   onTapp: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            BlocProvider.value(
+                                          value: TeacherCubit(),
+                                          child: TeacherPage(),
+                                        ),
+                                      ),
+                                    );
+                                  },
                                   height: 25,
                                   width: 25,
                                 ),
