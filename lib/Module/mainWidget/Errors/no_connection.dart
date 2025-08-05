@@ -7,11 +7,10 @@ import 'package:lms/Module/mainWidget/authText.dart';
 
 class NoConnection extends StatelessWidget {
   NoConnection(
-      {Key? key,
+      {super.key,
       this.height = 200,
       this.width = 200,
-      this.message = "No Connection"})
-      : super(key: key);
+      this.message = "No Connection"});
   double height, width;
   String message;
   @override

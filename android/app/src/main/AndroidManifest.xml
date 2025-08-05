@@ -8,7 +8,7 @@
  
 
     <application
-        android:label="lms"
+        android:label="SCRIPTS"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         

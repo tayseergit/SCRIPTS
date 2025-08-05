@@ -11,7 +11,7 @@ import 'package:lms/generated/l10n.dart';
 class ToggleExample extends StatelessWidget {
   final ProjectCubit projectCubit;
 
-  const ToggleExample({Key? key, required this.projectCubit}) : super(key: key);
+  const ToggleExample({super.key, required this.projectCubit});
 
   @override
   Widget build(BuildContext context) {

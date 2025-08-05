@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'; // add this
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
@@ -45,18 +44,32 @@ void main() async {
   await CacheHelper.init();
   await Firebase.initializeApp();
   await requestNotificationPermission();
-  // Stripe.publishableKey = dotenv.env['STRIPE_KEY'] ?? '';
-  // await Stripe.instance.applySettings();
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   await DioHelper.init();
 
   await getFcmToken();
+  // Stripe.publishableKey = dotenv.env['STRIPE_KEY'] ?? '';
+  // await Stripe.instance.applySettings();
 
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+
+    setupForegroundMessageListener();
+    setupOnMessageOpenedAppListener();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +102,7 @@ class MyApp extends StatelessWidget {
                     theme: themeState.isDarkMode
                         ? ThemeData.dark()
                         : ThemeData.light(),
-                    home: ProjectPage(),
+                    home: Login(),
                   );
                 },
               );

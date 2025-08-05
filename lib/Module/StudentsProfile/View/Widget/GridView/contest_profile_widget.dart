@@ -176,8 +176,7 @@ class DataRow extends StatelessWidget {
 class _Badge extends StatelessWidget {
   const _Badge(this.label,
       {this.color = const Color(0xFFE0E0E0),
-      this.textColor = Colors.black87,
-      super.key});
+      this.textColor = Colors.black87});
 
   final String label;
   final Color color;
@@ -200,7 +199,7 @@ class _Badge extends StatelessWidget {
 }
 
 class ContestGrid extends StatelessWidget {
-  ContestGrid({Key? key, required this.contestsResponse}) : super(key: key);
+  ContestGrid({super.key, required this.contestsResponse});
   ContestResponse contestsResponse;
   @override
   Widget build(BuildContext context) {

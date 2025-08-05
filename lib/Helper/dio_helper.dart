@@ -61,7 +61,7 @@ class DioHelper {
         url,
         options: Options(headers: headers, validateStatus: (status) {
             // Allow Dio to return 422, 401, etc. as normal responses
-            return status != null && status < 500;
+            return status != null && status <= 500;
           },),
         queryParameters: params,
         
@@ -88,7 +88,7 @@ class DioHelper {
         options: Options(
           headers: headers,
           validateStatus: (status) {
-             return status != null && status < 500;
+             return status != null && status <= 500;
           },
         ),
       );

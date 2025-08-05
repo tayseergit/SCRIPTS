@@ -10,7 +10,7 @@ import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/generated/l10n.dart';
 
 class NoAuthUser extends StatelessWidget {
-  NoAuthUser({Key? key, this.height = 350, this.width = 250}) : super(key: key);
+  NoAuthUser({super.key, this.height = 350, this.width = 250});
   double height, width;
 
   @override

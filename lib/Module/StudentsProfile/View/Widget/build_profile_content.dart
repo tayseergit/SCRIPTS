@@ -10,7 +10,7 @@ import 'package:lms/Module/StudentsProfile/cubit/student_profile_cubit.dart';
 import 'package:lms/Module/mainWidget/TabButtons.dart';
 
 class BuildProfileContent extends StatelessWidget {
-  BuildProfileContent({Key? key, required this.cubit}) : super(key: key);
+  BuildProfileContent({super.key, required this.cubit});
   StudentProfileCubit cubit;
   @override
   Widget build(BuildContext context) {

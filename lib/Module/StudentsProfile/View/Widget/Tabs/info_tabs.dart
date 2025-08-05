@@ -4,7 +4,7 @@ import 'package:lms/Module/StudentsProfile/View/Widget/profile_student_status.da
 import 'package:lms/Module/StudentsProfile/cubit/student_profile_cubit.dart';
 
 class InfoTabs extends StatelessWidget {
-  InfoTabs({Key? key,required this.cubit}) : super(key: key);
+  InfoTabs({super.key,required this.cubit});
   StudentProfileCubit cubit;
   @override
   Widget build(BuildContext context) {

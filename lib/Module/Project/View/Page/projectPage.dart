@@ -59,6 +59,9 @@ class ProjectPage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    width: 50.w,
+                  ),
                   // Container with text at the end
                   InkWell(
                     onTap: () {
@@ -71,6 +74,7 @@ class ProjectPage extends StatelessWidget {
                     },
                     child: Container(
                       height: 40.h,
+                      width: 50.w,
                       padding:
                           EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
@@ -78,15 +82,10 @@ class ProjectPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
-                        child: Text(
-                          lang.add_new_project, // Change text as needed
-                          style: TextStyle(
-                            color: appColors.mainText,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                      ),
+                          child: Icon(
+                        Icons.add,
+                        color: appColors.mainIconColor,
+                      )),
                     ),
                   ),
                 ],
@@ -136,8 +135,10 @@ class ProjectPage extends StatelessWidget {
                       Builder(
                         builder: (context) {
                           if (state is TagsLoading) return LoadingContainer();
-                          if (state is Error || projectCubit.selectedkind == 1)
+                          if (state is Error ||
+                              projectCubit.selectedkind == 1) {
                             return Container();
+                          }
                           return TabButtonsProject(
                             cubit: projectCubit,
                           );
@@ -158,9 +159,10 @@ class ProjectPage extends StatelessWidget {
                                 return Gridviewproject(
                                     projectModel:
                                         projectCubit.projectsResponse!.data);
-                              } else
+                              } else {
                                 return Center(
                                     heightFactor: 2.5, child: NoItem());
+                              }
                             }
                             return NoConnection();
                           },

@@ -65,10 +65,11 @@ class ReviewCubit extends Cubit<ReviewState> {
       if (newReviews.data.reviews.isNotEmpty) {
         allReviews.addAll(newReviews.data.reviews);
       }
-      if (allReviews.isNotEmpty && allReviews[0].yourReview)
+      if (allReviews.isNotEmpty && allReviews[0].yourReview) {
         HasYourReview = true;
-      else
+      } else {
         HasYourReview = false;
+      }
 
       emit(ReviewSuccess());
     } on DioException catch (e) {
@@ -111,7 +112,7 @@ class ReviewCubit extends Cubit<ReviewState> {
       emit(AddReviewSuccess());
       reset();
       getCourseReview();
-    } on DioException catch (e) {
+    } on DioException {
       emit(AddReviewError(message: 'Unexpected error occurred'));
     } catch (e) {
       print(e.toString());
@@ -167,7 +168,7 @@ class ReviewCubit extends Cubit<ReviewState> {
       emit(DeleteReviewSuccess());
       reset();
       getCourseReview();
-    } on DioException catch (e) {
+    } on DioException {
       emit(DeleteReviewError(message: 'Error deleting'));
     } catch (e) {
       print(e.toString());

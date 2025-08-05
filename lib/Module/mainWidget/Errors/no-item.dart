@@ -6,7 +6,7 @@ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 
 class NoItem extends StatelessWidget {
-  NoItem({Key? key, this.height = 200, this.width = 200}) : super(key: key);
+  NoItem({super.key, this.height = 200, this.width = 200});
   double height, width;
   @override
   Widget build(BuildContext context) {

@@ -10,7 +10,7 @@ import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 
 class MainHeader extends StatelessWidget {
-  MainHeader({Key? key, required this.cubit}) : super(key: key);
+  MainHeader({super.key, required this.cubit});
   StudentProfileCubit cubit;
   @override
   Widget build(BuildContext context) {

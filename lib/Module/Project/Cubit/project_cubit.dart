@@ -104,7 +104,7 @@ class ProjectCubit extends Cubit<ProjectState> {
       } else {
         emit(Error(message: S.of(context).error_occurred));
       }
-    } on DioException catch (e) {
+    } catch(e) {
       emit(Error(message: S.of(context).error_in_server));
     }
   }
@@ -129,14 +129,10 @@ class ProjectCubit extends Cubit<ProjectState> {
       } else {
         emit(Error(message: S.of(context).error_occurred));
       }
-    } on DioException catch (e) {
-      if (e.response != null) {
-        print("Error Status: ${e.response?.statusCode}");
-        emit(Error(message: S.of(context).error_occurred));
-      } else {
-        print("Connection Error: $e");
+    } catch(e){
         emit(Error(message: S.of(context).error_in_server));
-      }
+
     }
+    
   }
 }
