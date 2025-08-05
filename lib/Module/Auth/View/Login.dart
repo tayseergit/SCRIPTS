@@ -222,7 +222,7 @@ class Login extends StatelessWidget {
                               ],
                             ),
                             onTap: () {
-                              authCubit.logIn();
+                              authCubit.logIn(context);
                             },
                           ),
                   ),

@@ -529,10 +529,10 @@ class S {
     );
   }
 
-  /// `Please fill in all the details of your project.`
+  /// `Please fill required fields`
   String get fill_details {
     return Intl.message(
-      'Please fill in all the details of your project.',
+      'Please fill required fields',
       name: 'fill_details',
       desc: '',
       args: [],
@@ -834,6 +834,41 @@ class S {
     return Intl.message(
       'search project',
       name: 'search_project',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Read More`
+  String get read_more {
+    return Intl.message('Read More', name: 'read_more', desc: '', args: []);
+  }
+
+  /// `Details`
+  String get details {
+    return Intl.message('Details', name: 'details', desc: '', args: []);
+  }
+
+  /// `Close`
+  String get close {
+    return Intl.message('Close', name: 'close', desc: '', args: []);
+  }
+
+  /// `Please wait for the admin to accept.`
+  String get attent_admin_To_Accept {
+    return Intl.message(
+      'Please wait for the admin to accept.',
+      name: 'attent_admin_To_Accept',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can't send more than 3 project requests a month`
+  String get cant_send_more_in_month {
+    return Intl.message(
+      'You can\'t send more than 3 project requests a month',
+      name: 'cant_send_more_in_month',
       desc: '',
       args: [],
     );

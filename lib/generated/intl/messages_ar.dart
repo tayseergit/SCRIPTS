@@ -50,12 +50,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "at_least_8_char_lower_upper_symbols": MessageLookupByLibrary.simpleMessage(
       "8 أحرف على الأقل، تشمل حروفًا صغيرة وكبيرة ورموزًا",
     ),
+    "attent_admin_To_Accept": MessageLookupByLibrary.simpleMessage(
+      "يرجى الانتظار حتى يقبل المشرف.",
+    ),
     "basic_information": MessageLookupByLibrary.simpleMessage(
       "المعلومات الأساسية",
     ),
     "bio": MessageLookupByLibrary.simpleMessage("نبذة"),
     "buy_now": MessageLookupByLibrary.simpleMessage("اشترِ الآن"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "cant_send_more_in_month": MessageLookupByLibrary.simpleMessage(
+      "لا يمكنك إرسال أكثر من 3 طلبات مشاريع في الشهر",
+    ),
     "change_language": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
     "change_password": MessageLookupByLibrary.simpleMessage(
       "تغيير كلمة المرور",
@@ -67,6 +73,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "choose_file_to_upload": MessageLookupByLibrary.simpleMessage(
       "اختر ملفًا للتحميل",
     ),
+    "close": MessageLookupByLibrary.simpleMessage("إغلاق"),
     "code_sent": MessageLookupByLibrary.simpleMessage("تم ارسال رمز التحقق"),
     "confirmNewPassword": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور الجديدة",
@@ -79,6 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
     "delete_history": MessageLookupByLibrary.simpleMessage("حذف السجل"),
     "demo_url": MessageLookupByLibrary.simpleMessage("رابط العرض التجريبي"),
+    "details": MessageLookupByLibrary.simpleMessage("تفاصيل"),
     "done": MessageLookupByLibrary.simpleMessage("تم"),
     "dont_have_account": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
     "edit_profile": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
@@ -115,7 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "الحقل والتقييم مطلوبان",
     ),
     "fill_details": MessageLookupByLibrary.simpleMessage(
-      "الرجاء تعبئة جميع تفاصيل مشروعك.",
+      "الرجاء تعبئة الحقول المطلوبة",
     ),
     "forget_password": MessageLookupByLibrary.simpleMessage(
       "نسيت كلمة المرور؟",
@@ -149,6 +157,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "project_links": MessageLookupByLibrary.simpleMessage("روابط المشروع"),
     "project_title": MessageLookupByLibrary.simpleMessage("عنوان المشروع"),
     "push_notifications": MessageLookupByLibrary.simpleMessage("إشعارات الدفع"),
+    "read_more": MessageLookupByLibrary.simpleMessage("المزيد"),
     "register": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
     "register_completed": MessageLookupByLibrary.simpleMessage(
       "تم التسجيل بنجاح",

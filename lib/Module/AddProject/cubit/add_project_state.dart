@@ -17,3 +17,13 @@ class AddProjectError extends AddProjectState {
 
   AddProjectError({required this.message});
 }
+
+class TagError extends AddProjectState {
+  final String message;
+
+  TagError({required this.message});
+}
+
+class FieldRrequired extends AddProjectState {}
+
+class FullMonthlyProjectError extends AddProjectState {}

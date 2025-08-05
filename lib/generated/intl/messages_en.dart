@@ -50,12 +50,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "at_least_8_char_lower_upper_symbols": MessageLookupByLibrary.simpleMessage(
       "At least 8 characters, including lowercase, uppercase, and symbols",
     ),
+    "attent_admin_To_Accept": MessageLookupByLibrary.simpleMessage(
+      "Please wait for the admin to accept.",
+    ),
     "basic_information": MessageLookupByLibrary.simpleMessage(
       "Basic Information",
     ),
     "bio": MessageLookupByLibrary.simpleMessage("Bio"),
     "buy_now": MessageLookupByLibrary.simpleMessage("Buy Now"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "cant_send_more_in_month": MessageLookupByLibrary.simpleMessage(
+      "You can\'t send more than 3 project requests a month",
+    ),
     "change_language": MessageLookupByLibrary.simpleMessage("Change language"),
     "change_password": MessageLookupByLibrary.simpleMessage("Change Password"),
     "check_email_or_password": MessageLookupByLibrary.simpleMessage(
@@ -65,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "choose_file_to_upload": MessageLookupByLibrary.simpleMessage(
       "Choose File to upload",
     ),
+    "close": MessageLookupByLibrary.simpleMessage("Close"),
     "code_sent": MessageLookupByLibrary.simpleMessage("code sendt"),
     "confirmNewPassword": MessageLookupByLibrary.simpleMessage(
       "Confirm New Password",
@@ -79,6 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "delete_history": MessageLookupByLibrary.simpleMessage("Delete history"),
     "demo_url": MessageLookupByLibrary.simpleMessage("Demo URL"),
+    "details": MessageLookupByLibrary.simpleMessage("Details"),
     "done": MessageLookupByLibrary.simpleMessage("Done"),
     "dont_have_account": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account?",
@@ -117,7 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Field and rating are required",
     ),
     "fill_details": MessageLookupByLibrary.simpleMessage(
-      "Please fill in all the details of your project.",
+      "Please fill required fields",
     ),
     "forget_password": MessageLookupByLibrary.simpleMessage("Forget Password?"),
     "friends": MessageLookupByLibrary.simpleMessage("Friends"),
@@ -152,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "push_notifications": MessageLookupByLibrary.simpleMessage(
       "Push notifications",
     ),
+    "read_more": MessageLookupByLibrary.simpleMessage("Read More"),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "register_completed": MessageLookupByLibrary.simpleMessage(
       "Register Completed",

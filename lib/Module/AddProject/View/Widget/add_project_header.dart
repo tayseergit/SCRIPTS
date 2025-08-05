@@ -3,23 +3,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
- 
+import 'package:lms/generated/l10n.dart';
+
 class AddProjectHeader extends StatelessWidget {
   const AddProjectHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
-        ThemeState appColors = context.watch<ThemeCubit>().state;
-
-      Color darkText = appColors.mainText;
+    ThemeState appColors = context.watch<ThemeCubit>().state;
+    var lang = S.of(context);
+    Color darkText = appColors.mainText;
     return Container(
-      color: Colors.white,
-      padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w, bottom: 20.h),
+      width: double.infinity,
+      decoration: BoxDecoration(
+          color: appColors.lihgtPrimer,
+          borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(50.r),
+              bottomLeft: Radius.circular(50.r))),
+      padding:
+          EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w, bottom: 20.h),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            'Add A New Project',
+            lang.add_new_project,
             style: TextStyle(
               fontSize: 24.sp,
               fontWeight: FontWeight.bold,
@@ -28,7 +35,7 @@ class AddProjectHeader extends StatelessWidget {
           ),
           SizedBox(height: 5.h),
           Text(
-            'Please fill in all the details of your project.',
+            lang.fill_details,
             style: TextStyle(
               fontSize: 14.sp,
               color: darkText.withOpacity(0.7),

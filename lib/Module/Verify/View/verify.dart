@@ -40,17 +40,16 @@ class Verify extends StatelessWidget {
             var verifyCubit = context.read<VerifyCubit>();
             registretion == 1
                 ? {
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BlocProvider.value(
-                            value: NavigationCubit(),
-                            child: NavigationBarwidget(),
-                          ),
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider.value(
+                          value: NavigationCubit(),
+                          child: NavigationBarwidget(),
                         ),
-                      );
-                    }),
+                      ),
+                      (route) => false,
+                    ),
                     Future.delayed(Duration(milliseconds: 700), () {
                       CustomSnackbar.show(
                         context: context,

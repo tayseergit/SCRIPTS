@@ -64,7 +64,7 @@
   "check_info":"check information",
   
   "add_new_project": "Add Project",
-  "fill_details": "Please fill in all the details of your project.",
+  "fill_details": "Please fill required fields",
   "basic_information": "Basic Information",
   "project_content": "Project Content",
   "settings": "Settings",
@@ -101,6 +101,10 @@
   "edit_profile":"Edit profile" , 
   "All":"All",
   "My":"My",
-  "search_project":"search project"
-
+  "search_project":"search project",
+   "read_more": "Read More",
+    "details": "Details",
+    "close": "Close",
+    "attent_admin_To_Accept":"Please wait for the admin to accept.",
+    "cant_send_more_in_month":"You can't send more than 3 project requests a month"
 }

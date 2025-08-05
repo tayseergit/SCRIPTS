@@ -55,7 +55,6 @@ class AuthCubit extends Cubit<AuthState> {
     emit(PickedImageUpdated()); // create this state if needed
   }
 
-
   void validEmail(String email) {
     if (GlobalFunc.validEmail(email)) {
       isEmail = true;
@@ -92,7 +91,7 @@ class AuthCubit extends Cubit<AuthState> {
 
 ////////////  login
   ///
-  void logIn() async {
+  void logIn(BuildContext context) async {
     if (emailLogctrl.text.isEmpty ||
         passWordLogctrl.text.isEmpty ||
         !isPassWord ||
@@ -103,31 +102,36 @@ class AuthCubit extends Cubit<AuthState> {
 
     emit(LogInLoading());
 
-    final response = await DioHelper.postData(
-      url: "login",
-      postData: {
-        'email': emailLogctrl.text,
-        'password': passWordLogctrl.text,
-        "fcm_token": CacheHelper.getData(key: "fcm"),
-      },
-      headers: {"Accept": "application/json"},
-    );
+    try {
+      final response = await DioHelper.postData(
+        url: "login",
+        postData: {
+          'email': emailLogctrl.text,
+          'password': passWordLogctrl.text,
+          "fcm_token": CacheHelper.getData(key: "fcm"),
+        },
+        headers: {"Accept": "application/json"},
+      );
 
-    print("Status Code: ${response.statusCode}");
-    print("Response Data: ${response.data}");
+      print("Status Code: ${response.statusCode}");
+      print("Response Data: ${response.data}");
 
-    if (response.statusCode == 200) {
-      userAuthModel = UserAuthModel.fromJson(response.data);
-      CacheHelper.saveData(key: "token", value: userAuthModel?.token);
-      CacheHelper.saveData(key: "role", value: userAuthModel?.role);
-      CacheHelper.saveData(key: "user_id", value: userAuthModel?.userId);
+      if (response.statusCode == 200) {
+        userAuthModel = UserAuthModel.fromJson(response.data);
+        CacheHelper.saveData(key: "token", value: userAuthModel?.token);
+        CacheHelper.saveData(key: "role", value: userAuthModel?.role);
+        CacheHelper.saveData(key: "user_id", value: userAuthModel?.userId);
 
-      print('token: ${userAuthModel?.token}');
-      emit(LogInsucess());
-    } else if (response.statusCode == 422 || response.statusCode == 401) {
-      emit(CheckInfo());
-    } else {
-      emit(LogInError(message: "Unexpected error: ${response.statusCode}"));
+        print('token: ${userAuthModel?.token}');
+        emit(LogInsucess());
+      } else if (response.statusCode == 422 || response.statusCode == 401) {
+        emit(CheckInfo());
+      } else {
+        emit(LogInError(message: S.of(context).error_occurred));
+      }
+    } catch (e) {
+      print("Login Exception: $e");
+      emit(LogInError(message: S.of(context).error_in_server));
     }
   }
 
@@ -202,21 +206,20 @@ class AuthCubit extends Cubit<AuthState> {
       final response = await DioHelper.postData(
         url: "register",
         postData: {
-        "name": nameCtrl.text.trim(),
-        "email": emailRegCtrl.text.trim(),
-        "password": passwordRegCtrl.text.trim(),
-        "password_confirmation": confirmPasswordCtrl.text.trim(),
-        "gitHub_account": githubAccount.text.trim(),
-        "bio": bioCtrl.text.trim(),
-        "fcm_token": CacheHelper.getData(key: "fcm"),
-        "image": ""
-      },
-    headers: {
+          "name": nameCtrl.text.trim(),
+          "email": emailRegCtrl.text.trim(),
+          "password": passwordRegCtrl.text.trim(),
+          "password_confirmation": confirmPasswordCtrl.text.trim(),
+          "gitHub_account": githubAccount.text.trim(),
+          "bio": bioCtrl.text.trim(),
+          "fcm_token": CacheHelper.getData(key: "fcm"),
+          "image": ""
+        },
+        headers: {
           'Accept': 'application/json',
-          },
-      
+        },
       );
-       if (response.statusCode == 200) {
+      if (response.statusCode == 200) {
         emit(SignUpSuccess());
         print(state);
         print(response.data);

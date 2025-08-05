@@ -64,7 +64,7 @@
   "error_old_password":"كلمة المرور غير صحيحة",
 "check_info":"تاكد من المعلومات",
 "add_new_project": "إضافة مشروع",
-  "fill_details": "الرجاء تعبئة جميع تفاصيل مشروعك.",
+  "fill_details": "الرجاء تعبئة الحقول المطلوبة",
   "basic_information": "المعلومات الأساسية",
   "project_content": "محتوى المشروع",
   "settings": "الإعدادات",
@@ -101,7 +101,14 @@
   "edit_profile":"تعديل الملف الشخصي"  ,
   "All":"الكل",
   "My":"خاصة",
-  "search_project":"ابحث عن مشروع"
+  "search_project":"ابحث عن مشروع",
+   "read_more": "المزيد",
+    "details": "تفاصيل",
+    "close": "إغلاق",
+    "attent_admin_To_Accept":"يرجى الانتظار حتى يقبل المشرف.",
+    "cant_send_more_in_month":"لا يمكنك إرسال أكثر من 3 طلبات مشاريع في الشهر"
+
+
 
 
 

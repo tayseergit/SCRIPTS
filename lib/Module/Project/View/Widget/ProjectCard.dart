@@ -54,10 +54,10 @@ class Projectcard extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: ReadMoreInlineTextProject(
                         text: projectModel.description,
-                        trimLength: 25,
+                        trimLength: 15,
                       ),
                     ),
-                    SizedBox(height: 10.h),
+                    SizedBox(height: 5.h),
                     if (projectModel.technologies != null)
                       Align(
                         alignment: Alignment.centerLeft,

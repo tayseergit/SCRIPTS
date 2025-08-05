@@ -6,8 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
-import 'package:lms/Helper/image_picker.dart';
-import 'package:lms/Module/Localization/localization.dart';
+ import 'package:lms/Module/Localization/localization.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/Verify/View/verify.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
@@ -20,6 +19,7 @@ import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/shake_animation.dart';
 import 'package:lms/generated/l10n.dart';
 
+ 
 class Register extends StatelessWidget {
   Register({super.key});
   File? selectedImage;
@@ -152,15 +152,15 @@ class Register extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                         ),
                         onTap: () async {
-                          final xfile = await ImageService()
-                              .pickImageFromGallery(context);
-                          if (xfile != null) {
-                            final file =
-                                File(xfile.path); // ✅ correct conversion
-                            selectedImage = file;
-                            authCubit.setPickedImage(file);
-                            print('Picked: ${file.path}');
-                          }
+                          // final xfile = await ImageService()
+                          //     .pickImageFromGallery(context);
+                          // if (xfile != null) {
+                          //   final file =
+                          //       File(xfile.path); // ✅ correct conversion
+                          //   selectedImage = file;
+                          //   authCubit.setPickedImage(file);
+                          //   print('Picked: ${file.path}');
+                          // }
                         }),
                   ),
                   SizedBox(height: 36.h),

@@ -36,14 +36,16 @@ class _CustomMultiSelectDropdownState extends State<CustomMultiSelectDropdown> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.label,
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-            color: darkText,
+        Row(children: [
+          Text(
+            widget.label,
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: darkText,
+            ),
           ),
-        ),
+        ]),
         SizedBox(height: 8.h),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),

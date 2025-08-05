@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/generated/l10n.dart';
 
 class ReadMoreInlineText extends StatefulWidget {
   final String text;
@@ -110,7 +111,7 @@ class _ReadMoreInlineTextProject extends State<ReadMoreInlineTextProject> {
           TextSpan(text: visibleText),
           if (!_isExpanded && isLong)
             TextSpan(
-              text: '... Read More',
+              text: S.of(context).read_more,
               style: TextStyle(
                 color: appColors.primary,
                 fontWeight: FontWeight.bold,
@@ -120,12 +121,12 @@ class _ReadMoreInlineTextProject extends State<ReadMoreInlineTextProject> {
                   showDialog(
                     context: context,
                     builder: (_) => AlertDialog(
-                      title: const Text('Details'),
+                      title: Text(S.of(context).details),
                       content: Text(fullText),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: const Text('Close'),
+                          child: Text(S.of(context).close),
                         ),
                       ],
                     ),

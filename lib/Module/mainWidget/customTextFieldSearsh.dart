@@ -34,7 +34,7 @@ class Customtextfieldsearsh extends StatelessWidget {
       this.errorText,
       this.hintText,
       this.borderRadius = 30.0,
-      this.hintFontSize = 16.0,
+      this.hintFontSize = 14.0,
       this.hintFontWeight = FontWeight.normal,
       this.borderColor,
       this.fillColor,
