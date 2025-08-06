@@ -8,6 +8,7 @@ import 'package:lms/Module/UserFriend/Cubit/user_friend_state.dart';
 import 'package:lms/Module/UserFriend/Model/user_frind_model.dart';
 import 'package:lms/Module/UserFriend/View/Widget/user_friend_gridview.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
+import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 
 class UserFriendPage extends StatelessWidget {
@@ -32,29 +33,12 @@ class UserFriendPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: appColors.pageBackground,
         body: BlocConsumer<UserFriendCubit, UserFriendState>(
-          listener: (context, state) {
-            if (state is UserFriendError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.masseg),
-                  backgroundColor: Colors.red,
-                ),
-              );
-            }
-          },
+          listener: (context, state) {},
           builder: (context, state) {
             if (state is UserFriendLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is UserFriendError) {
-              return Center(
-                child: Text(
-                  state.masseg,
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontSize: 16,
-                  ),
-                ),
-              );
+              return Center(child: NoConnection());
             } else if (state is UserFriendSuccess) {
               final friend = state.friendsResponse.friends;
               return ListView(
