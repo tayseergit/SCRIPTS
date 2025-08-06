@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Module/LearnPath/Cubit/learn_path_cubit.dart';
 import 'package:lms/Module/LearnPath/View/Widget/gridViewLearnPath.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
-import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/TabButtons.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';

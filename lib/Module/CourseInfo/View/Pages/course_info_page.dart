@@ -9,8 +9,8 @@ import 'package:lms/Module/CourseInfo/Cubit/CourseDiscription/course_info_state.
 import 'package:lms/Module/CourseInfo/Cubit/Reveiw/review_cubit.dart';
 import 'package:lms/Module/CourseInfo/View/Widget/Grid_course_info.dart';
 import 'package:lms/Module/CourseInfo/View/Widget/loading.dart';
-import 'package:lms/Module/TeacherProfile/teacherProfilePage.dart';
-import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/TeacherProfile/View/Pages/teacher_profile_page.dart';
+ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/Errors/no_connection.dart';

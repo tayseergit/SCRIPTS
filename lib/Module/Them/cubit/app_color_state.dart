@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ThemeState {
-    bool isDarkMode;
+  bool isDarkMode;
 
   final Color lihgtPrimer;
   final Color primary;
@@ -56,7 +56,6 @@ class ThemeState {
     required this.whiteText,
     required this.orang,
     required this.blackGreen,
-
     required this.blackGreenDisable,
     required this.lightfieldBackground,
     required this.cyanAccent,
@@ -137,7 +136,6 @@ class ThemeState {
       cyanAccent: Color(0xFF18FFFF),
       shadow: Color.fromARGB(255, 63, 105, 105),
       lightfieldBackground: Color.fromARGB(255, 68, 72, 72),
-
 
       //
       lightGray: const Color.fromARGB(135, 221, 221, 221),

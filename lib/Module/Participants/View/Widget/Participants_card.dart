@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lms/Constant/images.dart';
+import 'package:lms/Module/Participants/Cubit/Participants_cubit.dart';
+import 'package:lms/Module/Teacher/Model/teacher_model.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/Module/mainWidget/shake_animation.dart';
 
-class Userfriendcard extends StatelessWidget {
-  const Userfriendcard({super.key});
+class ParticipantsCard extends StatelessWidget {
+  final TeacherModel teacherModel;
+  const ParticipantsCard({super.key, required this.teacherModel});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +31,9 @@ class Userfriendcard extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.r),
               child: Stack(
                 children: [
-                  Image.asset(
-                    Images.courses,
+                  Image.network(
+                    teacherModel.image ??
+                        'https://www.radware.com/RadwareSite/MediaLibraries/WordPressImages/uploads/2020/06/anonymous-960x638.jpg',
                     width: double.infinity,
                     height: double.infinity,
                     fit: BoxFit.cover,
@@ -49,33 +53,45 @@ class Userfriendcard extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: Center(
-                      child: Container(
-                        width: 110.w,
-                        padding: EdgeInsets.symmetric(vertical: 4.h),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(color: appColors.orang, width: 3),
-                            left: BorderSide(color: appColors.orang, width: 3),
-                            right: BorderSide(color: appColors.orang, width: 3),
-                          ),
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(14.r),
-                            bottomRight: Radius.circular(14.r),
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Intermediate',
-                            style: TextStyle(
-                              color: appColors.orang,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600,
+                    left: 15,
+                    top: 50,
+                    child: Builder(
+                      builder: (innerContext) => IconButton(
+                        onPressed: () {
+                          final cubit = innerContext.read<ParticipantsCubit>();
+                          showDialog(
+                            context: innerContext,
+                            builder: (context) => AlertDialog(
+                              title: const Text('تأكيد الاضافة'),
+                              content: Text(
+                                  'هل تريد اضافة ${teacherModel.name} الى قائمة الأصدقاء؟'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text('إلغاء'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    cubit.addFriend(teacherModel);
+                                    Navigator.pop(context);
+                                    CustomSnackbar.show(
+                                      context: context,
+                                      duration: 5,
+                                      fillColor: appColors.ok,
+                                      message: "Add Friend Successful",
+                                    );
+                                  },
+                                  child: const Text('اضافة',
+                                      style: TextStyle(color: Colors.orange)),
+                                ),
+                              ],
                             ),
-                          ),
+                          );
+                        },
+                        icon: Icon(
+                          Icons.add,
+                          color: appColors.orang,
+                          size: 40,
                         ),
                       ),
                     ),
@@ -86,14 +102,14 @@ class Userfriendcard extends StatelessWidget {
                     right: 0,
                     child: Center(
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12.w, vertical: 6.h),
                         decoration: BoxDecoration(
                             color: appColors.mainText.withOpacity(0.7),
                             borderRadius: BorderRadius.circular(8.r),
                             border: Border.all(color: appColors.primary)),
                         child: Text(
-                          "Tayseer Matar",
+                          teacherModel.name,
                           style: TextStyle(
                             color: appColors.pageBackground,
                             fontSize: 14.sp,

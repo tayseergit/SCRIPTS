@@ -4,8 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Helper/cach_helper.dart';
+import 'package:lms/Module/LearnPathInfo/Cubit/main_cubit.dart';
+import 'package:lms/Module/Participants/Cubit/Participants_cubit.dart';
+import 'package:lms/Module/Participants/View/Page/Participants_page.dart';
 import 'package:lms/Module/ResetPassword.dart/View/Widget/reset_dialog.dart';
 import 'package:lms/Module/Setting/SettingPage.dart';
+import 'package:lms/Module/Teacher/View/Page/teacher_Page.dart';
+import 'package:lms/Module/UserFriend/Cubit/user_friend_cubit.dart';
+import 'package:lms/Module/UserFriend/View/Page/user_friend_page.dart';
 import 'package:lms/Module/mainWidget/TopWave_more_Clipper.dart';
 import 'package:lms/Module/StudentsProfile/View/Pages/student_profile_page.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
@@ -110,10 +116,11 @@ class More extends StatelessWidget {
                                 height: 60,
                                 color: appColors.pageBackground,
                                 widget: Rowmore(
-                                  text: lang.change_password,
+                                  text: lang.change_password, 
                                   image: Images.changePassword,
                                   onTapp: () {
                                     if (CacheHelper.getToken() != null) {
+                                      CacheHelper.removeAllData();
                                       showPasswordResetDialog(context);
                                     } else {
                                       showNoAuthDialog(context);
@@ -174,7 +181,18 @@ class More extends StatelessWidget {
                                 widget: Rowmore(
                                   text: lang.friends,
                                   image: Images.friend,
-                                  onTapp: () {},
+                                  onTapp: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            BlocProvider.value(
+                                          value: UserFriendCubit(),
+                                          child: UserFriendPage(),
+                                        ),
+                                      ),
+                                    );
+                                  },
                                   height: 25,
                                   width: 25,
                                 ),
@@ -200,7 +218,18 @@ class More extends StatelessWidget {
                                 widget: Rowmore(
                                   text: lang.participants,
                                   image: Images.participants,
-                                  onTapp: () {},
+                                  onTapp: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            BlocProvider.value(
+                                          value: ParticipantsCubit(),
+                                          child: ParticipantsPage(),
+                                        ),
+                                      ),
+                                    );
+                                  },
                                   height: 25,
                                   width: 25,
                                 ),
@@ -226,7 +255,18 @@ class More extends StatelessWidget {
                                 widget: Rowmore(
                                   text: lang.teachers,
                                   image: Images.teacher,
-                                  onTapp: () {},
+                                  onTapp: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            BlocProvider.value(
+                                          value: TeacherCubit(),
+                                          child: TeacherPage(),
+                                        ),
+                                      ),
+                                    );
+                                  },
                                   height: 25,
                                   width: 25,
                                 ),

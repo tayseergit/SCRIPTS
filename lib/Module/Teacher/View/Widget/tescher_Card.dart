@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lms/Constant/images.dart';
+import 'package:lms/Module/Teacher/Model/teacher_model.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class Teschercard extends StatelessWidget {
-  const Teschercard({super.key});
+  final TeacherModel teacherModel;
+  const Teschercard({super.key, required this.teacherModel});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +29,8 @@ class Teschercard extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.r),
               child: Stack(
                 children: [
-                  Image.asset(
-                    Images.courses,
+                  Image.network(
+                    teacherModel.image??  'https://www.radware.com/RadwareSite/MediaLibraries/WordPressImages/uploads/2020/06/anonymous-960x638.jpg',
                     width: double.infinity,
                     height: double.infinity,
                     fit: BoxFit.cover,
@@ -61,7 +62,7 @@ class Teschercard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.r),
                             border: Border.all(color: appColors.primary)),
                         child: Text(
-                          "Tayseer Matar",
+                          teacherModel.name,
                           style: TextStyle(
                             color: appColors.pageBackground,
                             fontSize: 14.sp,

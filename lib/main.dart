@@ -102,7 +102,7 @@ class _MyAppState extends State<MyApp> {
                     theme: themeState.isDarkMode
                         ? ThemeData.dark()
                         : ThemeData.light(),
-                    home: Login(),
+                    home: NavigationBarwidget(),
                   );
                 },
               );

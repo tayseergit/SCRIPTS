@@ -17,6 +17,7 @@ class Cursescard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(course.imageOfCourse);
     ThemeState appColors = context.watch<ThemeCubit>().state;
 
     return GestureDetector(

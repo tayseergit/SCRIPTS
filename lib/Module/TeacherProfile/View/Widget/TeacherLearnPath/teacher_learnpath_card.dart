@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
-import 'package:lms/Constant/public_constant.dart';
-import 'package:lms/Module/LearnPath/Model/learn_path_reaponse.dart';
 import 'package:lms/Module/LearnPath/View/Widget/TopWaveClipper.dart';
-import 'package:lms/Module/LearnPathInfo/LearnPathInfoPage.dart';
+import 'package:lms/Module/TeacherProfile/Model/teacher_learnpath_model.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class Learnpathcard extends StatelessWidget {
-  Learnpathcard({super.key, required this.learnPath});
-  LearningPath learnPath;
+class TeacherLearnpathCard extends StatelessWidget {
+  final TeacherLearnpathModel teacherLearnpathModel;
+  TeacherLearnpathCard({super.key, required this.teacherLearnpathModel, });
+
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
@@ -22,7 +21,7 @@ class Learnpathcard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: appColors.border, width: 3),
-        borderRadius: BorderRadius.circular(10.r),
+        borderRadius: BorderRadius.circular(5),
       ),
       child: OnBoardingContainer(
         width: 180.w,
@@ -50,7 +49,7 @@ class Learnpathcard extends StatelessWidget {
                         width: 225.w,
                         child: Center(
                           child: AuthText(
-                              text: learnPath.title,
+                              text: teacherLearnpathModel.title,
                               size: 14,
                               color: appColors.mainText,
                               maxLines: 2,
@@ -64,13 +63,13 @@ class Learnpathcard extends StatelessWidget {
                       child: OnBoardingContainer(
                         width: 60,
                         height: 40,
-                        color: learnPath.totalCoursesPrice == 0
+                        color: teacherLearnpathModel.totalCoursesPrice == 0
                             ? appColors.ok
                             : appColors.orang,
                         widget: AuthText(
-                          text: learnPath.totalCoursesPrice == 0
+                          text: teacherLearnpathModel.totalCoursesPrice == 0
                               ? 'Free'
-                              : "${learnPath.totalCoursesPrice} \$",
+                              : "${teacherLearnpathModel.totalCoursesPrice} \$",
                           size: 12,
                           color: appColors.mainText,
                           fontWeight: FontWeight.w700,
@@ -87,27 +86,28 @@ class Learnpathcard extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 height: 200.h,
-                child: (learnPath.image == null && learnPath.image!.isNotEmpty)
-                    ? Image.network(
-                        learnPath.image!,
-                        width: double.infinity,
-                        height: 100.h,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Image.asset(
-                            Images.noImage,
-                            width: double.infinity,
-                            height: 100.h,
-                            fit: BoxFit.contain,
-                          );
-                        },
-                      )
-                    : Image.asset(
-                        Images.noImage,
-                        width: double.infinity,
-                        height: 100.h,
-                        fit: BoxFit.fill,
-                      ),
+                child:(teacherLearnpathModel.image == null &&
+                              teacherLearnpathModel.image.isNotEmpty)
+                          ? Image.network(
+                              teacherLearnpathModel.image,
+                              width: double.infinity,
+                              height: 100.h,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset(
+                                  Images.noImage,
+                                  width: double.infinity,
+                                  height: 100.h,
+                                  fit: BoxFit.contain,
+                                );
+                              },
+                            )
+                          : Image.asset(
+                              Images.noImage,
+                              width: double.infinity,
+                              height: 100.h,
+                              fit: BoxFit.fill,
+                            ),
               ),
             ),
             SizedBox(height: 15.h),
@@ -145,7 +145,7 @@ class Learnpathcard extends StatelessWidget {
                               color: appColors.mainText,
                             ),
                             AuthText(
-                              text: '${learnPath.coursesCount} courses',
+                              text: '${teacherLearnpathModel.coursesCount} courses',
                               color: appColors.mainText,
                               fontWeight: FontWeight.w600,
                               size: 12,
@@ -155,7 +155,7 @@ class Learnpathcard extends StatelessWidget {
                       ),
                     ),
                     RatingBarIndicator(
-                      rating: learnPath.rate,
+                      rating: teacherLearnpathModel.rate,
                       itemCount: 5,
                       itemSize: 15.0, // star size
                       direction: Axis.horizontal,
@@ -168,9 +168,7 @@ class Learnpathcard extends StatelessWidget {
                 )),
           ],
         ),
-        onTap: () {
-          pushTo(context: context, toPage: LearnPathInfoPage());
-        },
+        onTap: () {},
       ),
     );
   }
