@@ -7,6 +7,7 @@ import 'package:lms/Module/Teacher/Cubit/teacher_state.dart';
 import 'package:lms/Module/Teacher/View/Widget/gridview_teacher.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
 
 class TeacherPage extends StatelessWidget {
@@ -24,30 +25,13 @@ class TeacherPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: appColors.pageBackground,
         body: BlocConsumer<TeacherCubit, TeacherState>(
-          listener: (context, state) {
-            if (state is TeacherError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.masseg),
-                  backgroundColor: Colors.red,
-                ),
-              );
-            }
-          },
+          listener: (context, state) {},
           builder: (context, state) {
             if (state is TeacherLoding &&
                 context.read<TeacherCubit>().lastUsers == null) {
               return Center(child: CircularProgressIndicator());
             } else if (state is TeacherError) {
-              return Center(
-                child: Text(
-                  state.masseg,
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 16,
-                  ),
-                ),
-              );
+              return Center(child: NoConnection());
             } else {
               final teacherList =
                   context.read<TeacherCubit>().lastUsers?.users ?? [];

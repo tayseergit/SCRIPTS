@@ -20,14 +20,15 @@ import 'package:lms/Module/TeacherProfile/View/Widget/tab_teacher.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
+import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 
 class TeacherProfilePage extends StatelessWidget {
   final UserData? userData;
-  const TeacherProfilePage(
-      {super.key,
-      this.userData,
-      });
+  const TeacherProfilePage({
+    super.key,
+    this.userData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,35 +54,18 @@ class TeacherProfilePage extends StatelessWidget {
             create: (_) => TeacherLearnPathCubit()
               ..fetchTeacherLearnPath(userData?.id ?? 0)),
         BlocProvider(
-            create: (_) => TeacherContestCubit()
-              ..fetchTeacherContest(userData?.id ?? 0)),
+            create: (_) =>
+                TeacherContestCubit()..fetchTeacherContest(userData?.id ?? 0)),
       ],
       child: Scaffold(
         backgroundColor: appColors.pageBackground,
         body: BlocConsumer<TeacherProfileCubit, TeacherProfileState>(
-          listener: (context, state) {
-            if (state is TeacherProfileError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.masseg),
-                  backgroundColor: Colors.red,
-                ),
-              );
-            }
-          },
+          listener: (context, state) {},
           builder: (context, state) {
             if (state is TeacherProfileLoging) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is TeacherProfileError) {
-              return Center(
-                child: Text(
-                  state.masseg,
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontSize: 16,
-                  ),
-                ),
-              );
+              return Center(child: NoConnection());
             } else if (state is TeacherProfileSuccess) {
               final user = state.userModel.user;
               print(user.image);

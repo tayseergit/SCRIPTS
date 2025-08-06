@@ -8,6 +8,7 @@ import 'package:lms/Module/Participants/View/Widget/Participants_gridview.dart';
 import 'package:lms/Module/Participants/View/Widget/order_options_sheet.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
 
 class ParticipantsPage extends StatelessWidget {
@@ -26,30 +27,13 @@ class ParticipantsPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: appColors.pageBackground,
         body: BlocConsumer<ParticipantsCubit, ParticipantsState>(
-          listener: (context, state) {
-            if (state is ParticpantsError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.masseg),
-                  backgroundColor: Colors.red,
-                ),
-              );
-            }
-          },
+          listener: (context, state) {},
           builder: (context, state) {
             if (state is ParticpantsLoding &&
                 context.read<ParticipantsCubit>().lastUsers == null) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is ParticpantsError) {
-              return Center(
-                child: Text(
-                  state.masseg,
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontSize: 16,
-                  ),
-                ),
-              );
+              return Center(child: NoConnection());
             } else {
               final teacherList =
                   context.read<ParticipantsCubit>().lastUsers?.users ?? [];
