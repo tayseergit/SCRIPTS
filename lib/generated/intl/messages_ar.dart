@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Project": MessageLookupByLibrary.simpleMessage("المشاريع"),
     "Send_code": MessageLookupByLibrary.simpleMessage("ارسال رمز التحقق"),
     "about_this_course": MessageLookupByLibrary.simpleMessage("عن هذه الدورة"),
+    "achievement": MessageLookupByLibrary.simpleMessage("الإنجازات"),
     "add_a_payment_method": MessageLookupByLibrary.simpleMessage(
       "إضافة طريقة دفع",
     ),
@@ -62,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "cant_send_more_in_month": MessageLookupByLibrary.simpleMessage(
       "لا يمكنك إرسال أكثر من 3 طلبات مشاريع في الشهر",
     ),
+    "certificates": MessageLookupByLibrary.simpleMessage("الشهادات"),
     "change_language": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
     "change_password": MessageLookupByLibrary.simpleMessage(
       "تغيير كلمة المرور",
@@ -82,8 +84,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "تأكيد كلمة المرور",
     ),
     "connection_error": MessageLookupByLibrary.simpleMessage("خطأ في الاتصال"),
+    "course_completed": MessageLookupByLibrary.simpleMessage(
+      "الدورات المكتملة",
+    ),
     "courses": MessageLookupByLibrary.simpleMessage("الدورات"),
+    "current_streak": MessageLookupByLibrary.simpleMessage("السلسلة الحالية"),
     "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
+    "days": MessageLookupByLibrary.simpleMessage("أيام"),
     "delete_history": MessageLookupByLibrary.simpleMessage("حذف السجل"),
     "demo_url": MessageLookupByLibrary.simpleMessage("رابط العرض التجريبي"),
     "details": MessageLookupByLibrary.simpleMessage("تفاصيل"),
@@ -91,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "dont_have_account": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
     "edit_profile": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
     "edit_your_review": MessageLookupByLibrary.simpleMessage("تعديل تقييمك"),
+    "edite_image": MessageLookupByLibrary.simpleMessage("تحديث الصورة"),
     "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
     "email_already_exist": MessageLookupByLibrary.simpleMessage(
       "البريد الإلكتروني مستخدم بالفعل",
@@ -138,6 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "mentor": MessageLookupByLibrary.simpleMessage("المدرب"),
+    "my_contest": MessageLookupByLibrary.simpleMessage("مسابقتي"),
     "my_profile": MessageLookupByLibrary.simpleMessage("ملفي الشخصي"),
     "name": MessageLookupByLibrary.simpleMessage("الاسم"),
     "network_error": MessageLookupByLibrary.simpleMessage("خطأ في الشبكة"),
@@ -151,6 +160,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "كلمات المرور غير متطابقة",
     ),
     "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+    "profile_updated": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث الملف الشخصي",
+    ),
     "project_content": MessageLookupByLibrary.simpleMessage("محتوى المشروع"),
     "project_description": MessageLookupByLibrary.simpleMessage("وصف المشروع"),
     "project_kind": MessageLookupByLibrary.simpleMessage("نوع المشروع"),
@@ -183,6 +195,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
     "teachers": MessageLookupByLibrary.simpleMessage("معلمون"),
     "technologies": MessageLookupByLibrary.simpleMessage("التقنيات"),
+    "total_points": MessageLookupByLibrary.simpleMessage("إجمالي النقاط"),
+    "update": MessageLookupByLibrary.simpleMessage("تحديث"),
     "verify_code": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
     "watch": MessageLookupByLibrary.simpleMessage("مشاهدة"),
   };

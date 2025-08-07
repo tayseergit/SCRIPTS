@@ -31,23 +31,6 @@ class MainHeader extends StatelessWidget {
                 height: 300.h,
                 fit: BoxFit.cover,
               ),
-        Padding(
-          padding: EdgeInsets.only(top: 20.h, right: 15.w),
-          child: Align(
-            alignment: Alignment.topRight,
-            child: OnBoardingContainer(
-              width: 90.w,
-              height: 25.h,
-              color: appColors.darkText,
-              widget: AuthText(
-                text: 'Edit Profile',
-                size: 14.sp,
-                color: appColors.mainText,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-        ),
         Positioned(
           bottom: 16.h,
           left: 16.w,

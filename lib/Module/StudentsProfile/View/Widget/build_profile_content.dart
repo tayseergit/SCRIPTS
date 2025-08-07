@@ -24,7 +24,7 @@ class BuildProfileContent extends StatelessWidget {
           cubit: cubit,
         ),
         SizedBox(height: 12.h),
-        const SingleChildScrollView(
+          SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: TabButtonsProfile(),
         ),

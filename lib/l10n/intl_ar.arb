@@ -106,7 +106,19 @@
     "details": "تفاصيل",
     "close": "إغلاق",
     "attent_admin_To_Accept":"يرجى الانتظار حتى يقبل المشرف.",
-    "cant_send_more_in_month":"لا يمكنك إرسال أكثر من 3 طلبات مشاريع في الشهر"
+    "cant_send_more_in_month":"لا يمكنك إرسال أكثر من 3 طلبات مشاريع في الشهر",
+"current_streak": "السلسلة الحالية",
+  "course_completed": "الدورات المكتملة",
+  "days": "أيام",
+  "total_points": "إجمالي النقاط",
+  "certificates": "الشهادات",
+  "achievement": "الإنجازات",
+  "my_contest": "مسابقتي",
+  "profile_updated": "تم تحديث الملف الشخصي",
+  "update":"تحديث",
+  "edite_image": "تحديث الصورة"
+  
+  
 
 
 

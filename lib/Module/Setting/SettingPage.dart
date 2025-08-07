@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Constant/public_constant.dart';
+import 'package:lms/Module/Edit_profile/View/Pages/edite_profile_page.dart';
 import 'package:lms/Module/Localization/localization.dart';
 import 'package:lms/Module/Setting/NotificationSwitchCubit.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
@@ -212,6 +214,9 @@ class Settingpage extends StatelessWidget {
                         ),
                       ),
                       child: OnBoardingContainerMore(
+                          onTap: () {
+                            pushTo(context: context, toPage: EditProfile());
+                          },
                           width: 330,
                           height: 60,
                           color: appColors.pageBackground,
@@ -248,9 +253,9 @@ class Settingpage extends StatelessWidget {
                         ),
                       ),
                       child: OnBoardingContainerMore(
-                        onTap: () {
-                          context.read<LocaleCubit>().toggleLocale();
-                        },
+                          onTap: () {
+                            context.read<LocaleCubit>().toggleLocale();
+                          },
                           width: 330,
                           height: 60,
                           color: appColors.pageBackground,

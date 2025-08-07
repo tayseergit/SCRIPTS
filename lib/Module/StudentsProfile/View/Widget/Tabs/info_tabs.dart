@@ -4,14 +4,14 @@ import 'package:lms/Module/StudentsProfile/View/Widget/profile_student_status.da
 import 'package:lms/Module/StudentsProfile/cubit/student_profile_cubit.dart';
 
 class InfoTabs extends StatelessWidget {
-  InfoTabs({super.key,required this.cubit});
+  InfoTabs({super.key, required this.cubit});
   StudentProfileCubit cubit;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 13.w),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Profilestate(
               title: 'Current Streak',
@@ -19,10 +19,6 @@ class InfoTabs extends StatelessWidget {
           Profilestate(
               title: 'Course Completed',
               value: "${cubit.studentProfileModel.completedCourses}"),
-          Profilestate(
-              title: 'Path Completed',
-              value:
-                  "${cubit.studentProfileModel.completedLearningPaths}"),
           Profilestate(
               title: 'Total Points',
               value: "${cubit.studentProfileModel.points}"),

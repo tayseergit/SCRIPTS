@@ -294,14 +294,19 @@ class S {
     );
   }
 
+  /// `Name`
+  String get name {
+    return Intl.message('Name', name: 'name', desc: '', args: []);
+  }
+
   /// `Add Image`
   String get add_image {
     return Intl.message('Add Image', name: 'add_image', desc: '', args: []);
   }
 
-  /// `Name`
-  String get name {
-    return Intl.message('Name', name: 'name', desc: '', args: []);
+  /// `Edite Image`
+  String get edite_image {
+    return Intl.message('Edite Image', name: 'edite_image', desc: '', args: []);
   }
 
   /// `Send code`
@@ -872,6 +877,76 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Current Streak`
+  String get current_streak {
+    return Intl.message(
+      'Current Streak',
+      name: 'current_streak',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Course Completed`
+  String get course_completed {
+    return Intl.message(
+      'Course Completed',
+      name: 'course_completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Days`
+  String get days {
+    return Intl.message('Days', name: 'days', desc: '', args: []);
+  }
+
+  /// `Total Points`
+  String get total_points {
+    return Intl.message(
+      'Total Points',
+      name: 'total_points',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Certificates`
+  String get certificates {
+    return Intl.message(
+      'Certificates',
+      name: 'certificates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Achievement`
+  String get achievement {
+    return Intl.message('Achievement', name: 'achievement', desc: '', args: []);
+  }
+
+  /// `My Contest`
+  String get my_contest {
+    return Intl.message('My Contest', name: 'my_contest', desc: '', args: []);
+  }
+
+  /// `Profile Updated`
+  String get profile_updated {
+    return Intl.message(
+      'Profile Updated',
+      name: 'profile_updated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `update`
+  String get update {
+    return Intl.message('update', name: 'update', desc: '', args: []);
   }
 }
 

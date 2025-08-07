@@ -14,32 +14,37 @@ class Profilestate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: appColors.primary),
-        borderRadius: BorderRadius.circular(5.r),
-      ),
-      child: OnBoardingContainer(
-        width: 80,
-        height: 50,
-        color: appColors.pageBackground,
-        widget: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AuthText(
-              text: title,
-              size: 8.sp,
-              color: appColors.mainText,
-              fontWeight: FontWeight.w700,
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 5.w),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: appColors.primary),
+            borderRadius: BorderRadius.circular(5.r),
+          ),
+          child: OnBoardingContainer(
+            // width: 80,
+            height: 50,
+            color: appColors.pageBackground,
+            widget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AuthText(
+                  text: title,
+                  size: 10.sp,
+                  color: appColors.mainText,
+                  fontWeight: FontWeight.w700,
+                ),
+                SizedBox(height: 2.h),
+                AuthText(
+                  text: value,
+                  size: 15,
+                  color: appColors.mainText,
+                  fontWeight: FontWeight.w700,
+                ),
+              ],
             ),
-            SizedBox(height: 2.h),
-            AuthText(
-              text: value,
-              size: 15,
-              color: appColors.mainText,
-              fontWeight: FontWeight.w700,
-            ),
-          ],
+          ),
         ),
       ),
     );

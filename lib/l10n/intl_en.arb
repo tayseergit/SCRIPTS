@@ -33,8 +33,9 @@
   "github_account": "GitHub Account",
   "bio": "Bio",
   "confirm_password": "Confirm Password",
-  "add_image": "Add Image",
   "name":"Name",
+  "add_image": "Add Image",
+  "edite_image": "Edite Image",
   "Send_code":"Send code",
   "Email_not_found":"Email not found"  ,
    "all_fields_required": "All fields are required",
@@ -106,5 +107,17 @@
     "details": "Details",
     "close": "Close",
     "attent_admin_To_Accept":"Please wait for the admin to accept.",
-    "cant_send_more_in_month":"You can't send more than 3 project requests a month"
+    "cant_send_more_in_month":"You can't send more than 3 project requests a month",
+    
+  "current_streak": "Current Streak",
+  "course_completed": "Course Completed",
+  "days": "Days",
+  "total_points": "Total Points",
+  "certificates": "Certificates",
+  "achievement": "Achievement",
+  "my_contest": "My Contest",
+  "profile_updated": "Profile Updated",
+  "update":"update"
+
+
 }

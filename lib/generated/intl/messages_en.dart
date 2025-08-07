@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "about_this_course": MessageLookupByLibrary.simpleMessage(
       "About this course",
     ),
+    "achievement": MessageLookupByLibrary.simpleMessage("Achievement"),
     "add_a_payment_method": MessageLookupByLibrary.simpleMessage(
       "Add a payment method",
     ),
@@ -62,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "cant_send_more_in_month": MessageLookupByLibrary.simpleMessage(
       "You can\'t send more than 3 project requests a month",
     ),
+    "certificates": MessageLookupByLibrary.simpleMessage("Certificates"),
     "change_language": MessageLookupByLibrary.simpleMessage("Change language"),
     "change_password": MessageLookupByLibrary.simpleMessage("Change Password"),
     "check_email_or_password": MessageLookupByLibrary.simpleMessage(
@@ -82,8 +84,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "connection_error": MessageLookupByLibrary.simpleMessage(
       "Connection Error",
     ),
+    "course_completed": MessageLookupByLibrary.simpleMessage(
+      "Course Completed",
+    ),
     "courses": MessageLookupByLibrary.simpleMessage("Courses"),
+    "current_streak": MessageLookupByLibrary.simpleMessage("Current Streak"),
     "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+    "days": MessageLookupByLibrary.simpleMessage("Days"),
     "delete_history": MessageLookupByLibrary.simpleMessage("Delete history"),
     "demo_url": MessageLookupByLibrary.simpleMessage("Demo URL"),
     "details": MessageLookupByLibrary.simpleMessage("Details"),
@@ -95,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "edit_your_review": MessageLookupByLibrary.simpleMessage(
       "Edit Your Review",
     ),
+    "edite_image": MessageLookupByLibrary.simpleMessage("Edite Image"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "email_already_exist": MessageLookupByLibrary.simpleMessage(
       "This email is already in use",
@@ -137,6 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "mentor": MessageLookupByLibrary.simpleMessage("Mentor"),
+    "my_contest": MessageLookupByLibrary.simpleMessage("My Contest"),
     "my_profile": MessageLookupByLibrary.simpleMessage("My Profile"),
     "name": MessageLookupByLibrary.simpleMessage("Name"),
     "network_error": MessageLookupByLibrary.simpleMessage("Network error"),
@@ -150,6 +159,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Passwords do not match",
     ),
     "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+    "profile_updated": MessageLookupByLibrary.simpleMessage("Profile Updated"),
     "project_content": MessageLookupByLibrary.simpleMessage("Project Content"),
     "project_description": MessageLookupByLibrary.simpleMessage(
       "Project Description",
@@ -184,6 +194,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "teachers": MessageLookupByLibrary.simpleMessage("Teachers"),
     "technologies": MessageLookupByLibrary.simpleMessage("Technologies"),
+    "total_points": MessageLookupByLibrary.simpleMessage("Total Points"),
+    "update": MessageLookupByLibrary.simpleMessage("update"),
     "verify_code": MessageLookupByLibrary.simpleMessage("Verify Code"),
     "watch": MessageLookupByLibrary.simpleMessage("Watch"),
   };
