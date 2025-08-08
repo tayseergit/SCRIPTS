@@ -117,7 +117,10 @@
   "achievement": "Achievement",
   "my_contest": "My Contest",
   "profile_updated": "Profile Updated",
-  "update":"update"
+  "update":"update",
+  "Completed":"Completed",
+  "Not_Completed":"not Completed",
+  "Quiz":"Quiz"                             
 
 
 }

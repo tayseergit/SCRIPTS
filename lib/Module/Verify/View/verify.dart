@@ -39,25 +39,18 @@ class Verify extends StatelessWidget {
           if (state is VerifySucsses) {
             var verifyCubit = context.read<VerifyCubit>();
             registretion == 1
-                ? {
+                ?  WidgetsBinding.instance.addPostFrameCallback((_) {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) => BlocProvider.value(
                           value: NavigationCubit(),
-                          child: NavigationBarwidget(),
+                          child: NavigationBarwidget()
                         ),
                       ),
-                      (route) => false,
-                    ),
-                    Future.delayed(Duration(milliseconds: 700), () {
-                      CustomSnackbar.show(
-                        context: context,
-                        fillColor: appColors.primary,
-                        message: lang.register_completed,
-                      );
-                    })
-                  }
+                      (route) => false, // Remove all previous routes
+                    );
+                  })
                 : WidgetsBinding.instance.addPostFrameCallback((_) {
                     Navigator.pushAndRemoveUntil(
                       context,

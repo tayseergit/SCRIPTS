@@ -4,32 +4,41 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Module/Course_content/Cubit/ContentCubit/course_content_state.dart';
+import 'package:lms/Module/Course_content/View/Widget/GridviewVediocoursesShimmer.dart';
+import 'package:lms/Module/Course_content/View/Widget/course_content_shminer.dart';
+import 'package:lms/Module/Course_content/cubit/ContentCubit/course_content_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
-import 'package:lms/Module/Vedio/CommentCubit.dart';
-import 'package:lms/Module/Vedio/GridViewCourses.dart';
-import 'package:lms/Module/Vedio/GridViewVedio.dart';
-import 'package:lms/Module/Vedio/VideoCubit.dart';
-import 'package:lms/Module/Vedio/VideoState.dart';
+import 'package:lms/Module/Course_content/Cubit/CommentCubit/CommentCubit.dart';
+import 'package:lms/Module/Course_content/View/Widget/ListViewCourses.dart';
+import 'package:lms/Module/Course_content/View/Widget/GridViewVedio.dart';
+import 'package:lms/Module/Course_content/Cubit/VideoCubit/VideoCubit.dart';
+import 'package:lms/Module/Course_content/Cubit/VideoCubit/VideoState.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
+import 'package:lms/Module/mainWidget/Errors/no-item.dart';
+import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 
-class VideoScreen extends StatelessWidget {
-  const VideoScreen({super.key});
-
+class CourseContentPage extends StatelessWidget {
+  CourseContentPage({super.key, required this.courseId});
+  int courseId;
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
     final TextEditingController controller = TextEditingController();
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => VideoCubit()..initializeVideo()),
+        BlocProvider(create: (_) => VideoCubit()),
         BlocProvider(create: (_) => CommentCubit()),
+        BlocProvider(
+            create: (_) =>
+                CourseContentCubit(courseId: 1)..getCourseContent(context)),
       ],
       child: Scaffold(
         backgroundColor: appColors.pageBackground,
         body: ListView(
-          children: [
+           children: [
             Container(
               width: double.infinity.w,
               height: 300.h,
@@ -83,6 +92,8 @@ class VideoScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20.h),
+
+            ///   comments
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 17.w),
               child: BlocBuilder<CommentCubit, bool>(
@@ -217,7 +228,25 @@ class VideoScreen extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 17.w),
-              child: GridviewVediocourses(),
+              child: BlocConsumer<CourseContentCubit, CourseContentState>(
+                listener: (context, state) {},
+                builder: (context, courseContentState) {
+                  CourseContentCubit courseContentCubit =
+                      context.read<CourseContentCubit>();
+                  if (courseContentState is CourseContentLoading)
+                    return GridviewVediocoursesShimmer();
+                  else if (courseContentState is CourseContentError)
+                    return NoConnection(message: courseContentState.message);
+                  else if (courseContentCubit.courseContentResponse!.data
+                       .allContents.isEmpty) return NoItem();
+                  return Container(
+                    height: 300.h,
+                    child: ListViewVediocourses(
+                        courseData: courseContentCubit
+                            .courseContentResponse!.data),
+                  );
+                },
+              ),
             ),
           ],
         ),

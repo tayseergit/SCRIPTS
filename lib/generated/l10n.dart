@@ -948,6 +948,26 @@ class S {
   String get update {
     return Intl.message('update', name: 'update', desc: '', args: []);
   }
+
+  /// `Completed`
+  String get Completed {
+    return Intl.message('Completed', name: 'Completed', desc: '', args: []);
+  }
+
+  /// `not Completed`
+  String get Not_Completed {
+    return Intl.message(
+      'not Completed',
+      name: 'Not_Completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quiz`
+  String get Quiz {
+    return Intl.message('Quiz', name: 'Quiz', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -116,7 +116,11 @@
   "my_contest": "مسابقتي",
   "profile_updated": "تم تحديث الملف الشخصي",
   "update":"تحديث",
-  "edite_image": "تحديث الصورة"
+  "edite_image": "تحديث الصورة",
+  
+  "Completed":"مكتمل",
+  "Not_Completed":"غير مكتمل",
+  "Quiz":"اختبار"
   
   
 

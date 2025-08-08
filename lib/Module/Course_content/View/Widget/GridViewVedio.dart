@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
-import 'package:lms/Module/Vedio/CommentCard.dart';
+import 'package:lms/Module/Course_content/View/Widget/CommentCard.dart';
 
 class Gridviewvedio extends StatelessWidget {
   const Gridviewvedio({super.key});

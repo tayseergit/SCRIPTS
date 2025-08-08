@@ -1,6 +1,6 @@
 // lib/cubits/video_cubit.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lms/Module/Vedio/VideoState.dart';
+import 'package:lms/Module/Course_content/Cubit/VideoCubit/VideoState.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 

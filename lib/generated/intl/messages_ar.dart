@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "All": MessageLookupByLibrary.simpleMessage("الكل"),
+    "Completed": MessageLookupByLibrary.simpleMessage("مكتمل"),
     "Contest": MessageLookupByLibrary.simpleMessage("المسابقات"),
     "Courses": MessageLookupByLibrary.simpleMessage("الدورات"),
     "Email_not_found": MessageLookupByLibrary.simpleMessage(
@@ -34,7 +35,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "More": MessageLookupByLibrary.simpleMessage("المزيد"),
     "My": MessageLookupByLibrary.simpleMessage("خاصة"),
+    "Not_Completed": MessageLookupByLibrary.simpleMessage("غير مكتمل"),
     "Project": MessageLookupByLibrary.simpleMessage("المشاريع"),
+    "Quiz": MessageLookupByLibrary.simpleMessage("اختبار"),
     "Send_code": MessageLookupByLibrary.simpleMessage("ارسال رمز التحقق"),
     "about_this_course": MessageLookupByLibrary.simpleMessage("عن هذه الدورة"),
     "achievement": MessageLookupByLibrary.simpleMessage("الإنجازات"),

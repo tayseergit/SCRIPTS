@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/CourseInfo/View/Pages/course_info_page.dart';
+import 'package:lms/Module/Course_content/View/Pages/course_conten_page.dart';
 import 'package:lms/Module/Courses/Model/course_response.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
@@ -22,7 +23,9 @@ class Cursescard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        pushTo(context: context, toPage: CourseInfoPage(courseId: course.id));
+        // pushTo(context: context, toPage: CourseInfoPage(courseId: course.id));
+        pushTo(
+            context: context, toPage: CourseContentPage(courseId: course.id));
       },
       child: Container(
         width: 180.w,
