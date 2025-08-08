@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
+import 'package:lms/Module/Edit_profile/Cubit/edite_profile_cubit.dart';
 import 'package:lms/Module/Edit_profile/View/Pages/edite_profile_page.dart';
 import 'package:lms/Module/Localization/localization.dart';
 import 'package:lms/Module/Setting/NotificationSwitchCubit.dart';
@@ -215,7 +216,15 @@ class Settingpage extends StatelessWidget {
                       ),
                       child: OnBoardingContainerMore(
                           onTap: () {
-                            pushTo(context: context, toPage: EditProfile());
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => BlocProvider(
+                                  create: (_) => EditeProfileCubit(),
+                                  child: EditProfile(),
+                                ),
+                              ),
+                            );
                           },
                           width: 330,
                           height: 60,

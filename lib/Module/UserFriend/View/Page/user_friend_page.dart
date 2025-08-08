@@ -10,6 +10,8 @@ import 'package:lms/Module/UserFriend/View/Widget/user_friend_gridview.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/Module/mainWidget/loading_container.dart';
 
 class UserFriendPage extends StatelessWidget {
   // final FriendsResponse? friendsResponse;
@@ -36,7 +38,12 @@ class UserFriendPage extends StatelessWidget {
           listener: (context, state) {},
           builder: (context, state) {
             if (state is UserFriendLoading) {
-              return const Center(child: CircularProgressIndicator());
+               return Center(
+                    child: SizedBox(
+                      height: 80.h,
+                      child: Loading(height: 50.h, width: 50.w),
+                    ),
+                  );
             } else if (state is UserFriendError) {
               return Center(child: NoConnection());
             } else if (state is UserFriendSuccess) {

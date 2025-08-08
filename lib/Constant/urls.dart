@@ -5,6 +5,7 @@ class Urls {
   static String baseUrl = "";
 
   static String teacher = '$baseUrl/users';
+  static String update = '$baseUrl/me/update';
 
   static teacherProfile(int id) {
     return '$baseUrl/users/$id';

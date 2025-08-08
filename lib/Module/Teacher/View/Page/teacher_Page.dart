@@ -9,6 +9,8 @@ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
+import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/Module/mainWidget/loading_container.dart';
 
 class TeacherPage extends StatelessWidget {
   const TeacherPage({super.key});
@@ -29,7 +31,12 @@ class TeacherPage extends StatelessWidget {
           builder: (context, state) {
             if (state is TeacherLoding &&
                 context.read<TeacherCubit>().lastUsers == null) {
-              return Center(child: CircularProgressIndicator());
+               return Center(
+                    child: SizedBox(
+                      height: 80.h,
+                      child: Loading(height: 50.h, width: 50.w),
+                    ),
+                  );
             } else if (state is TeacherError) {
               return Center(child: NoConnection());
             } else {

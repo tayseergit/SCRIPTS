@@ -22,6 +22,8 @@ import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/Module/mainWidget/loading_container.dart';
 
 class TeacherProfilePage extends StatelessWidget {
   final UserData? userData;
@@ -63,7 +65,12 @@ class TeacherProfilePage extends StatelessWidget {
           listener: (context, state) {},
           builder: (context, state) {
             if (state is TeacherProfileLoging) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(
+                child: SizedBox(
+                  height: 80.h,
+                  child: Loading(height: 50.h, width: 50.w),
+                ),
+              );
             } else if (state is TeacherProfileError) {
               return Center(child: NoConnection());
             } else if (state is TeacherProfileSuccess) {
@@ -227,8 +234,13 @@ class TeacherProfilePage extends StatelessWidget {
                                     TeacherCoursesState>(
                                   builder: (context, state) {
                                     if (state is TeacherCoursesLoding) {
-                                      return const Center(
-                                          child: CircularProgressIndicator());
+                                      return Center(
+                                        child: SizedBox(
+                                          height: 80.h,
+                                          child: Loading(
+                                              height: 50.h, width: 50.w),
+                                        ),
+                                      );
                                     } else if (state is TeacherCoursesSuccess) {
                                       final list =
                                           state.teacherCoursesModel.courses;
@@ -252,8 +264,13 @@ class TeacherProfilePage extends StatelessWidget {
                                     TeacherLearnpathState>(
                                   builder: (context, state) {
                                     if (state is TeacherLearnPathLoding) {
-                                      return const Center(
-                                          child: CircularProgressIndicator());
+                                      return Center(
+                                        child: SizedBox(
+                                          height: 80.h,
+                                          child: Loading(
+                                              height: 50.h, width: 50.w),
+                                        ),
+                                      );
                                     } else if (state
                                         is TeacherLearnPathSuccess) {
                                       final learnPathlist = state
@@ -278,8 +295,13 @@ class TeacherProfilePage extends StatelessWidget {
                                     TeacherContestState>(
                                   builder: (context, state) {
                                     if (state is TeacherContestLoding) {
-                                      return const Center(
-                                          child: CircularProgressIndicator());
+                                      return Center(
+                                        child: SizedBox(
+                                          height: 80.h,
+                                          child: Loading(
+                                              height: 50.h, width: 50.w),
+                                        ),
+                                      );
                                     } else if (state is TeacherContestSuccess) {
                                       final contestlist =
                                           state.teacherContestModel.contests;

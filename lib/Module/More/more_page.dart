@@ -116,7 +116,7 @@ class More extends StatelessWidget {
                                 height: 60,
                                 color: appColors.pageBackground,
                                 widget: Rowmore(
-                                  text: lang.change_password, 
+                                  text: lang.change_password,
                                   image: Images.changePassword,
                                   onTapp: () {
                                     if (CacheHelper.getToken() != null) {
@@ -182,16 +182,20 @@ class More extends StatelessWidget {
                                   text: lang.friends,
                                   image: Images.friend,
                                   onTapp: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            BlocProvider.value(
-                                          value: UserFriendCubit(),
-                                          child: UserFriendPage(),
+                                    if (CacheHelper.getToken() == null) {
+                                      showNoAuthDialog(context);
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              BlocProvider.value(
+                                            value: UserFriendCubit(),
+                                            child: UserFriendPage(),
+                                          ),
                                         ),
-                                      ),
-                                    );
+                                      );
+                                    }
                                   },
                                   height: 25,
                                   width: 25,
@@ -219,16 +223,20 @@ class More extends StatelessWidget {
                                   text: lang.participants,
                                   image: Images.participants,
                                   onTapp: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            BlocProvider.value(
-                                          value: ParticipantsCubit(),
-                                          child: ParticipantsPage(),
+                                    if (CacheHelper.getToken() == null) {
+                                      showNoAuthDialog(context);
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              BlocProvider.value(
+                                            value: ParticipantsCubit(),
+                                            child: ParticipantsPage(),
+                                          ),
                                         ),
-                                      ),
-                                    );
+                                      );
+                                    }
                                   },
                                   height: 25,
                                   width: 25,
@@ -256,16 +264,20 @@ class More extends StatelessWidget {
                                   text: lang.teachers,
                                   image: Images.teacher,
                                   onTapp: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            BlocProvider.value(
-                                          value: TeacherCubit(),
-                                          child: TeacherPage(),
+                                    if (CacheHelper.getToken() == null) {
+                                      showNoAuthDialog(context);
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              BlocProvider.value(
+                                            value: TeacherCubit(),
+                                            child: TeacherPage(),
+                                          ),
                                         ),
-                                      ),
-                                    );
+                                      );
+                                    }
                                   },
                                   height: 25,
                                   width: 25,
