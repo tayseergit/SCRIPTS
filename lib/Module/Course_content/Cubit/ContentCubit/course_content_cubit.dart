@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
+import 'package:lms/Module/Course_content/Cubit/VideoCubit/VideoCubit.dart';
 import 'package:lms/Module/Course_content/Model/course_content_response.dart';
 import 'package:lms/Module/Course_content/Cubit/ContentCubit/course_content_state.dart';
 import 'package:meta/meta.dart';
@@ -28,6 +30,7 @@ class CourseContentCubit extends Cubit<CourseContentState> {
         if (value.statusCode == 200) {
           courseContentResponse = CourseContentResponse.fromJson(value.data);
           emit(CourseContentSuccess());
+         
         } else {
           emit(CourseContentError(message: S.of(context).error_occurred));
         }

@@ -1,32 +1,32 @@
 class CourseContentResponse {
-  final bool successful;
-  final String message;
-  final CourseData data;
+  bool successful;
+  String message;
+  CourseData? data;
 
   CourseContentResponse({
     required this.successful,
     required this.message,
-    required this.data,
+    this.data,
   });
 
   factory CourseContentResponse.fromJson(Map<String, dynamic> json) {
     return CourseContentResponse(
-      successful: json['successful'],
-      message: json['message'],
-      data: CourseData.fromJson(json['data']),
+      successful: json['successful'] ?? false,
+      message: json['message'] ?? '',
+      data: json['data'] != null ? CourseData.fromJson(json['data']) : null,
     );
   }
 }
 
 class CourseData {
-  final int id;
-  final String title;
-  final String description;
-  final bool isEnrolled;
-  final int totalVideos;
-  final int watchedVideos;
-  final String courseProgress;
-  final List<ContentItem> allContents; // القائمة الموحدة لجميع المحتويات
+  int id;
+  String title;
+  String description;
+  bool isEnrolled;
+  int totalVideos;
+  int watchedVideos;
+  String courseProgress;
+  List<ContentItem> allContents;
 
   CourseData({
     required this.id,
@@ -40,109 +40,55 @@ class CourseData {
   });
 
   factory CourseData.fromJson(Map<String, dynamic> json) {
-    List<dynamic> contentList = json['content'] ?? [];
-
-    // تحويل كل عنصر إلى النوع المناسب من ContentItem (VideoItem أو TestItem)
-    List<ContentItem> contents = contentList.map<ContentItem>((item) {
-      if (item['type'] == 'video') {
-        return VideoItem.fromJson(item);
-      } else if (item['type'] == 'test') {
-        return TestItem.fromJson(item);
-      } else {
-        // يمكن إضافة أنواع أخرى هنا إذا وجدت
-        return ContentItem.fromJson(item);
-      }
-    }).toList();
-
     return CourseData(
-      id: json['id'],
-      title: json['title'],
-      description: json['description'],
-      isEnrolled: json['is_enrolled'],
-      totalVideos: json['total_videos'],
-      watchedVideos: json['watched_videos'],
-      courseProgress: json['course_progress'],
-      allContents: contents,
+      id: json['id'] ?? 0,
+      title: json['title'] ?? '',
+      description: json['description'] ?? '',
+      isEnrolled: json['is_enrolled'] ?? false,
+      totalVideos: json['total_videos'] ?? 0,
+      watchedVideos: json['watched_videos'] ?? 0,
+      courseProgress: json['course_progress'] ?? '',
+      allContents: (json['content'] as List<dynamic>)
+          .map((item) => ContentItem.fromJson(item))
+          .toList(),
     );
   }
 }
 
-/// الكلاس الأساسي لكل المحتويات
 class ContentItem {
-  final int id;
-  final String title;
-  final String type;
-  final int order;
+  int id;
+  String title;
+  String type;
+  int order;
+  String? progress; // for videos
+  bool? isFree; // for videos
+  bool? watched; // for videos
+  bool? isFinal; // for tests
+  bool? completed; // for tests
 
   ContentItem({
     required this.id,
     required this.title,
     required this.type,
     required this.order,
+    this.progress,
+    this.isFree,
+    this.watched,
+    this.isFinal,
+    this.completed,
   });
 
   factory ContentItem.fromJson(Map<String, dynamic> json) {
     return ContentItem(
-      id: json['id'],
-      title: json['title'],
-      type: json['type'],
-      order: json['order'],
+      id: json['id'] ?? 0,
+      title: json['title'] ?? '',
+      type: json['type'] ?? '',
+      order: json['order'] ?? 0,
+      progress: json['progress'],
+      isFree: json['is_free'],
+      watched: json['watched'],
+      isFinal: json['is_final'],
+      completed: json['completed'],
     );
   }
 }
-
-/// موديل خاص للفيديوهات يرث من ContentItem
-class VideoItem extends ContentItem {
-  final String progress;
-  final bool isFree;
-  final bool watched;
-
-  VideoItem({
-    required int id,
-    required String title,
-    required String type,
-    required int order,
-    required this.progress,
-    required this.isFree,
-    required this.watched,
-  }) : super(id: id, title: title, type: type, order: order);
-
-  factory VideoItem.fromJson(Map<String, dynamic> json) {
-    return VideoItem(
-      id: json['id'],
-      title: json['title'],
-      type: json['type'],
-      order: json['order'],
-      progress: json['progress'] ?? "0 %",
-      isFree: json['is_free'] ?? false,
-      watched: json['watched'] ?? false,
-    );
-  }
-}
-
-/// موديل خاص للاختبارات يرث من ContentItem
-class TestItem extends ContentItem {
-  final bool isFinal;
-  final bool completed;
-
-  TestItem({
-    required int id,
-    required String title,
-    required String type,
-    required int order,
-    required this.isFinal,
-    required this.completed,
-  }) : super(id: id, title: title, type: type, order: order);
-
-  factory TestItem.fromJson(Map<String, dynamic> json) {
-    return TestItem(
-      id: json['id'],
-      title: json['title'],
-      type: json['type'],
-      order: json['order'],
-      isFinal: json['is_final'] ?? false,
-      completed: json['completed'] ?? false,
-    );
-  }
-}
-    

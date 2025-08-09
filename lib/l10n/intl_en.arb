@@ -120,7 +120,9 @@
   "update":"update",
   "Completed":"Completed",
   "Not_Completed":"not Completed",
-  "Quiz":"Quiz"                             
+  "Quiz":"Quiz",
+  "fetch_video_failed":"Failed to fetch video data",
+  "invalid_video_url": "Invalid video URL"      
 
 
 }

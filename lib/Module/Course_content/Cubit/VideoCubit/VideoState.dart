@@ -1,19 +1,34 @@
-// lib/cubits/video_state.dart
-
-import 'package:chewie/chewie.dart';
-
-abstract class VideoState {}
-
-class VideoInitial extends VideoState {}
-
-class VideoLoading extends VideoState {}
-
-class VideoLoaded extends VideoState {
-  final ChewieController chewieController;
-  VideoLoaded(this.chewieController);
+abstract class VideoState {
+  final int? selectedVideo;
+  const VideoState({this.selectedVideo});
 }
 
-class VideoError extends VideoState {
+class VideoInitialYouTube extends VideoState {
+  const VideoInitialYouTube({int? selectedVideo})
+      : super(selectedVideo: selectedVideo);
+}
+
+class VideoLoadingYouTube extends VideoState {
+  const VideoLoadingYouTube({required int selectedVideo})
+      : super(selectedVideo: selectedVideo);
+}
+
+class VideoSuccessYouTube extends VideoState {
+  final String title;
+  final String description;
+  const VideoSuccessYouTube({
+    int? selectedVideo,
+    required this.title,
+    required this.description,
+  }) : super(selectedVideo: selectedVideo);
+}
+
+class VideoErrorYoutube extends VideoState {
   final String message;
-  VideoError(this.message);
+  const VideoErrorYoutube({int? selectedVideo, required this.message})
+      : super(selectedVideo: selectedVideo);
+}
+
+class VideoProgressUpdated extends VideoState {
+ 
 }

@@ -968,6 +968,26 @@ class S {
   String get Quiz {
     return Intl.message('Quiz', name: 'Quiz', desc: '', args: []);
   }
+
+  /// `Failed to fetch video data`
+  String get fetch_video_failed {
+    return Intl.message(
+      'Failed to fetch video data',
+      name: 'fetch_video_failed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid video URL`
+  String get invalid_video_url {
+    return Intl.message(
+      'Invalid video URL',
+      name: 'invalid_video_url',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

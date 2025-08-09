@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'; // add this
@@ -38,8 +39,7 @@ import 'generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load();
-
+await dotenv.load(fileName: ".env");
   await CacheHelper.init();
   await Firebase.initializeApp();
   await requestNotificationPermission();
@@ -68,6 +68,9 @@ class _MyAppState extends State<MyApp> {
 
     setupForegroundMessageListener();
     setupOnMessageOpenedAppListener();
+     SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.leanBack ,  
+  );
   }
 
   @override
@@ -102,7 +105,7 @@ class _MyAppState extends State<MyApp> {
                         ? ThemeData.dark()
                         : ThemeData.light(),
                     home: CourseContentPage(
-                      courseId: 10,
+                      courseId: 1,
                     ),
                   );
                 },

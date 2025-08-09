@@ -5,20 +5,22 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/Course_content/Cubit/ContentCubit/course_content_state.dart';
-import 'package:lms/Module/Course_content/View/Widget/GridviewVediocoursesShimmer.dart';
-import 'package:lms/Module/Course_content/View/Widget/course_content_shminer.dart';
+import 'package:lms/Module/Course_content/View/Widget/content/GridviewVediocoursesShimmer.dart';
+import 'package:lms/Module/Course_content/View/Widget/content/course_content_shminer.dart';
 import 'package:lms/Module/Course_content/cubit/ContentCubit/course_content_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/Course_content/Cubit/CommentCubit/CommentCubit.dart';
-import 'package:lms/Module/Course_content/View/Widget/ListViewCourses.dart';
-import 'package:lms/Module/Course_content/View/Widget/GridViewVedio.dart';
+import 'package:lms/Module/Course_content/View/Widget/content/ListViewCourses.dart';
+import 'package:lms/Module/Course_content/View/Widget/comment/GridViewComment.dart';
 import 'package:lms/Module/Course_content/Cubit/VideoCubit/VideoCubit.dart';
 import 'package:lms/Module/Course_content/Cubit/VideoCubit/VideoState.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/Errors/no-item.dart';
 import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/generated/l10n.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class CourseContentPage extends StatelessWidget {
   CourseContentPage({super.key, required this.courseId});
@@ -29,69 +31,83 @@ class CourseContentPage extends StatelessWidget {
     final TextEditingController controller = TextEditingController();
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => VideoCubit()),
+        BlocProvider(create: (_) => VideoCubit(courseId: courseId)),
         BlocProvider(create: (_) => CommentCubit()),
         BlocProvider(
-            create: (_) =>
-                CourseContentCubit(courseId: 1)..getCourseContent(context)),
+            create: (_) => CourseContentCubit(courseId: courseId)
+              ..getCourseContent(context)),
       ],
       child: Scaffold(
         backgroundColor: appColors.pageBackground,
         body: ListView(
-           children: [
+          children: [
             Container(
-              width: double.infinity.w,
-              height: 300.h,
-              child: BlocBuilder<VideoCubit, VideoState>(
-                builder: (context, state) {
-                  if (state is VideoLoading) {
-                    return Center(child: CircularProgressIndicator());
-                  } else if (state is VideoLoaded) {
-                    return Chewie(controller: state.chewieController);
-                  } else if (state is VideoError) {
-                    return Center(child: Text(state.message));
-                  } else {
-                    return Center(child: Text("جارٍ تحميل الفيديو..."));
-                  }
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 17.w),
-              child: Row(
-                children: [
-                  AuthText(
-                    text: '01',
-                    size: 24,
-                    color: appColors.secondText,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  AuthText(
-                    text: 'Welcome to the Course',
-                    size: 24,
-                    color: appColors.mainText,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ],
-              ),
-            ),
+                width: double.infinity.w,
+                height: 300.h,
+                child: BlocBuilder<VideoCubit, VideoState>(
+                  builder: (context, state) {
+                    if (state is VideoLoadingYouTube ||
+                        state is VideoInitialYouTube) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (state is VideoErrorYoutube) {
+                      return Center(child: Text(S.of(context).error_occurred));
+                    }
+                     final cubit = context.read<VideoCubit>();
+                      return Column(
+                        children: [
+                          YoutubePlayer(
+                            controller: cubit.youtubeController!,
+                            showVideoProgressIndicator: true,
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 17.w),
+                            child: Row(
+                              children: [
+                                AuthText(
+                                  text: (cubit.videoDataResponse!.data.order)
+                                      .toString()
+                                      .padLeft(2, '0'),
+                                  size: 24,
+                                  color: appColors.secondText,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
+                                Container(
+                                  width: 200.w,
+                                  child: AuthText(
+                                    text: cubit.videoDataResponse!.data.title,
+                                    size: 24,
+                                    color: appColors.mainText,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 25.w),
+                            child: Container(
+                              width: 280.w,
+                              child: AuthText(
+                                text: cubit.videoDataResponse!.data.description,
+                                size: 15,
+                                color: appColors.secondText,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                  },
+                )),
             SizedBox(
               height: 12.h,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 17.w),
-              child: AuthText(
-                text:
-                    'Ultrices vitae auctor eu augue. Tincidunt id aliquet risus.',
-                size: 15,
-                color: appColors.secondText,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            SizedBox(height: 20.h),
 
             ///   comments
             Padding(
@@ -151,7 +167,7 @@ class CourseContentPage extends StatelessWidget {
                           ),
                           if (isExpanded) ...[
                             SizedBox(height: 10.h),
-                            Gridviewvedio(),
+                            GridViewComment(),
                             SizedBox(height: 100.h),
                             Padding(
                               padding: EdgeInsets.symmetric(
@@ -229,7 +245,20 @@ class CourseContentPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 17.w),
               child: BlocConsumer<CourseContentCubit, CourseContentState>(
-                listener: (context, state) {},
+                listener: (context, state) {
+                  CourseContentCubit courseContentCubit =
+                      context.read<CourseContentCubit>();
+                  if (state is CourseContentSuccess) {
+                    if (courseContentCubit
+                        .courseContentResponse!.data!.allContents.isNotEmpty) {
+                      context.read<VideoCubit>().loadVideoFromApi(
+                            context,
+                            videoId: courseContentCubit
+                                .courseContentResponse!.data!.allContents[0].id,
+                          );
+                    }
+                  }
+                },
                 builder: (context, courseContentState) {
                   CourseContentCubit courseContentCubit =
                       context.read<CourseContentCubit>();
@@ -237,13 +266,14 @@ class CourseContentPage extends StatelessWidget {
                     return GridviewVediocoursesShimmer();
                   else if (courseContentState is CourseContentError)
                     return NoConnection(message: courseContentState.message);
-                  else if (courseContentCubit.courseContentResponse!.data
-                       .allContents.isEmpty) return NoItem();
+                  else if (courseContentCubit.courseContentResponse!.data!
+                      .allContents.isEmpty) return NoItem();
+
                   return Container(
-                    height: 300.h,
+                    height: 350.h,
                     child: ListViewVediocourses(
-                        courseData: courseContentCubit
-                            .courseContentResponse!.data),
+                        courseData:
+                            courseContentCubit.courseContentResponse!.data!),
                   );
                 },
               ),

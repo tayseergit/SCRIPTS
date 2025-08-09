@@ -130,6 +130,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "error_old_password": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور غير صحيحة",
     ),
+    "fetch_video_failed": MessageLookupByLibrary.simpleMessage(
+      "فشل جلب بيانات الفيديو",
+    ),
     "field_and_rating_are_required": MessageLookupByLibrary.simpleMessage(
       "الحقل والتقييم مطلوبان",
     ),
@@ -145,6 +148,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "google": MessageLookupByLibrary.simpleMessage("جوجل"),
     "invalid_email": MessageLookupByLibrary.simpleMessage(
       "البريد الإلكتروني غير صالح",
+    ),
+    "invalid_video_url": MessageLookupByLibrary.simpleMessage(
+      "رابط الفيديو غير صالح",
     ),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),

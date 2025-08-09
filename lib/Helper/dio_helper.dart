@@ -14,6 +14,7 @@ class DioHelper {
 
     final baseUrl = "http://$ip:8000";
     final baseUrlApi = "$baseUrl/api/";
+print("Base URL: $baseUrl");
 
     _dio = Dio(
       BaseOptions(

@@ -9,11 +9,9 @@ import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/generated/l10n.dart';
 
 class TestCourseCard extends StatelessWidget {
-  final TestItem testItem;
-  final int index;
-
-  TestCourseCard({Key? key, required this.testItem, required this.index})
-      : super(key: key);
+  final ContentItem testItem;
+  int courseId;
+  TestCourseCard({Key? key, required this.testItem, required this.courseId});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,7 @@ class TestCourseCard extends StatelessWidget {
             color: appColors.fieldBackground,
             border: Border.all(color: appColors.border)),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 8.h),
           child: Row(
             children: [
               // أيقونة تمثل الاختبار
@@ -49,27 +47,26 @@ class TestCourseCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         AuthText(
-                          text: (index).toString().padLeft(2, '0'),
+                          text: (testItem.order).toString().padLeft(2, '0'),
                           size: 20,
                           color: appColors.secondText,
                           fontWeight: FontWeight.w500,
                         ),
                         SizedBox(width: 6.w),
-                        Expanded(
-                          child: AuthText(
-                            text: S.of(context).Quiz,
-                            size: 16,
-                            color: appColors.purple,
-                            fontWeight: FontWeight.w700,
-                          ),
+                        AuthText(
+                          text: S.of(context).Quiz,
+                          size: 16,
+                          color: appColors.purple,
+                          fontWeight: FontWeight.w700,
                         ),
                         AuthText(
-                          text: testItem.completed
+                          text: testItem.completed!
                               ? S.of(context).Completed
                               : S.of(context).Not_Completed,
                           size: 12,
-                          color:
-                              testItem.completed ? appColors.ok : appColors.red,
+                          color: testItem.completed!
+                              ? appColors.ok
+                              : appColors.red,
                           fontWeight: FontWeight.w500,
                         ),
                         SizedBox(
@@ -96,16 +93,15 @@ class TestCourseCard extends StatelessWidget {
               ),
 
               // أيقونة حالة الاختبار (يمكن إضافة تفاعل عند الضغط)
-              IconButton(
-                onPressed: () {
-                  // اضف الوظيفة هنا عند الحاجة
-                },
-                icon: Icon(
-                  testItem.completed
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  testItem.completed!
                       ? Icons.done
-                      : Icons.pending_actions_outlined,
-                  color: testItem.completed ? appColors.ok : appColors.ok,
-                  size: 30.sp,
+                      : Icons.play_circle_fill_outlined,
+                  color: testItem.completed! ? appColors.ok : appColors.orang,
+                  size: 50.sp,
                 ),
               ),
             ],

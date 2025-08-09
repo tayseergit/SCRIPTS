@@ -132,6 +132,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "error_old_password": MessageLookupByLibrary.simpleMessage(
       "wrong password",
     ),
+    "fetch_video_failed": MessageLookupByLibrary.simpleMessage(
+      "Failed to fetch video data",
+    ),
     "field_and_rating_are_required": MessageLookupByLibrary.simpleMessage(
       "Field and rating are required",
     ),
@@ -145,6 +148,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "github_url": MessageLookupByLibrary.simpleMessage("GitHub URL"),
     "google": MessageLookupByLibrary.simpleMessage("Google"),
     "invalid_email": MessageLookupByLibrary.simpleMessage("Invalid Email"),
+    "invalid_video_url": MessageLookupByLibrary.simpleMessage(
+      "Invalid video URL",
+    ),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "mentor": MessageLookupByLibrary.simpleMessage("Mentor"),

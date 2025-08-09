@@ -120,8 +120,10 @@
   
   "Completed":"مكتمل",
   "Not_Completed":"غير مكتمل",
-  "Quiz":"اختبار"
+  "Quiz":"اختبار",
   
+  "fetch_video_failed":"فشل جلب بيانات الفيديو",
+  "invalid_video_url": "رابط الفيديو غير صالح"
   
 
 
