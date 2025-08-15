@@ -38,7 +38,8 @@ class LearnPathInfoCubit extends Cubit<LearnPathInfoState> {
       final info = LearningPathInfoModel.fromJson(infoResponse.data);
       print("✅ Info fetched");
 
-      print("🔄 Fetching learn path courses from: ${Urls.learnPathInfocourse(id)}");
+      print(
+          "🔄 Fetching learn path courses from: ${Urls.learnPathInfocourse(id)}");
       final coursesResponse = await DioHelper.getData(
         url: Urls.learnPathInfocourse(id),
         headers: {
@@ -46,13 +47,14 @@ class LearnPathInfoCubit extends Cubit<LearnPathInfoState> {
           'Accept': 'application/json',
         },
       );
-
+      print(coursesResponse.statusCode);  
       if (coursesResponse.statusCode != 200) {
         emit(LearnPathInfoError(masseg: 'Failed to fetch path courses'));
         return;
       }
 
-      final courses = LearnPathInfoCourseResponse.fromJson(coursesResponse.data);
+      final courses =
+          LearnPathInfoCourseResponse.fromJson(coursesResponse.data);
       print("✅ Courses fetched");
 
       emit(LearnPathAllDataSuccess(info: info, courses: courses));

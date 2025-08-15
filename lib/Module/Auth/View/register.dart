@@ -36,11 +36,11 @@ class Register extends StatelessWidget {
           listener: (context, state) {
             AuthCubit authCubit = context.read<AuthCubit>();
             if (state is SignUpSuccess) {
-              CustomSnackbar.show(
-                fillColor: appColors.ok,
-                context: context,
-                message: lang.code_sent,
-              );
+              // CustomSnackbar.show(
+              //   fillColor: appColors.ok,
+              //   context: context,
+              //   message: lang.code_sent,
+              // );
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 pushTo(
                     context: context,

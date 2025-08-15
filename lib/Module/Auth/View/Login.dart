@@ -52,6 +52,8 @@ class Login extends StatelessWidget {
         //     message: "Login Completed",
         //   );
         // });
+
+         
       } else if (state is CheckInfo) {
         customSnackBar(
             context: context,

@@ -23,14 +23,17 @@ import 'package:lms/Module/Courses/View/Pages/courses_page.dart';
 import 'package:lms/Module/Localization/localization.dart';
 import 'package:lms/Module/More/more_page.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
+import 'package:lms/Module/PercentIndicatorTest/PercentIndicatorPage.dart';
 import 'package:lms/Module/Project/View/Page/projectPage.dart';
 import 'package:lms/Module/Setting/SettingPage.dart';
 import 'package:lms/Module/Stripe/stripe_page.dart';
 import 'package:lms/Module/StudentsProfile/View/Pages/student_profile_page.dart';
 import 'package:lms/Module/StudentsProfile/cubit/student_profile_cubit.dart';
+import 'package:lms/Module/CourseTest/View/Pages/course_Test_Page.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/Course_content/View/Pages/course_conten_page.dart';
+import 'package:lms/Module/leaderboardforpastcontest/leaderboardforpastcontestPage.dart';
 
 // Import your generated localization file
 import 'generated/l10n.dart';
@@ -39,7 +42,7 @@ import 'generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: ".env");
   await CacheHelper.init();
   await Firebase.initializeApp();
   await requestNotificationPermission();
@@ -68,9 +71,10 @@ class _MyAppState extends State<MyApp> {
 
     setupForegroundMessageListener();
     setupOnMessageOpenedAppListener();
-     SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.leanBack ,  
-  );
+    // SystemChrome.setEnabledSystemUIMode(
+    //   SystemUiMode.leanBack,
+    // );
+    print("token : ${CacheHelper.getToken()}");
   }
 
   @override
@@ -92,22 +96,24 @@ class _MyAppState extends State<MyApp> {
                 splitScreenMode: true,
                 builder: (context, child) {
                   return MaterialApp(
-                    debugShowCheckedModeBanner: false,
-                    locale: locale,
-                    supportedLocales: S.delegate.supportedLocales,
-                    localizationsDelegates: const [
-                      S.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
-                    theme: themeState.isDarkMode
-                        ? ThemeData.dark()
-                        : ThemeData.light(),
-                    home: CourseContentPage(
-                      courseId: 1,
-                    ),
-                  );
+                      debugShowCheckedModeBanner: false,
+                      locale: locale,
+                      supportedLocales: S.delegate.supportedLocales,
+                      localizationsDelegates: const [
+                        S.delegate,
+                        GlobalMaterialLocalizations.delegate,
+                        GlobalWidgetsLocalizations.delegate,
+                        GlobalCupertinoLocalizations.delegate,
+                      ],
+                      theme: themeState.isDarkMode
+                          ? ThemeData.dark()
+                          : ThemeData.light(),
+                      home: Login()
+                      // home: CourseContentPage(
+                      //   //   testId: 1,
+                      //   courseId: 1,
+                      // ),
+                      );
                 },
               );
             },

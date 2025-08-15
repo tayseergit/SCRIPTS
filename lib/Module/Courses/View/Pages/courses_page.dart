@@ -12,6 +12,7 @@ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/generated/l10n.dart';
 
 class CoursesPage extends StatelessWidget {
   const CoursesPage({super.key});
@@ -31,7 +32,7 @@ class CoursesPage extends StatelessWidget {
             backgroundColor: appColors.pageBackground,
             title: Center(
               child: AuthText(
-                text: 'Courses',
+                text: S.of(context).courses,
                 size: 24.sp,
                 color: appColors.mainText,
                 fontWeight: FontWeight.w700,
@@ -61,11 +62,11 @@ class CoursesPage extends StatelessWidget {
                       cubit.getAllCourse();
                     },
                     controller: cubit.searchController,
-                    hintText: "choose course ?",
+                    hintText: S.of(context).choose_course,
                   ),
                   SizedBox(height: 15.h),
                   TabButtons(
-                    labels: cubit.labels,
+                    labels: cubit.getLabels(context),
                     selectedTab: cubit.selectedTab,
                     onTap: cubit.changeTab,
                   ),
@@ -81,6 +82,7 @@ class CoursesPage extends StatelessWidget {
                                       SizedBox(height: 200.h, child: NoItem()),
                                 )
                               : Gridviewcourses(cubit: cubit),
+                  
                 ],
               );
             },

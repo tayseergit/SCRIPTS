@@ -11,7 +11,7 @@ import 'package:lms/Module/mainWidget/Container.dart';
 
 class LeaderListView extends StatelessWidget {
   const LeaderListView({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
@@ -121,7 +121,7 @@ class LeaderListView extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(25.r),
-                  topRight: Radius.circular(25.r),
+                  topRight: Radius.circular(25.r)
                 ),
               ),
             ),

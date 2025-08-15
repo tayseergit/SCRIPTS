@@ -88,8 +88,7 @@
   "save_as_draft": "Save as draft",
   "next": "Next",
   "Login_or_SignUp": "Login or Sign Up",
-  "Courses": "Courses",
-  "Learn_Path": "Learn Path",
+   "Learn_Path": "Learn Path",
   "Contest": "Contest",
   "Project": "Project",
   "More": "More",
@@ -122,7 +121,27 @@
   "Not_Completed":"not Completed",
   "Quiz":"Quiz",
   "fetch_video_failed":"Failed to fetch video data",
-  "invalid_video_url": "Invalid video URL"      
+  "invalid_video_url": "Invalid video URL"     ,
+   "your_best_score": "Your best Score",
+    "restart_quiz": "Restart Quiz",
+    "back_to_video": "Back to video",
+    "test": "TEST",
+    "question": "Question",
+    "back": "Back",
+    "choose_course":"choose course",
+    "choose_learn_path":"choose learn path",
+
+      "watchLater": "Watch later",
+      "view":"View",
+      "NoItem":"no items",
+      "active":"active",
+      "ended":"ended",
+      "coming":"coming",
+      "join":"join",
+      "contest_register":"Register"
+
+
+
 
 
 }

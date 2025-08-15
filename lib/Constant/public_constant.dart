@@ -29,7 +29,7 @@ Future<dynamic> pushTo(
       type: PageTransitionType.rightToLeft));
 }
 
-void pushAndRemoveUntiTo(
+void pushAndRemoveUntilTo(
     {required BuildContext context,
     required Widget toPage,
     PageTransitionType? pageTransitionType,

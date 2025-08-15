@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Module/Contest/Model/contest_response.dart';
+import 'package:lms/generated/l10n.dart';
 import 'contest_state.dart';
 
 class ContestCubit extends Cubit<ContestState> {
@@ -16,9 +17,18 @@ class ContestCubit extends Cubit<ContestState> {
 
   final searchController = TextEditingController();
 
-  final labels = ['active', 'coming', 'ended'];
+  final labels = [ 'ended','active', 'coming',];
   int selectedTab = 0;
 
+
+
+  List<String> getLabels(BuildContext context) {
+    return [
+      S.of(context).ended,
+      S.of(context).active,
+       S.of(context).coming,
+    ];
+  }
   void changeTab(int index) {
     selectedTab = index;
     emit(Selected());

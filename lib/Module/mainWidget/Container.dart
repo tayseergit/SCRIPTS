@@ -35,7 +35,8 @@ class OnBoardingContainer extends StatelessWidget {
         height: height?.h,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          // border: Border.all(color: boarderColor ?? appColors.border),
+          border: Border.all(
+              color: boarderColor ?? appColors.border.withOpacity(0)),
           color: color,
           borderRadius: BorderRadius.circular(radius!.r),
         ),

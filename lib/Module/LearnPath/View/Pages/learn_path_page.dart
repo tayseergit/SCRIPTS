@@ -13,6 +13,7 @@ import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/Errors/no-item.dart';
 import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
+import 'package:lms/generated/l10n.dart';
 
 class LearnpathPage extends StatelessWidget {
   const LearnpathPage({super.key});
@@ -32,7 +33,7 @@ class LearnpathPage extends StatelessWidget {
             backgroundColor: appColors.pageBackground,
             centerTitle: true,
             title: AuthText(
-              text: 'Learn Path',
+              text: S.of(context).Learn_Path,
               size: 24.sp,
               color: appColors.mainText,
               fontWeight: FontWeight.w700,
@@ -55,11 +56,11 @@ class LearnpathPage extends StatelessWidget {
                       cubit.getAllLearnPath();
                     },
                     controller: cubit.searchController,
-                    hintText: "choose learn path ?",
+                    hintText: S.of(context).choose_learn_path,
                   ),
                   SizedBox(height: 15.h),
                   TabButtons(
-                    labels: cubit.labels,
+                    labels: cubit.getLabels(context),
                     selectedTab: cubit.selectedTab,
                     onTap: cubit.changeTab,
                   ),

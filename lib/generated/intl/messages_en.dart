@@ -25,12 +25,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "All": MessageLookupByLibrary.simpleMessage("All"),
     "Completed": MessageLookupByLibrary.simpleMessage("Completed"),
     "Contest": MessageLookupByLibrary.simpleMessage("Contest"),
-    "Courses": MessageLookupByLibrary.simpleMessage("Courses"),
     "Email_not_found": MessageLookupByLibrary.simpleMessage("Email not found"),
     "Learn_Path": MessageLookupByLibrary.simpleMessage("Learn Path"),
     "Login_or_SignUp": MessageLookupByLibrary.simpleMessage("Login or Sign Up"),
     "More": MessageLookupByLibrary.simpleMessage("More"),
     "My": MessageLookupByLibrary.simpleMessage("My"),
+    "NoItem": MessageLookupByLibrary.simpleMessage("no items"),
     "Not_Completed": MessageLookupByLibrary.simpleMessage("not Completed"),
     "Project": MessageLookupByLibrary.simpleMessage("Project"),
     "Quiz": MessageLookupByLibrary.simpleMessage("Quiz"),
@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "About this course",
     ),
     "achievement": MessageLookupByLibrary.simpleMessage("Achievement"),
+    "active": MessageLookupByLibrary.simpleMessage("active"),
     "add_a_payment_method": MessageLookupByLibrary.simpleMessage(
       "Add a payment method",
     ),
@@ -57,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "attent_admin_To_Accept": MessageLookupByLibrary.simpleMessage(
       "Please wait for the admin to accept.",
     ),
+    "back": MessageLookupByLibrary.simpleMessage("Back"),
+    "back_to_video": MessageLookupByLibrary.simpleMessage("Back to video"),
     "basic_information": MessageLookupByLibrary.simpleMessage(
       "Basic Information",
     ),
@@ -73,11 +76,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "Check your email or password",
     ),
     "check_info": MessageLookupByLibrary.simpleMessage("check information"),
+    "choose_course": MessageLookupByLibrary.simpleMessage("choose course"),
     "choose_file_to_upload": MessageLookupByLibrary.simpleMessage(
       "Choose File to upload",
     ),
+    "choose_learn_path": MessageLookupByLibrary.simpleMessage(
+      "choose learn path",
+    ),
     "close": MessageLookupByLibrary.simpleMessage("Close"),
     "code_sent": MessageLookupByLibrary.simpleMessage("code sendt"),
+    "coming": MessageLookupByLibrary.simpleMessage("coming"),
     "confirmNewPassword": MessageLookupByLibrary.simpleMessage(
       "Confirm New Password",
     ),
@@ -87,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "connection_error": MessageLookupByLibrary.simpleMessage(
       "Connection Error",
     ),
+    "contest_register": MessageLookupByLibrary.simpleMessage("Register"),
     "course_completed": MessageLookupByLibrary.simpleMessage(
       "Course Completed",
     ),
@@ -111,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "This email is already in use",
     ),
     "en": MessageLookupByLibrary.simpleMessage("Ar"),
+    "ended": MessageLookupByLibrary.simpleMessage("ended"),
     "enroll": MessageLookupByLibrary.simpleMessage("Enroll"),
     "enter_demo_url": MessageLookupByLibrary.simpleMessage("Enter demo link"),
     "enter_description": MessageLookupByLibrary.simpleMessage(
@@ -151,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalid_video_url": MessageLookupByLibrary.simpleMessage(
       "Invalid video URL",
     ),
+    "join": MessageLookupByLibrary.simpleMessage("join"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "mentor": MessageLookupByLibrary.simpleMessage("Mentor"),
@@ -179,6 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "push_notifications": MessageLookupByLibrary.simpleMessage(
       "Push notifications",
     ),
+    "question": MessageLookupByLibrary.simpleMessage("Question"),
     "read_more": MessageLookupByLibrary.simpleMessage("Read More"),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "register_completed": MessageLookupByLibrary.simpleMessage(
@@ -189,6 +201,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "reset_password_done": MessageLookupByLibrary.simpleMessage(
       "Reset password done",
     ),
+    "restart_quiz": MessageLookupByLibrary.simpleMessage("Restart Quiz"),
     "retry": MessageLookupByLibrary.simpleMessage("Retry"),
     "save_as_draft": MessageLookupByLibrary.simpleMessage("Save as draft"),
     "search_project": MessageLookupByLibrary.simpleMessage("search project"),
@@ -203,9 +216,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "teachers": MessageLookupByLibrary.simpleMessage("Teachers"),
     "technologies": MessageLookupByLibrary.simpleMessage("Technologies"),
+    "test": MessageLookupByLibrary.simpleMessage("TEST"),
     "total_points": MessageLookupByLibrary.simpleMessage("Total Points"),
     "update": MessageLookupByLibrary.simpleMessage("update"),
     "verify_code": MessageLookupByLibrary.simpleMessage("Verify Code"),
+    "view": MessageLookupByLibrary.simpleMessage("View"),
     "watch": MessageLookupByLibrary.simpleMessage("Watch"),
+    "watchLater": MessageLookupByLibrary.simpleMessage("Watch later"),
+    "your_best_score": MessageLookupByLibrary.simpleMessage("Your best Score"),
   };
 }

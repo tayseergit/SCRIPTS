@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/generated/l10n.dart';
 
 class NoItem extends StatelessWidget {
   NoItem({super.key, this.height = 200, this.width = 200});
@@ -45,7 +46,7 @@ class NoItem extends StatelessWidget {
               FittedBox(
                 fit: BoxFit.scaleDown,
                 child: AuthText(
-                  text: "No Items",
+                  text: S.of(context).NoItem,
                   size: 16.sp, // يمكن ضبطها بعامل نسبي أيضاً إن شئت
                   color: appColors.secondText,
                   fontWeight: FontWeight.w500,

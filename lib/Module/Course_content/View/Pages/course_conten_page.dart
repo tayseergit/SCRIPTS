@@ -52,57 +52,57 @@ class CourseContentPage extends StatelessWidget {
                     } else if (state is VideoErrorYoutube) {
                       return Center(child: Text(S.of(context).error_occurred));
                     }
-                     final cubit = context.read<VideoCubit>();
-                      return Column(
-                        children: [
-                          YoutubePlayer(
-                            controller: cubit.youtubeController!,
-                            showVideoProgressIndicator: true,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 17.w),
-                            child: Row(
-                              children: [
-                                AuthText(
-                                  text: (cubit.videoDataResponse!.data.order)
-                                      .toString()
-                                      .padLeft(2, '0'),
-                                  size: 24,
-                                  color: appColors.secondText,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                Container(
-                                  width: 200.w,
-                                  child: AuthText(
-                                    text: cubit.videoDataResponse!.data.title,
-                                    size: 24,
-                                    color: appColors.mainText,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 25.w),
-                            child: Container(
-                              width: 280.w,
-                              child: AuthText(
-                                text: cubit.videoDataResponse!.data.description,
-                                size: 15,
+                    final cubit = context.read<VideoCubit>();
+                    return Column(
+                      children: [
+                        YoutubePlayer(
+                          controller: cubit.youtubeController!,
+                          showVideoProgressIndicator: true,
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 17.w),
+                          child: Row(
+                            children: [
+                              AuthText(
+                                text: (cubit.videoDataResponse!.data.order)
+                                    .toString()
+                                    .padLeft(2, '0'),
+                                size: 24,
                                 color: appColors.secondText,
-                                fontWeight: FontWeight.w400,
+                                fontWeight: FontWeight.w500,
                               ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Container(
+                                width: 200.w,
+                                child: AuthText(
+                                  text: cubit.videoDataResponse!.data.title,
+                                  size: 24,
+                                  color: appColors.mainText,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 25.w),
+                          child: Container(
+                            width: 280.w,
+                            child: AuthText(
+                              text: cubit.videoDataResponse!.data.description,
+                              size: 15,
+                              color: appColors.secondText,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
-                        ],
-                      );
+                        ),
+                      ],
+                    );
                   },
                 )),
             SizedBox(

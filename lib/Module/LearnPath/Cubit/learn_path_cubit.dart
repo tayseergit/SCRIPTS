@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Module/LearnPath/Model/learn_path_reaponse.dart';
+import 'package:lms/generated/l10n.dart';
 import 'package:meta/meta.dart';
 
 part 'learn_path_state.dart';
@@ -23,6 +24,15 @@ class LearnPathCubit extends Cubit<LearnPathState> {
   final labels = ['All', 'Enroll', 'Watch later'];
   int selectedTab = 0;
   LearningPathsResponse? learningPathsResponse;
+
+
+  List<String> getLabels(BuildContext context) {
+    return [
+      S.of(context).All,
+      S.of(context).enroll,
+       S.of(context).watchLater,
+    ];
+  }
 
   void changeTab(int index) {
     selectedTab = index;

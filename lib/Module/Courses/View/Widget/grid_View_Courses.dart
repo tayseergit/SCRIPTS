@@ -15,7 +15,7 @@ class Gridviewcourses extends StatelessWidget {
     ThemeState appColors = context.watch<ThemeCubit>().state;
 
     return Container(
-      height: 510.h, // Responsive height
+      height: 525.h, // Responsive height
       color: appColors.pageBackground,
       child: GridView.builder(
         // padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),

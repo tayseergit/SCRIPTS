@@ -25,22 +25,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "All": MessageLookupByLibrary.simpleMessage("الكل"),
     "Completed": MessageLookupByLibrary.simpleMessage("مكتمل"),
     "Contest": MessageLookupByLibrary.simpleMessage("المسابقات"),
-    "Courses": MessageLookupByLibrary.simpleMessage("الدورات"),
     "Email_not_found": MessageLookupByLibrary.simpleMessage(
       "الايميل غير موجود",
     ),
-    "Learn_Path": MessageLookupByLibrary.simpleMessage("مسار التعلم"),
+    "Learn_Path": MessageLookupByLibrary.simpleMessage("مسارات التعلم"),
     "Login_or_SignUp": MessageLookupByLibrary.simpleMessage(
       "تسجيل الدخول أو الاشتراك",
     ),
     "More": MessageLookupByLibrary.simpleMessage("المزيد"),
     "My": MessageLookupByLibrary.simpleMessage("خاصة"),
+    "NoItem": MessageLookupByLibrary.simpleMessage("لا يوجد محتوى"),
     "Not_Completed": MessageLookupByLibrary.simpleMessage("غير مكتمل"),
     "Project": MessageLookupByLibrary.simpleMessage("المشاريع"),
     "Quiz": MessageLookupByLibrary.simpleMessage("اختبار"),
     "Send_code": MessageLookupByLibrary.simpleMessage("ارسال رمز التحقق"),
     "about_this_course": MessageLookupByLibrary.simpleMessage("عن هذه الدورة"),
     "achievement": MessageLookupByLibrary.simpleMessage("الإنجازات"),
+    "active": MessageLookupByLibrary.simpleMessage("فعالة"),
     "add_a_payment_method": MessageLookupByLibrary.simpleMessage(
       "إضافة طريقة دفع",
     ),
@@ -57,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "attent_admin_To_Accept": MessageLookupByLibrary.simpleMessage(
       "يرجى الانتظار حتى يقبل المشرف.",
     ),
+    "back": MessageLookupByLibrary.simpleMessage("رجوع"),
+    "back_to_video": MessageLookupByLibrary.simpleMessage("عودة إلى الفيديو"),
     "basic_information": MessageLookupByLibrary.simpleMessage(
       "المعلومات الأساسية",
     ),
@@ -75,11 +78,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "تحقق من البريد الإلكتروني أو كلمة المرور",
     ),
     "check_info": MessageLookupByLibrary.simpleMessage("تاكد من المعلومات"),
+    "choose_course": MessageLookupByLibrary.simpleMessage("اختر كورس"),
     "choose_file_to_upload": MessageLookupByLibrary.simpleMessage(
       "اختر ملفًا للتحميل",
     ),
+    "choose_learn_path": MessageLookupByLibrary.simpleMessage("اختر مسار"),
     "close": MessageLookupByLibrary.simpleMessage("إغلاق"),
     "code_sent": MessageLookupByLibrary.simpleMessage("تم ارسال رمز التحقق"),
+    "coming": MessageLookupByLibrary.simpleMessage("مستقبلية"),
     "confirmNewPassword": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور الجديدة",
     ),
@@ -87,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تأكيد كلمة المرور",
     ),
     "connection_error": MessageLookupByLibrary.simpleMessage("خطأ في الاتصال"),
+    "contest_register": MessageLookupByLibrary.simpleMessage("نسجيل"),
     "course_completed": MessageLookupByLibrary.simpleMessage(
       "الدورات المكتملة",
     ),
@@ -107,7 +114,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "البريد الإلكتروني مستخدم بالفعل",
     ),
     "en": MessageLookupByLibrary.simpleMessage("En"),
-    "enroll": MessageLookupByLibrary.simpleMessage("التحق"),
+    "ended": MessageLookupByLibrary.simpleMessage("منتهية"),
+    "enroll": MessageLookupByLibrary.simpleMessage("مسجل"),
     "enter_demo_url": MessageLookupByLibrary.simpleMessage(
       "أدخل رابط العرض التجريبي",
     ),
@@ -152,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalid_video_url": MessageLookupByLibrary.simpleMessage(
       "رابط الفيديو غير صالح",
     ),
+    "join": MessageLookupByLibrary.simpleMessage("انضمام"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "mentor": MessageLookupByLibrary.simpleMessage("المدرب"),
@@ -178,6 +187,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "project_links": MessageLookupByLibrary.simpleMessage("روابط المشروع"),
     "project_title": MessageLookupByLibrary.simpleMessage("عنوان المشروع"),
     "push_notifications": MessageLookupByLibrary.simpleMessage("إشعارات الدفع"),
+    "question": MessageLookupByLibrary.simpleMessage("سؤال"),
     "read_more": MessageLookupByLibrary.simpleMessage("المزيد"),
     "register": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
     "register_completed": MessageLookupByLibrary.simpleMessage(
@@ -190,6 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "reset_password_done": MessageLookupByLibrary.simpleMessage(
       "تم إعادة تعيين كلمة المرور",
     ),
+    "restart_quiz": MessageLookupByLibrary.simpleMessage("أعد الاختبار"),
     "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "save_as_draft": MessageLookupByLibrary.simpleMessage("حفظ كمسودة"),
     "search_project": MessageLookupByLibrary.simpleMessage("ابحث عن مشروع"),
@@ -204,9 +215,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
     "teachers": MessageLookupByLibrary.simpleMessage("معلمون"),
     "technologies": MessageLookupByLibrary.simpleMessage("التقنيات"),
+    "test": MessageLookupByLibrary.simpleMessage("اختبار"),
     "total_points": MessageLookupByLibrary.simpleMessage("إجمالي النقاط"),
     "update": MessageLookupByLibrary.simpleMessage("تحديث"),
     "verify_code": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
+    "view": MessageLookupByLibrary.simpleMessage("عرض"),
     "watch": MessageLookupByLibrary.simpleMessage("مشاهدة"),
+    "watchLater": MessageLookupByLibrary.simpleMessage("شاهد لاحقاً"),
+    "your_best_score": MessageLookupByLibrary.simpleMessage("افضل نتيجة"),
   };
 }

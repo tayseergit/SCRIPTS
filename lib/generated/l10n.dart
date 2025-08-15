@@ -739,11 +739,6 @@ class S {
     );
   }
 
-  /// `Courses`
-  String get Courses {
-    return Intl.message('Courses', name: 'Courses', desc: '', args: []);
-  }
-
   /// `Learn Path`
   String get Learn_Path {
     return Intl.message('Learn Path', name: 'Learn_Path', desc: '', args: []);
@@ -984,6 +979,116 @@ class S {
     return Intl.message(
       'Invalid video URL',
       name: 'invalid_video_url',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your best Score`
+  String get your_best_score {
+    return Intl.message(
+      'Your best Score',
+      name: 'your_best_score',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restart Quiz`
+  String get restart_quiz {
+    return Intl.message(
+      'Restart Quiz',
+      name: 'restart_quiz',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to video`
+  String get back_to_video {
+    return Intl.message(
+      'Back to video',
+      name: 'back_to_video',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TEST`
+  String get test {
+    return Intl.message('TEST', name: 'test', desc: '', args: []);
+  }
+
+  /// `Question`
+  String get question {
+    return Intl.message('Question', name: 'question', desc: '', args: []);
+  }
+
+  /// `Back`
+  String get back {
+    return Intl.message('Back', name: 'back', desc: '', args: []);
+  }
+
+  /// `choose course`
+  String get choose_course {
+    return Intl.message(
+      'choose course',
+      name: 'choose_course',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `choose learn path`
+  String get choose_learn_path {
+    return Intl.message(
+      'choose learn path',
+      name: 'choose_learn_path',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Watch later`
+  String get watchLater {
+    return Intl.message('Watch later', name: 'watchLater', desc: '', args: []);
+  }
+
+  /// `View`
+  String get view {
+    return Intl.message('View', name: 'view', desc: '', args: []);
+  }
+
+  /// `no items`
+  String get NoItem {
+    return Intl.message('no items', name: 'NoItem', desc: '', args: []);
+  }
+
+  /// `active`
+  String get active {
+    return Intl.message('active', name: 'active', desc: '', args: []);
+  }
+
+  /// `ended`
+  String get ended {
+    return Intl.message('ended', name: 'ended', desc: '', args: []);
+  }
+
+  /// `coming`
+  String get coming {
+    return Intl.message('coming', name: 'coming', desc: '', args: []);
+  }
+
+  /// `join`
+  String get join {
+    return Intl.message('join', name: 'join', desc: '', args: []);
+  }
+
+  /// `Register`
+  String get contest_register {
+    return Intl.message(
+      'Register',
+      name: 'contest_register',
       desc: '',
       args: [],
     );

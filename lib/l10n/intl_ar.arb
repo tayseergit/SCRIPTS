@@ -5,7 +5,7 @@
   "mentor": "المدرب",
   "courses": "الدورات",
   "profile": "الملف الشخصي",
-  "enroll": "التحق",
+  "enroll": "مسجل",
   "buy_now": "اشترِ الآن",
   "watch": "مشاهدة",
   "error_occurred": "حدث خطأ",
@@ -87,8 +87,7 @@
   "save_as_draft": "حفظ كمسودة",
   "next": "التالي",
   "Login_or_SignUp": "تسجيل الدخول أو الاشتراك",
-  "Courses": "الدورات",
-  "Learn_Path": "مسار التعلم",
+ "Learn_Path": "مسارات التعلم",
   "Contest": "المسابقات",
   "Project": "المشاريع",
   "More": "المزيد",
@@ -123,7 +122,27 @@
   "Quiz":"اختبار",
   
   "fetch_video_failed":"فشل جلب بيانات الفيديو",
-  "invalid_video_url": "رابط الفيديو غير صالح"
+  "invalid_video_url": "رابط الفيديو غير صالح",
+  "your_best_score": "افضل نتيجة",
+    "restart_quiz": "أعد الاختبار",
+    "back_to_video": "عودة إلى الفيديو",
+    "test": "اختبار",
+    "question": "سؤال",
+    "back": "رجوع",
+    "choose_course":"اختر كورس",
+    "choose_learn_path":"اختر مسار",
+      "watchLater": "شاهد لاحقاً",
+      "view":"عرض",
+      "NoItem":"لا يوجد محتوى",
+            "active":"فعالة",
+      "ended":"منتهية",
+      "coming":"مستقبلية",
+      "join":"انضمام",
+      "contest_register":"نسجيل"
+
+
+
+
   
 
 

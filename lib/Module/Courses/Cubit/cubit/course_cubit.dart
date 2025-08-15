@@ -4,10 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:lms/Helper/cach_helper.dart';
+ import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Module/Courses/Model/course_response.dart';
+import 'package:lms/generated/l10n.dart';
 
 part 'course_state.dart';
 
@@ -21,6 +21,15 @@ class CourseCubit extends Cubit<CourseState> {
   final labels = ['All', 'Enroll', 'Completed', 'Watch later'];
   int selectedTab = 0;
   CoursesResponse? courseResponse;
+
+  List<String> getLabels(BuildContext context) {
+    return [
+      S.of(context).All,
+      S.of(context).enroll,
+      S.of(context).Completed,
+      S.of(context).watchLater,
+    ];
+  }
 
   void changeTab(int index) {
     selectedTab = index;

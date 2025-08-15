@@ -144,7 +144,7 @@ class AuthCubit extends Cubit<AuthState> {
       'email',
       'profile',
     ],
-    clientId: dotenv.env['GOOGLE_CLIENT_ID'],
+    clientId:'688587039842-fvdu1499imvbuoh4k48j1dc34tlfvfi5.apps.googleusercontent.com',
   );
 
   Future<void> loginWithGoogle({bool forceChooser = false}) async {

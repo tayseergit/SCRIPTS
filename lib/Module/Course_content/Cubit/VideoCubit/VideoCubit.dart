@@ -49,44 +49,46 @@ class VideoCubit extends Cubit<VideoState> {
           ));
           return;
         }
-youtubeController?.removeListener(_videoProgressListener); // إزالة المستمع القديم لو موجود
-youtubeController?.dispose(); // التخلص من الكنترولر القديم
+        youtubeController?.removeListener(
+            _videoProgressListener); // إزالة المستمع القديم لو موجود
+        youtubeController?.dispose(); // التخلص من الكنترولر القديم
 
-youtubeController = YoutubePlayerController(
-  initialVideoId: videoIdFromUrl,
-  flags: const YoutubePlayerFlags(
-    autoPlay: false,
-    mute: false,
-  ),
-)..addListener(_videoProgressListener);
+        youtubeController = YoutubePlayerController(
+          initialVideoId: videoIdFromUrl,
+          flags: const YoutubePlayerFlags(
+            autoPlay: false,
+            mute: false,
+          ),
+        )..addListener(_videoProgressListener);
 
 // قراءة النسبة من الـ API
-final savedProgressPercent = videoDataResponse?.data.progress ?? 0.0; // مثال: 75
+        final savedProgressPercent =
+            videoDataResponse?.data.progress ?? 0.0; // مثال: 75
 
-if (savedProgressPercent > 0) {
-  VoidCallback? seekListener;
+        if (savedProgressPercent > 0) {
+          VoidCallback? seekListener;
 
-  seekListener = () {
-    if (youtubeController!.value.isReady) {
-      final duration = youtubeController!.metadata.duration;
+          seekListener = () {
+            if (youtubeController!.value.isReady) {
+              final duration = youtubeController!.metadata.duration;
 
-      if (duration.inSeconds > 0) {
-        // تحويل النسبة إلى وقت بالثواني
-        final startSeconds =
-            (savedProgressPercent / 100) * duration.inSeconds;
+              if (duration.inSeconds > 0) {
+                // تحويل النسبة إلى وقت بالثواني
+                final startSeconds =
+                    (savedProgressPercent / 100) * duration.inSeconds;
 
-        youtubeController!
-            .seekTo(Duration(seconds: startSeconds.toInt()));
-      }
+                youtubeController!
+                    .seekTo(Duration(seconds: startSeconds.toInt()));
+              }
 
-      // إزالة المستمع بعد التقديم لمرة واحدة
-      youtubeController!.removeListener(seekListener!);
-      seekListener = null;
-    }
-  };
+              // إزالة المستمع بعد التقديم لمرة واحدة
+              youtubeController!.removeListener(seekListener!);
+              seekListener = null;
+            }
+          };
 
-  youtubeController!.addListener(seekListener!);
-}
+          youtubeController!.addListener(seekListener!);
+        }
 
         emit(VideoSuccessYouTube(
           selectedVideo: videoId,
@@ -121,7 +123,7 @@ if (savedProgressPercent > 0) {
       // فقط إذا لم يكن المؤقت مفعل، يتم إرسال بيانات التقدم وتهيئة المؤقت
       if (_progressTimer == null || !_progressTimer!.isActive) {
         _sendProgressToApi(progressPercent, videoId!);
-        _progressTimer = Timer(Duration(seconds: 15), () {});
+        _progressTimer = Timer(Duration(seconds: 20), () {});
       }
     }
   }
@@ -132,7 +134,7 @@ if (savedProgressPercent > 0) {
 
       print("pppppppppppppppppp");
       await DioHelper.postData(
-        url: "courses/$courseId/video/${videoId}/updateProgress",
+        url: "courses/$courseId/video/$videoId/updateProgress",
         postData: {"progress": progress * 100},
         headers: {
           "Authorization": "Bearer ${CacheHelper.getToken()}",

@@ -8,20 +8,24 @@ class AuthText extends StatelessWidget {
   final FontWeight fontWeight;
   final int? maxLines;
   final TextOverflow? overflow;
-
-  const AuthText({
-    super.key,
-    required this.text,
-    required this.size,
-    required this.color,
-    required this.fontWeight,
-    this.maxLines = 1,
-    this.overflow,
-  });
+  final TextAlign? textAlign;
+  final TextDirection ?textDirection;
+  const AuthText(
+      {super.key,
+      required this.text,
+      required this.size,
+      required this.color,
+      required this.fontWeight,
+      this.maxLines = 1,
+      this.overflow,
+      this.textAlign,
+      this.textDirection});
 
   @override
   Widget build(BuildContext context) {
     return Text(
+      textAlign: textAlign,
+      textDirection: textDirection,
       text,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
@@ -29,6 +33,7 @@ class AuthText extends StatelessWidget {
         fontSize: size.sp,
         color: color,
         fontWeight: fontWeight,
+        
       ),
     );
   }

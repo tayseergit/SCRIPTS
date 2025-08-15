@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
-import 'package:lms/Module/PercentIndicator/GridViewPercent.dart';
+import 'package:lms/Module/PercentIndicatorTest/View/Widget/GridViewPercent.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class Percentindicatorpage extends StatelessWidget {
-  const Percentindicatorpage({super.key});
+class PercentIndicatorPage extends StatelessWidget {
+  const PercentIndicatorPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +122,7 @@ class Percentindicatorpage extends StatelessWidget {
           SizedBox(
             height: 35.h,
           ),
-          Gridviewpercent()
+          // Gridviewpercent()
         ],
       ),
     );

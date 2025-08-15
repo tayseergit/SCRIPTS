@@ -11,9 +11,9 @@ class LearningPathInfoModel {
 
   factory LearningPathInfoModel.fromJson(Map<String, dynamic> json) {
     return LearningPathInfoModel(
-      successful: json['successful'],
-      message: json['message'],
-      data: LearningPathInfoData.fromJson(json['data']),
+      successful: json['successful'] ?? false,
+      message: json['message'] ?? '',
+      data: LearningPathInfoData.fromJson(json['data'] ?? {}),
     );
   }
 
@@ -61,19 +61,19 @@ class LearningPathInfoData {
 
   factory LearningPathInfoData.fromJson(Map<String, dynamic> json) {
     return LearningPathInfoData(
-      id: json['id'],
-      title: json['title'],
-      description: json['description'],
-      image: json['image'],
-      rate: (json['rate'] as num).toDouble(),
-      coursesCount: json['courses_count'],
-      totalCoursesPrice: json['total_courses_price'],
-      totalDuration: json['total_duration'],
-      teacherId: json['teacher_id'],
-      teacherName: json['teacher_name'],
-      teacherImage: json['teacher_image'],
-      teacherBio: json['teacher_bio'],
-      teacherCoursesCount: json['teacher_courses_count'],
+      id: json['id'] ?? 0,
+      title: json['title'] ?? '',
+      description: json['description'] ?? '',
+      image: json['image'] ?? '',
+      rate: (json['rate'] != null ? (json['rate'] as num).toDouble() : 0.0),
+      coursesCount: json['courses_count'] ?? 0,
+      totalCoursesPrice: json['total_courses_price'] ?? '0',
+      totalDuration: json['total_duration'] ?? '0h 0min',
+      teacherId: json['teacher_id'] ?? 0,
+      teacherName: json['teacher_name'] ?? '',
+      teacherImage: json['teacher_image'] ?? '',
+      teacherBio: json['teacher_bio'] ?? '',
+      teacherCoursesCount: json['teacher_courses_count'] ?? 0,
       status: json['status'],
     );
   }

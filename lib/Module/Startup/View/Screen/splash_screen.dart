@@ -49,9 +49,10 @@ class _SplashScreenState extends State<SplashScreen> {
     if (!mounted) return; // Prevent navigation if widget is disposed
 
     if (token == null) {
-      pushAndRemoveUntiTo(context: context, toPage: Login());
+      pushAndRemoveUntilTo(context: context, toPage: Login());
     } else {
-      pushAndRemoveUntiTo(context: context, toPage: const NavigationBarwidget());
+      pushAndRemoveUntilTo(
+          context: context, toPage: const NavigationBarwidget());
     }
   }
 
