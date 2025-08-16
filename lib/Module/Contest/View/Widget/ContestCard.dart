@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Contest/Model/contest_response.dart';
+import 'package:lms/Module/ContestTest/View/Pages/contest_Test_Page.dart';
 import 'package:lms/Module/CourseInfo/View/Pages/course_info_page.dart';
 import 'package:lms/Module/leaderboardforpastcontest/leaderboardforpastcontestPage.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
@@ -11,6 +12,7 @@ import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/ReadMoreInlineText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/generated/l10n.dart';
 
 class Contestcard extends StatelessWidget {
   Contestcard({super.key, required this.contest});
@@ -18,15 +20,15 @@ class Contestcard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
+    var lang = S.of(context);
     final status = contest.status;
-    return Padding(
-      padding: EdgeInsets.only(top: 10.h),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: appColors.secondText, width: 1),
-          borderRadius: BorderRadius.circular(5.r),
-        ),
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Padding(
+        padding: EdgeInsets.only(top: 10.h),
         child: OnBoardingContainer(
+          radius: 20.r,
+          boarderColor: appColors.blackGreen,
           color: appColors.pageBackground,
           widget: Padding(
             padding: EdgeInsets.only(right: 10.w, left: 10.h, top: 10.h),
@@ -117,7 +119,7 @@ class Contestcard extends StatelessWidget {
                                   height: 40,
                                   color: appColors.blackGreen,
                                   widget: AuthText(
-                                    text: 'Leader Board',
+                                    text: lang.Leader_Board,
                                     size: 16,
                                     color: appColors.whiteText,
                                     fontWeight: FontWeight.w400,
@@ -158,9 +160,9 @@ class Contestcard extends StatelessWidget {
                               padding: EdgeInsets.only(top: 10.h),
                               child: AuthText(
                                 text: status == "active"
-                                    ? 'Join'
+                                    ? lang.join
                                     : status == "coming"
-                                        ? "Register"
+                                        ? lang.contest_register
                                         : "",
                                 size: 10,
                                 color: appColors.mainText,
@@ -176,7 +178,75 @@ class Contestcard extends StatelessWidget {
               ],
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            if (contest.type == "programming") {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    backgroundColor: appColors.primary.withOpacity(0.8),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    content: AuthText(
+                      text: lang.You_cant_open_programming_contest_now,
+                      color: appColors.mainText,
+                      fontWeight: FontWeight.bold,
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                      size: 15.sp,
+                    ),
+                    actions: [
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text(
+                            lang.done,
+                            style: TextStyle(
+                                color: appColors.mainText, fontSize: 10.sp),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            } else if (contest.status == "coming") {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    backgroundColor: appColors.primary.withOpacity(0.8),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    content: AuthText(
+                      text: lang.wait_until_the_contest_open,
+                      color: appColors.mainText,
+                      fontWeight: FontWeight.bold,
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                      size: 15.sp,
+                    ),
+                    actions: [
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text(
+                            lang.done,
+                            style: TextStyle(
+                                color: appColors.mainText, fontSize: 10.sp),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            } else
+              pushTo(
+                  context: context,
+                  toPage: ContestTestPage(contestId: contest.id));
+            print(contest.id);
+          },
         ),
       ),
     );

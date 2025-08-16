@@ -2,40 +2,39 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
-import 'package:lms/Module/CourseTest/Model/course_test_question.dart';
+import 'package:lms/Module/ContestTest/Model/contest_test_question.dart';
 import 'package:lms/generated/l10n.dart';
 import 'package:meta/meta.dart';
 
 part 'contest_test_state.dart';
 
 class ContestTestCubit extends Cubit<ContsetTestState> {
-  ContestTestCubit({required this.testId, required this.courseId})
-      : super(CourseTestInitial());
+  ContestTestCubit({required this.contestId}) : super(CourseTestInitial());
 
-  final int testId;
-  final int courseId;
-
-  CourseTestQuestion? contestTestQuestion;
+  final int contestId;
+  int? remainingSeconds;
+  ContestQuestionResponse? contestTestQuestion;
 
   int currentIndex = 0;
   Map<String, int> answers = {}; // questionId : answerId
   late String startTime; // test start time
 
-  void getCourseTest(BuildContext context) async {
+  void getContestTest(BuildContext context) async {
     emit(TestLoading());
     try {
-      await DioHelper.getData(
-        url: "courses/$courseId/tests/$testId",
+      final response = await DioHelper.getData(
+        url: "contests/$contestId/questions",
         headers: {
           "Accept": "application/json",
           "Authorization": "Bearer ${CacheHelper.getToken()}",
         },
       ).then((value) {
+        print(value.statusCode);
+ 
         if (value.statusCode == 200) {
-          contestTestQuestion = CourseTestQuestion.fromJson(value.data);
+          contestTestQuestion = ContestQuestionResponse.fromJson(value.data);
 
-          // Record start time when test is loaded
-          startTime = DateTime.now().toString().substring(0, 19);
+          remainingSeconds = contestTestQuestion!.minutesLeft.toInt()*60;
 
           emit(TestSuccess());
         } else {
@@ -59,12 +58,12 @@ class ContestTestCubit extends Cubit<ContsetTestState> {
   bool get hasSelectedAnswerForCurrentQuestion {
     if (contestTestQuestion == null) return false;
     String questionId =
-        contestTestQuestion!.test.questions[currentIndex].id.toString();
+        contestTestQuestion!.questions[currentIndex].id.toString();
     return answers.containsKey(questionId);
   }
 
   void nextQuestion() {
-    if (currentIndex < (contestTestQuestion!.test.questions.length - 1)) {
+    if (currentIndex < (contestTestQuestion!.questions.length - 1)) {
       currentIndex++;
       emit(TestSuccess());
     }
@@ -81,9 +80,6 @@ class ContestTestCubit extends Cubit<ContsetTestState> {
     emit(TestSubmitLoading());
 
     final data = {
-      "start_time": startTime,
-      // "start_time": "2025-08-14 7:11:44",
-//
       "answers": answers,
     };
 
@@ -91,7 +87,7 @@ class ContestTestCubit extends Cubit<ContsetTestState> {
 
     try {
       await DioHelper.postData(
-        url: "courses/$courseId/tests/$testId",
+        url: "contests/$contestId/questions",
         postData: data,
         headers: {
           "Accept": "application/json",

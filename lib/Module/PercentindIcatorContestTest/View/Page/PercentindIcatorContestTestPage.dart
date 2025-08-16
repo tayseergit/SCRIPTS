@@ -3,10 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
-import 'package:lms/Module/CourseTest/View/Pages/course_Test_Page.dart';
-import 'package:lms/Module/CourseTest/cubit/course_test_cubit.dart';
+import 'package:lms/Module/ContestTest/cubit/contest_test_cubit.dart';
 import 'package:lms/Module/Course_content/View/Pages/course_conten_page.dart';
-import 'package:lms/Module/PercentIndicatorTest/View/Widget/LoadingShminer.dart';
+import 'package:lms/Module/PercentindIcatorCourseTest/View/Widget/LoadingShminer.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
@@ -14,16 +13,14 @@ import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/generated/l10n.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class Percentindicatorpage extends StatelessWidget {
-  Percentindicatorpage({
+class PercentindIcatorContestTestPage extends StatelessWidget {
+  PercentindIcatorContestTestPage({
     super.key,
-    required this.courseId,
-    required this.testId,
+    required this.contestId,
     this.message,
   });
 
-  final int courseId;
-  final int testId;
+  final int contestId;
   final String? message;
 
   @override
@@ -31,14 +28,14 @@ class Percentindicatorpage extends StatelessWidget {
     ThemeState appColors = context.watch<ThemeCubit>().state;
     var lang = S.of(context);
     return BlocProvider(
-      create: (context) => CourseTestCubit(courseId: courseId, testId: testId)
-        ..getCourseTest(context),
+      create: (context) =>
+          ContestTestCubit(contestId: contestId)..getContestTest(context),
       child: Scaffold(
         backgroundColor: appColors.pageBackground,
-        body: BlocConsumer<CourseTestCubit, CourseTestState>(
+        body: BlocConsumer<ContestTestCubit, ContsetTestState>(
           listener: (context, state) {},
           builder: (context, state) {
-            var testCubit = context.read<CourseTestCubit>();
+            var testCubit = context.read<ContestTestCubit>();
 
             if (state is TestLoading) return PercentIndicatorShimmer();
             if (state is TestError)
@@ -73,12 +70,7 @@ class Percentindicatorpage extends StatelessWidget {
                       height: 300.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                        color: (double.tryParse(testCubit
-                                            .courseTestQuestion!.bestResult
-                                            .replaceAll('%', ''))
-                                        ?.toInt() ??
-                                    0) >=
-                                60
+                        color: testCubit.contestTestQuestion!.yourResult >= 60
                             ? appColors.lihgtPrimer
                             : appColors.orang.withOpacity(0.5),
                       ),
@@ -98,17 +90,14 @@ class Percentindicatorpage extends StatelessWidget {
                             radius: 80.0,
                             lineWidth: 13.0,
                             animation: true,
-                            percent: (double.tryParse(testCubit
-                                        .courseTestQuestion!.bestResult
-                                        .replaceAll('%', '')) ??
-                                    0.0) /
-                                100,
+                            percent:
+                                testCubit.contestTestQuestion!.yourResult / 100,
                             center: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 AuthText(
                                   text:
-                                      '${double.tryParse(testCubit.courseTestQuestion!.bestResult.replaceAll('%', ''))?.toInt() ?? 0}%',
+                                      '${testCubit.contestTestQuestion!.yourResult} %',
                                   size: 30,
                                   color: appColors.mainText,
                                   fontWeight: FontWeight.w700,
@@ -116,14 +105,10 @@ class Percentindicatorpage extends StatelessWidget {
                               ],
                             ),
                             circularStrokeCap: CircularStrokeCap.round,
-                            progressColor: (double.tryParse(testCubit
-                                                .courseTestQuestion!.bestResult
-                                                .replaceAll('%', ''))
-                                            ?.toInt() ??
-                                        0) >=
-                                    60
-                                ? appColors.lihgtPrimer
-                                : appColors.red,
+                            progressColor:
+                                testCubit.contestTestQuestion!.yourResult >= 60
+                                    ? appColors.lihgtPrimer
+                                    : appColors.red,
                             backgroundColor: appColors.secondText,
                             widgetIndicator: Padding(
                               padding: const EdgeInsets.all(65),
@@ -134,16 +119,12 @@ class Percentindicatorpage extends StatelessWidget {
                                   shape: BoxShape.circle,
                                   color: appColors.pageBackground,
                                   border: Border.all(
-                                      color: (double.tryParse(testCubit
-                                                          .courseTestQuestion!
-                                                          .bestResult
-                                                          .replaceAll('%', ''))
-                                                      ?.toInt() ??
-                                                  0) >=
+                                      color: testCubit.contestTestQuestion!
+                                                  .yourResult >=
                                               60
                                           ? appColors.lihgtPrimer
                                           : appColors.red,
-                                    width: 8),
+                                      width: 8),
                                 ),
                               ),
                             ),
@@ -162,7 +143,7 @@ class Percentindicatorpage extends StatelessWidget {
                                     ),
                                     AuthText(
                                       text:
-                                          "${((double.tryParse(testCubit.courseTestQuestion!.bestResult.replaceAll('%', ''))?.toInt() ?? 0) / 100 * (testCubit.courseTestQuestion!.test.questionsCount)).ceil()}",
+                                          "${testCubit.contestTestQuestion!.correctAnswers}",
                                       size: 20,
                                       color: appColors.ok,
                                       fontWeight: FontWeight.w700,
@@ -178,7 +159,7 @@ class Percentindicatorpage extends StatelessWidget {
                                     ),
                                     AuthText(
                                       text:
-                                          "${testCubit.courseTestQuestion!.test.questionsCount - ((double.tryParse(testCubit.courseTestQuestion!.bestResult.replaceAll('%', ''))?.toInt() ?? 0) / 100 * (testCubit.courseTestQuestion!.test.questionsCount)).ceil()}",
+                                          "${testCubit.contestTestQuestion!.questionsCount - testCubit.contestTestQuestion!.correctAnswers}",
                                       size: 20,
                                       color: appColors.red,
                                       fontWeight: FontWeight.w700,
@@ -195,56 +176,25 @@ class Percentindicatorpage extends StatelessWidget {
                     SizedBox(height: 30.h),
 
                     // Buttons Row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Restart Quiz Button
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: appColors.primary,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 25.w, vertical: 12.h),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                            ),
-                          ),
-                          onPressed: () {
-                            pushReplacement(
-                                context: context,
-                                toPage: CourseTestPage(
-                                  courseId: courseId,
-                                  testId: testId,
-                                ));
-                          },
-                          child: AuthText(
-                            text: lang.restart_quiz,
-                            size: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
+
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: appColors.ok,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 25.w, vertical: 12.h),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.r),
                         ),
-                        SizedBox(width: 15.w),
-                        // Back Button
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: appColors.ok,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 25.w, vertical: 12.h),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.r),
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: AuthText(
-                            text: lang.back_to_video,
-                            size: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: AuthText(
+                        text: lang.done,
+                        size: 16,
+                        color: appColors.mainText,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ],
                 ),

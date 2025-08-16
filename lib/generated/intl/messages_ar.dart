@@ -20,6 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
+  static String m0(Active, Ended) =>
+      "{status, select, active {نشط} ended {منتهية} coming {قريباً}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "All": MessageLookupByLibrary.simpleMessage("الكل"),
@@ -28,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Email_not_found": MessageLookupByLibrary.simpleMessage(
       "الايميل غير موجود",
     ),
+    "Leader_Board": MessageLookupByLibrary.simpleMessage("لوحة الصدارة"),
     "Learn_Path": MessageLookupByLibrary.simpleMessage("مسارات التعلم"),
     "Login_or_SignUp": MessageLookupByLibrary.simpleMessage(
       "تسجيل الدخول أو الاشتراك",
@@ -39,9 +43,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "Project": MessageLookupByLibrary.simpleMessage("المشاريع"),
     "Quiz": MessageLookupByLibrary.simpleMessage("اختبار"),
     "Send_code": MessageLookupByLibrary.simpleMessage("ارسال رمز التحقق"),
+    "Timeisfinishedtocopmletetest": MessageLookupByLibrary.simpleMessage(
+      "انتهى الوقت , لا يمكنك متابعة الاختبار",
+    ),
+    "You_cant_open_programming_contest_now":
+        MessageLookupByLibrary.simpleMessage(
+          "لا يمكنك فتح مسابقة البرمجة الآن",
+        ),
     "about_this_course": MessageLookupByLibrary.simpleMessage("عن هذه الدورة"),
     "achievement": MessageLookupByLibrary.simpleMessage("الإنجازات"),
-    "active": MessageLookupByLibrary.simpleMessage("فعالة"),
+    "active": MessageLookupByLibrary.simpleMessage("نشط"),
     "add_a_payment_method": MessageLookupByLibrary.simpleMessage(
       "إضافة طريقة دفع",
     ),
@@ -78,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تحقق من البريد الإلكتروني أو كلمة المرور",
     ),
     "check_info": MessageLookupByLibrary.simpleMessage("تاكد من المعلومات"),
+    "choose_contest": MessageLookupByLibrary.simpleMessage("اختر مسابقة"),
     "choose_course": MessageLookupByLibrary.simpleMessage("اختر كورس"),
     "choose_file_to_upload": MessageLookupByLibrary.simpleMessage(
       "اختر ملفًا للتحميل",
@@ -85,7 +97,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "choose_learn_path": MessageLookupByLibrary.simpleMessage("اختر مسار"),
     "close": MessageLookupByLibrary.simpleMessage("إغلاق"),
     "code_sent": MessageLookupByLibrary.simpleMessage("تم ارسال رمز التحقق"),
-    "coming": MessageLookupByLibrary.simpleMessage("مستقبلية"),
+    "coming": MessageLookupByLibrary.simpleMessage("قريباً"),
+    "complete_as_browser": MessageLookupByLibrary.simpleMessage(
+      "المتابعة كمتصفح",
+    ),
     "confirmNewPassword": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور الجديدة",
     ),
@@ -93,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تأكيد كلمة المرور",
     ),
     "connection_error": MessageLookupByLibrary.simpleMessage("خطأ في الاتصال"),
+    "contestStatus": m0,
     "contest_register": MessageLookupByLibrary.simpleMessage("نسجيل"),
     "course_completed": MessageLookupByLibrary.simpleMessage(
       "الدورات المكتملة",
@@ -203,6 +219,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "restart_quiz": MessageLookupByLibrary.simpleMessage("أعد الاختبار"),
     "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "save_as_draft": MessageLookupByLibrary.simpleMessage("حفظ كمسودة"),
+    "search": MessageLookupByLibrary.simpleMessage("ابحث"),
     "search_project": MessageLookupByLibrary.simpleMessage("ابحث عن مشروع"),
     "select_a_tag": MessageLookupByLibrary.simpleMessage("اختر علامة"),
     "select_technologies": MessageLookupByLibrary.simpleMessage(
@@ -212,7 +229,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "setting": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "steam_url": MessageLookupByLibrary.simpleMessage("رابط Steam"),
+    "student": MessageLookupByLibrary.simpleMessage("الطالب"),
     "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
+    "teacher": MessageLookupByLibrary.simpleMessage("استاذ"),
     "teachers": MessageLookupByLibrary.simpleMessage("معلمون"),
     "technologies": MessageLookupByLibrary.simpleMessage("التقنيات"),
     "test": MessageLookupByLibrary.simpleMessage("اختبار"),
@@ -220,6 +239,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "update": MessageLookupByLibrary.simpleMessage("تحديث"),
     "verify_code": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
     "view": MessageLookupByLibrary.simpleMessage("عرض"),
+    "wait_until_the_contest_open": MessageLookupByLibrary.simpleMessage(
+      "انتظر حتى تفتح المسابقة",
+    ),
     "watch": MessageLookupByLibrary.simpleMessage("مشاهدة"),
     "watchLater": MessageLookupByLibrary.simpleMessage("شاهد لاحقاً"),
     "your_best_score": MessageLookupByLibrary.simpleMessage("افضل نتيجة"),

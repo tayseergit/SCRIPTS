@@ -17,27 +17,44 @@ class ContestCubit extends Cubit<ContestState> {
 
   final searchController = TextEditingController();
 
-  final labels = [ 'ended','active', 'coming',];
+  final labels = [
+    'ended',
+    'active',
+    'coming',
+  ];
   int selectedTab = 0;
-
-
 
   List<String> getLabels(BuildContext context) {
     return [
       S.of(context).ended,
       S.of(context).active,
-       S.of(context).coming,
+      S.of(context).coming,
     ];
   }
+
   void changeTab(int index) {
     selectedTab = index;
     emit(Selected());
     getContest();
   }
 
-  Future<void> getContest() async {
-    try {
+  List<Contest> allContests = [];
+  int currentPage = 1;
+  int lastPage = 1;
+  bool isLoadingMore = false;
+
+  Future<void> getContest({bool loadMore = false}) async {
+    if (loadMore) {
+      if (isLoadingMore || currentPage >= lastPage) return;
+      isLoadingMore = true;
+      emit(ContestLoadingMore());
+    } else {
+      currentPage = 1;
+      allContests.clear();
       emit(ContestLoading());
+    }
+
+    try {
       final response = await DioHelper.getData(
         url: "contests",
         headers: {
@@ -48,28 +65,27 @@ class ContestCubit extends Cubit<ContestState> {
           'type': 'all',
           'status': labels[selectedTab],
           'search': searchController.text.trim(),
-          // 'items': '',
-          // 'page': '',
+          'page': currentPage,
+          // 'items': "1"
         },
       );
 
-      print("Status Code: ${response.statusCode}");
-
       if (response.statusCode == 200) {
         contestResponse = ContestsResponse.fromJson(response.data);
+
+        // Update meta info
+        currentPage = contestResponse!.meta.currentPage;
+        lastPage = contestResponse!.meta.lastPage;
+
+        // Append results
+        allContests.addAll(contestResponse!.contests);
+
         emit(ContestSuccess());
       }
-      if (response.statusCode == 422) {
-        emit(ContestError(message: 'sssss'));
-      }
     } on DioException catch (e) {
-      if (e.response != null) {
-        print("Error Status: ${e.response?.statusCode}");
-        emit(ContestError(message: "fetching error"));
-      } else {
-        print("Connection Error: $e");
-        emit(ContestError(message: "Connection Error"));
-      }
+      emit(ContestError(message: "Connection Error"));
+    } finally {
+      isLoadingMore = false;
     }
   }
 }

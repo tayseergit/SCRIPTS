@@ -6,6 +6,7 @@ class ContestInitial extends ContestState {}
 
 /// While the API / repo is fetching data
 class ContestLoading extends ContestState {}
+class ContestLoadingMore extends ContestState {}
 
 /// Data arrived successfully
 class ContestSuccess extends ContestState {}

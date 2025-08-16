@@ -1,53 +1,42 @@
-class ContestTestQuestion {
+class ContestQuestionResponse {
   final bool status;
-  final String message;
-  final bool alreadyTaken;
-  final String bestResult;
-  final TestQuestionDataModel test;
-
-  ContestTestQuestion({
-    required this.status,
-    required this.message,
-    required this.alreadyTaken,
-    required this.bestResult,
-    required this.test,
-  });
-
-  factory ContestTestQuestion.fromJson(Map<String, dynamic> json) {
-    return ContestTestQuestion(
-      status: json['status'] ?? false,
-      message: json['message'] ?? '',
-      alreadyTaken: json['already_taken'] ?? false,
-      bestResult: json['best_result'] ?? '',
-      test: TestQuestionDataModel.fromJson(json['test']),
-    );
-  }
-}
-
-class TestQuestionDataModel {
-  final int id;
-  final String title;
-  final int isFinal;
+  final String contestType;
+  final bool alreadyParticipate;
   final int questionsCount;
+  final int correctAnswers;
+  final int yourResult;
+  final String endDate;       
+  final double minutesLeft;   
   final List<Question> questions;
 
-  TestQuestionDataModel.ContestQuestionDataModel({
-    required this.id,
-    required this.title,
-    required this.isFinal,
+  ContestQuestionResponse({
+    required this.status,
+    required this.contestType,
+    required this.alreadyParticipate,
     required this.questionsCount,
+    required this.correctAnswers,
+    required this.yourResult,
+    required this.endDate,
+    required this.minutesLeft,
     required this.questions,
   });
 
-  factory TestQuestionDataModel.fromJson(Map<String, dynamic> json) {
-    return TestQuestionDataModel.ContestQuestionDataModel(
-      id: json['id'] ?? 0,
-      title: json['title'] ?? '',
-      isFinal: json['is_final'] ?? 0,
+  factory ContestQuestionResponse.fromJson(Map<String, dynamic> json) {
+    return ContestQuestionResponse(
+      status: json['status'] ?? false,
+      contestType: json['contest_type'] ?? '',
+      alreadyParticipate: json['alreadyParticipate'] ?? false,
       questionsCount: json['questions_count'] ?? 0,
-      questions: (json['questions'] as List<dynamic>)
-          .map((q) => Question.fromJson(q))
-          .toList(),
+      correctAnswers: json['correct_answers'] ?? 0,
+      yourResult: json['your_result'] ?? 0,
+      endDate: json['end_date'] ?? '',
+      minutesLeft: (json['minutes_left'] != null)
+          ? double.tryParse(json['minutes_left'].toString()) ?? 0
+          : 0,
+      questions: (json['questions'] as List<dynamic>?)
+              ?.map((q) => Question.fromJson(q))
+              .toList() ??
+          [],
     );
   }
 }
@@ -67,9 +56,10 @@ class Question {
     return Question(
       id: json['id'] ?? 0,
       text: json['text'] ?? '',
-      options: (json['options'] as List<dynamic>)
-          .map((o) => Option.fromJson(o))
-          .toList(),
+      options: (json['options'] as List<dynamic>?)
+              ?.map((o) => Option.fromJson(o))
+              .toList() ??
+          [],
     );
   }
 }

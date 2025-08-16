@@ -144,7 +144,8 @@ class AuthCubit extends Cubit<AuthState> {
       'email',
       'profile',
     ],
-    clientId:'688587039842-fvdu1499imvbuoh4k48j1dc34tlfvfi5.apps.googleusercontent.com',
+    clientId:
+        '688587039842-fvdu1499imvbuoh4k48j1dc34tlfvfi5.apps.googleusercontent.com',
   );
 
   Future<void> loginWithGoogle({bool forceChooser = false}) async {
@@ -225,8 +226,13 @@ class AuthCubit extends Cubit<AuthState> {
         print(response.data);
       } else if (response.statusCode == 422) {
         emit(SignUpError(message: S.of(context).email_already_exist));
+      } else {
+        emit(SignUpError(message: S.of(context).error_occurred));
+        print(response.data['message']);
       }
     } catch (error) {
+      emit(SignUpError(message: S.of(context).error_in_server));
+
       print("❌ Dio POST Error: $error");
     }
   }

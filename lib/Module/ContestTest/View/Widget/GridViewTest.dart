@@ -2,9 +2,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:lms/Module/CourseTest/Model/course_test_question.dart';
-import 'package:lms/Module/CourseTest/View/Widget/ContainerTest.dart';
-import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/ContestTest/Model/contest_test_question.dart';
+import 'package:lms/Module/ContestTest/View/Widget/ContainerTest.dart';
+ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 
 class GridViewTestAnswers extends StatelessWidget {

@@ -50,6 +50,7 @@ class OnBoardingContainerMore extends StatelessWidget {
   final double width;
   final double height;
   final Color color;
+  final Color? borderColor;
   final Widget widget;
   final Function()? onTap;
 
@@ -60,10 +61,13 @@ class OnBoardingContainerMore extends StatelessWidget {
     required this.color,
     required this.widget,
     this.onTap,
+    this.borderColor,
   });
 
   @override
   Widget build(BuildContext context) {
+    ThemeState appColors = context.watch<ThemeCubit>().state;
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(5.r),
@@ -73,7 +77,8 @@ class OnBoardingContainerMore extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(30.r),
+          borderRadius: BorderRadius.circular(30.r,),
+          border: Border.all(color: borderColor ?? appColors.border.withOpacity(0))
         ),
         child: widget,
       ),

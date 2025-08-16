@@ -20,12 +20,16 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(Active, Ended) =>
+      "{status, select, active ${Active} ended ${Ended} coming {Coming Soon} ";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "All": MessageLookupByLibrary.simpleMessage("All"),
     "Completed": MessageLookupByLibrary.simpleMessage("Completed"),
     "Contest": MessageLookupByLibrary.simpleMessage("Contest"),
     "Email_not_found": MessageLookupByLibrary.simpleMessage("Email not found"),
+    "Leader_Board": MessageLookupByLibrary.simpleMessage("Leader Board"),
     "Learn_Path": MessageLookupByLibrary.simpleMessage("Learn Path"),
     "Login_or_SignUp": MessageLookupByLibrary.simpleMessage("Login or Sign Up"),
     "More": MessageLookupByLibrary.simpleMessage("More"),
@@ -35,6 +39,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "Project": MessageLookupByLibrary.simpleMessage("Project"),
     "Quiz": MessageLookupByLibrary.simpleMessage("Quiz"),
     "Send_code": MessageLookupByLibrary.simpleMessage("Send code"),
+    "Timeisfinishedtocopmletetest": MessageLookupByLibrary.simpleMessage(
+      "time is finish , test over",
+    ),
+    "You_cant_open_programming_contest_now":
+        MessageLookupByLibrary.simpleMessage(
+          "You can\'t open programming contest now",
+        ),
     "about_this_course": MessageLookupByLibrary.simpleMessage(
       "About this course",
     ),
@@ -76,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Check your email or password",
     ),
     "check_info": MessageLookupByLibrary.simpleMessage("check information"),
+    "choose_contest": MessageLookupByLibrary.simpleMessage("choose contest"),
     "choose_course": MessageLookupByLibrary.simpleMessage("choose course"),
     "choose_file_to_upload": MessageLookupByLibrary.simpleMessage(
       "Choose File to upload",
@@ -86,6 +98,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "close": MessageLookupByLibrary.simpleMessage("Close"),
     "code_sent": MessageLookupByLibrary.simpleMessage("code sendt"),
     "coming": MessageLookupByLibrary.simpleMessage("coming"),
+    "complete_as_browser": MessageLookupByLibrary.simpleMessage(
+      "complete in browser mode",
+    ),
     "confirmNewPassword": MessageLookupByLibrary.simpleMessage(
       "Confirm New Password",
     ),
@@ -95,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "connection_error": MessageLookupByLibrary.simpleMessage(
       "Connection Error",
     ),
+    "contestStatus": m0,
     "contest_register": MessageLookupByLibrary.simpleMessage("Register"),
     "course_completed": MessageLookupByLibrary.simpleMessage(
       "Course Completed",
@@ -204,6 +220,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "restart_quiz": MessageLookupByLibrary.simpleMessage("Restart Quiz"),
     "retry": MessageLookupByLibrary.simpleMessage("Retry"),
     "save_as_draft": MessageLookupByLibrary.simpleMessage("Save as draft"),
+    "search": MessageLookupByLibrary.simpleMessage("search"),
     "search_project": MessageLookupByLibrary.simpleMessage("search project"),
     "select_a_tag": MessageLookupByLibrary.simpleMessage("Select a tag"),
     "select_technologies": MessageLookupByLibrary.simpleMessage(
@@ -213,7 +230,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "setting": MessageLookupByLibrary.simpleMessage("Setting"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "steam_url": MessageLookupByLibrary.simpleMessage("Steam URL"),
+    "student": MessageLookupByLibrary.simpleMessage("Student"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+    "teacher": MessageLookupByLibrary.simpleMessage("Teacher"),
     "teachers": MessageLookupByLibrary.simpleMessage("Teachers"),
     "technologies": MessageLookupByLibrary.simpleMessage("Technologies"),
     "test": MessageLookupByLibrary.simpleMessage("TEST"),
@@ -221,6 +240,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "update": MessageLookupByLibrary.simpleMessage("update"),
     "verify_code": MessageLookupByLibrary.simpleMessage("Verify Code"),
     "view": MessageLookupByLibrary.simpleMessage("View"),
+    "wait_until_the_contest_open": MessageLookupByLibrary.simpleMessage(
+      "wait until the contest open",
+    ),
     "watch": MessageLookupByLibrary.simpleMessage("Watch"),
     "watchLater": MessageLookupByLibrary.simpleMessage("Watch later"),
     "your_best_score": MessageLookupByLibrary.simpleMessage("Your best Score"),

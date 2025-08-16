@@ -23,7 +23,6 @@ import 'package:lms/Module/Courses/View/Pages/courses_page.dart';
 import 'package:lms/Module/Localization/localization.dart';
 import 'package:lms/Module/More/more_page.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
-import 'package:lms/Module/PercentIndicatorTest/PercentIndicatorPage.dart';
 import 'package:lms/Module/Project/View/Page/projectPage.dart';
 import 'package:lms/Module/Setting/SettingPage.dart';
 import 'package:lms/Module/Stripe/stripe_page.dart';

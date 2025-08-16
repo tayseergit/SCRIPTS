@@ -1093,6 +1093,91 @@ class S {
       args: [],
     );
   }
+
+  /// `complete in browser mode`
+  String get complete_as_browser {
+    return Intl.message(
+      'complete in browser mode',
+      name: 'complete_as_browser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Student`
+  String get student {
+    return Intl.message('Student', name: 'student', desc: '', args: []);
+  }
+
+  /// `Teacher`
+  String get teacher {
+    return Intl.message('Teacher', name: 'teacher', desc: '', args: []);
+  }
+
+  /// `choose contest`
+  String get choose_contest {
+    return Intl.message(
+      'choose contest',
+      name: 'choose_contest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `search`
+  String get search {
+    return Intl.message('search', name: 'search', desc: '', args: []);
+  }
+
+  /// `Leader Board`
+  String get Leader_Board {
+    return Intl.message(
+      'Leader Board',
+      name: 'Leader_Board',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{status, select, active {Active} ended {Ended} coming {Coming Soon} `
+  String contestStatus(Object Active, Object Ended) {
+    return Intl.message(
+      '{status, select, active $Active ended $Ended coming {Coming Soon} ',
+      name: 'contestStatus',
+      desc: '',
+      args: [Active, Ended],
+    );
+  }
+
+  /// `You can't open programming contest now`
+  String get You_cant_open_programming_contest_now {
+    return Intl.message(
+      'You can\'t open programming contest now',
+      name: 'You_cant_open_programming_contest_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `time is finish , test over`
+  String get Timeisfinishedtocopmletetest {
+    return Intl.message(
+      'time is finish , test over',
+      name: 'Timeisfinishedtocopmletetest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `wait until the contest open`
+  String get wait_until_the_contest_open {
+    return Intl.message(
+      'wait until the contest open',
+      name: 'wait_until_the_contest_open',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

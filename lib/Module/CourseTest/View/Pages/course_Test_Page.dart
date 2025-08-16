@@ -5,7 +5,7 @@ import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/CourseTest/View/Widget/CourseTestLoadingShimmer%20.dart';
 import 'package:lms/Module/CourseTest/View/Widget/GridViewTest.dart';
 import 'package:lms/Module/Courses/Cubit/cubit/course_cubit.dart';
-import 'package:lms/Module/PercentIndicatorTest/View/Page/PercentIndicatorPage.dart';
+import 'package:lms/Module/PercentindIcatorCourseTest/View/Page/PercentindIcatorCourseTestPage.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/CourseTest/cubit/course_test_cubit.dart';
@@ -35,10 +35,9 @@ class CourseTestPage extends StatelessWidget {
                     context: context, success: 2, message: state.message);
               }
               if (state is TestSubmitSuccess) {
-               
                 pushReplacement(
                     context: context,
-                    toPage: Percentindicatorpage(
+                    toPage: PercentindIcatorCourseTestPage(
                       courseId: courseId,
                       testId: testId,
                       message: state.message,

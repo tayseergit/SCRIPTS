@@ -69,7 +69,7 @@ void customSnackBar(
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
         dismissDirection: DismissDirection.horizontal,
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 3),
         margin: EdgeInsets.symmetric(
             vertical: verPadding.w, horizontal: horPadding.w),
         backgroundColor: success == 0
@@ -83,6 +83,7 @@ void customSnackBar(
           child: Text(
             message,
             textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
           ),
         )),
   );

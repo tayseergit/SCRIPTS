@@ -16,8 +16,38 @@ import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 
-class ContestPage extends StatelessWidget {
+import '../../../../generated/l10n.dart';
+
+class ContestPage extends StatefulWidget {
   const ContestPage({super.key});
+
+  @override
+  State<ContestPage> createState() => _ContestPageState();
+}
+
+class _ContestPageState extends State<ContestPage> {
+  late ContestCubit contestCubit;
+  final ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    contestCubit = ContestCubit()..getContest();
+
+    scrollController.addListener(() {
+      if (scrollController.position.pixels >=
+          scrollController.position.maxScrollExtent - 200) {
+        contestCubit.getContest(loadMore: true);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    contestCubit.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +66,7 @@ class ContestPage extends StatelessWidget {
             title: Align(
               alignment: Alignment.center,
               child: AuthText(
-                text: 'Contest',
+                text: S.of(context).Contest,
                 size: 24,
                 color: appColors.mainText,
                 fontWeight: FontWeight.w700,
@@ -56,7 +86,7 @@ class ContestPage extends StatelessWidget {
                         contestCubit.getContest();
                       },
                       controller: contestCubit.searchController,
-                      hintText: 'get contest ?',
+                      hintText: S.of(context).choose_contest,
                     ),
                     SizedBox(height: 15.h),
                     ContestTab(
@@ -74,7 +104,7 @@ class ContestPage extends StatelessWidget {
                         } else if (state is ContestError) {
                           return SizedBox(
                             height: 500.h,
-                            child: Center(child: Container()),
+                            child: Center(child: NoConnection()),
                           );
                         }
 
@@ -91,20 +121,47 @@ class ContestPage extends StatelessWidget {
                           );
                         }
 
-                        return SizedBox(
-                          height: 560.h,
-                          child: Padding(
-                            padding: EdgeInsets.only(bottom: 40.0),
-                            child: ListView.builder(
-                              itemCount: contests.length,
-                              itemBuilder: (context, index) {
-                                return Contestcard(
-                                  contest: contestCubit
-                                      .contestResponse!.contests[index],
-                                );
-                              },
+                        return Column(
+                          children: [
+                            Container(
+                              height: 515.h,
+                              child: ListView.builder(
+                                controller: scrollController,
+                                itemCount: contests.length +
+                                    (contestCubit.isLoadingMore ? 1 : 0),
+                                itemBuilder: (context, index) {
+                                  if (index >= contests.length) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    );
+                                  }
+
+                                  return TweenAnimationBuilder<double>(
+                                    key: ValueKey(contests[index].id),
+                                    tween: Tween<double>(begin: 50, end: 0),
+                                    duration: Duration(
+                                        milliseconds:
+                                            800 + ((index % 10) * 50)),
+                                    curve: Curves.easeOut,
+                                    builder: (context, value, child) {
+                                      return Transform.translate(
+                                        offset: Offset(0, value),
+                                        child: Opacity(
+                                          opacity: 1 - (value / 50),
+                                          child: child,
+                                        ),
+                                      );
+                                    },
+                                    child:
+                                        Contestcard(contest: contests[index]),
+                                  );
+                                },
+                              ),
                             ),
-                          ),
+                          ],
                         );
                       },
                     )

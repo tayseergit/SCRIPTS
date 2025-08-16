@@ -138,7 +138,22 @@
       "ended":"ended",
       "coming":"coming",
       "join":"join",
-      "contest_register":"Register"
+      "contest_register":"Register",
+      "complete_as_browser": "complete in browser mode",
+      "student":"Student",
+  "teacher": "Teacher",
+  "choose_contest":"choose contest",
+  "search":"search",
+  "Leader_Board":"Leader Board",
+    "contestStatus": "{status, select, active {Active} ended {Ended} coming {Coming Soon} ",
+
+ 
+   "You_cant_open_programming_contest_now":"You can't open programming contest now",
+   "Timeisfinishedtocopmletetest":"time is finish , test over",
+   "wait_until_the_contest_open":"wait until the contest open"
+
+ 
+
 
 
 

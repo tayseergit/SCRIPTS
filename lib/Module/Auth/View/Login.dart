@@ -52,8 +52,6 @@ class Login extends StatelessWidget {
         //     message: "Login Completed",
         //   );
         // });
-
-         
       } else if (state is CheckInfo) {
         customSnackBar(
             context: context,
@@ -309,7 +307,7 @@ class Login extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 33.h),
+                  SizedBox(height: 20.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -331,6 +329,31 @@ class Login extends StatelessWidget {
                         },
                         child: AuthText(
                           text: lang.register,
+                          color: appColors.primary,
+                          size: 17,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                         Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+              value: NavigationCubit(),
+              child: NavigationBarwidget(),
+            ),
+          ),
+          (route) => false,
+        );
+                        },
+                        child: AuthText(
+                          text: lang.complete_as_browser,
                           color: appColors.primary,
                           size: 17,
                           fontWeight: FontWeight.w700,

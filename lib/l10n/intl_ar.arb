@@ -134,11 +134,25 @@
       "watchLater": "شاهد لاحقاً",
       "view":"عرض",
       "NoItem":"لا يوجد محتوى",
-            "active":"فعالة",
+            "active":"نشط",
       "ended":"منتهية",
-      "coming":"مستقبلية",
+      "coming":"قريباً",
       "join":"انضمام",
-      "contest_register":"نسجيل"
+      "contest_register":"نسجيل",
+      "complete_as_browser":"المتابعة كمتصفح",
+      "student":"الطالب",
+  "teacher": "استاذ",
+  "choose_contest":"اختر مسابقة",
+  "search":"ابحث",
+  "Leader_Board":"لوحة الصدارة",
+  "contestStatus": "{status, select, active {نشط} ended {منتهية} coming {قريباً}",
+     "You_cant_open_programming_contest_now":"لا يمكنك فتح مسابقة البرمجة الآن",
+   "Timeisfinishedtocopmletetest":"انتهى الوقت , لا يمكنك متابعة الاختبار",
+   "wait_until_the_contest_open":"انتظر حتى تفتح المسابقة"
+
+
+  }
+
 
 
 
@@ -152,5 +166,4 @@
 
 
 
-
-}
+ 

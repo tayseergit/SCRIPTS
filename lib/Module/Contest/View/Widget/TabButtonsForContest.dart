@@ -24,7 +24,7 @@ class ContestTab extends StatelessWidget {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: List.generate(contestCubit.labels.length, (index) {
+      children: List.generate(contestCubit.getLabels(context).length, (index) {
         final isSelected = contestCubit.selectedTab == index;
 
         return Expanded(
@@ -58,7 +58,7 @@ class ContestTab extends StatelessWidget {
                           key: ValueKey('text_$index'),
                           padding: EdgeInsets.all(1),
                           child: Text(
-                            contestCubit.labels[index],
+                            contestCubit.getLabels(context)[index],
                             style: TextStyle(
                               color: appColors.whiteText,
                               fontWeight: FontWeight.bold,
