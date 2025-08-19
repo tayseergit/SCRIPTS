@@ -10,6 +10,8 @@
 analyzer:
   errors:
     avoid_print: ignore
+    avoid_unnecessary_containers: ignore
+    body_might_complete_normally_nullable: ignore
     curly_braces_in_flow_control_structures: ignore
     depend_on_referenced_packages: ignore
     deprecated_member_use: ignore

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Module/Participants/Cubit/Participants_cubit.dart';
+import 'package:lms/generated/l10n.dart';
 
 class OrderOptionsSheet extends StatelessWidget {
     final ParticipantsCubit cubit;
@@ -15,8 +16,8 @@ class OrderOptionsSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            title: const Text('ترتيب حسب النقاط'),
-            leading: const Icon(Icons.star),
+            title:  Text(S.of(context).Participants_tarteep),
+            leading:  Icon(Icons.star),
             onTap: () {
               cubit.fetchAllParticipantsWithOrder(
                   orderBy: 'points', direction: 'desc');
@@ -24,8 +25,8 @@ class OrderOptionsSheet extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('ترتيب حسب الاسم'),
-            leading: const Icon(Icons.sort_by_alpha),
+            title:  Text(S.of(context).participant_trtip),
+            leading:  Icon(Icons.sort_by_alpha),
            onTap: () {
               cubit.fetchAllParticipantsWithOrder(
                   orderBy: 'name', direction: 'asc');

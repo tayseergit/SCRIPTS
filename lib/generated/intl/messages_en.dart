@@ -30,6 +30,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "Login_or_SignUp": MessageLookupByLibrary.simpleMessage("Login or Sign Up"),
     "More": MessageLookupByLibrary.simpleMessage("More"),
     "My": MessageLookupByLibrary.simpleMessage("My"),
+    "Participants_tarteep": MessageLookupByLibrary.simpleMessage(
+      "Sort by points",
+    ),
     "Project": MessageLookupByLibrary.simpleMessage("Project"),
     "Send_code": MessageLookupByLibrary.simpleMessage("Send code"),
     "about_this_course": MessageLookupByLibrary.simpleMessage(
@@ -74,7 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Choose File to upload",
     ),
     "close": MessageLookupByLibrary.simpleMessage("Close"),
-    "code_sent": MessageLookupByLibrary.simpleMessage("code sendt"),
+    "code_sent": MessageLookupByLibrary.simpleMessage("code sent"),
     "confirmNewPassword": MessageLookupByLibrary.simpleMessage(
       "Confirm New Password",
     ),
@@ -142,6 +145,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "github_url": MessageLookupByLibrary.simpleMessage("GitHub URL"),
     "google": MessageLookupByLibrary.simpleMessage("Google"),
     "invalid_email": MessageLookupByLibrary.simpleMessage("Invalid Email"),
+    "leader": MessageLookupByLibrary.simpleMessage("Leader Board"),
+    "leaderbord": MessageLookupByLibrary.simpleMessage("not participant"),
+    "learn_path_info": MessageLookupByLibrary.simpleMessage("About this Path"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "mentor": MessageLookupByLibrary.simpleMessage("Mentor"),
@@ -151,8 +157,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "network_error": MessageLookupByLibrary.simpleMessage("Network error"),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
     "old_password": MessageLookupByLibrary.simpleMessage("Old Password"),
     "or_login": MessageLookupByLibrary.simpleMessage("or login"),
+    "participant_trtip": MessageLookupByLibrary.simpleMessage("Sort by name"),
     "participants": MessageLookupByLibrary.simpleMessage("Participants"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwords_do_not_match": MessageLookupByLibrary.simpleMessage(

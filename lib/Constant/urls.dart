@@ -1,11 +1,12 @@
 // ignore_for_file: file_names
 
 class Urls {
-  static String ip = "192.168.1.5";
+  static String ip = "192.168.43.38";
   static String baseUrl = "";
 
   static String teacher = '$baseUrl/users';
   static String update = '$baseUrl/me/update';
+  static String notification = '$baseUrl/notifications';
 
   static teacherProfile(int id) {
     return '$baseUrl/users/$id';
@@ -37,5 +38,9 @@ class Urls {
 
   static learnPathInfocourse(int id) {
     return '$baseUrl/learningPath/$id/courses';
+  }
+
+  static feachLeaderBoard(int id, {bool justFriends = false}) {
+    return '$baseUrl/contests/$id/standing?justFriends=${justFriends ? 1 : 0}';
   }
 }

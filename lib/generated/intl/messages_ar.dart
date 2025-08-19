@@ -34,6 +34,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "More": MessageLookupByLibrary.simpleMessage("المزيد"),
     "My": MessageLookupByLibrary.simpleMessage("خاصة"),
+    "Participants_tarteep": MessageLookupByLibrary.simpleMessage(
+      "ترتيب حسب النقاط",
+    ),
     "Project": MessageLookupByLibrary.simpleMessage("المشاريع"),
     "Send_code": MessageLookupByLibrary.simpleMessage("ارسال رمز التحقق"),
     "about_this_course": MessageLookupByLibrary.simpleMessage("عن هذه الدورة"),
@@ -143,6 +146,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalid_email": MessageLookupByLibrary.simpleMessage(
       "البريد الإلكتروني غير صالح",
     ),
+    "leader": MessageLookupByLibrary.simpleMessage("لائحة الصدارة"),
+    "leaderbord": MessageLookupByLibrary.simpleMessage("لست مشاركا"),
+    "learn_path_info": MessageLookupByLibrary.simpleMessage("حول هذا المسار"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "mentor": MessageLookupByLibrary.simpleMessage("المدرب"),
@@ -152,8 +158,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "network_error": MessageLookupByLibrary.simpleMessage("خطأ في الشبكة"),
     "newPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
+    "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
     "old_password": MessageLookupByLibrary.simpleMessage("كلمة المرور القديمة"),
     "or_login": MessageLookupByLibrary.simpleMessage("أو تسجيل الدخول"),
+    "participant_trtip": MessageLookupByLibrary.simpleMessage(
+      "ترتيب حسب الاسم",
+    ),
     "participants": MessageLookupByLibrary.simpleMessage("المشاركون"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "passwords_do_not_match": MessageLookupByLibrary.simpleMessage(

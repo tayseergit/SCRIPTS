@@ -16,7 +16,7 @@ import 'package:lms/Module/Project/View/Widget/grid_loading.dart';
 import 'package:lms/Module/Project/View/Widget/toggle_switch.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
-import 'package:lms/Module/leaderboardforpastcontest/LeaderListView.dart';
+import 'package:lms/Module/leaderboardforpastcontest/View/Widget/leader_listview.dart';
 import 'package:lms/Module/mainWidget/Errors/no-item.dart';
 import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/authText.dart';

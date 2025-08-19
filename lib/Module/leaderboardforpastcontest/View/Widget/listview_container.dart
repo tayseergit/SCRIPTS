@@ -10,7 +10,7 @@ class ListViewContainer extends StatelessWidget {
   final String rank;
   final Color rankColor;
   final BorderRadius borderRadius;
-  final String image;
+  final Widget image;
   final double height;
   final BoxBorder border;
 
@@ -73,12 +73,7 @@ class ListViewContainer extends StatelessWidget {
             radius: 35.r,
             backgroundColor: appColors.pageBackground,
             child: ClipOval(
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
-                width: 75.w,
-                height: 75.h,
-              ),
+              child: image,
             ),
           ),
         ),

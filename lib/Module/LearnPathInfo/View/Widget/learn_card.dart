@@ -103,7 +103,7 @@ class LearnCard extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Icon(Icons.star, color: Colors.yellow, size: 21),
+                              Icon(Icons.star, color: Colors.yellow, size: 21.r),
                               SizedBox(width: 5.w),
                               AuthText(
                                 text: learnPathInfoCourse.rate.toString(),

@@ -150,19 +150,21 @@ class Userfriendcard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 12.w, vertical: 6.h),
-                        decoration: BoxDecoration(
-                            color: appColors.mainText.withOpacity(0.7),
-                            borderRadius: BorderRadius.circular(8.r),
-                            border: Border.all(color: appColors.primary)),
-                        child: Text(
-                          friend.name,
-                          style: TextStyle(
-                            color: appColors.pageBackground,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w600,
+                      Flexible(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 12.w, vertical: 6.h),
+                          decoration: BoxDecoration(
+                              color: appColors.mainText.withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(8.r),
+                              border: Border.all(color: appColors.primary)),
+                          child: Text(
+                            friend.name,
+                            style: TextStyle(
+                              color: appColors.pageBackground,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ),

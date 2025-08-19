@@ -2,33 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Module/CourseInfo/Model/Review/add_review_response.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
-import 'package:lms/Module/leaderboardforpastcontest/CardExpandCubit.dart';
+import 'package:lms/Module/leaderboardforpastcontest/Cubit/card_expand_cubit.dart';
+import 'package:lms/Module/leaderboardforpastcontest/Model/leader_board_for_past_contest_model.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 
 class CardLeader extends StatelessWidget {
   final int index;
+  final Studentss student;
+  final int questionCount;
 
-  const CardLeader({super.key, required this.index});
+  const CardLeader({
+    super.key,
+    required this.index,
+    required this.student,
+    required this.questionCount,
+  });
 
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
 
-    return BlocProvider(
-      create: (_) => CardExpandCubit(),
-      child: BlocBuilder<CardExpandCubit, bool>(
-        builder: (context, isExpanded) {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 8.h),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.r),
-                border: Border.all(color: appColors.mainText),
-                color: appColors.pageBackground,
-              ),
+    return BlocBuilder<CardExpandCubit,  Map<int, bool>>(
+      builder: (context, state) {
+        final isExpanded = state[index] ?? false;
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 18.w),
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 8.h),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.r),
+              border: Border.all(color: appColors.mainText),
+              color: appColors.pageBackground,
+            ),
+            child: IntrinsicHeight(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -52,14 +61,17 @@ class CardLeader extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.all(10.r),
+                      padding: EdgeInsets.all(12.r),
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Row(
                             children: [
                               CircleAvatar(
                                 radius: 25.r,
-                                backgroundImage: AssetImage(Images.courses),
+                                backgroundImage: student.image.isNotEmpty
+                                    ? NetworkImage(student.image)
+                                    : AssetImage(Images.noImage) as ImageProvider,
                               ),
                               SizedBox(width: 12.w),
                               Expanded(
@@ -68,15 +80,15 @@ class CardLeader extends StatelessWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        AuthText(
-                                          text: 'Sebastian',
-                                          size: 16,
-                                          color: appColors.mainText,
-                                          fontWeight: FontWeight.w700,
+                                        Expanded(
+                                          child: AuthText(
+                                            text: student.name,
+                                            size: 16,
+                                            color: appColors.mainText,
+                                            fontWeight: FontWeight.w700,
+                                          ),
                                         ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
+                                        SizedBox(width: 10),
                                         AuthText(
                                           text: 'points : ',
                                           size: 13,
@@ -84,7 +96,7 @@ class CardLeader extends StatelessWidget {
                                           fontWeight: FontWeight.w700,
                                         ),
                                         AuthText(
-                                          text: '1124',
+                                          text: student.gainedPoints.toString(),
                                           size: 13,
                                           color: appColors.ok,
                                           fontWeight: FontWeight.w700,
@@ -102,7 +114,7 @@ class CardLeader extends StatelessWidget {
                                   color: appColors.mainText,
                                 ),
                                 onPressed: () {
-                                  context.read<CardExpandCubit>().toggle();
+                                context.read<CardExpandCubit>().toggle(index);
                                 },
                               ),
                             ],
@@ -117,7 +129,7 @@ class CardLeader extends StatelessWidget {
                                     Icon(Icons.check, color: appColors.ok),
                                     SizedBox(height: 4.h),
                                     AuthText(
-                                      text: '18',
+                                      text: student.correctAnswers.toString(),
                                       size: 14,
                                       color: appColors.ok,
                                       fontWeight: FontWeight.w700,
@@ -129,7 +141,7 @@ class CardLeader extends StatelessWidget {
                                     Icon(Icons.close, color: appColors.red),
                                     SizedBox(height: 4.h),
                                     AuthText(
-                                      text: '2',
+                                      text: (questionCount - student.correctAnswers).toString(),
                                       size: 14,
                                       color: appColors.red,
                                       fontWeight: FontWeight.w700,
@@ -138,11 +150,10 @@ class CardLeader extends StatelessWidget {
                                 ),
                                 Column(
                                   children: [
-                                    Icon(Icons.hourglass_empty,
-                                        color: appColors.mainText),
+                                    Icon(Icons.hourglass_empty, color: appColors.mainText),
                                     SizedBox(height: 4.h),
                                     AuthText(
-                                      text: '60 m 5 s',
+                                      text: student.endTime,
                                       size: 14,
                                       color: appColors.mainText,
                                       fontWeight: FontWeight.w700,
@@ -158,9 +169,10 @@ class CardLeader extends StatelessWidget {
                 ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
+

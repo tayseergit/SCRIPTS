@@ -5,6 +5,8 @@ import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Module/LearnPathInfo/Cubit/main_cubit.dart';
+import 'package:lms/Module/Notifications/Cubit/notification_cubit.dart';
+import 'package:lms/Module/Notifications/View/Page/notifications_page.dart';
 import 'package:lms/Module/Participants/Cubit/Participants_cubit.dart';
 import 'package:lms/Module/Participants/View/Page/Participants_page.dart';
 import 'package:lms/Module/ResetPassword.dart/View/Widget/reset_dialog.dart';
@@ -47,7 +49,7 @@ class More extends StatelessWidget {
               top: 30.h,
               left: 16.w,
               child: AuthText(
-                  text: "Tayseer Matar",
+                  text: S.of(context).read_more,
                   size: 30,
                   color: appColors.mainText,
                   fontWeight: FontWeight.bold),
@@ -274,6 +276,47 @@ class More extends StatelessWidget {
                                               BlocProvider.value(
                                             value: TeacherCubit(),
                                             child: TeacherPage(),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  height: 25,
+                                  width: 25,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 25.h,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: appColors.secondText,
+                                  width: 1.5,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30),
+                                ),
+                              ),
+                              child: OnBoardingContainerMore(
+                                width: 330,
+                                height: 60,
+                                color: appColors.pageBackground,
+                                widget: Rowmore(
+                                  text: lang.notifications,
+                                  image: Images.rnrn,
+                                  onTapp: () {
+                                    if (CacheHelper.getToken() == null) {
+                                      showNoAuthDialog(context);
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              BlocProvider.value(
+                                            value: NotificationCubit(),
+                                            child: NotificationPage(),
                                           ),
                                         ),
                                       );

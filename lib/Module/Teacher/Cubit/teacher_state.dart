@@ -12,7 +12,7 @@ class TeacherSuccess extends TeacherState {
 
 class TeacherLoding extends TeacherState {}
 
-class TeacherError extends TeacherState {
+class TeacherError extends TeacherState {  
   final String masseg;
   TeacherError({required this.masseg});
 }

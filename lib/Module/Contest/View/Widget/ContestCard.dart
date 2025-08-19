@@ -3,14 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
+import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Module/Contest/Model/contest_response.dart';
 import 'package:lms/Module/CourseInfo/View/Pages/course_info_page.dart';
-import 'package:lms/Module/leaderboardforpastcontest/leaderboardforpastcontestPage.dart';
+import 'package:lms/Module/leaderboardforpastcontest/Cubit/leader_board_cubit.dart';
+import 'package:lms/Module/leaderboardforpastcontest/View/Pages/leaderboardforpastcontestPage.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/ReadMoreInlineText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/Module/mainWidget/no_auth.dart';
 
 class Contestcard extends StatelessWidget {
   Contestcard({super.key, required this.contest});
@@ -123,10 +126,23 @@ class Contestcard extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                   ),
                                   onTap: () {
-                                    pushTo(
-                                        context: context,
-                                        toPage:
-                                            Leaderboardforpastcontestpage());
+                                    if (CacheHelper.getToken() == null) {
+                                      showNoAuthDialog(context);
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              BlocProvider.value(
+                                            value: LeaderBoardCubit(),
+                                            child:
+                                                Leaderboardforpastcontestpage(
+                                              contastId: contest.id,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
                                   },
                                 )
                               : Container(),

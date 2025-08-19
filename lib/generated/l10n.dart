@@ -344,9 +344,9 @@ class S {
     );
   }
 
-  /// `code sendt`
+  /// `code sent`
   String get code_sent {
-    return Intl.message('code sendt', name: 'code_sent', desc: '', args: []);
+    return Intl.message('code sent', name: 'code_sent', desc: '', args: []);
   }
 
   /// `Register Completed`
@@ -739,6 +739,36 @@ class S {
     );
   }
 
+  /// `About this Path`
+  String get learn_path_info {
+    return Intl.message(
+      'About this Path',
+      name: 'learn_path_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort by name`
+  String get participant_trtip {
+    return Intl.message(
+      'Sort by name',
+      name: 'participant_trtip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort by points`
+  String get Participants_tarteep {
+    return Intl.message(
+      'Sort by points',
+      name: 'Participants_tarteep',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Courses`
   String get Courses {
     return Intl.message('Courses', name: 'Courses', desc: '', args: []);
@@ -947,6 +977,31 @@ class S {
   /// `update`
   String get update {
     return Intl.message('update', name: 'update', desc: '', args: []);
+  }
+
+  /// `Leader Board`
+  String get leader {
+    return Intl.message('Leader Board', name: 'leader', desc: '', args: []);
+  }
+
+  /// `not participant`
+  String get leaderbord {
+    return Intl.message(
+      'not participant',
+      name: 'leaderbord',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
   }
 }
 
