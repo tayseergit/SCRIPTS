@@ -42,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "My": MessageLookupByLibrary.simpleMessage("خاصة"),
     "NoItem": MessageLookupByLibrary.simpleMessage("لا يوجد محتوى"),
     "Not_Completed": MessageLookupByLibrary.simpleMessage("غير مكتمل"),
+    "Participants_tarteep": MessageLookupByLibrary.simpleMessage(
+      "ترتيب حسب النقاط",
+    ),
     "Project": MessageLookupByLibrary.simpleMessage("المشاريع"),
     "Quiz": MessageLookupByLibrary.simpleMessage("اختبار"),
     "Reviews": MessageLookupByLibrary.simpleMessage("التقييمات"),
@@ -188,6 +191,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "رابط الفيديو غير صالح",
     ),
     "join": MessageLookupByLibrary.simpleMessage("انضمام"),
+    "leader": MessageLookupByLibrary.simpleMessage("لائحة الصدارة"),
+    "leaderbord": MessageLookupByLibrary.simpleMessage("لست مشاركا"),
+    "learn_path_info": MessageLookupByLibrary.simpleMessage("حول هذا المسار"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "mentor": MessageLookupByLibrary.simpleMessage("المدرب"),
@@ -197,9 +203,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "network_error": MessageLookupByLibrary.simpleMessage("خطأ في الشبكة"),
     "newPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
+    "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
     "old_password": MessageLookupByLibrary.simpleMessage("كلمة المرور القديمة"),
     "or_login": MessageLookupByLibrary.simpleMessage("أو تسجيل الدخول"),
     "participant": MessageLookupByLibrary.simpleMessage("مشارك"),
+    "participant_trtip": MessageLookupByLibrary.simpleMessage(
+      "ترتيب حسب الاسم",
+    ),
     "participants": MessageLookupByLibrary.simpleMessage("المشاركون"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "passwords_do_not_match": MessageLookupByLibrary.simpleMessage(

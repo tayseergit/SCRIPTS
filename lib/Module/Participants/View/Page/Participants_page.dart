@@ -9,7 +9,12 @@ import 'package:lms/Module/Participants/View/Widget/order_options_sheet.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
+import 'package:lms/Module/mainWidget/TopWave_more_Clipper.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
+import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/Module/mainWidget/loading_container.dart';
+import 'package:lms/generated/l10n.dart';
 
 class ParticipantsPage extends StatelessWidget {
   const ParticipantsPage({super.key});
@@ -31,66 +36,94 @@ class ParticipantsPage extends StatelessWidget {
           builder: (context, state) {
             if (state is ParticpantsLoding &&
                 context.read<ParticipantsCubit>().lastUsers == null) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(
+                child: SizedBox(
+                  height: 80.h,
+                  child: Loading(height: 50.h, width: 50.w),
+                ),
+              );
             } else if (state is ParticpantsError) {
               return Center(child: NoConnection());
             } else {
               final teacherList =
                   context.read<ParticipantsCubit>().lastUsers?.users ?? [];
 
-              return ListView(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
+              return Stack(
                 children: [
-                  SizedBox(height: 140.h),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 150),
-                      child: Customtextfieldsearsh(
-                        onChanged: (value) {
-                          final query = value.trim();
-                          if (query.isNotEmpty) {
-                            context
-                                .read<ParticipantsCubit>()
-                                .searchParticipants(query);
-                          } else {
-                            context
-                                .read<ParticipantsCubit>()
-                                .fetchAllParticipants();
-                          }
-                        },
-                        borderRadius: 6,
-                        controller: search,
-                        borderColor: appColors.primary,
-                        prefixIcon: Icon(
-                          Icons.search_outlined,
-                          size: 30,
-                          color: appColors.iconSearsh,
-                        ),
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            final cubit = context.read<ParticipantsCubit>();
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (_) => OrderOptionsSheet(cubit: cubit),
-                            );
-                          },
-                          child: Image.asset(
-                            Images.filter,
-                            width: 17.w,
-                            height: 17.h,
-                            color: appColors.iconSearsh,
-                          ),
-                        ),
-                        hintText: 'which teacher?',
-                        hintFontSize: 13.sp,
-                        hintFontWeight: FontWeight.w600,
-                        fillColor: appColors.pageBackground,
-                      ),
+                  ClipPath(
+                    clipper: TopWaveMoreClipper(),
+                    child: Container(
+                      decoration: BoxDecoration(gradient: appColors.linear),
+                      width: double.infinity,
+                      height: 250.h,
                     ),
                   ),
-                  SizedBox(height: 18.h),
-                  ParticipantsGridview(teacher: teacherList)
+                  Positioned(
+                    top: 60.h,
+                    left: 16.w,
+                    child: AuthText(
+                      text: S.of(context).participants,
+                      size: 30,
+                      color: appColors.mainText,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  ListView(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    children: [
+                      SizedBox(height: 140.h),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 150),
+                          child: Customtextfieldsearsh(
+                            onChanged: (value) {
+                              final query = value.trim();
+                              if (query.isNotEmpty) {
+                                context
+                                    .read<ParticipantsCubit>()
+                                    .searchParticipants(query);
+                              } else {
+                                context
+                                    .read<ParticipantsCubit>()
+                                    .fetchAllParticipants();
+                              }
+                            },
+                            borderRadius: 6,
+                            controller: search,
+                            borderColor: appColors.primary,
+                            prefixIcon: Icon(
+                              Icons.search_outlined,
+                              size: 30,
+                              color: appColors.iconSearsh,
+                            ),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                final cubit = context.read<ParticipantsCubit>();
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (_) =>
+                                      OrderOptionsSheet(cubit: cubit),
+                                );
+                              },
+                              child: Image.asset(
+                                Images.filter,
+                                width: 17.w,
+                                height: 17.h,
+                                color: appColors.iconSearsh,
+                              ),
+                            ),
+                            hintText: 'which teacher?',
+                            hintFontSize: 13.sp,
+                            hintFontWeight: FontWeight.w600,
+                            fillColor: appColors.pageBackground,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 18.h),
+                      ParticipantsGridview(teacher: teacherList)
+                    ],
+                  ),
                 ],
               );
             }

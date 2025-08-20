@@ -60,4 +60,5 @@ class Images {
   static String noProfile = "${baseImages}noProfile.png";
   static String studentIcon = "${baseImages}studentIcon.png";
   static String TestImage = "${baseImages}TestImage.png";
+  static String rnrn = "${baseImages}rnrn.png";
 }

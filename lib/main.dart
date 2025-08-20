@@ -32,8 +32,7 @@ import 'package:lms/Module/CourseTest/View/Pages/course_Test_Page.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/Course_content/View/Pages/course_conten_page.dart';
-import 'package:lms/Module/leaderboardforpastcontest/leaderboardforpastcontestPage.dart';
-
+ 
 // Import your generated localization file
 import 'generated/l10n.dart';
 

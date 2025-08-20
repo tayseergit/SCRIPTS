@@ -53,70 +53,77 @@ class ParticipantsCard extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    left: 15,
-                    top: 50,
-                    child: Builder(
-                      builder: (innerContext) => IconButton(
-                        onPressed: () {
-                          final cubit = innerContext.read<ParticipantsCubit>();
-                          showDialog(
-                            context: innerContext,
-                            builder: (context) => AlertDialog(
-                              title: const Text('تأكيد الاضافة'),
-                              content: Text(
-                                  'هل تريد اضافة ${teacherModel.name} الى قائمة الأصدقاء؟'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: const Text('إلغاء'),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    cubit.addFriend(teacherModel);
-                                    Navigator.pop(context);
-                                    CustomSnackbar.show(
-                                      context: context,
-                                      duration: 5,
-                                      fillColor: appColors.ok,
-                                      message: "Add Friend Successful",
-                                    );
-                                  },
-                                  child: const Text('اضافة',
-                                      style: TextStyle(color: Colors.orange)),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                        icon: Icon(
-                          Icons.add,
-                          color: appColors.orang,
-                          size: 40,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
                     bottom: 12.h,
-                    left: 0,
+                    left: -12,
                     right: 0,
-                    child: Center(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 12.w, vertical: 6.h),
-                        decoration: BoxDecoration(
-                            color: appColors.mainText.withOpacity(0.7),
-                            borderRadius: BorderRadius.circular(8.r),
-                            border: Border.all(color: appColors.primary)),
-                        child: Text(
-                          teacherModel.name,
-                          style: TextStyle(
-                            color: appColors.pageBackground,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w600,
+                    child: Row(
+                      children: [
+                        Builder(
+                          builder: (innerContext) => IconButton(
+                            onPressed: () {
+                              final cubit =
+                                  innerContext.read<ParticipantsCubit>();
+                              showDialog(
+                                context: innerContext,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('تأكيد الاضافة'),
+                                  content: Text(
+                                      'هل تريد اضافة ${teacherModel.name} الى قائمة الأصدقاء؟'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text('إلغاء'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        cubit.addFriend(teacherModel);
+                                        Navigator.pop(context);
+                                        CustomSnackbar.show(
+                                          context: context,
+                                          duration: 5,
+                                          fillColor: appColors.ok,
+                                          message: "Add Friend Successful",
+                                        );
+                                      },
+                                      child: const Text('اضافة',
+                                          style:
+                                              TextStyle(color: Colors.orange)),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            icon: Icon(
+                              Icons.add,
+                              color: appColors.orang,
+                              size: 30,
+                            ),
                           ),
                         ),
-                      ),
+                        Flexible(
+                          child: IntrinsicWidth(
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 8.w, 
+                                vertical: 6.h, 
+                              ),
+                              decoration: BoxDecoration(
+                                color: appColors.mainText.withOpacity(0.7),
+                                borderRadius: BorderRadius.circular(8.r),
+                                border: Border.all(color: appColors.primary),
+                              ),
+                              child: Text(
+                                teacherModel.name,
+                                style: TextStyle(
+                                  color: appColors.pageBackground,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ],

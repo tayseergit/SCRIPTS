@@ -22,7 +22,7 @@ class Gridviewlearn extends StatelessWidget {
         itemCount: list.length,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 400.w,
-          childAspectRatio: 335.w/117.h,
+          childAspectRatio: 335.w/126.h,
           mainAxisSpacing: 10.h,
           crossAxisSpacing: 10.w,
         ),

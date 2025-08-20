@@ -105,69 +105,70 @@ class Userfriendcard extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  left: -15,
-                  top: 50,
-                  child: Builder(
-                    builder: (innerContext) => IconButton(
-                      onPressed: () {
-                        final cubit = innerContext.read<UserFriendCubit>();
-                        showDialog(
-                          context: innerContext,
-                          builder: (context) => AlertDialog(
-                            title: const Text('تأكيد الحذف'),
-                            content: Text(
-                                'هل تريد حذف ${friend.name} من قائمة الأصدقاء؟'),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: const Text('إلغاء'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  cubit.DeletFriend(friend);
-                                  Navigator.pop(context);
-                                  CustomSnackbar.show(
-                                      context: context,
-                                      duration: 5,
-                                      fillColor: appColors.ok,
-                                      message: "Remove Friend Successful",
-                                    );
-                                },
-                                child: const Text('حذف',
-                                    style: TextStyle(color: Colors.red)),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                      icon: Icon(
-                        Icons.delete_outline_rounded,
-                        color: appColors.red,
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
                   bottom: 12.h,
-                  left: 0,
+                  left: -12,
                   right: 0,
-                  child: Center(
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                      decoration: BoxDecoration(
-                          color: appColors.mainText.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(color: appColors.primary)),
-                      child: Text(
-                        friend.name,
-                        style: TextStyle(
-                          color: appColors.pageBackground,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
+                  child: Row(
+                    children: [
+                      Builder(
+                        builder: (innerContext) => IconButton(
+                          onPressed: () {
+                            final cubit = innerContext.read<UserFriendCubit>();
+                            showDialog(
+                              context: innerContext,
+                              builder: (context) => AlertDialog(
+                                title: const Text('تأكيد الحذف'),
+                                content: Text(
+                                    'هل تريد حذف ${friend.name} من قائمة الأصدقاء؟'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: const Text('إلغاء'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      cubit.DeletFriend(friend);
+                                      Navigator.pop(context);
+                                      CustomSnackbar.show(
+                                        context: context,
+                                        duration: 5,
+                                        fillColor: appColors.ok,
+                                        message: "Remove Friend Successful",
+                                      );
+                                    },
+                                    child: const Text('حذف',
+                                        style: TextStyle(color: Colors.red)),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          icon: Icon(
+                            Icons.disabled_by_default_rounded,
+                            color: appColors.red,
+                            size: 30,
+                          ),
                         ),
                       ),
-                    ),
+                      Flexible(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 12.w, vertical: 6.h),
+                          decoration: BoxDecoration(
+                              color: appColors.mainText.withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(8.r),
+                              border: Border.all(color: appColors.primary)),
+                          child: Text(
+                            friend.name,
+                            style: TextStyle(
+                              color: appColors.pageBackground,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
