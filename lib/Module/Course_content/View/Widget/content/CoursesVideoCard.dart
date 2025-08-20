@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Module/Course_content/Cubit/CommentCubit/comment_cubit.dart';
 import 'package:lms/Module/Course_content/Cubit/VideoCubit/VideoCubit.dart';
 import 'package:lms/Module/Course_content/Cubit/VideoCubit/VideoState.dart';
-import 'package:lms/Module/Course_content/Model/course_content_response.dart';
+import 'package:lms/Module/Course_content/Model/ContentModel/course_content_response.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
@@ -33,6 +34,8 @@ class Coursesvideocard extends StatelessWidget {
                     context,
                     videoId: videoContentItem.id,
                   );
+              context.read<CommentCubit>().videoId = videoContentItem.id;
+              context.read<CommentCubit>().getAllComments();
             },
             child: Container(
               height: 80.h,
@@ -75,7 +78,9 @@ class Coursesvideocard extends StatelessWidget {
                               ? Icons.lock
                               : selectedVideo == videoContentItem.id
                                   ? Icons.pause
-                                  : Icons.play_circle_fill_outlined,
+                                  // : videoContentItem.completed
+                                  //     ? Icons.done
+                                      : Icons.play_circle_fill_outlined,
                           color: videoContentItem.isFree!
                               ? appColors.blackGreen
                               : appColors.blackGreenDisable,

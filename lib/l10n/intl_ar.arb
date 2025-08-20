@@ -1,6 +1,7 @@
 {
   "@@locale": "ar",
   "add_review": "أضف تقييمًا",
+  "add_comment": "أضف تعليق",
   "about_this_course": "عن هذه الدورة",
   "mentor": "المدرب",
   "courses": "الدورات",
@@ -148,7 +149,23 @@
   "contestStatus": "{status, select, active {نشط} ended {منتهية} coming {قريباً}",
      "You_cant_open_programming_contest_now":"لا يمكنك فتح مسابقة البرمجة الآن",
    "Timeisfinishedtocopmletetest":"انتهى الوقت , لا يمكنك متابعة الاختبار",
-   "wait_until_the_contest_open":"انتظر حتى تفتح المسابقة"
+   "wait_until_the_contest_open":"انتظر حتى تفتح المسابقة",
+   "comments":"التعليقات",
+   "reply":"رد",
+   "hide_replies": "إخفاء الردود",
+    "replies": "الردود",
+    "add_reply": "إضافة رد",
+    "hours": "ساعات",
+"videos": "فيديوهات",
+"participant": "مشارك",
+"Reviews": "التقييمات",
+"About_this_course": "عن هذه الدورة",
+"Mentor": "المدرّب",
+
+    "remove_watch_later":"ازالة من المشاهدة لاحقاً",
+    "add_watch_later":"اضافة للمشاهدة لاحقاً"
+
+   
 
 
   }

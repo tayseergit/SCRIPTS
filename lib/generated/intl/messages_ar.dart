@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "About_this_course": MessageLookupByLibrary.simpleMessage("عن هذه الدورة"),
     "All": MessageLookupByLibrary.simpleMessage("الكل"),
     "Completed": MessageLookupByLibrary.simpleMessage("مكتمل"),
     "Contest": MessageLookupByLibrary.simpleMessage("المسابقات"),
@@ -36,12 +37,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "Login_or_SignUp": MessageLookupByLibrary.simpleMessage(
       "تسجيل الدخول أو الاشتراك",
     ),
+    "Mentor": MessageLookupByLibrary.simpleMessage("المدرّب"),
     "More": MessageLookupByLibrary.simpleMessage("المزيد"),
     "My": MessageLookupByLibrary.simpleMessage("خاصة"),
     "NoItem": MessageLookupByLibrary.simpleMessage("لا يوجد محتوى"),
     "Not_Completed": MessageLookupByLibrary.simpleMessage("غير مكتمل"),
     "Project": MessageLookupByLibrary.simpleMessage("المشاريع"),
     "Quiz": MessageLookupByLibrary.simpleMessage("اختبار"),
+    "Reviews": MessageLookupByLibrary.simpleMessage("التقييمات"),
     "Send_code": MessageLookupByLibrary.simpleMessage("ارسال رمز التحقق"),
     "Timeisfinishedtocopmletetest": MessageLookupByLibrary.simpleMessage(
       "انتهى الوقت , لا يمكنك متابعة الاختبار",
@@ -56,9 +59,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_a_payment_method": MessageLookupByLibrary.simpleMessage(
       "إضافة طريقة دفع",
     ),
+    "add_comment": MessageLookupByLibrary.simpleMessage("أضف تعليق"),
     "add_image": MessageLookupByLibrary.simpleMessage("إضافة صورة"),
     "add_new_project": MessageLookupByLibrary.simpleMessage("إضافة مشروع"),
+    "add_reply": MessageLookupByLibrary.simpleMessage("إضافة رد"),
     "add_review": MessageLookupByLibrary.simpleMessage("أضف تقييمًا"),
+    "add_watch_later": MessageLookupByLibrary.simpleMessage(
+      "اضافة للمشاهدة لاحقاً",
+    ),
     "all_fields_required": MessageLookupByLibrary.simpleMessage(
       "جميع الحقول مطلوبة",
     ),
@@ -98,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "close": MessageLookupByLibrary.simpleMessage("إغلاق"),
     "code_sent": MessageLookupByLibrary.simpleMessage("تم ارسال رمز التحقق"),
     "coming": MessageLookupByLibrary.simpleMessage("قريباً"),
+    "comments": MessageLookupByLibrary.simpleMessage("التعليقات"),
     "complete_as_browser": MessageLookupByLibrary.simpleMessage(
       "المتابعة كمتصفح",
     ),
@@ -170,6 +179,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "github_account": MessageLookupByLibrary.simpleMessage("حساب GitHub"),
     "github_url": MessageLookupByLibrary.simpleMessage("رابط GitHub"),
     "google": MessageLookupByLibrary.simpleMessage("جوجل"),
+    "hide_replies": MessageLookupByLibrary.simpleMessage("إخفاء الردود"),
+    "hours": MessageLookupByLibrary.simpleMessage("ساعات"),
     "invalid_email": MessageLookupByLibrary.simpleMessage(
       "البريد الإلكتروني غير صالح",
     ),
@@ -188,6 +199,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
     "old_password": MessageLookupByLibrary.simpleMessage("كلمة المرور القديمة"),
     "or_login": MessageLookupByLibrary.simpleMessage("أو تسجيل الدخول"),
+    "participant": MessageLookupByLibrary.simpleMessage("مشارك"),
     "participants": MessageLookupByLibrary.simpleMessage("المشاركون"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "passwords_do_not_match": MessageLookupByLibrary.simpleMessage(
@@ -209,6 +221,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "register_completed": MessageLookupByLibrary.simpleMessage(
       "تم التسجيل بنجاح",
     ),
+    "remove_watch_later": MessageLookupByLibrary.simpleMessage(
+      "ازالة من المشاهدة لاحقاً",
+    ),
+    "replies": MessageLookupByLibrary.simpleMessage("الردود"),
+    "reply": MessageLookupByLibrary.simpleMessage("رد"),
     "resend_code": MessageLookupByLibrary.simpleMessage("إعادة إرسال الرمز؟"),
     "resetPassword": MessageLookupByLibrary.simpleMessage(
       "إعادة تعيين كلمة المرور",
@@ -238,6 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "total_points": MessageLookupByLibrary.simpleMessage("إجمالي النقاط"),
     "update": MessageLookupByLibrary.simpleMessage("تحديث"),
     "verify_code": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
+    "videos": MessageLookupByLibrary.simpleMessage("فيديوهات"),
     "view": MessageLookupByLibrary.simpleMessage("عرض"),
     "wait_until_the_contest_open": MessageLookupByLibrary.simpleMessage(
       "انتظر حتى تفتح المسابقة",

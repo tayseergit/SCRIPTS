@@ -74,6 +74,7 @@ class _MyAppState extends State<MyApp> {
     //   SystemUiMode.leanBack,
     // );
     print("token : ${CacheHelper.getToken()}");
+    print("userid : ${CacheHelper.getUserId()}");
   }
 
   @override
@@ -107,10 +108,10 @@ class _MyAppState extends State<MyApp> {
                       theme: themeState.isDarkMode
                           ? ThemeData.dark()
                           : ThemeData.light(),
-                      home: Login()
-                      // home: CourseContentPage(
-                      //   //   testId: 1,
-                      //   courseId: 1,
+                      home: NavigationBarwidget()
+                      // home: CourseInfoPage(
+                      //   testId: 1,
+                      // courseId: 1,
                       // ),
                       );
                 },

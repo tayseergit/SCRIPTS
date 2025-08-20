@@ -18,7 +18,7 @@ class CourseContentResponse {
   }
 }
 
-class CourseData {
+class CourseData {  
   int id;
   String title;
   String description;
@@ -64,7 +64,7 @@ class ContentItem {
   bool? isFree; // for videos
   bool? watched; // for videos
   bool? isFinal; // for tests
-  bool? completed; // for tests
+  bool ? completed; // for tests
 
   ContentItem({
     required this.id,
@@ -75,7 +75,7 @@ class ContentItem {
     this.isFree,
     this.watched,
     this.isFinal,
-    this.completed,
+     this.completed,
   });
 
   factory ContentItem.fromJson(Map<String, dynamic> json) {

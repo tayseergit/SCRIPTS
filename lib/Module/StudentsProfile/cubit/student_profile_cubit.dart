@@ -37,7 +37,7 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
 
 ////////
   void getProfile() async {
-    print(token);
+  
     if (token == null) {
       emit(NoAuth());
       return;

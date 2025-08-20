@@ -26,14 +26,14 @@ class CourseData {
   final String image;
   final String price;
   final String level;
-  final String? status;
-  final dynamic studentPaid;
+    String? status;
+    String? studentPaid; // changed to String? to match API
   final int numberOfVideos;
-  final int duration;
+  final String duration; // changed to String
   final int numberOfParticipants;
   final int teacherId;
   final String teacherName;
-  final String teacherImage;
+  final String? teacherImage;
   final String teacherBio;
   final int numberOfTeacherCourses;
   final List<LearningPath> learningPaths;
@@ -53,7 +53,7 @@ class CourseData {
     required this.numberOfParticipants,
     required this.teacherId,
     required this.teacherName,
-    required this.teacherImage,
+    this.teacherImage,
     required this.teacherBio,
     required this.numberOfTeacherCourses,
     required this.learningPaths,
@@ -71,7 +71,7 @@ class CourseData {
       status: json['status'],
       studentPaid: json['student_paid'],
       numberOfVideos: json['number_of_videos'],
-      duration: json['duration'],
+      duration: json['duration'], // now string
       numberOfParticipants: json['number_of_participants'],
       teacherId: json['teacher_id'],
       teacherName: json['teacher_name'],

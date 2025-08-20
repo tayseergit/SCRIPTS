@@ -22,23 +22,11 @@ class CourseTestQuestion {
       status: json['status'] ?? false,
       message: json['message'] ?? '',
       alreadyTaken: json['already_taken'] ?? false,
-      questionCount: json['question_count'] ?? 0,
-      correctAnswers: json['correct_answers'] ?? 0,
-      bestResult: json['best_result'] ?? 0,
+      questionCount: (json['question_count'] ?? 0).toInt(),
+      correctAnswers: (json['correct_answers'] ?? 0).toInt(),
+      bestResult: (json['best_result'] ?? 0).toInt(),
       test: TestQuestionDataModel.fromJson(json['test'] ?? {}),
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'status': status,
-      'message': message,
-      'already_taken': alreadyTaken,
-      'question_count': questionCount,
-      'correct_answers': correctAnswers,
-      'best_result': bestResult,
-      'test': test.toJson(),
-    };
   }
 }
 
@@ -59,24 +47,14 @@ class TestQuestionDataModel {
 
   factory TestQuestionDataModel.fromJson(Map<String, dynamic> json) {
     return TestQuestionDataModel(
-      id: json['id'] ?? 0,
+      id: (json['id'] ?? 0).toInt(),
       title: json['title'] ?? '',
-      isFinal: json['is_final'] ?? 0,
-      questionsCount: json['questions_count'] ?? 0,
+      isFinal: (json['is_final'] ?? 0).toInt(),
+      questionsCount: (json['questions_count'] ?? 0).toInt(),
       questions: (json['questions'] as List<dynamic>? ?? [])
           .map((q) => Question.fromJson(q))
           .toList(),
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'title': title,
-      'is_final': isFinal,
-      'questions_count': questionsCount,
-      'questions': questions.map((q) => q.toJson()).toList(),
-    };
   }
 }
 
@@ -93,20 +71,12 @@ class Question {
 
   factory Question.fromJson(Map<String, dynamic> json) {
     return Question(
-      id: json['id'] ?? 0,
+      id: (json['id'] ?? 0).toInt(),
       text: json['text'] ?? '',
       options: (json['options'] as List<dynamic>? ?? [])
           .map((o) => Option.fromJson(o))
           .toList(),
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'text': text,
-      'options': options.map((o) => o.toJson()).toList(),
-    };
   }
 }
 
@@ -121,15 +91,8 @@ class Option {
 
   factory Option.fromJson(Map<String, dynamic> json) {
     return Option(
-      id: json['id'] ?? 0,
+      id: (json['id'] ?? 0).toInt(),
       answer: json['answer'] ?? '',
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'answer': answer,
-    };
   }
 }

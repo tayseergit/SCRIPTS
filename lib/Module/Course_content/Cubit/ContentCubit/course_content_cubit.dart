@@ -4,14 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Module/Course_content/Cubit/VideoCubit/VideoCubit.dart';
-import 'package:lms/Module/Course_content/Model/course_content_response.dart';
-import 'package:lms/Module/Course_content/Cubit/ContentCubit/course_content_state.dart';
+ import 'package:lms/Module/Course_content/Cubit/ContentCubit/course_content_state.dart';
+import 'package:lms/Module/Course_content/Model/ContentModel/course_content_response.dart';
 import 'package:meta/meta.dart';
 
 import 'package:lms/generated/l10n.dart'; // For localization
 
 class CourseContentCubit extends Cubit<CourseContentState> {
-  CourseContentCubit({required this.courseId}) : super(CourseContentInitial());
+CourseContentCubit({required this.courseId}) : super(CourseContentInitial());
   int courseId;
   CourseContentResponse? courseContentResponse;
 

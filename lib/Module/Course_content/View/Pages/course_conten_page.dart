@@ -4,13 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Module/Course_content/Cubit/CommentCubit/comment_state.dart';
 import 'package:lms/Module/Course_content/Cubit/ContentCubit/course_content_state.dart';
+import 'package:lms/Module/Course_content/View/Widget/comment/add_comment_field.dart';
 import 'package:lms/Module/Course_content/View/Widget/content/GridviewVediocoursesShimmer.dart';
 import 'package:lms/Module/Course_content/View/Widget/content/course_content_shminer.dart';
 import 'package:lms/Module/Course_content/cubit/ContentCubit/course_content_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
-import 'package:lms/Module/Course_content/Cubit/CommentCubit/CommentCubit.dart';
+import 'package:lms/Module/Course_content/Cubit/CommentCubit/comment_cubit.dart';
 import 'package:lms/Module/Course_content/View/Widget/content/ListViewCourses.dart';
 import 'package:lms/Module/Course_content/View/Widget/comment/GridViewComment.dart';
 import 'package:lms/Module/Course_content/Cubit/VideoCubit/VideoCubit.dart';
@@ -19,6 +21,7 @@ import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/Errors/no-item.dart';
 import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/generated/l10n.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -28,11 +31,12 @@ class CourseContentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
+    var lang = S.of(context);
     final TextEditingController controller = TextEditingController();
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => VideoCubit(courseId: courseId)),
-        BlocProvider(create: (_) => CommentCubit()),
+        BlocProvider(create: (_) => CommentCubit(context: context)),
         BlocProvider(
             create: (_) => CourseContentCubit(courseId: courseId)
               ..getCourseContent(context)),
@@ -42,20 +46,29 @@ class CourseContentPage extends StatelessWidget {
         body: ListView(
           children: [
             Container(
+                color: appColors.lightGray,
                 width: double.infinity.w,
                 height: 300.h,
                 child: BlocBuilder<VideoCubit, VideoState>(
                   builder: (context, state) {
-                    if (state is VideoLoadingYouTube ||
-                        state is VideoInitialYouTube) {
+                    print(state);
+                    if (state is VideoLoadingYouTube) {
                       return Center(child: CircularProgressIndicator());
+                    } else if (state is VideoInitialYouTube) {
+                      return Center(
+                          child: AuthText(
+                        text: S.of(context).NoItem,
+                        size: 20,
+                      ));
                     } else if (state is VideoErrorYoutube) {
-                      return Center(child: Text(S.of(context).error_occurred));
+                      return Center(
+                          child: AuthText(text: S.of(context).error_occurred));
                     }
                     final cubit = context.read<VideoCubit>();
                     return Column(
                       children: [
                         YoutubePlayer(
+                        
                           controller: cubit.youtubeController!,
                           showVideoProgressIndicator: true,
                         ),
@@ -112,52 +125,45 @@ class CourseContentPage extends StatelessWidget {
             ///   comments
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 17.w),
-              child: BlocBuilder<CommentCubit, bool>(
-                builder: (context, isExpanded) {
+              child: BlocConsumer<CommentCubit, CommentState>(
+                listener: (context, commentState) {},
+                builder: (context, commentState) {
+                  var commentCubit = context.read<CommentCubit>();
+                  // if (commentState is CommentLoading )
+
                   return AnimatedSize(
-                    duration: const Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 1000),
                     curve: Curves.fastOutSlowIn,
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: appColors.lightGray,
+                        color: appColors.lightGray.withOpacity(0.5),
                         borderRadius: BorderRadius.circular(15.r),
                       ),
                       padding: EdgeInsets.symmetric(horizontal: 10.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 10.h),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: AuthText(
-                              text: 'Comments',
-                              size: 16,
-                              color: appColors.mainText,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          SizedBox(height: 10.h),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CircleAvatar(
-                                radius: 20,
-                                backgroundImage: AssetImage(Images.courses),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: AuthText(
+                                  text: lang.comments,
+                                  size: 16,
+                                  color: appColors.mainText,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
-                              SizedBox(width: 10.w),
-                              AuthText(
-                                text: 'savzvxvzvzvxxvzvzvzxvxvz',
-                                size: 10,
-                                color: appColors.secondText,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              SizedBox(width: 100.w),
                               IconButton(
                                 onPressed: () {
-                                  context.read<CommentCubit>().toggleExpand();
+                                  commentCubit.isExpanded
+                                      ? commentCubit.toggleExpand()
+                                      : commentCubit.toggleNotExpand();
                                 },
                                 icon: Icon(
-                                  isExpanded
+                                  commentCubit.isExpanded
                                       ? Icons.keyboard_arrow_up
                                       : Icons.keyboard_arrow_down,
                                   size: 30,
@@ -165,72 +171,55 @@ class CourseContentPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          if (isExpanded) ...[
-                            SizedBox(height: 10.h),
-                            GridViewComment(),
-                            SizedBox(height: 100.h),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 15.w,
-                              ),
-                              child: OnBoardingContainer(
-                                width: double.infinity,
-                                height: 50,
-                                color: appColors.border,
-                                widget: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 25.r,
-                                      backgroundImage: AssetImage(
-                                        Images.courses,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 20.w,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: appColors.primary,
-                                          ),
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(
-                                              30,
-                                            ),
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 5.w),
-                                          child: TextField(
-                                            controller: controller,
-                                            keyboardType: TextInputType.text,
-                                            style: TextStyle(
-                                              color: appColors.mainText,
-                                            ),
-                                            decoration: InputDecoration(
-                                              hintText: 'Add Review',
-                                              hintStyle: TextStyle(
-                                                  color: appColors.secondText),
-                                              border: InputBorder.none,
-                                              suffixIcon: IconButton(
-                                                onPressed: () {},
-                                                icon: Icon(
-                                                  Icons.send,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
+                          if (commentCubit.isExpanded) ...[
+                            Builder(
+                              builder: (context) {
+                                print(commentState);
+                                if (commentState is CommentLoading) {
+                                  return Loading();
+                                }
+                                if (commentState is CommentError) {
+                                  return AuthText(text: commentState.message);
+                                }
+                                return SizedBox(
+                                  height: 300.h,
+                                  child: Column(
+                                    children: [
+                                      /// القائمة قابلة للتمرير
+                                      Expanded(
+                                        child: ListView(
+                                          children: [
+                                            SizedBox(height: 5.h),
+                                            GridViewComment(
+                                                commentsCubit: commentCubit),
+                                          ],
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20.h),
+
+                                      /// التكست فيلد ثابتة تحت
+                                      CommentInputField(
+                                        controller:
+                                            commentCubit.addCommentController,
+                                        onSend: () => commentState
+                                                is ReplyModeState
+                                            ? commentCubit.addReply(
+                                                commentState.parentComment.id)
+                                            : commentCubit.addComment(),
+                                        hintText: commentState is ReplyModeState
+                                            ? lang.add_reply
+                                            : lang.add_comment,
+                                        borderColor: appColors.primary,
+                                        textColor: appColors.mainText,
+                                        hintTextColor: appColors.secondText,
+                                      ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                            )
                           ]
                         ],
                       ),
@@ -249,6 +238,9 @@ class CourseContentPage extends StatelessWidget {
                   CourseContentCubit courseContentCubit =
                       context.read<CourseContentCubit>();
                   if (state is CourseContentSuccess) {
+                    print("ffffffffffffff");
+                    print(courseContentCubit
+                        .courseContentResponse!.data!.allContents.isNotEmpty);
                     if (courseContentCubit
                         .courseContentResponse!.data!.allContents.isNotEmpty) {
                       context.read<VideoCubit>().loadVideoFromApi(
@@ -270,7 +262,7 @@ class CourseContentPage extends StatelessWidget {
                       .allContents.isEmpty) return NoItem();
 
                   return Container(
-                    height: 350.h,
+                    height: 400.h,
                     child: ListViewVediocourses(
                         courseData:
                             courseContentCubit.courseContentResponse!.data!),

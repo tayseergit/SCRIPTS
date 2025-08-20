@@ -132,83 +132,75 @@ class CourseTestPage extends StatelessWidget {
                     height: 30.h,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 18.w),
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
                     child: Row(
                       children: [
-                        // Back Button with smooth growth/shrink
-                        AnimatedSize(
+                        // Back button
+                        AnimatedContainer(
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
+                          width: testCubit.currentIndex > 0
+                              ? (MediaQuery.of(context).size.width / 2) - 10.w
+                              : 0,
                           child: testCubit.currentIndex > 0
-                              ? SizedBox(
-                                  width:
-                                      (MediaQuery.of(context).size.width / 2) -
-                                          20.w,
-                                  child: OnBoardingContainer(
-                                    key: ValueKey(
-                                        "back_${testCubit.currentIndex}"),
-                                    onTap: () {
-                                      testCubit.previousQuestion();
-                                    },
-                                    height: 50,
-                                    color: appColors.red,
-                                    widget: AuthText(
-                                      text: lang.back,
-                                      size: 20,
-                                      color: appColors.pageBackground,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                              ? OnBoardingContainer(
+                                  key: ValueKey(
+                                      "back_${testCubit.currentIndex}"),
+                                  onTap: () => testCubit.previousQuestion(),
+                                  height: 50,
+                                  color: appColors.red,
+                                  widget: AuthText(
+                                    text: lang.back,
+                                    size: 20,
+                                    color: appColors.pageBackground,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 )
-                              : const SizedBox(width: 0), // Collapse smoothly
+                              : const SizedBox.shrink(),
                         ),
 
+                        // Small gap, only if back button is visible
                         if (testCubit.currentIndex > 0) SizedBox(width: 10.w),
-                        state is TestSubmitLoading
-                            ? Center(child: Loading())
-                            : AnimatedSize(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeInOut,
-                                child: SizedBox(
-                                  width: testCubit.currentIndex > 0
-                                      ? (MediaQuery.of(context).size.width /
-                                              2) -
-                                          30.w // Half width
-                                      : MediaQuery.of(context).size.width -
-                                          36.w, // Full width (padding considered)
-                                  child: OnBoardingContainer(
-                                    onTap: testCubit
-                                            .hasSelectedAnswerForCurrentQuestion
-                                        ? () {
-                                            if (testCubit.currentIndex ==
-                                                testCubit.courseTestQuestion!
-                                                        .test.questions.length -
-                                                    1) {
-                                              testCubit.submitTest(context);
-                                            } else {
-                                              testCubit.nextQuestion();
-                                            }
-                                          }
-                                        : null,
-                                    height: 50,
-                                    color: testCubit
-                                            .hasSelectedAnswerForCurrentQuestion
-                                        ? appColors.seocndIconColor
-                                        : Colors.grey,
-                                    widget: AuthText(
-                                      text: testCubit.currentIndex ==
+
+                        // Next / Submit button
+                        Flexible(
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                            width: double.infinity, // Flexible handles width
+                            child: OnBoardingContainer(
+                              onTap:
+                                  testCubit.hasSelectedAnswerForCurrentQuestion
+                                      ? () {
+                                          if (testCubit.currentIndex ==
                                               testCubit.courseTestQuestion!.test
                                                       .questions.length -
-                                                  1
-                                          ? lang.submit
-                                          : lang.next,
-                                      size: 20,
-                                      color: appColors.pageBackground,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
+                                                  1) {
+                                            testCubit.submitTest(context);
+                                          } else {
+                                            testCubit.nextQuestion();
+                                          }
+                                        }
+                                      : null,
+                              height: 50,
+                              color:
+                                  testCubit.hasSelectedAnswerForCurrentQuestion
+                                      ? appColors.seocndIconColor
+                                      : Colors.grey,
+                              widget: AuthText(
+                                text: testCubit.currentIndex ==
+                                        testCubit.courseTestQuestion!.test
+                                                .questions.length -
+                                            1
+                                    ? lang.submit
+                                    : lang.next,
+                                size: 20,
+                                color: appColors.pageBackground,
+                                fontWeight: FontWeight.w600,
                               ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   )

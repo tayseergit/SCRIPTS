@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Module/Course_content/Cubit/VideoCubit/VideoState.dart';
-import 'package:lms/Module/Course_content/Model/video_data_respose.dart';
+import 'package:lms/Module/Course_content/Model/VideoModel/video_data_respose.dart';
 import 'package:lms/generated/l10n.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +24,7 @@ class VideoCubit extends Cubit<VideoState> {
     BuildContext context, {
     required int videoId,
   }) async {
+    print("video id $videoId");
     emit(VideoLoadingYouTube(selectedVideo: videoId));
     this.videoId = videoId;
     try {
@@ -34,8 +35,9 @@ class VideoCubit extends Cubit<VideoState> {
           "Authorization": "Bearer ${CacheHelper.getToken()}",
         },
       );
-
+      print(response.data["message"]);
       if (response.statusCode == 200 && response.data["successful"] == true) {
+        print("pppppppppppppppppp");
         final data = response.data["data"];
         videoDataResponse = VideoDataResponse.fromJson(response.data);
 
@@ -55,16 +57,15 @@ class VideoCubit extends Cubit<VideoState> {
 
         youtubeController = YoutubePlayerController(
           initialVideoId: videoIdFromUrl,
-          flags: const YoutubePlayerFlags(
-            autoPlay: false,
+          flags: YoutubePlayerFlags(
+            autoPlay: true,
             mute: false,
           ),
-        )..addListener(_videoProgressListener);
+        );
 
-// قراءة النسبة من الـ API
         final savedProgressPercent =
             videoDataResponse?.data.progress ?? 0.0; // مثال: 75
-
+        print(videoDataResponse?.data.progress);
         if (savedProgressPercent > 0) {
           VoidCallback? seekListener;
 
@@ -132,7 +133,6 @@ class VideoCubit extends Cubit<VideoState> {
     try {
       // emit(VideoProgressUpdated());
 
-      print("pppppppppppppppppp");
       await DioHelper.postData(
         url: "courses/$courseId/video/$videoId/updateProgress",
         postData: {"progress": progress * 100},

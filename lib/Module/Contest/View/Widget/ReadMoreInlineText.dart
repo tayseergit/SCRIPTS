@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
- 
+
 class ReadMoreInlineText extends StatefulWidget {
   final String text;
   final int trimLength;
@@ -23,12 +23,13 @@ class _ReadMoreInlineTextState extends State<ReadMoreInlineText> {
 
   @override
   Widget build(BuildContext context) {
-        ThemeState appColors = context.watch<ThemeCubit>().state;
+    ThemeState appColors = context.watch<ThemeCubit>().state;
 
     final String fullText = widget.text;
     final bool isLong = fullText.length > widget.trimLength;
-    final String visibleText =
-        !_isExpanded && isLong ? fullText.substring(0, widget.trimLength) : fullText;
+    final String visibleText = !_isExpanded && isLong
+        ? fullText.substring(0, widget.trimLength)
+        : fullText;
 
     return RichText(
       text: TextSpan(
@@ -43,12 +44,11 @@ class _ReadMoreInlineTextState extends State<ReadMoreInlineText> {
             TextSpan(
               text: '... Read More',
               style: TextStyle(
-                color: appColors.primary,
+                color: appColors.mainText,
                 fontWeight: FontWeight.bold,
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                
                   showDialog(
                     context: context,
                     builder: (_) => AlertDialog(

@@ -32,8 +32,8 @@ class CourseTestCubit extends Cubit<CourseTestState> {
         },
       ).then((value) {
         if (value.statusCode == 200) {
+          print("dvvvvvvvv");
           courseTestQuestion = CourseTestQuestion.fromJson(value.data);
-
           // Record start time when test is loaded
           startTime = DateTime.now().toString().substring(0, 19);
 

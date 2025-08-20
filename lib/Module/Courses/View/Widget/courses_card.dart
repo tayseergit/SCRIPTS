@@ -23,9 +23,9 @@ class Cursescard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
+        print(course.id);
         // pushTo(context: context, toPage: CourseInfoPage(courseId: course.id));
-        pushTo(
-            context: context, toPage: CourseContentPage(courseId: course.id));
+        pushTo(context: context, toPage: CourseInfoPage(courseId: course.id));
       },
       child: Container(
         width: 180.w,

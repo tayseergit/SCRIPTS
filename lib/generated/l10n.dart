@@ -1178,6 +1178,96 @@ class S {
       args: [],
     );
   }
+
+  /// `comments`
+  String get comments {
+    return Intl.message('comments', name: 'comments', desc: '', args: []);
+  }
+
+  /// `add comment`
+  String get add_comment {
+    return Intl.message('add comment', name: 'add_comment', desc: '', args: []);
+  }
+
+  /// `reply`
+  String get reply {
+    return Intl.message('reply', name: 'reply', desc: '', args: []);
+  }
+
+  /// `Hide replies`
+  String get hide_replies {
+    return Intl.message(
+      'Hide replies',
+      name: 'hide_replies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Replies`
+  String get replies {
+    return Intl.message('Replies', name: 'replies', desc: '', args: []);
+  }
+
+  /// `Add a reply`
+  String get add_reply {
+    return Intl.message('Add a reply', name: 'add_reply', desc: '', args: []);
+  }
+
+  /// `hours`
+  String get hours {
+    return Intl.message('hours', name: 'hours', desc: '', args: []);
+  }
+
+  /// `videos`
+  String get videos {
+    return Intl.message('videos', name: 'videos', desc: '', args: []);
+  }
+
+  /// `participant`
+  String get participant {
+    return Intl.message('participant', name: 'participant', desc: '', args: []);
+  }
+
+  /// `Reviews`
+  String get Reviews {
+    return Intl.message('Reviews', name: 'Reviews', desc: '', args: []);
+  }
+
+  /// `About this course`
+  String get About_this_course {
+    return Intl.message(
+      'About this course',
+      name: 'About_this_course',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mentor`
+  String get Mentor {
+    return Intl.message('Mentor', name: 'Mentor', desc: '', args: []);
+  }
+
+  /// `remove watch later`
+  String get remove_watch_later {
+    return Intl.message(
+      'remove watch later',
+      name: 'remove_watch_later',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `add watch later`
+  String get add_watch_later {
+    return Intl.message(
+      'add watch later',
+      name: 'add_watch_later',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

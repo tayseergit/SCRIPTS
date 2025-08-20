@@ -25,6 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "About_this_course": MessageLookupByLibrary.simpleMessage(
+      "About this course",
+    ),
     "All": MessageLookupByLibrary.simpleMessage("All"),
     "Completed": MessageLookupByLibrary.simpleMessage("Completed"),
     "Contest": MessageLookupByLibrary.simpleMessage("Contest"),
@@ -32,12 +35,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "Leader_Board": MessageLookupByLibrary.simpleMessage("Leader Board"),
     "Learn_Path": MessageLookupByLibrary.simpleMessage("Learn Path"),
     "Login_or_SignUp": MessageLookupByLibrary.simpleMessage("Login or Sign Up"),
+    "Mentor": MessageLookupByLibrary.simpleMessage("Mentor"),
     "More": MessageLookupByLibrary.simpleMessage("More"),
     "My": MessageLookupByLibrary.simpleMessage("My"),
     "NoItem": MessageLookupByLibrary.simpleMessage("no items"),
     "Not_Completed": MessageLookupByLibrary.simpleMessage("not Completed"),
     "Project": MessageLookupByLibrary.simpleMessage("Project"),
     "Quiz": MessageLookupByLibrary.simpleMessage("Quiz"),
+    "Reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
     "Send_code": MessageLookupByLibrary.simpleMessage("Send code"),
     "Timeisfinishedtocopmletetest": MessageLookupByLibrary.simpleMessage(
       "time is finish , test over",
@@ -54,9 +59,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_a_payment_method": MessageLookupByLibrary.simpleMessage(
       "Add a payment method",
     ),
+    "add_comment": MessageLookupByLibrary.simpleMessage("add comment"),
     "add_image": MessageLookupByLibrary.simpleMessage("Add Image"),
     "add_new_project": MessageLookupByLibrary.simpleMessage("Add Project"),
+    "add_reply": MessageLookupByLibrary.simpleMessage("Add a reply"),
     "add_review": MessageLookupByLibrary.simpleMessage("Add Review"),
+    "add_watch_later": MessageLookupByLibrary.simpleMessage("add watch later"),
     "all_fields_required": MessageLookupByLibrary.simpleMessage(
       "All fields are required",
     ),
@@ -98,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "close": MessageLookupByLibrary.simpleMessage("Close"),
     "code_sent": MessageLookupByLibrary.simpleMessage("code sendt"),
     "coming": MessageLookupByLibrary.simpleMessage("coming"),
+    "comments": MessageLookupByLibrary.simpleMessage("comments"),
     "complete_as_browser": MessageLookupByLibrary.simpleMessage(
       "complete in browser mode",
     ),
@@ -173,6 +182,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "github_account": MessageLookupByLibrary.simpleMessage("GitHub Account"),
     "github_url": MessageLookupByLibrary.simpleMessage("GitHub URL"),
     "google": MessageLookupByLibrary.simpleMessage("Google"),
+    "hide_replies": MessageLookupByLibrary.simpleMessage("Hide replies"),
+    "hours": MessageLookupByLibrary.simpleMessage("hours"),
     "invalid_email": MessageLookupByLibrary.simpleMessage("Invalid Email"),
     "invalid_video_url": MessageLookupByLibrary.simpleMessage(
       "Invalid video URL",
@@ -189,6 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "old_password": MessageLookupByLibrary.simpleMessage("Old Password"),
     "or_login": MessageLookupByLibrary.simpleMessage("or login"),
+    "participant": MessageLookupByLibrary.simpleMessage("participant"),
     "participants": MessageLookupByLibrary.simpleMessage("Participants"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwords_do_not_match": MessageLookupByLibrary.simpleMessage(
@@ -212,6 +224,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "register_completed": MessageLookupByLibrary.simpleMessage(
       "Register Completed",
     ),
+    "remove_watch_later": MessageLookupByLibrary.simpleMessage(
+      "remove watch later",
+    ),
+    "replies": MessageLookupByLibrary.simpleMessage("Replies"),
+    "reply": MessageLookupByLibrary.simpleMessage("reply"),
     "resend_code": MessageLookupByLibrary.simpleMessage("Resend code?"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
     "reset_password_done": MessageLookupByLibrary.simpleMessage(
@@ -239,6 +256,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "total_points": MessageLookupByLibrary.simpleMessage("Total Points"),
     "update": MessageLookupByLibrary.simpleMessage("update"),
     "verify_code": MessageLookupByLibrary.simpleMessage("Verify Code"),
+    "videos": MessageLookupByLibrary.simpleMessage("videos"),
     "view": MessageLookupByLibrary.simpleMessage("View"),
     "wait_until_the_contest_open": MessageLookupByLibrary.simpleMessage(
       "wait until the contest open",

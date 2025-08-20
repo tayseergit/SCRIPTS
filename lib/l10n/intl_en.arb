@@ -150,10 +150,21 @@
  
    "You_cant_open_programming_contest_now":"You can't open programming contest now",
    "Timeisfinishedtocopmletetest":"time is finish , test over",
-   "wait_until_the_contest_open":"wait until the contest open"
-
- 
-
+   "wait_until_the_contest_open":"wait until the contest open",
+   "comments":"comments",
+  "add_comment":"add comment",
+  "reply":"reply",
+  "hide_replies": "Hide replies",
+    "replies": "Replies",
+    "add_reply": "Add a reply",
+    "hours":"hours",
+    "videos":"videos",
+    "participant":"participant",
+    "Reviews":"Reviews",
+    "About_this_course":"About this course",
+    "Mentor":"Mentor",
+    "remove_watch_later":"remove watch later",
+    "add_watch_later":"add watch later"
 
 
 
