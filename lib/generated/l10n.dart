@@ -54,7 +54,7 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Add Review` 
+  /// `Add Review`
   String get add_review {
     return Intl.message('Add Review', name: 'add_review', desc: '', args: []);
   }
@@ -147,6 +147,11 @@ class S {
   /// `Done`
   String get done {
     return Intl.message('Done', name: 'done', desc: '', args: []);
+  }
+
+  /// `SCRIPTS AI`
+  String get Chat {
+    return Intl.message('SCRIPTS AI', name: 'Chat', desc: '', args: []);
   }
 
   /// `Error deleting`

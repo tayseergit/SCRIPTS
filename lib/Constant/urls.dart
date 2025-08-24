@@ -1,12 +1,15 @@
 // ignore_for_file: file_names
 
 class Urls {
-  static String ip = "192.168.43.38";
-  static String baseUrl = "";
+  static String ip = "https://lms-master-ikaitb.laravel.cloud";
+  static String baseUrl = "https://lms-master-ikaitb.laravel.cloud/api";
 
   static String teacher = '$baseUrl/users';
   static String update = '$baseUrl/me/update';
   static String notification = '$baseUrl/notifications';
+  static String getChat = '$baseUrl/agent';
+  static String chatSend = '$baseUrl/agent/send';
+  static String deletAi = '$baseUrl/agent';
 
   static teacherProfile(int id) {
     return '$baseUrl/users/$id';

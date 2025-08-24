@@ -328,11 +328,13 @@ class Settingpage extends StatelessWidget {
                                     ),
                                     TextButton(
                                       onPressed: () {
+                                        print('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
                                         Navigator.pop(context);
                                         context
                                             .read<AuthCubit>()
                                             .logOut(context);
                                         Navigator.pop(context);
+                                        print('bbbbbbbbbbbbbbbbbbbnnnnbbbbbbbbbbbbbbbbbbbbbbbbbb');
                                       },
                                       child: AuthText(
                                         text: lang.logout,

@@ -12,7 +12,7 @@ class DioHelper {
       throw Exception('❌ API_IP not found in .env file');
     }
 
-    final baseUrl = ip;
+    final baseUrl = "https://lms-master-ikaitb.laravel.cloud";
     final baseUrlApi = "$baseUrl/api/";
 print("Base URL: $baseUrl");
 

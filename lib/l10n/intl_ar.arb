@@ -123,6 +123,7 @@
   "Completed":"مكتمل",
   "Not_Completed":"غير مكتمل",
   "Quiz":"اختبار",
+  "Chat":"الذكاء",
   
   "fetch_video_failed":"فشل جلب بيانات الفيديو",
   "invalid_video_url": "رابط الفيديو غير صالح",

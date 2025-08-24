@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Are_you_sure_you_want_to_log_out": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد أنك تريد تسجيل الخروج؟",
     ),
+    "Chat": MessageLookupByLibrary.simpleMessage("الذكاء"),
     "Completed": MessageLookupByLibrary.simpleMessage("مكتمل"),
     "Contest": MessageLookupByLibrary.simpleMessage("المسابقات"),
     "Email_not_found": MessageLookupByLibrary.simpleMessage(
