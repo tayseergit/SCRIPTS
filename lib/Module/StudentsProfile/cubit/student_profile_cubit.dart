@@ -8,15 +8,15 @@ import 'package:lms/Module/StudentsProfile/Model/CertificatesModel.dart';
 import 'package:lms/Module/StudentsProfile/Model/achievement_response.dart';
 import 'package:lms/Module/StudentsProfile/Model/contest_model.dart';
 import 'package:lms/Module/StudentsProfile/Model/student_profile_model.dart';
+import 'package:lms/generated/l10n.dart';
 import 'package:meta/meta.dart';
 
 part 'student_profile_state.dart';
 
 class StudentProfileCubit extends Cubit<StudentProfileState> {
   StudentProfileCubit() : super(StudentProfileInitial());
-  static StudentProfileCubit get(BuildContext context) =>
-      BlocProvider.of(context);
-
+  // BuildContext context;
+  
   late StudentProfileModel studentProfileModel;
   CertificateResponse? certificateResponse;
   ContestResponse? contestResponse;
@@ -28,6 +28,14 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
 
   int selectedTab = 0;
 
+  List<String> getLabels(BuildContext context ) {
+    return [
+      S.of(context).certificates,
+      S.of(context).achievement,
+      S.of(context).my_contest,
+     ];
+  }
+
   void changeTab(int index) {
     if (index != selectedTab) {
       selectedTab = index;
@@ -37,7 +45,6 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
 
 ////////
   void getProfile() async {
-  
     if (token == null) {
       emit(NoAuth());
       return;

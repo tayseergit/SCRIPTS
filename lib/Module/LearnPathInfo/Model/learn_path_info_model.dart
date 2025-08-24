@@ -40,7 +40,7 @@ class LearningPathInfoData {
   final String teacherImage;
   final String teacherBio;
   final int teacherCoursesCount;
-  final String? status;
+    String? status;
 
   LearningPathInfoData({
     required this.id,

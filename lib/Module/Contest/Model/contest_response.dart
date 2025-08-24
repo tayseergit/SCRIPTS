@@ -30,18 +30,19 @@ class Contest {
   final String status;
   final String startAt;
   final int teacherId;
+  final bool? alreadyParticipate;
 
-  Contest({
-    required this.id,
-    required this.name,
-    required this.time,
-    required this.description,
-    required this.type,
-    required this.level,
-    required this.status,
-    required this.startAt,
-    required this.teacherId,
-  });
+  Contest(
+      {required this.id,
+      required this.name,
+      required this.time,
+      required this.description,
+      required this.type,
+      required this.level,
+      required this.status,
+      required this.startAt,
+      required this.teacherId,
+      this.alreadyParticipate});
 
   factory Contest.fromJson(Map<String, dynamic> json) {
     return Contest(
@@ -54,6 +55,9 @@ class Contest {
       status: json['status'],
       startAt: json['start_at'],
       teacherId: json['teacher_id'],
+      alreadyParticipate: json['alreadyParticipate'] is bool
+          ? json['alreadyParticipate'] as bool
+          : null,
     );
   }
 }

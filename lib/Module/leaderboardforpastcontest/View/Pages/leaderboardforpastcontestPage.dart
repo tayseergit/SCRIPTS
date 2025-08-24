@@ -15,10 +15,10 @@ import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/generated/l10n.dart';
 
 class Leaderboardforpastcontestpage extends StatelessWidget {
-  final int contastId;
+  final int contestId;
   const Leaderboardforpastcontestpage({
     super.key,
-    required this.contastId,
+    required this.contestId,
   });
 
   @override
@@ -30,7 +30,7 @@ class Leaderboardforpastcontestpage extends StatelessWidget {
           create: (_) => TapLeadercubit(),
         ),
         BlocProvider(
-          create: (_) => LeaderBoardCubit()..fetchLeaderBoards(contastId),
+          create: (_) => LeaderBoardCubit()..fetchLeaderBoards(contestId),
         ),
       ],
       child: Scaffold(

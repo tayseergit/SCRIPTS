@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/Notifications/Cubit/notification_cubit.dart';
 import 'package:lms/Module/Notifications/Cubit/notification_state.dart';
 import 'package:lms/Module/Notifications/Model/notification_model.dart';
@@ -42,8 +43,8 @@ class NotificationPage extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/images/rnrn.png'),
-                        opacity: 0.4,
+                        image: AssetImage(Images.notification),
+                        opacity: 0.2,
                       ),
                     ),
                   ),

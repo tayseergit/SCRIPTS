@@ -261,15 +261,6 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                CircleAvatar(
-                                                  radius: 25.r,
-                                                  backgroundImage: AssetImage(
-                                                    Images.courses,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 20.w,
-                                                ),
                                                 Expanded(
                                                   child: Container(
                                                     decoration: BoxDecoration(
@@ -348,31 +339,34 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                                                   ),
                                                 ),
                                                 SizedBox(width: 5.h),
-                                                RatingBar.builder(
-                                                  itemSize: 20.w,
-                                                  initialRating: 0,
-                                                  minRating: 1,
-                                                  direction: Axis.vertical,
-                                                  allowHalfRating: true,
-                                                  itemCount: 5,
-                                                  itemPadding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 4.0),
-                                                  itemBuilder: (context, _) =>
-                                                      const Icon(
-                                                    Icons.star,
-                                                    color: Colors.amber,
-                                                  ),
-                                                  onRatingUpdate: (rating) {
-                                                    setState(() {
-                                                      reviewCubit.userRating =
-                                                          rating; // update state or controller
-                                                    });
-                                                  },
-                                                ),
                                               ],
                                             ),
                                           )),
+                                      SizedBox(height: 10.h),
+                                      Center(
+                                        child: RatingBar.builder(
+                                          itemSize: 20.w,
+                                          initialRating: 0,
+                                          minRating: 1,
+                                          direction: Axis.horizontal,
+                                          allowHalfRating: true,
+                                          itemCount: 5,
+                                          itemPadding:
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
+                                          itemBuilder: (context, _) =>
+                                              const Icon(
+                                            Icons.star,
+                                            color: Colors.amber,
+                                          ),
+                                          onRatingUpdate: (rating) {
+                                            setState(() {
+                                              reviewCubit.userRating =
+                                                  rating; // update state or controller
+                                            });
+                                          },
+                                        ),
+                                      ),
                                       SizedBox(height: 10.h),
                                     ]
                                   ],
@@ -449,7 +443,7 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                         Container(
                           width: 200.w,
                           child: AuthText(
-                            text: courseInfoData.teacherBio,
+                            text: courseInfoData.teacherBio ?? "",
                             size: 12,
                             color: appColors.secondText,
                             fontWeight: FontWeight.w400,
@@ -508,7 +502,7 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                                 widget: AuthText(
                                   text: lang.enroll,
                                   size: 16,
-                                  color: appColors.pageBackground,
+                                  color: appColors.mainText,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 onTap: () {

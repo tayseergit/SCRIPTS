@@ -61,35 +61,51 @@ class TabButtonsProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeState appColors = context.watch<ThemeCubit>().state;
-    StudentProfileCubit studentProfileCubit =
+    final ThemeState appColors = context.watch<ThemeCubit>().state;
+    final StudentProfileCubit studentProfileCubit =
         context.watch<StudentProfileCubit>();
 
     return Container(
-      decoration: BoxDecoration(
-          color: appColors.pageBackground,
-          borderRadius: BorderRadius.all(Radius.circular(5.r))),
+      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 6.h),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: List.generate(studentProfileCubit.labels.length, (index) {
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: List.generate(studentProfileCubit.getLabels(context).length,
+            (index) {
           final isSelected = studentProfileCubit.selectedTab == index;
+          final label = studentProfileCubit.getLabels(context)[index];
 
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 3.5.w),
-            child: OnBoardingContainer(
-              width: (studentProfileCubit.labels[index].length * 10).w,
-              height: 40.h,
-              color: isSelected
-                  ? appColors.pageBackground
-                  : appColors.fieldBackground,
-              widget: Text(
-                studentProfileCubit.labels[index],
-                style: TextStyle(
-                  color: isSelected ? appColors.mainText : appColors.mainText,
-                  fontWeight: FontWeight.bold,
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: InkWell(
+              onTap: () => studentProfileCubit.changeTab(index),
+              child: Expanded(
+                child: Column(
+                  // mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AnimatedDefaultTextStyle(
+                      duration: const Duration(milliseconds: 800),
+                      curve: Curves.easeInOut,
+                      style: TextStyle(
+                        fontSize: isSelected ? 16.sp : 14.sp,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.w300,
+                        color: appColors.mainText,
+                      ),
+                      child: Text(label),
+                    ),
+                    SizedBox(height: 4.h),
+
+                    // Optional underline animation for extra emphasis
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      height: 2.h,
+                      width: isSelected ? 20.w : 0,
+                      color: appColors.primary,
+                    ),
+                  ],
                 ),
               ),
-              onTap: () => studentProfileCubit.changeTab(index),
             ),
           );
         }),

@@ -24,6 +24,11 @@ class ContestCubit extends Cubit<ContestState> {
   ];
   int selectedTab = 0;
 
+  List<Contest> allContests = [];
+   int currentPage = 1;
+  bool hasMorePages = true;
+  bool isLoading = false;
+
   List<String> getLabels(BuildContext context) {
     return [
       S.of(context).ended,
@@ -31,28 +36,26 @@ class ContestCubit extends Cubit<ContestState> {
       S.of(context).coming,
     ];
   }
-
+ 
+  void resetPagination() {
+    currentPage = 1;
+    hasMorePages = true;
+    isLoading = false;
+    allContests.clear();
+  }
   void changeTab(int index) {
     selectedTab = index;
+        resetPagination();
+
     emit(Selected());
     getContest();
   }
 
-  List<Contest> allContests = [];
-  int currentPage = 1;
-  int lastPage = 1;
-  bool isLoadingMore = false;
+  Future<void> getContest( ) async {
+     if (!hasMorePages || isLoading) return;
+    isLoading = true;
+    if (currentPage == 1) emit(ContestLoading());
 
-  Future<void> getContest({bool loadMore = false}) async {
-    if (loadMore) {
-      if (isLoadingMore || currentPage >= lastPage) return;
-      isLoadingMore = true;
-      emit(ContestLoadingMore());
-    } else {
-      currentPage = 1;
-      allContests.clear();
-      emit(ContestLoading());
-    }
 
     try {
       final response = await DioHelper.getData(
@@ -62,7 +65,7 @@ class ContestCubit extends Cubit<ContestState> {
           "Authorization": "Bearer $token",
         },
         params: {
-          'type': 'all',
+          'type': 'quiz',
           'status': labels[selectedTab],
           'search': searchController.text.trim(),
           'page': currentPage,
@@ -72,20 +75,18 @@ class ContestCubit extends Cubit<ContestState> {
 
       if (response.statusCode == 200) {
         contestResponse = ContestsResponse.fromJson(response.data);
-
-        // Update meta info
-        currentPage = contestResponse!.meta.currentPage;
-        lastPage = contestResponse!.meta.lastPage;
-
-        // Append results
-        allContests.addAll(contestResponse!.contests);
+ allContests.addAll(contestResponse!.contests);
+  final meta = contestResponse!.meta;
+          hasMorePages = meta.currentPage < meta.lastPage;
+          currentPage = meta.currentPage + 1;
+          if (hasMorePages) currentPage++;
 
         emit(ContestSuccess());
       }
     } on DioException catch (e) {
       emit(ContestError(message: "Connection Error"));
     } finally {
-      isLoadingMore = false;
+      isLoading = false;
     }
   }
 }

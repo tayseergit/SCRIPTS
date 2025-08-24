@@ -107,7 +107,7 @@ class ThemeState {
       linerImage: const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [Color(0x00FFFFFF), Color(0xB3248BF5)],
+        colors: [Color(0x00FFFFFF), Color.fromARGB(179, 70, 162, 253)],
       ),
     );
   }

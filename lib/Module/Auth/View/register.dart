@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
- import 'package:lms/Module/Localization/localization.dart';
+import 'package:lms/Module/Localization/localization.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/Verify/View/verify.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
@@ -19,7 +19,6 @@ import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/shake_animation.dart';
 import 'package:lms/generated/l10n.dart';
 
- 
 class Register extends StatelessWidget {
   Register({super.key});
   File? selectedImage;
@@ -179,7 +178,7 @@ class Register extends StatelessWidget {
                             ),
                             child: OnBoardingContainer(
                               onTap: () {
-                                authCubit.loginWithGoogle();
+                                authCubit.loginWithGoogle(context);
                               },
                               height: 50.h,
                               color: appColors.fieldBackground,

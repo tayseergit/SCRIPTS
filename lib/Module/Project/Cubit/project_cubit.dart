@@ -15,8 +15,13 @@ class ProjectCubit extends Cubit<ProjectState> {
 
   int selectedkind = 0;
   int selectedTab = -1;
+  List<ProjectModel> allProjects = [];
 
-//tags
+  // Pagination variables
+  int currentPage = 1;
+  bool hasMorePages = true;
+  bool isLoading = false;
+  //tags
 
   final token = CacheHelper.getData(key: "token");
   final userId = CacheHelper.getData(key: "user_id");
@@ -34,15 +39,27 @@ class ProjectCubit extends Cubit<ProjectState> {
   ];
   TagsResponse? tagResponse;
   ProjectsResponse? projectsResponse;
+
+  void resetProjects() {
+    currentPage = 1;
+    hasMorePages = true;
+    isLoading = false;
+    allProjects.clear();
+  }
+
   void changeTab(int index, BuildContext context) {
     selectedTab = index;
+
     emit(Selected());
+    resetProjects();
     getProjects(context);
   }
 
   void changeKind(int index, BuildContext context) {
     selectedkind = index;
     emit(Selected());
+    resetProjects();
+
     getProjects(context);
   }
 
@@ -79,8 +96,12 @@ class ProjectCubit extends Cubit<ProjectState> {
   }
 
   void getAllProjects(BuildContext context) async {
-    emit(ProjectLoading());
-    try {
+    if (!hasMorePages || isLoading) return;
+    isLoading = true;
+
+    if (currentPage == 1) emit(ProjectLoading());
+
+     try {
       final response = await DioHelper.getData(url: "projects", headers: {
         "Accept": "application/json",
         "Authorization": "Bearer $token",
@@ -90,22 +111,30 @@ class ProjectCubit extends Cubit<ProjectState> {
                 selectedTab > 0
             ? tagResponse!.tags[selectedTab]
             : '',
-
         "search": searchController.text.trim(),
-        // "page":"",
-        // "items":"",
-      });
+        "page": currentPage,
+        "items": 20,
+      }).then((response) {
+        if (response.statusCode == 200) {
+          projectsResponse = ProjectsResponse.fromJson(response.data);
+          allProjects.addAll(projectsResponse!.data);
 
-      print("Status Code: ${response.statusCode}");
-
-      if (response.statusCode == 200) {
-        projectsResponse = ProjectsResponse.fromJson(response.data);
-        emit(ProjectSuccess());
-      } else {
+          final meta = projectsResponse!.meta;
+          hasMorePages = meta.currentPage < meta.lastPage;
+          currentPage = meta.currentPage + 1;
+          if (hasMorePages) currentPage++;
+          emit(ProjectSuccess());
+        } else {
+          emit(Error(message: response.data['message']));
+        }
+      }).catchError((response) {
         emit(Error(message: S.of(context).error_occurred));
-      }
-    } catch(e) {
+      });
+    } catch (e) {
+      print(e.toString());
       emit(Error(message: S.of(context).error_in_server));
+    } finally {
+      isLoading = false;
     }
   }
 
@@ -119,20 +148,26 @@ class ProjectCubit extends Cubit<ProjectState> {
           await DioHelper.getData(url: "users/$userId/projects", headers: {
         "Accept": "application/json",
         "Authorization": "Bearer $token",
-      });
+      }).then((response) {
+        if (response.statusCode == 200) {
+          projectsResponse = ProjectsResponse.fromJson(response.data);
+          allProjects.addAll(projectsResponse!.data);
 
-      print("Status Code: ${response.statusCode}");
-
-      if (response.statusCode == 200) {
-        projectsResponse = ProjectsResponse.fromJson(response.data);
-        emit(ProjectSuccess());
-      } else {
+          final meta = projectsResponse!.meta;
+          hasMorePages = meta.currentPage < meta.lastPage;
+          currentPage = meta.currentPage + 1;
+          if (hasMorePages) currentPage++;
+          emit(ProjectSuccess());
+        } else {
+          emit(Error(message: response.data['message']));
+        }
+      }).catchError((response) {
         emit(Error(message: S.of(context).error_occurred));
-      }
-    } catch(e){
-        emit(Error(message: S.of(context).error_in_server));
-
+      });
+    } catch (e) {
+      emit(Error(message: S.of(context).error_in_server));
+    } finally {
+      isLoading = false;
     }
-    
   }
 }

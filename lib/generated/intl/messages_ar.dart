@@ -27,6 +27,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "About_this_course": MessageLookupByLibrary.simpleMessage("عن هذه الدورة"),
     "All": MessageLookupByLibrary.simpleMessage("الكل"),
+    "Are_you_sure_you_want_to_log_out": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+    ),
     "Completed": MessageLookupByLibrary.simpleMessage("مكتمل"),
     "Contest": MessageLookupByLibrary.simpleMessage("المسابقات"),
     "Email_not_found": MessageLookupByLibrary.simpleMessage(
@@ -82,6 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "back": MessageLookupByLibrary.simpleMessage("رجوع"),
     "back_to_video": MessageLookupByLibrary.simpleMessage("عودة إلى الفيديو"),
+    "balance": MessageLookupByLibrary.simpleMessage("الرصيد"),
     "basic_information": MessageLookupByLibrary.simpleMessage(
       "المعلومات الأساسية",
     ),
@@ -95,6 +99,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "change_language": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
     "change_password": MessageLookupByLibrary.simpleMessage(
       "تغيير كلمة المرور",
+    ),
+    "change_path_status": MessageLookupByLibrary.simpleMessage(
+      "تغيير حالة المسار",
     ),
     "check_email_or_password": MessageLookupByLibrary.simpleMessage(
       "تحقق من البريد الإلكتروني أو كلمة المرور",
@@ -121,6 +128,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "connection_error": MessageLookupByLibrary.simpleMessage("خطأ في الاتصال"),
     "contestStatus": m0,
+    "contest_already_participate": MessageLookupByLibrary.simpleMessage(
+      "مشارك بالمسابقة سابقا",
+    ),
     "contest_register": MessageLookupByLibrary.simpleMessage("نسجيل"),
     "course_completed": MessageLookupByLibrary.simpleMessage(
       "الدورات المكتملة",
@@ -230,6 +240,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "register": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
     "register_completed": MessageLookupByLibrary.simpleMessage(
       "تم التسجيل بنجاح",
+    ),
+    "remove_path_status": MessageLookupByLibrary.simpleMessage(
+      "ازالة حالة المسار",
     ),
     "remove_watch_later": MessageLookupByLibrary.simpleMessage(
       "ازالة من المشاهدة لاحقاً",

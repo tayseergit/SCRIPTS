@@ -35,7 +35,7 @@ class StudentProfilePage extends StatelessWidget {
       },
       builder: (context, state) {
         StudentProfileCubit studentProfileCubit =
-            context.watch<StudentProfileCubit>();
+            context.read<StudentProfileCubit>();
 
         return Container(
           color: appColors.pageBackground,
@@ -62,8 +62,7 @@ class StudentProfilePage extends StatelessWidget {
                 } else if (state is NoAuth) {
                   return Center(
                     child: SizedBox(
-                      // height: 100.h,
-                      // width: 100.w,
+                      
                       child: NoAuthUser(),
                     ),
                   );

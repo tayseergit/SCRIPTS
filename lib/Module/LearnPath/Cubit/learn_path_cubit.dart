@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -13,35 +12,54 @@ import 'package:meta/meta.dart';
 part 'learn_path_state.dart';
 
 class LearnPathCubit extends Cubit<LearnPathState> {
-  LearnPathCubit() : super(LearnPathInitial());
+  LearnPathCubit({required this.context}) : super(LearnPathInitial());
+  final BuildContext context;
 
   static LearnPathCubit get(BuildContext context) => BlocProvider.of(context);
-  TextEditingController searchController = TextEditingController();
 
+  final TextEditingController searchController = TextEditingController();
   final token = CacheHelper.getData(key: "token");
   final userId = CacheHelper.getData(key: "user_id");
 
   final labels = ['All', 'Enroll', 'Watch later'];
   int selectedTab = 0;
-  LearningPathsResponse? learningPathsResponse;
 
+  // Pagination variables
+  int currentPage = 1;
+  bool hasMorePages = true;
+  bool isLoading = false;
+
+  LearningPathsResponse? learningPathsResponse;
+  List<LearningPath> allLearningPaths = [];
 
   List<String> getLabels(BuildContext context) {
     return [
       S.of(context).All,
       S.of(context).enroll,
-       S.of(context).watchLater,
+      S.of(context).watchLater,
     ];
+  }
+
+  void reset() {
+    currentPage = 1;
+    hasMorePages = true;
+    isLoading = false;
+    allLearningPaths.clear();
   }
 
   void changeTab(int index) {
     selectedTab = index;
     emit(Selected());
+    reset();
     getAllLearnPath();
   }
 
-  void getAllLearnPath() async {
-    emit(LearnPathLoading());
+  Future<void> getAllLearnPath() async {
+    if (!hasMorePages || isLoading) return;
+
+    isLoading = true;
+
+    if (currentPage == 1) emit(LearnPathLoading());
 
     try {
       final response = await DioHelper.getData(
@@ -51,8 +69,8 @@ class LearnPathCubit extends Cubit<LearnPathState> {
           "Authorization": "Bearer $token",
         },
         params: {
+          'page': currentPage,
           'orderBy': 'title',
-          // 'direction': '10',
           'status': selectedTab == 1
               ? "enroll"
               : selectedTab == 2
@@ -62,20 +80,29 @@ class LearnPathCubit extends Cubit<LearnPathState> {
         },
       );
 
-      print("Status Code: ${response.statusCode}");
-
       if (response.statusCode == 200) {
         learningPathsResponse = LearningPathsResponse.fromJson(response.data);
+
+        // Append new data
+        allLearningPaths.addAll(learningPathsResponse!.data.learningPaths);
+
+        hasMorePages = learningPathsResponse!.data.hasMorePages;
+        if (hasMorePages) currentPage++;
+
         emit(LearnPathSuccess());
-      }
-    } on DioException catch (e) {
-      if (e.response != null) {
-        print("Error Status: ${e.response?.statusCode}");
-        emit(LearnPathError(message: "fetching error"));
       } else {
-        print("Connection Error: $e");
-        emit(LearnPathError(message: "Connection Error"));
+        emit(LearnPathError(message: S.of(context).error_occurred));
       }
+    } on SocketException {
+      emit(LearnPathError(message: S.of(context).error_in_server));
+    } on DioException catch (e) {
+      emit(LearnPathError(
+        message: "حدث خطأ في السيرفر: ${e.response?.statusCode ?? ''}",
+      ));
+    } catch (_) {
+      emit(LearnPathError(message: S.of(context).error_in_server));
+    } finally {
+      isLoading = false;
     }
   }
 }

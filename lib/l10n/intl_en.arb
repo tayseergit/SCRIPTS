@@ -169,7 +169,12 @@
   
   "leader":"Leader Board",
   "leaderbord":"not participant",
-  "notifications":"Notifications"
+  "notifications":"Notifications",
+  "remove_path_status":"remove path status",
+  "Are_you_sure_you_want_to_log_out":"Are you sure you want to log out?",
+  "contest_already_participate":"contest already participate",
+  "change_path_status":"change path status",
+  "balance":"balance" 
 
 
 

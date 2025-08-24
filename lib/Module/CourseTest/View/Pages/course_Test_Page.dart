@@ -21,7 +21,7 @@ class CourseTestPage extends StatelessWidget {
   int courseId;
   @override
   Widget build(BuildContext context) {
-    ThemeState appColors = context.watch<ThemeCubit>().state;
+    ThemeState appColors = context.read<ThemeCubit>().state;
     var lang = S.of(context);
     return BlocProvider(
         create: (context) => CourseTestCubit(testId: testId, courseId: courseId)

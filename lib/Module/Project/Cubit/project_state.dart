@@ -20,3 +20,8 @@ final String message;
 
 Error({required this.message});
 }
+class ForBiddenError extends ProjectState {
+final String message;
+
+ForBiddenError({required this.message});
+}

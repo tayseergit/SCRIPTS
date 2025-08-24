@@ -34,7 +34,7 @@ class CourseData {
   final int teacherId;
   final String teacherName;
   final String? teacherImage;
-  final String teacherBio;
+    String ?teacherBio;
   final int numberOfTeacherCourses;
   final List<LearningPath> learningPaths;
 
@@ -54,7 +54,7 @@ class CourseData {
     required this.teacherId,
     required this.teacherName,
     this.teacherImage,
-    required this.teacherBio,
+      this.teacherBio,
     required this.numberOfTeacherCourses,
     required this.learningPaths,
   });

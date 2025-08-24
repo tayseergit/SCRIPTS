@@ -5,6 +5,7 @@ import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Module/Auth/View/Login.dart';
+import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
 import 'package:lms/Module/LearnPathInfo/Cubit/main_cubit.dart';
 import 'package:lms/Module/Notifications/Cubit/notification_cubit.dart';
 import 'package:lms/Module/Notifications/View/Page/notifications_page.dart';
@@ -13,6 +14,7 @@ import 'package:lms/Module/Participants/View/Page/Participants_page.dart';
 import 'package:lms/Module/ResetPassword.dart/View/Widget/reset_dialog.dart';
 import 'package:lms/Module/Setting/SettingPage.dart';
 import 'package:lms/Module/Teacher/View/Page/teacher_Page.dart';
+import 'package:lms/Module/TeacherProfile/View/Pages/teacher_profile_page.dart';
 import 'package:lms/Module/UserFriend/Cubit/user_friend_cubit.dart';
 import 'package:lms/Module/UserFriend/View/Page/user_friend_page.dart';
 import 'package:lms/Module/mainWidget/TopWave_more_Clipper.dart';
@@ -80,9 +82,15 @@ class More extends StatelessWidget {
                                 image: Images.studentIcon,
                                 onTapp: () {
                                   if (CacheHelper.getToken() != null) {
-                                    pushTo(
-                                        context: context,
-                                        toPage: StudentProfilePage());
+                                    if (CacheHelper.getData(key: "role") ==
+                                        "teacher")
+                                      pushTo(
+                                          context: context,
+                                          toPage: TeacherProfilePage());
+                                    else
+                                      pushTo(
+                                          context: context,
+                                          toPage: StudentProfilePage());
                                   } else {
                                     showNoAuthDialog(context);
                                   }
@@ -95,16 +103,15 @@ class More extends StatelessWidget {
                               height: 25.h,
                             ),
                             OnBoardingContainerMore(
-                              borderColor: appColors.blackGreen,
                               width: 330,
                               height: 60,
+                              borderColor: appColors.blackGreen,
                               color: appColors.pageBackground,
                               widget: Rowmore(
                                 text: lang.change_password,
                                 image: Images.changePassword,
                                 onTapp: () {
                                   if (CacheHelper.getToken() != null) {
-                                    CacheHelper.removeAllData();
                                     showPasswordResetDialog(context);
                                   } else {
                                     showNoAuthDialog(context);
@@ -118,183 +125,143 @@ class More extends StatelessWidget {
                               height: 25.h,
                             ),
                             OnBoardingContainerMore(
-                              borderColor: appColors.blackGreen,
                               width: 330,
                               height: 60,
+                              borderColor: appColors.blackGreen,
                               color: appColors.pageBackground,
                               widget: Rowmore(
                                 text: lang.setting,
                                 image: Images.setting,
-                                onTapp: () {},
+                                onTapp: () {
+                                  pushTo(
+                                      context: context, toPage: Settingpage());
+                                },
                                 height: 25,
                                 width: 25,
                               ),
-                              onTap: () {
-                                pushTo(context: context, toPage: Settingpage());
-                              },
                             ),
                             SizedBox(
                               height: 25.h,
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: appColors.secondText,
-                                  width: 1.5,
-                                ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(30),
-                                ),
-                              ),
-                              child: OnBoardingContainerMore(
-                                width: 330,
-                                height: 60,
-                                color: appColors.pageBackground,
-                                widget: Rowmore(
-                                  text: lang.friends,
-                                  image: Images.friend,
-                                  onTapp: () {
-                                    if (CacheHelper.getToken() == null) {
-                                      showNoAuthDialog(context);
-                                    } else {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              BlocProvider.value(
-                                            value: UserFriendCubit(),
-                                            child: UserFriendPage(),
-                                          ),
+                            OnBoardingContainerMore(
+                              width: 330,
+                              height: 60,
+                              borderColor: appColors.blackGreen,
+                              color: appColors.pageBackground,
+                              widget: Rowmore(
+                                text: lang.friends,
+                                image: Images.friend,
+                                onTapp: () {
+                                  if (CacheHelper.getToken() == null) {
+                                    showNoAuthDialog(context);
+                                  } else {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            BlocProvider.value(
+                                          value: UserFriendCubit(),
+                                          child: UserFriendPage(),
                                         ),
-                                      );
-                                    }
-                                  },
-                                  height: 25,
-                                  width: 25,
-                                ),
+                                      ),
+                                    );
+                                  }
+                                },
+                                height: 25,
+                                width: 25,
                               ),
                             ),
                             SizedBox(
                               height: 25.h,
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: appColors.secondText,
-                                  width: 1.5,
-                                ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(30),
-                                ),
-                              ),
-                              child: OnBoardingContainerMore(
-                                width: 330,
-                                height: 60,
-                                color: appColors.pageBackground,
-                                widget: Rowmore(
-                                  text: lang.participants,
-                                  image: Images.participants,
-                                  onTapp: () {
-                                    if (CacheHelper.getToken() == null) {
-                                      showNoAuthDialog(context);
-                                    } else {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              BlocProvider.value(
-                                            value: ParticipantsCubit(),
-                                            child: ParticipantsPage(),
-                                          ),
+                            OnBoardingContainerMore(
+                              width: 330,
+                              height: 60,
+                              borderColor: appColors.blackGreen,
+                              color: appColors.pageBackground,
+                              widget: Rowmore(
+                                text: lang.participants,
+                                image: Images.participants,
+                                onTapp: () {
+                                  if (CacheHelper.getToken() == null) {
+                                    showNoAuthDialog(context);
+                                  } else {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            BlocProvider.value(
+                                          value: ParticipantsCubit(),
+                                          child: ParticipantsPage(),
                                         ),
-                                      );
-                                    }
-                                  },
-                                  height: 25,
-                                  width: 25,
-                                ),
+                                      ),
+                                    );
+                                  }
+                                },
+                                height: 25,
+                                width: 25,
                               ),
                             ),
                             SizedBox(
                               height: 25.h,
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: appColors.secondText,
-                                  width: 1.5,
-                                ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(30),
-                                ),
-                              ),
-                              child: OnBoardingContainerMore(
-                                width: 330,
-                                height: 60,
-                                color: appColors.pageBackground,
-                                widget: Rowmore(
-                                  text: lang.teachers,
-                                  image: Images.teacher,
-                                  onTapp: () {
-                                    if (CacheHelper.getToken() == null) {
-                                      showNoAuthDialog(context);
-                                    } else {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              BlocProvider.value(
-                                            value: TeacherCubit(),
-                                            child: TeacherPage(),
-                                          ),
+                            OnBoardingContainerMore(
+                              width: 330,
+                              height: 60,
+                              borderColor: appColors.blackGreen,
+                              color: appColors.pageBackground,
+                              widget: Rowmore(
+                                text: lang.teachers,
+                                image: Images.teacher,
+                                onTapp: () {
+                                  if (CacheHelper.getToken() == null) {
+                                    showNoAuthDialog(context);
+                                  } else {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            BlocProvider.value(
+                                          value: TeacherCubit(),
+                                          child: TeacherPage(),
                                         ),
-                                      );
-                                    }
-                                  },
-                                  height: 25,
-                                  width: 25,
-                                ),
+                                      ),
+                                    );
+                                  }
+                                },
+                                height: 25,
+                                width: 25,
                               ),
                             ),
                             SizedBox(
                               height: 25.h,
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: appColors.secondText,
-                                  width: 1.5,
-                                ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(30),
-                                ),
-                              ),
-                              child: OnBoardingContainerMore(
-                                width: 330,
-                                height: 60,
-                                color: appColors.pageBackground,
-                                widget: Rowmore(
-                                  text: lang.notifications,
-                                  image: Images.rnrn,
-                                  onTapp: () {
-                                    if (CacheHelper.getToken() == null) {
-                                      showNoAuthDialog(context);
-                                    } else {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              BlocProvider.value(
-                                            value: NotificationCubit(),
-                                            child: NotificationPage(),
-                                          ),
+                            OnBoardingContainerMore(
+                              width: 330,
+                              height: 60,
+                              borderColor: appColors.blackGreen,
+                              color: appColors.pageBackground,
+                              widget: Rowmore(
+                                text: lang.notifications,
+                                image: Images.notification,
+                                onTapp: () {
+                                  if (CacheHelper.getToken() == null) {
+                                    showNoAuthDialog(context);
+                                  } else {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            BlocProvider.value(
+                                          value: NotificationCubit(),
+                                          child: NotificationPage(),
                                         ),
-                                      );
-                                    }
-                                  },
-                                  height: 25,
-                                  width: 25,
-                                ),
+                                      ),
+                                    );
+                                  }
+                                },
+                                height: 25,
+                                width: 25,
                               ),
                             ),
                             SizedBox(

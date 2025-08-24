@@ -243,7 +243,7 @@ class Login extends StatelessWidget {
                             ),
                             child: OnBoardingContainer(
                               onTap: () {
-                                authCubit.loginWithGoogle();
+                                authCubit.loginWithGoogle(context);
                               },
                               height: 50.h,
                               color: appColors.fieldBackground,
@@ -281,6 +281,9 @@ class Login extends StatelessWidget {
                               borderRadius: BorderRadius.circular(5.r),
                             ),
                             child: OnBoardingContainer(
+                              onTap: () {
+                                authCubit.loginWithGithub();
+                              },
                               height: 50.h,
                               color: appColors.fieldBackground,
                               widget: Row(
@@ -341,16 +344,16 @@ class Login extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                         Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => BlocProvider.value(
-              value: NavigationCubit(),
-              child: NavigationBarwidget(),
-            ),
-          ),
-          (route) => false,
-        );
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BlocProvider.value(
+                                value: NavigationCubit(),
+                                child: NavigationBarwidget(),
+                              ),
+                            ),
+                            (route) => false,
+                          );
                         },
                         child: AuthText(
                           text: lang.complete_as_browser,

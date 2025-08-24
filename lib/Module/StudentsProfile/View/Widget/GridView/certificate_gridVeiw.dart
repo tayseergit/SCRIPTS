@@ -6,7 +6,6 @@ import 'package:lms/Module/StudentsProfile/View/Widget/Cards/cetificate_card.dar
 import 'package:lms/Module/StudentsProfile/cubit/student_profile_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/mainWidget/Errors/no-item.dart';
-import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 
 class CirtificateGridview extends StatefulWidget {
@@ -18,7 +17,8 @@ class CirtificateGridview extends StatefulWidget {
   State<CirtificateGridview> createState() => _CirtificateGridviewState();
 }
 
-class _CirtificateGridviewState extends State<CirtificateGridview> {
+class _CirtificateGridviewState extends State<CirtificateGridview>
+    with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
@@ -30,6 +30,11 @@ class _CirtificateGridviewState extends State<CirtificateGridview> {
   @override
   Widget build(BuildContext context) {
     final appColors = context.watch<ThemeCubit>().state;
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Dynamically calculate max cross-axis extent (responsive card size)
+    double maxCrossAxisExtent =
+        (screenWidth / 2) - 20; // 2 items per row approx.
 
     return SizedBox(
       height: 350.h,
@@ -50,23 +55,37 @@ class _CirtificateGridviewState extends State<CirtificateGridview> {
           } else if (state is CertificatesSuccess) {
             final certs = widget.cubit.certificateResponse?.certificates ?? [];
             if (certs.isEmpty) {
-              return Center(
-                child: NoItem(),
-              );
+              return Center(child: NoItem());
             }
 
             return GridView.builder(
-              padding: EdgeInsets.only(top: 17.h, left: 10.w, right: 10.w),
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 17.h),
               itemCount: certs.length,
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 220.w,
-                childAspectRatio: 1,
+                maxCrossAxisExtent: maxCrossAxisExtent, // responsive size
+                childAspectRatio: 0.9,
                 mainAxisSpacing: 15.h,
-                crossAxisSpacing: 5.w,
+                crossAxisSpacing: 10.w,
               ),
               itemBuilder: (ctx, index) {
-                // Use real data in your actual card
-                return CetifiateCard(certificate: certs[index]);
+                final certificate = certs[index];
+
+                // Wrap card with animated slide-in effect
+                return TweenAnimationBuilder<Offset>(
+                  tween: Tween<Offset>(
+                      begin: const Offset(1, 0), end: const Offset(0, 0)),
+                  duration: Duration(milliseconds: 400 + (index * 100)),
+                  curve: Curves.easeOut,
+                  builder: (context, offset, child) {
+                    return Transform.translate(
+                      offset: offset * 50, // Move 50px initially
+                      child: Opacity(
+                        opacity: 1 - offset.dx.abs(),
+                        child: CertificateCard(certificate: certificate),
+                      ),
+                    );
+                  },
+                );
               },
             );
           } else {

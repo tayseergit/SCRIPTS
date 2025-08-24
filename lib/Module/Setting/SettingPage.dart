@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
+import 'package:lms/Helper/cach_helper.dart';
+import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
+import 'package:lms/Module/Auth/cubit/auth_state.dart';
 import 'package:lms/Module/Edit_profile/Cubit/edite_profile_cubit.dart';
 import 'package:lms/Module/Edit_profile/View/Pages/edite_profile_page.dart';
 import 'package:lms/Module/Localization/localization.dart';
@@ -12,6 +15,7 @@ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/TopWave_more_Clipper.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/Module/mainWidget/no_auth.dart';
 import 'package:lms/generated/l10n.dart';
 
 class Settingpage extends StatelessWidget {
@@ -301,6 +305,46 @@ class Settingpage extends StatelessWidget {
                         ),
                       ),
                       child: OnBoardingContainerMore(
+                          onTap: () async {
+                            if (CacheHelper.getToken() == null)
+                              showNoAuthDialog(context);
+                            else {
+                              showDialog<bool>(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  content: AuthText(
+                                      maxLines: 2,
+                                      size: 15,
+                                      text: lang
+                                          .Are_you_sure_you_want_to_log_out),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context), // cancel
+                                      child: AuthText(
+                                        text: lang.cancel,
+                                        size: 15,
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        context
+                                            .read<AuthCubit>()
+                                            .logOut(context);
+                                        Navigator.pop(context);
+                                      },
+                                      child: AuthText(
+                                        text: lang.logout,
+                                        color: appColors.red,
+                                        size: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                          },
                           width: 330,
                           height: 60,
                           color: appColors.pageBackground,

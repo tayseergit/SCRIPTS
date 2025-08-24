@@ -53,23 +53,23 @@ class _AchievementGridviewState extends State<AchievementGridview> {
             if (Ach_List.isEmpty) {
               return Center(child: NoItem());
             }
-
-            return GridView.builder(
-              padding: EdgeInsets.only(top: 7.h, left: 10.w, right: 10.w),
-              itemCount: Ach_List.length,
-              scrollDirection: Axis.horizontal,
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 220.w,
-                childAspectRatio: 1,
-                mainAxisSpacing: 15.h,
-                crossAxisSpacing: 5.w,
+            return SizedBox(
+              height: 220.h, // Adjust to match the card height
+              child: GridView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                scrollDirection: Axis.horizontal,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1, // Only 1 row for horizontal scroll
+                  mainAxisSpacing: 15.w,
+                  childAspectRatio: 1.2, // Adjust width/height ratio
+                ),
+                itemCount: Ach_List.length,
+                itemBuilder: (ctx, index) {
+                  return AchievementCard(
+                    achievement: Ach_List[index],
+                  );
+                },
               ),
-              itemBuilder: (ctx, index) {
-                // Use real data in your actual card
-                return AchievementCard(
-                  achievement: Ach_List[index],
-                );
-              },
             );
           } else {
             return const SizedBox(); // Initial or unknown state

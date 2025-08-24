@@ -1,4 +1,4 @@
-class AchievementResponse {
+class AchievementResponse { 
   final bool status;
   final List<Achievement> achievements;
   final Meta meta;
@@ -23,13 +23,15 @@ class AchievementResponse {
 class Achievement {
   final int id;
   final String name;
-  final String ?image;
+  final String? image;
+  final String description;
   final String achieveDate;
 
   Achievement({
     required this.id,
     required this.name,
-    required this.image,
+    this.image,
+    required this.description,
     required this.achieveDate,
   });
 
@@ -38,6 +40,7 @@ class Achievement {
       id: json['id'],
       name: json['name'],
       image: json['image'],
+      description: json['description'],
       achieveDate: json['achieve_date'],
     );
   }

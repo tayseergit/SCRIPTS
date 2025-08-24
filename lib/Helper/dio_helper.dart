@@ -12,7 +12,7 @@ class DioHelper {
       throw Exception('❌ API_IP not found in .env file');
     }
 
-    final baseUrl = "http://$ip:8000";
+    final baseUrl = ip;
     final baseUrlApi = "$baseUrl/api/";
 print("Base URL: $baseUrl");
 

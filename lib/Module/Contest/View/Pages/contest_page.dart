@@ -37,7 +37,7 @@ class _ContestPageState extends State<ContestPage> {
     scrollController.addListener(() {
       if (scrollController.position.pixels >=
           scrollController.position.maxScrollExtent - 200) {
-        contestCubit.getContest(loadMore: true);
+        contestCubit.getContest();
       }
     });
   }
@@ -95,21 +95,21 @@ class _ContestPageState extends State<ContestPage> {
                     SizedBox(height: 10.h),
                     Builder(
                       builder: (context) {
-                        print(state);
-                        if (state is ContestLoading) {
+                        final contestCubit = context.watch<ContestCubit>();
+                        final contests = contestCubit.allContests;
+
+                        if (contestCubit.isLoading &&
+                            contestCubit.currentPage == 1) {
                           return SizedBox(
                             height: 500.h,
                             child: Center(child: Loading()),
                           );
-                        } else if (state is ContestError) {
+                        } else if (contestCubit.state is ContestError) {
                           return SizedBox(
                             height: 500.h,
                             child: Center(child: NoConnection()),
                           );
                         }
-
-                        final contests =
-                            contestCubit.contestResponse?.contests ?? [];
 
                         if (contests.isEmpty) {
                           return Center(
@@ -121,47 +121,42 @@ class _ContestPageState extends State<ContestPage> {
                           );
                         }
 
-                        return Column(
-                          children: [
-                            Container(
-                              height: 515.h,
-                              child: ListView.builder(
-                                controller: scrollController,
-                                itemCount: contests.length +
-                                    (contestCubit.isLoadingMore ? 1 : 0),
-                                itemBuilder: (context, index) {
-                                  if (index >= contests.length) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Center(
-                                        child: CircularProgressIndicator(),
-                                      ),
-                                    );
-                                  }
+                        return Container(
+                          height: 515.h,
+                          child: ListView.builder(
+                            controller: scrollController,
+                            itemCount: contests.length +
+                                (contestCubit.isLoading ? 1 : 0),
+                            itemBuilder: (context, index) {
+                              if (index >= contests.length) {
+                                // Show loader at the bottom for pagination
+                                return Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Center(
+                                    child: Loading(),
+                                  ),
+                                );
+                              }
 
-                                  return TweenAnimationBuilder<double>(
-                                    key: ValueKey(contests[index].id),
-                                    tween: Tween<double>(begin: 50, end: 0),
-                                    duration: Duration(
-                                        milliseconds:
-                                            800 + ((index % 10) * 50)),
-                                    curve: Curves.easeOut,
-                                    builder: (context, value, child) {
-                                      return Transform.translate(
-                                        offset: Offset(0, value),
-                                        child: Opacity(
-                                          opacity: 1 - (value / 50),
-                                          child: child,
-                                        ),
-                                      );
-                                    },
-                                    child:
-                                        Contestcard(contest: contests[index]),
+                              return TweenAnimationBuilder<double>(
+                                key: ValueKey(contests[index].id),
+                                tween: Tween<double>(begin: 50, end: 0),
+                                duration: Duration(
+                                    milliseconds: 800 + ((index % 10) * 50)),
+                                curve: Curves.easeOut,
+                                builder: (context, value, child) {
+                                  return Transform.translate(
+                                    offset: Offset(0, value),
+                                    child: Opacity(
+                                      opacity: 1 - (value / 50),
+                                      child: child,
+                                    ),
                                   );
                                 },
-                              ),
-                            ),
-                          ],
+                                child: Contestcard(contest: contests[index]),
+                              );
+                            },
+                          ),
                         );
                       },
                     )

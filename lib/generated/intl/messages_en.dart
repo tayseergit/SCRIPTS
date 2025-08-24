@@ -29,6 +29,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "About this course",
     ),
     "All": MessageLookupByLibrary.simpleMessage("All"),
+    "Are_you_sure_you_want_to_log_out": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to log out?",
+    ),
     "Completed": MessageLookupByLibrary.simpleMessage("Completed"),
     "Contest": MessageLookupByLibrary.simpleMessage("Contest"),
     "Email_not_found": MessageLookupByLibrary.simpleMessage("Email not found"),
@@ -82,6 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "back": MessageLookupByLibrary.simpleMessage("Back"),
     "back_to_video": MessageLookupByLibrary.simpleMessage("Back to video"),
+    "balance": MessageLookupByLibrary.simpleMessage("balance"),
     "basic_information": MessageLookupByLibrary.simpleMessage(
       "Basic Information",
     ),
@@ -94,6 +98,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "certificates": MessageLookupByLibrary.simpleMessage("Certificates"),
     "change_language": MessageLookupByLibrary.simpleMessage("Change language"),
     "change_password": MessageLookupByLibrary.simpleMessage("Change Password"),
+    "change_path_status": MessageLookupByLibrary.simpleMessage(
+      "change path status",
+    ),
     "check_email_or_password": MessageLookupByLibrary.simpleMessage(
       "Check your email or password",
     ),
@@ -123,6 +130,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Connection Error",
     ),
     "contestStatus": m0,
+    "contest_already_participate": MessageLookupByLibrary.simpleMessage(
+      "contest already participate",
+    ),
     "contest_register": MessageLookupByLibrary.simpleMessage("Register"),
     "course_completed": MessageLookupByLibrary.simpleMessage(
       "Course Completed",
@@ -231,6 +241,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "register_completed": MessageLookupByLibrary.simpleMessage(
       "Register Completed",
+    ),
+    "remove_path_status": MessageLookupByLibrary.simpleMessage(
+      "remove path status",
     ),
     "remove_watch_later": MessageLookupByLibrary.simpleMessage(
       "remove watch later",

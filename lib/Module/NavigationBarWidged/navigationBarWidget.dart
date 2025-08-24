@@ -24,9 +24,9 @@ class NavigationBarwidget extends StatefulWidget {
 
 class _NavigationBarwidgetState extends State<NavigationBarwidget> {
   final List<Widget> pages = const [
-    CoursesPage(),
-    LearnpathPage(),
     ContestPage(),
+    LearnpathPage(),
+    CoursesPage(),
     ProjectPage(),
     More(),
   ];
@@ -54,14 +54,14 @@ class _NavigationBarwidgetState extends State<NavigationBarwidget> {
               items: [
                 CurvedNavigationBarItem(
                     child: Image.asset(
-                      Images.navBarCourse,
-                      width: 30.w,
+                      Images.navBarContest,
+                      width: 30,
                       height: state == 0 ? 30.h : 25.h,
                       color: state == 0
                           ? appColors.whiteText
                           : appColors.mainIconColor,
                     ),
-                    label: lang.courses,
+                    label: lang.Contest,
                     labelStyle: TextStyle(
                         color: state == 0
                             ? appColors.whiteText
@@ -84,14 +84,14 @@ class _NavigationBarwidgetState extends State<NavigationBarwidget> {
                         fontSize: 12.sp)),
                 CurvedNavigationBarItem(
                     child: Image.asset(
-                      Images.navBarContest,
-                      width: 30,
+                      Images.navBarCourse,
+                      width: 30.w,
                       height: state == 2 ? 30.h : 25.h,
                       color: state == 2
                           ? appColors.whiteText
                           : appColors.mainIconColor,
                     ),
-                    label: lang.Contest,
+                    label: lang.courses,
                     labelStyle: TextStyle(
                         color: state == 2
                             ? appColors.whiteText

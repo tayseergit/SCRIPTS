@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Courses/Cubit/cubit/course_cubit.dart';
 import 'package:lms/Module/mainWidget/Errors/no-item.dart';
 import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
@@ -23,7 +24,7 @@ class CoursesPage extends StatelessWidget {
 
     return SafeArea(
       child: BlocProvider(
-        create: (_) => CourseCubit()..getAllCourse(),
+        create: (_) => CourseCubit(context:context )..getAllCourse(),
         child: Scaffold(
           backgroundColor: appColors.pageBackground,
           appBar: AppBar(
@@ -42,9 +43,8 @@ class CoursesPage extends StatelessWidget {
           body: BlocConsumer<CourseCubit, CourseState>(
             listener: (context, state) {
               if (state is CourseError) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.message)),
-                );
+                customSnackBar(
+                    context: context, success: 0, message: state.message);
               }
             },
             builder: (context, state) {
@@ -82,7 +82,6 @@ class CoursesPage extends StatelessWidget {
                                       SizedBox(height: 200.h, child: NoItem()),
                                 )
                               : Gridviewcourses(cubit: cubit),
-                  
                 ],
               );
             },

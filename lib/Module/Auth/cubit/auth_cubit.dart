@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Helper/global_func.dart';
@@ -144,19 +146,15 @@ class AuthCubit extends Cubit<AuthState> {
       'email',
       'profile',
     ],
-    clientId:
-        '688587039842-fvdu1499imvbuoh4k48j1dc34tlfvfi5.apps.googleusercontent.com',
+    clientId: dotenv.env['GOOGLE_CLIENT_ID'],
   );
 
-  Future<void> loginWithGoogle({bool forceChooser = false}) async {
+  Future<void> loginWithGoogle(BuildContext context) async {
+    emit(LogInLoading());
+
     try {
-      // 1️⃣ خَرْجْ المستخدم أولاً (يزيل الجلسة المخبَّأة)
       await _googleSignIn.signOut();
 
-      // ملاحظة: إذا كنت تريد أيضاً إلغاء ربط التطبيق من الحساب
-      // استخدم await _googleSignIn.disconnect();
-
-      // 2️⃣ استدعِ شاشة اختيار الحساب
       final GoogleSignInAccount? account = await _googleSignIn.signIn();
 
       if (account == null) {
@@ -164,13 +162,38 @@ class AuthCubit extends Cubit<AuthState> {
         return;
       }
 
-      // 3️⃣ احصل على التوكينات كالمعتاد
       final auth = await account.authentication;
-      debugPrint('✅ ID‑Token: ${auth.idToken}');
+      // debugPrint('✅ ID‑Token: ${auth.idToken}');
       debugPrint('✅ Access‑Token: ${auth.accessToken}');
-    } catch (e, st) {
-      debugPrint('❌ خطأ: $e');
-      debugPrint(st.toString());
+      final response = await DioHelper.postData(
+        url: "auth/google",
+        postData: {
+          'id_token': auth.accessToken,
+          "fcm_token": "${CacheHelper.getData(key: "fcm")}"
+        },
+        headers: {"Accept": "application/json"},
+      ).then((value) {
+        print(value.statusCode);
+        if (value.statusCode == 200) {
+          userAuthModel = UserAuthModel.fromJson(value.data);
+          CacheHelper.saveData(key: "token", value: userAuthModel?.token);
+          CacheHelper.saveData(key: "role", value: userAuthModel?.role);
+          CacheHelper.saveData(key: "user_id", value: userAuthModel?.userId);
+
+          print('token: ${userAuthModel?.token}');
+          emit(LogInsucess());
+        } else {
+          emit(LogInError(message: S.of(context).error_occurred));
+        }
+      }).catchError((value) {
+        print(value.statusCode);
+
+        emit(LogInError(message: S.of(context).error_in_server));
+      });
+    } catch (e) {
+      print(e.toString());
+
+      emit(LogInError(message: S.of(context).error_in_server));
     }
   }
 
@@ -258,5 +281,57 @@ class AuthCubit extends Cubit<AuthState> {
       print(" Connection Error $e");
     }
     return false;
+  }
+
+  void logOut(BuildContext context) async {
+    emit(LogOutLoading());
+
+    try {
+      final response = await DioHelper.postData(
+        url: "logout",
+        headers: {
+          "Accept": "application/json",
+          "Authorization": "Bearer ${CacheHelper.getToken()}",
+        },
+      );
+
+      if (response.statusCode == 200) {
+        CacheHelper.removeData(key: "token");
+        CacheHelper.removeData(key: "role");
+        CacheHelper.removeData(key: "user_id");
+
+        print('token: ${userAuthModel?.token}');
+        emit(LogOutSuccess());
+      } else if (response.statusCode == 422 || response.statusCode == 401) {
+        emit(UnAuth());
+      } else {
+        emit(LogOutError(message: S.of(context).error_occurred));
+      }
+    } catch (e) {
+      print("Login Exception: $e");
+      emit(LogOutError(message: S.of(context).error_in_server));
+    }
+  }
+
+  ///// github
+
+  Future<void> loginWithGithub() async {
+    final clientId = dotenv.env['GITHUB_CLIENT_ID'];
+    final redirectUri = "myapp://callback";
+    final scope = "read:user,user:email";
+    final state = "random_state_string"; // generate securely
+
+    // Step 1: Open GitHub login page
+    final result = await FlutterWebAuth2.authenticate(
+      url: "https://github.com/login/oauth/authorize"
+          "?client_id=$clientId"
+          "&redirect_uri=$redirectUri"
+          "&scope=$scope",
+      callbackUrlScheme: "myapp",
+    );
+
+    // Step 2: Extract authorization code
+    final code = Uri.parse(result).queryParameters['code'];
+    print("Auth Code: $code");
   }
 }

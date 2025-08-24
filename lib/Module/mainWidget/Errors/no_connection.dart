@@ -4,15 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/generated/l10n.dart';
 
 class NoConnection extends StatelessWidget {
-  NoConnection(
-      {super.key,
-      this.height = 200,
-      this.width = 200,
-      this.message = "No Connection"});
+  NoConnection({super.key, this.height = 200, this.width = 200, this.message});
   double height, width;
-  String message;
+  String? message;
   @override
   Widget build(BuildContext context) {
     final appColors = context.watch<ThemeCubit>().state;
@@ -50,7 +47,7 @@ class NoConnection extends StatelessWidget {
               // ◀︎ النص: نجعله يتقلص أو يتمدّد داخل عرض الوالد
 
               AuthText(
-                text: message,
+                text: message ?? S.of(context).network_error,
                 size: 16.sp, // يمكن ضبطها بعامل نسبي أيضاً إن شئت
                 color: appColors.secondText,
                 fontWeight: FontWeight.w900,

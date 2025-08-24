@@ -95,8 +95,12 @@ class ProjectPage extends StatelessWidget {
           body: BlocConsumer<ProjectCubit, ProjectState>(
             listener: (context, state) {
               if (state is Error) {
-                print("++++++++++ $state");
-                // ScaffoldMessenger.of(context).showSnackBar(state.message);
+                customSnackBar(
+                    context: context, success: 0, message: state.message);
+              }
+              if (state is Error) {
+                customSnackBar(
+                    context: context, success: 0, message: state.message);
               }
             },
             builder: (context, state) {
@@ -157,8 +161,7 @@ class ProjectPage extends StatelessWidget {
                               if (projectCubit
                                   .projectsResponse!.data.isNotEmpty) {
                                 return Gridviewproject(
-                                    projectModel:
-                                        projectCubit.projectsResponse!.data);
+                                    projectCubit: projectCubit);
                               } else {
                                 return Center(
                                     heightFactor: 2.5, child: NoItem());

@@ -2,32 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Constant/public_constant.dart';
+import 'package:lms/Module/CourseInfo/View/Pages/course_info_page.dart';
 import 'package:lms/Module/LearnPathInfo/Model/learn_path_info_courses_model.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/generated/l10n.dart';
 
-class LearnCard extends StatelessWidget {
+class LearnInfoCard extends StatelessWidget {
   final LearnPathInfoCourse learnPathInfoCourse;
-  const LearnCard({super.key, required this.learnPathInfoCourse});
+  const LearnInfoCard({super.key, required this.learnPathInfoCourse});
 
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(width: 0.1),
-        borderRadius: BorderRadius.circular(9.r),
+        borderRadius: BorderRadius.circular(20.r),
+        gradient: LinearGradient(
+          colors: [
+            appColors.blackGreenDisable.withOpacity(0.1),
+            appColors.ok.withOpacity(0.3)
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
       ),
       child: OnBoardingContainer(
         width: 180,
-        height: 250,
-        color: appColors.lihgtPrimer,
         widget: Padding(
           padding: EdgeInsets.symmetric(horizontal: 11.w),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(12.r),
@@ -84,7 +92,8 @@ class LearnCard extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                           ),
                           AuthText(
-                            text: '/ ${learnPathInfoCourse.numberOfVideo}',
+                            text:
+                                '/ ${learnPathInfoCourse.numberOfVideo} ${S.of(context).videos}',
                             size: 14,
                             color: appColors.secondText,
                             fontWeight: FontWeight.w400,
@@ -93,7 +102,8 @@ class LearnCard extends StatelessWidget {
                       ),
                       SizedBox(height: 4.h),
                       AuthText(
-                        text: 'Obtained',
+                        text: learnPathInfoCourse.status ??
+                            "${learnPathInfoCourse.price} \$",
                         size: 14,
                         color: appColors.ok,
                         fontWeight: FontWeight.w700,
@@ -103,7 +113,8 @@ class LearnCard extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Icon(Icons.star, color: Colors.yellow, size: 21.r),
+                              Icon(Icons.star,
+                                  color: Colors.yellow, size: 21.r),
                               SizedBox(width: 5.w),
                               AuthText(
                                 text: learnPathInfoCourse.rate.toString(),
@@ -129,7 +140,11 @@ class LearnCard extends StatelessWidget {
             ],
           ),
         ),
-        onTap: () {},
+        onTap: () {
+          pushTo(
+              context: context,
+              toPage: CourseInfoPage(courseId: learnPathInfoCourse.id));
+        },
       ),
     );
   }

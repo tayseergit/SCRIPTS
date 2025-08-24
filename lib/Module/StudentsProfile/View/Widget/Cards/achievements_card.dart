@@ -5,72 +5,91 @@ import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/StudentsProfile/Model/achievement_response.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
-import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/Module/mainWidget/loading.dart';
 
 class AchievementCard extends StatelessWidget {
-  Achievement achievement;
-  AchievementCard({super.key, required this.achievement});
+  final Achievement achievement;
+
+  const AchievementCard({super.key, required this.achievement});
 
   @override
   Widget build(BuildContext context) {
-    ThemeState appColors = context.watch<ThemeCubit>().state;
-    return Scaffold(
-      backgroundColor: appColors.pageBackground,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 5.w),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5.r)),
-              border: Border.all(color: appColors.primary)),
-          child: OnBoardingContainer(
-            width: double.infinity,
-            height: double.infinity,
-            color: appColors.fieldBackground,
-            widget: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 10.h,
+    final ThemeState appColors = context.watch<ThemeCubit>().state;
+
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.h),
+      height: 180.h,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12.r),
+        boxShadow: [
+          BoxShadow(
+            color: appColors.mainText.withOpacity(0.1),
+            blurRadius: 6,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Stack(
+        children: [
+          /// Background image with fallback and loading
+          Positioned.fill(
+            child: achievement.image != null && achievement.image!.isNotEmpty
+                ? Image.network(
+                    achievement.image!,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: Loading(),
+                      );
+                    },
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        Images.noImage,
+                        fit: BoxFit.contain,
+                      );
+                    },
+                  )
+                : Image.asset(
+                    Images.noImage,
+                    fit: BoxFit.contain,
                   ),
-                  Align(
-                      alignment: Alignment.topLeft,
-                      child: AuthText(
-                          text: achievement.name,
-                          size: 12,
-                          color: appColors.mainText,
-                          fontWeight: FontWeight.w700)),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  AuthText(
-                      text: achievement.achieveDate,
-                      size: 12,
-                      color: appColors.secondText,
-                      fontWeight: FontWeight.w400),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  achievement.image != null
-                      ? Image.network(
-                          achievement.image!,
-                          width: 170.w,
-                          height: 110.h,
-                          fit: BoxFit.fill,
-                        )
-                      : Image.asset(
-                          Images.noImage,
-                          width: 170.w,
-                          height: 110.h,
-                          fit: BoxFit.fill,
-                        ),
-                ],
+          ),
+
+          /// Linear gradient overlay for text readability
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: appColors.linerContainer.withOpacity(0.4),
               ),
             ),
           ),
-        ),
+
+          /// Text content at bottom
+          Positioned(
+            bottom: 12.h,
+            left: 12.w,
+            right: 12.w,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AuthText(
+                  text: achievement.name,
+                  color: appColors.mainText,
+                  size: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                SizedBox(height: 4.h),
+                AuthText(
+                  text: achievement.achieveDate,
+                  color: appColors.mainText,
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

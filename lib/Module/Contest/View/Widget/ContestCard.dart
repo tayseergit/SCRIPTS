@@ -139,7 +139,7 @@ class Contestcard extends StatelessWidget {
                                             value: LeaderBoardCubit(),
                                             child:
                                                 Leaderboardforpastcontestpage(
-                                              contastId: contest.id,
+                                              contestId: contest.id,
                                             ),
                                           ),
                                         ),
@@ -195,7 +195,7 @@ class Contestcard extends StatelessWidget {
             ),
           ),
           onTap: () {
-            if (contest.type == "programming") {
+            if (contest.type == "programming" || contest.alreadyParticipate!) {
               showDialog(
                 context: context,
                 builder: (context) {
@@ -204,7 +204,9 @@ class Contestcard extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12)),
                     content: AuthText(
-                      text: lang.You_cant_open_programming_contest_now,
+                      text: contest.alreadyParticipate!
+                          ? lang.contest_already_participate
+                          : lang.You_cant_open_programming_contest_now,
                       color: appColors.mainText,
                       fontWeight: FontWeight.bold,
                       maxLines: 3,

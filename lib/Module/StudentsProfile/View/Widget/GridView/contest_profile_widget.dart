@@ -68,8 +68,12 @@ class _ContestHistoryCardState extends State<ContestHistoryCard> {
 class _HeaderRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ThemeState appColors = context.watch<ThemeCubit>().state;
+
     final style = TextStyle(
-        fontWeight: FontWeight.w600, fontSize: 12.sp, color: Colors.black54);
+        fontWeight: FontWeight.w600,
+        fontSize: 12.sp,
+        color: appColors.mainText);
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -141,15 +145,13 @@ class DataRow extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: _Badge(
-                    '#${_contest.rank}',
+                    '#${_contest.rank ?? ""}',
                     color: _contest.rank == 1
                         ? appColors.orang
                         : (_contest.rank == 2
                             ? appColors.purple
                             : appColors.lightGray),
-                    textColor: _contest.rank == 1 || _contest.rank == 2
-                        ? Colors.white
-                        : Colors.black87,
+                    textColor: appColors.mainText,
                   ),
                 ),
               ),
@@ -159,7 +161,7 @@ class DataRow extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: AuthText(
-                        text: "${_contest.points}",
+                        text: "${_contest.points ?? 0}",
                         size: 13.sp,
                         color: appColors.ok,
                         fontWeight: FontWeight.w500),
@@ -167,7 +169,7 @@ class DataRow extends StatelessWidget {
             ],
           ),
         ),
-        Divider(thickness: 1, height: 0, color: Colors.grey.shade300),
+        Divider(thickness: 1, height: 0, color: appColors.lightGray),
       ],
     );
   }
@@ -175,8 +177,7 @@ class DataRow extends StatelessWidget {
 
 class _Badge extends StatelessWidget {
   const _Badge(this.label,
-      {this.color = const Color(0xFFE0E0E0),
-      this.textColor = Colors.black87});
+      {this.color = const Color(0xFFE0E0E0), this.textColor = Colors.black87});
 
   final String label;
   final Color color;
@@ -199,17 +200,18 @@ class _Badge extends StatelessWidget {
 }
 
 class ContestGrid extends StatelessWidget {
-  ContestGrid({super.key, required this.contestsResponse});
-  ContestResponse contestsResponse;
+  const ContestGrid({super.key, required this.contestsResponse});
+  final ContestResponse contestsResponse;
+
   @override
   Widget build(BuildContext context) {
-    ThemeState appColors = context.watch<ThemeCubit>().state;
+    final appColors = context.watch<ThemeCubit>().state;
 
     return Container(
       margin: EdgeInsets.all(8.w),
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: appColors.pageBackground,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
@@ -249,7 +251,7 @@ class ContestGrid extends StatelessWidget {
                       color: Colors.black87,
                     ),
                     children: [
-                      TextSpan(text: 'Total Points: '),
+                      const TextSpan(text: 'Total Points: '),
                       TextSpan(
                         text: '${contestsResponse.totalPoints}',
                         style: TextStyle(
@@ -266,23 +268,30 @@ class ContestGrid extends StatelessWidget {
           SizedBox(height: 12.h),
 
           /// Participated badge
-          _Badge('${contestsResponse.contestsCount} Contests Participated',
-              color: Colors.blue.shade100, textColor: Colors.blue.shade900),
+          _Badge(
+            '${contestsResponse.contestsCount} Contests Participated',
+            color: Colors.blue.shade100,
+            textColor: Colors.blue.shade900,
+          ),
           SizedBox(height: 18.h),
 
           /// Header row
           _HeaderRow(),
 
-          /// Divider line
           Divider(thickness: 1, height: 0, color: Colors.grey.shade300),
 
-          /// Data rows
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: contestsResponse.contests.length,
-            itemBuilder: (_, i) => DataRow(contestsResponse.contests[i]),
-          )
+          /// Scrollable table body
+          SizedBox(
+            height: 150.h, // adjust height as needed
+            child: SingleChildScrollView(
+              child: Column(
+                children: List.generate(
+                  contestsResponse.contests.length,
+                  (i) => DataRow(contestsResponse.contests[i]),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

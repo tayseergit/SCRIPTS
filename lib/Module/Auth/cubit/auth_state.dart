@@ -60,3 +60,4 @@ class SignUpError extends AuthState {
   SignUpError({required this.message});
 }
 class PickedImageUpdated extends AuthState {}
+class UnAuth extends AuthState {}

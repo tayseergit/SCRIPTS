@@ -54,7 +54,7 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Add Review`
+  /// `Add Review` 
   String get add_review {
     return Intl.message('Add Review', name: 'add_review', desc: '', args: []);
   }
@@ -1322,6 +1322,51 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `remove path status`
+  String get remove_path_status {
+    return Intl.message(
+      'remove path status',
+      name: 'remove_path_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to log out?`
+  String get Are_you_sure_you_want_to_log_out {
+    return Intl.message(
+      'Are you sure you want to log out?',
+      name: 'Are_you_sure_you_want_to_log_out',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `contest already participate`
+  String get contest_already_participate {
+    return Intl.message(
+      'contest already participate',
+      name: 'contest_already_participate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `change path status`
+  String get change_path_status {
+    return Intl.message(
+      'change path status',
+      name: 'change_path_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `balance`
+  String get balance {
+    return Intl.message('balance', name: 'balance', desc: '', args: []);
   }
 }
 

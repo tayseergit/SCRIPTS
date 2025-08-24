@@ -23,7 +23,7 @@ class LearnpathPage extends StatelessWidget {
     final appColors = context.watch<ThemeCubit>().state;
 
     return BlocProvider(
-      create: (_) => LearnPathCubit()..getAllLearnPath(),
+      create: (_) => LearnPathCubit(context: context)..getAllLearnPath(),
       child: SafeArea(
         child: Scaffold(
           backgroundColor: appColors.pageBackground,

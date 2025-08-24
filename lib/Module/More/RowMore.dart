@@ -38,7 +38,7 @@ class Rowmore extends StatelessWidget {
               text: text,
               size: 19,
               color: appColors.mainText,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w600,
             ),
           ],
         ),

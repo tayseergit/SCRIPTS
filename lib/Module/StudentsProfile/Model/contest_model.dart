@@ -6,16 +6,16 @@ class Contest {
   final int id;
   final String name;
   final DateTime date;
-  final int rank;
-  final int points;
+  final int? rank; // nullable
+  final int? points; // nullable
   final String type; // e.g. "programming", "quiz"
 
   const Contest({
     required this.id,
     required this.name,
     required this.date,
-    required this.rank,
-    required this.points,
+    this.rank,
+    this.points,
     required this.type,
   });
 
@@ -23,8 +23,8 @@ class Contest {
         id: json['id'] as int,
         name: json['name'] as String,
         date: DateTime.parse(json['date'] as String),
-        rank: json['rank'] as int,
-        points: json['points'] as int,
+        rank: json['rank'] != null ? json['rank'] as int : null,
+        points: json['points'] != null ? json['points'] as int : null,
         type: json['type'] as String,
       );
 

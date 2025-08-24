@@ -28,6 +28,9 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+dev_dependencies: 
+  flutter_test:
+    sdk : flutter
 dependencies:
 
   flutter:
@@ -77,8 +80,13 @@ dependencies:
   http_parser: ^4.1.2
   youtube_player_flutter: ^9.1.2
   flutter_staggered_animations: ^1.1.1
+  flutter_appauth: ^9.0.1
+  url_launcher: ^6.3.2
+  flutter_web_auth_2: ^4.1.0
+  gallery_saver_plus: ^3.2.8
+    # flutter_stripe: ^11.5.0
 
-  # flutter_stripe: ^11.5.0
+ 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

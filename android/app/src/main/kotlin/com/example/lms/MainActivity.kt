@@ -1,4 +1,4 @@
-package com.exmaple.SCRIPTS
+package com.example.lms
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity
