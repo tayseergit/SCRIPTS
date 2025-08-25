@@ -149,6 +149,11 @@ class S {
     return Intl.message('Done', name: 'done', desc: '', args: []);
   }
 
+  /// `SCRIPTS AI`
+  String get Chat {
+    return Intl.message('SCRIPTS AI', name: 'Chat', desc: '', args: []);
+  }
+
   /// `Error deleting`
   String get error_deleting {
     return Intl.message(

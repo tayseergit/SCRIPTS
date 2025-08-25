@@ -303,13 +303,16 @@ class AuthCubit extends Cubit<AuthState> {
         print('token: ${userAuthModel?.token}');
         emit(LogOutSuccess());
       } else if (response.statusCode == 422 || response.statusCode == 401) {
+        print('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccccccccccccccb');
         emit(UnAuth());
       } else {
         emit(LogOutError(message: S.of(context).error_occurred));
+        print('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbeeeeeeeeeeeeeeb');
       }
     } catch (e) {
       print("Login Exception: $e");
       emit(LogOutError(message: S.of(context).error_in_server));
+      print('bbbbbbbbbbbbbbbbbbbbbbbbbbzzzzzzzzzzzzzzzzzbbbbbbbbbbbbbbbbbbbb');
     }
   }
 

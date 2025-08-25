@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Are_you_sure_you_want_to_log_out": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to log out?",
     ),
+    "Chat": MessageLookupByLibrary.simpleMessage("SCRIPTS AI"),
     "Completed": MessageLookupByLibrary.simpleMessage("Completed"),
     "Contest": MessageLookupByLibrary.simpleMessage("Contest"),
     "Email_not_found": MessageLookupByLibrary.simpleMessage("Email not found"),

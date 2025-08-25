@@ -6,6 +6,8 @@ import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Module/Auth/View/Login.dart';
 import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
+import 'package:lms/Module/ChatGpt/Cubit/chat_cubit.dart';
+import 'package:lms/Module/ChatGpt/View/Pages/chat_page.dart';
 import 'package:lms/Module/LearnPathInfo/Cubit/main_cubit.dart';
 import 'package:lms/Module/Notifications/Cubit/notification_cubit.dart';
 import 'package:lms/Module/Notifications/View/Page/notifications_page.dart';
@@ -16,7 +18,7 @@ import 'package:lms/Module/Setting/SettingPage.dart';
 import 'package:lms/Module/Teacher/View/Page/teacher_Page.dart';
 import 'package:lms/Module/TeacherProfile/View/Pages/teacher_profile_page.dart';
 import 'package:lms/Module/UserFriend/Cubit/user_friend_cubit.dart';
-import 'package:lms/Module/UserFriend/View/Page/user_friend_page.dart';
+import 'package:lms/Module/UserFriend/View/Page/user_friend_page.dart'; 
 import 'package:lms/Module/mainWidget/TopWave_more_Clipper.dart';
 import 'package:lms/Module/StudentsProfile/View/Pages/student_profile_page.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
@@ -255,6 +257,37 @@ class More extends StatelessWidget {
                                             BlocProvider.value(
                                           value: NotificationCubit(),
                                           child: NotificationPage(),
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                },
+                                height: 25,
+                                width: 25,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 25.h,
+                            ),
+                            OnBoardingContainerMore(
+                              width: 330,
+                              height: 60,
+                              borderColor: appColors.blackGreen,
+                              color: appColors.pageBackground,
+                              widget: Rowmore(
+                                text: lang.Chat,
+                                image: Images.chat,
+                                onTapp: () {
+                                  if (CacheHelper.getToken() == null||CacheHelper.getUserId()==null) {
+                                    showNoAuthDialog(context);
+                                  } else {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            BlocProvider.value(
+                                          value: ChatCubit(),
+                                          child: ChatPage(),
                                         ),
                                       ),
                                     );
