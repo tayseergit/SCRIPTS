@@ -276,7 +276,7 @@ class More extends StatelessWidget {
                               color: appColors.pageBackground,
                               widget: Rowmore(
                                 text: lang.Chat,
-                                image: 'assets/images/Chat.png',
+                                image: Images.chat,
                                 onTapp: () {
                                   if (CacheHelper.getToken() == null||CacheHelper.getUserId()==null) {
                                     showNoAuthDialog(context);

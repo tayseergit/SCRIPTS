@@ -63,4 +63,5 @@ class Images {
   static String notification = "${baseImages}notification.png";
   static String certificate = "${baseImages}certificate.png";
   static String certificate_templet = "${baseImages}certificate_templet.png";
+  static String chat = "${baseImages}Chat.png";
 }
