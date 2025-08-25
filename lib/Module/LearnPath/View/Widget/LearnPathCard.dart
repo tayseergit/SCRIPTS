@@ -61,20 +61,6 @@ class LearnpathCard extends StatelessWidget {
                   ),
                 ),
               Positioned(
-                bottom: 10.h,
-                left: 15.w,
-                child: SizedBox(
-                  width: 180.w,
-                  child: AuthText(
-                    text: learnPath.title,
-                    size: 16,
-                    color: appColors.pageBackground,
-                    fontWeight: FontWeight.w700,
-                    maxLines: 2,
-                  ),
-                ),
-              ),
-              Positioned(
                 top: 10.h,
                 right: 10.w,
                 child: Container(
@@ -101,7 +87,14 @@ class LearnpathCard extends StatelessWidget {
 
           SizedBox(height: 10.h),
 
-          // Teacher Info
+          // TeachPositioned(
+          AuthText(
+            text: learnPath.title,
+            size: 16,
+            color: appColors.mainText,
+            fontWeight: FontWeight.w700,
+            maxLines: 2,
+          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
             child: Row(
@@ -111,7 +104,7 @@ class LearnpathCard extends StatelessWidget {
                   backgroundImage: (learnPath.teacherImage != null &&
                           learnPath.teacherImage!.isNotEmpty)
                       ? NetworkImage(learnPath.teacherImage!)
-                      : AssetImage(Images.noImage) as ImageProvider,
+                      : AssetImage(Images.studentImage) as ImageProvider,
                 ),
                 SizedBox(width: 10.w),
                 AuthText(
@@ -131,7 +124,7 @@ class LearnpathCard extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 12.w),
             child: ReadMoreInlineText(
               text: learnPath.description ?? "",
-              trimLength: 50,
+              trimLength: 30,
             ),
           ),
 
@@ -145,7 +138,8 @@ class LearnpathCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.book, size: 18.h, color: appColors.primary),
+                    Icon(Icons.video_collection_sharp,
+                        size: 18.h, color: appColors.primary),
                     SizedBox(width: 5.w),
                     AuthText(
                       text: "${learnPath.coursesCount} ${lang.courses}",

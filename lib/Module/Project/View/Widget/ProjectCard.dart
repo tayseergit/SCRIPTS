@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Helper/global_func.dart';
 import 'package:lms/Module/Project/Cubit/project_cubit.dart';
 import 'package:lms/Module/Project/Model/projet_response.dart';
 import 'package:lms/Module/Project/View/Widget/RowProjectCard.dart';
@@ -17,7 +18,7 @@ class Projectcard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
-    ProjectCubit projectCubit = context.watch<ProjectCubit>();
+    ProjectCubit projectCubit = context.read<ProjectCubit>();
 
     return Container(
       decoration: BoxDecoration(
@@ -122,6 +123,9 @@ class Projectcard extends StatelessWidget {
                         SizedBox(width: 10.w),
                         Expanded(
                           child: OnBoardingContainer(
+                            onTap: () {
+                              //  GlobalFunc. launchURL( projectModel.);
+                            },
                             height: 30,
                             color: appColors.primary,
                             widget: AuthText(

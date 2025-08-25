@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Module/StudentsProfile/View/Widget/GridView/achievement_gridView.dart';
 import 'package:lms/Module/StudentsProfile/View/Widget/GridView/certificate_gridVeiw.dart';
 import 'package:lms/Module/StudentsProfile/View/Widget/GridView/contest_profile_widget.dart';
-import 'package:lms/Module/StudentsProfile/View/Widget/Header/main_header.dart';
+import 'package:lms/Module/StudentsProfile/View/Widget/Header/main_header_student.dart';
 import 'package:lms/Module/StudentsProfile/View/Widget/Tabs/info_tabs.dart';
 import 'package:lms/Module/StudentsProfile/cubit/student_profile_cubit.dart';
 import 'package:lms/Module/mainWidget/TabButtons.dart';

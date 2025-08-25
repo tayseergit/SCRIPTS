@@ -14,13 +14,13 @@ class Tap extends StatelessWidget {
     ThemeState appColors = context.watch<ThemeCubit>().state;
     final selectedTab = context.watch<TapLeadercubit>().state;
 
-    final labels = [ S.of(context).All, S.of(context).friends];
+    final labels = [S.of(context).All, S.of(context).friends];
 
     return Container(
       width: 122.w,
-      height: 50.h,
+      // height: 50.h,
       decoration: BoxDecoration(
-        color: appColors.secondText,
+        color: appColors.blackGreenDisable,
         borderRadius: BorderRadius.circular(25.r),
       ),
       child: SingleChildScrollView(
@@ -36,16 +36,14 @@ class Tap extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: 14.w, vertical: 15.h),
                   decoration: BoxDecoration(
-                    color:
-                        isSelected ? appColors.primary : appColors.secondText,
+                    color: isSelected ? appColors.primary : null,
                     borderRadius: BorderRadius.circular(25.r),
                   ),
                   child: Text(
                     labels[index],
                     style: TextStyle(
-                      color: isSelected
-                          ? appColors.pageBackground
-                          : appColors.pageBackground,
+                      color:
+                          isSelected ? appColors.whiteText : appColors.mainText,
                       fontWeight: FontWeight.w600,
                       fontSize: 13.sp,
                     ),

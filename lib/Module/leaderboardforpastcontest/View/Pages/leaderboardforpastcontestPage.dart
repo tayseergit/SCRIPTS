@@ -12,6 +12,7 @@ import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/TopWave_more_Clipper.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/Module/mainWidget/no_auth.dart';
 import 'package:lms/generated/l10n.dart';
 
 class Leaderboardforpastcontestpage extends StatelessWidget {
@@ -23,6 +24,7 @@ class Leaderboardforpastcontestpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(contestId);
     ThemeState appColors = context.watch<ThemeCubit>().state;
     return MultiBlocProvider(
       providers: [
@@ -45,12 +47,14 @@ class Leaderboardforpastcontestpage extends StatelessWidget {
             if (state is LeaderBoardLoading) {
               return Center(
                 child: SizedBox(
-                  height: 80.h,
+                  height: 50.h,
                   child: Loading(height: 50.h, width: 50.w),
                 ),
               );
             } else if (state is LeaderBoardError) {
               return Center(child: NoConnection());
+            } else if (state is UnAuth) {
+              return Center(child: NoAuthUser());
             } else if (state is LeaderBoardSuccess) {
               return SafeArea(
                 child: ListView(
@@ -78,12 +82,9 @@ class Leaderboardforpastcontestpage extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          top: 100,
-                          right: 10,
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 20.w),
-                            child: Tap(), // أزرار التبويبات
-                          ),
+                          top: 100.h,
+                          right: 30.w,
+                          child: Tap(),
                         ),
                       ],
                     ),

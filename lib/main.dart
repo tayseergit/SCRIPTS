@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'; // add this
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 // import 'package:flutter_stripe/flutter_stripe.dart';
 
 import 'package:lms/Helper/cach_helper.dart';
@@ -26,6 +27,7 @@ import 'package:lms/Module/More/more_page.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/Project/View/Page/projectPage.dart';
 import 'package:lms/Module/Setting/SettingPage.dart';
+import 'package:lms/Module/Stripe/stripe_page.dart';
 // import 'package:lms/Module/Stripe/stripe_page.dart';
 import 'package:lms/Module/StudentsProfile/View/Pages/student_profile_page.dart';
 import 'package:lms/Module/StudentsProfile/cubit/student_profile_cubit.dart';
@@ -46,7 +48,6 @@ void main() async {
   await Firebase.initializeApp();
   await requestNotificationPermission();
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-
   await DioHelper.init();
 
   await getFcmToken();
@@ -67,7 +68,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
+    initStripe();
     setupForegroundMessageListener();
     setupOnMessageOpenedAppListener();
     // SystemChrome.setEnabledSystemUIMode(

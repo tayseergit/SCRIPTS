@@ -26,21 +26,27 @@ class LeaderListView extends StatelessWidget {
       print('🟢 [P] عدد الطلاب أقل من 3، عرض GridviewCaerLeader');
       return Column(
         children: [
-          SizedBox(height: 20.h,),
+          SizedBox(
+            height: 20.h,
+          ),
           Padding(
             padding: EdgeInsets.only(right: 34.w),
             child: Align(
               alignment: Alignment.centerRight,
-              child: OnBoardingContainer(
-                width: 110,
-                height: 30,
-                color: appColors.border,
-                widget: (quizResultModel.yourOrder == null || quizResultModel.yourOrder == 0)
-                    ? AuthText(
-                        text: S.of(context).leaderbord,
-                        size: 15,
-                        color: appColors.red,
-                        fontWeight: FontWeight.w400,
+              child: Container(
+                padding: EdgeInsets.all(10.sp),
+                // width: 310,
+                // height: 30,
+                color: appColors.blackGreenDisable,
+                child: (quizResultModel.yourOrder == null ||
+                        quizResultModel.yourOrder == 0)
+                    ? Text(
+                        S.of(context).notparticipant,
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                          color: appColors.red,
+                          fontWeight: FontWeight.w400,
+                        ),
                       )
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +68,9 @@ class LeaderListView extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           GridviewCaerLeader(
             students: quizResultModel.students,
             questionCount: quizResultModel.questionCount,
@@ -83,13 +91,15 @@ class LeaderListView extends StatelessWidget {
           padding: EdgeInsets.only(right: 34.w),
           child: Align(
             alignment: Alignment.centerRight,
-            child: OnBoardingContainer(
-              width: 70,
-              height: 30,
-              color: appColors.border,
-              widget: (quizResultModel.yourOrder == null || quizResultModel.yourOrder == 0)
+            child: Container(
+              // width: 70,
+              padding: EdgeInsets.all(10.sp),
+              // height: 30,
+              color: appColors.blackGreenDisable,
+              child: (quizResultModel.yourOrder == null ||
+                      quizResultModel.yourOrder == 0)
                   ? AuthText(
-                      text: S.of(context).leaderbord,
+                      text: S.of(context).notparticipant,
                       size: 15,
                       color: appColors.red,
                       fontWeight: FontWeight.w400,
@@ -125,7 +135,7 @@ class LeaderListView extends StatelessWidget {
               name: quizResultModel.students[1].name,
               score: quizResultModel.students[1].gainedPoints.toString(),
               rank: quizResultModel.students[1].rank.toString(),
-              rankColor: appColors.primary,
+              rankColor: appColors.blackGreen,
               borderRadius: BorderRadius.only(topLeft: Radius.circular(25.r)),
               image: (quizResultModel.students[1].image != null &&
                       quizResultModel.students[1].image.isNotEmpty)
@@ -143,10 +153,11 @@ class LeaderListView extends StatelessWidget {
                       Images.noImage,
                       fit: BoxFit.contain,
                     ),
-              height: 150.h,
+              // height: 150.h,
+
               border: Border(
-                bottom: BorderSide(color: appColors.primary, width: 4),
-                left: BorderSide(color: appColors.primary, width: 4),
+                bottom: BorderSide(color: appColors.blackGreen, width: 4),
+                left: BorderSide(color: appColors.blackGreen, width: 4),
               ),
             ),
             ListViewContainer(
@@ -201,7 +212,7 @@ class LeaderListView extends StatelessWidget {
                       Images.noImage,
                       fit: BoxFit.contain,
                     ),
-              height: 150.h,
+              // height: 150.h,
               border: Border(
                 bottom: BorderSide(color: appColors.ok, width: 4),
                 right: BorderSide(color: appColors.ok, width: 4),

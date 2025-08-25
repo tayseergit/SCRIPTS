@@ -52,7 +52,7 @@ class More extends StatelessWidget {
               top: 30.h,
               left: 16.w,
               child: AuthText(
-                  text: S.of(context).read_more,
+                  text: S.of(context).More,
                   size: 30,
                   color: appColors.mainText,
                   fontWeight: FontWeight.bold),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Constant/public_constant.dart';
+import 'package:lms/Module/CourseInfo/View/Pages/course_info_page.dart';
 import 'package:lms/Module/TeacherProfile/Model/teacher_courses_model.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
@@ -11,7 +13,8 @@ import 'package:lms/Module/Them/cubit/app_color_state.dart';
 class Teachercoursescard extends StatelessWidget {
   final TeacherCourse teacherCoursesModel;
   Teachercoursescard({
-    super.key, required this.teacherCoursesModel,
+    super.key,
+    required this.teacherCoursesModel,
   });
 
   @override
@@ -25,7 +28,7 @@ class Teachercoursescard extends StatelessWidget {
       ),
       child: OnBoardingContainer(
         width: 180.w,
-        height: 250.h,
+        // height: 250.h,
         color: appColors.pageBackground,
         widget: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
@@ -68,7 +71,9 @@ class Teachercoursescard extends StatelessWidget {
                     child: OnBoardingContainer(
                       width: 40.w,
                       height: 20.h,
-                      color: teacherCoursesModel.price == 0 ? appColors.ok : appColors.orang,
+                      color: teacherCoursesModel.price == 0
+                          ? appColors.ok
+                          : appColors.orang,
                       widget: Center(
                         child: AuthText(
                           text: "${teacherCoursesModel.price} \$",
@@ -178,7 +183,7 @@ class Teachercoursescard extends StatelessWidget {
                       ),
                       SizedBox(width: 5.w),
                       AuthText(
-                        text: '${teacherCoursesModel.course_duration} Hours',
+                        text: '${teacherCoursesModel.course_duration}',
                         color: appColors.mainText,
                         fontWeight: FontWeight.w400,
                         size: 10.sp,
@@ -190,7 +195,11 @@ class Teachercoursescard extends StatelessWidget {
             ],
           ),
         ),
-        onTap: () {},
+        onTap: () {
+          pushTo(
+              context: context,
+              toPage: CourseInfoPage(courseId: teacherCoursesModel.id));
+        },
       ),
     );
   }

@@ -17,3 +17,4 @@ class LeaderBoardSuccess extends LeaderBoardState {
   final QuizResultModel? friendsResult;
   LeaderBoardSuccess({this.allResult, this.friendsResult});
 }
+class UnAuth extends LeaderBoardState {}

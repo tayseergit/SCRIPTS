@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/Module/mainWidget/authText.dart';
 
 class ListViewContainer extends StatelessWidget {
   final String name;
@@ -11,7 +12,7 @@ class ListViewContainer extends StatelessWidget {
   final Color rankColor;
   final BorderRadius borderRadius;
   final Widget image;
-  final double height;
+  final double? height;
   final BoxBorder border;
 
   const ListViewContainer({
@@ -22,7 +23,7 @@ class ListViewContainer extends StatelessWidget {
     required this.rankColor,
     required this.borderRadius,
     required this.image,
-    required this.height,
+    this.height,
     required this.border,
   });
 
@@ -44,24 +45,24 @@ class ListViewContainer extends StatelessWidget {
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
+            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 50.h),
-              Text(
-                name,
-                style: TextStyle(
-                  color: appColors.mainText,
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
-                ),
+              AuthText(
+                text: name,
+                color: appColors.mainText,
+                size: 16,
+                fontWeight: FontWeight.bold,
+                maxLines: 2,
+                textAlign: TextAlign.center,
               ),
               SizedBox(height: 5.h),
-              Text(
-                score,
-                style: TextStyle(
-                  color: rankColor,
-                  fontSize: 22.sp,
-                  fontWeight: FontWeight.bold,
-                ),
+              AuthText(
+                text: score,
+                color: rankColor,
+                size: 22,
+                fontWeight: FontWeight.bold,
+                textAlign: TextAlign.center,
               ),
               SizedBox(height: 10.h),
             ],
@@ -85,13 +86,12 @@ class ListViewContainer extends StatelessWidget {
               color: rankColor,
               borderRadius: BorderRadius.circular(12.r),
             ),
-            child: Text(
-              rank,
-              style: TextStyle(
-                color: appColors.pageBackground,
-                fontSize: 12.sp,
-                fontWeight: FontWeight.bold,
-              ),
+            child: AuthText(
+              text: rank,
+              color: appColors.whiteText,
+              size: 12,
+              fontWeight: FontWeight.bold,
+              textAlign: TextAlign.center,
             ),
           ),
         ),

@@ -54,7 +54,7 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Add Review` 
+  /// `Add Review`
   String get add_review {
     return Intl.message('Add Review', name: 'add_review', desc: '', args: []);
   }
@@ -1305,10 +1305,10 @@ class S {
   }
 
   /// `not participant`
-  String get leaderbord {
+  String get notparticipant {
     return Intl.message(
       'not participant',
-      name: 'leaderbord',
+      name: 'notparticipant',
       desc: '',
       args: [],
     );
@@ -1367,6 +1367,36 @@ class S {
   /// `balance`
   String get balance {
     return Intl.message('balance', name: 'balance', desc: '', args: []);
+  }
+
+  /// `Total Contests`
+  String get Total_Contests {
+    return Intl.message(
+      'Total Contests',
+      name: 'Total_Contests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Contests`
+  String get Total_Paths {
+    return Intl.message(
+      'Total Contests',
+      name: 'Total_Paths',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Contests`
+  String get Total_Courses {
+    return Intl.message(
+      'Total Contests',
+      name: 'Total_Courses',
+      desc: '',
+      args: [],
+    );
   }
 }
 

@@ -51,7 +51,7 @@ class _GridviewlearnpathState extends State<Gridviewlearnpath> {
         final showLoader = cubit.isLoading && learningPaths.isNotEmpty;
 
         return Container(
-          height: 520.h,
+          height: 530.h,
           color: appColors.pageBackground,
           child: GridView.builder(
             controller: _scrollController,

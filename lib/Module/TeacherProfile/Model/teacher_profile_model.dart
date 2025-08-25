@@ -29,6 +29,7 @@ class UserData {
   final int? created_courses;
   final int? created_paths;
   final int? created_contests;
+  final int? balance;
 
   UserData({
     required this.id,
@@ -44,6 +45,7 @@ class UserData {
     this.created_courses,
     this.created_paths,
     this.created_contests,
+    this.balance,
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) {
@@ -60,6 +62,7 @@ class UserData {
       age: json['age'],
       created_courses: json['created_courses'],
       created_paths: json['created_paths'],
+      balance: json['balance'],
       created_contests: json['created_contests'],
     );
   }

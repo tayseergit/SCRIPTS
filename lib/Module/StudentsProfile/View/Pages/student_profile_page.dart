@@ -5,7 +5,7 @@ import 'package:lms/Constant/images.dart';
 import 'package:lms/Module/StudentsProfile/Model/student_profile_model.dart';
 import 'package:lms/Module/StudentsProfile/View/Widget/GridView/achievement_gridView.dart';
 import 'package:lms/Module/StudentsProfile/View/Widget/GridView/certificate_gridVeiw.dart';
-import 'package:lms/Module/StudentsProfile/View/Widget/Header/main_header.dart';
+import 'package:lms/Module/StudentsProfile/View/Widget/Header/main_header_student.dart';
 import 'package:lms/Module/StudentsProfile/View/Widget/Tabs/info_tabs.dart';
 import 'package:lms/Module/StudentsProfile/View/Widget/GridView/contest_profile_widget.dart';
 import 'package:lms/Module/StudentsProfile/View/Widget/build_profile_content.dart';

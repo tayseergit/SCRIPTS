@@ -53,6 +53,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "Timeisfinishedtocopmletetest": MessageLookupByLibrary.simpleMessage(
       "time is finish , test over",
     ),
+    "Total_Contests": MessageLookupByLibrary.simpleMessage("Total Contests"),
+    "Total_Courses": MessageLookupByLibrary.simpleMessage("Total Contests"),
+    "Total_Paths": MessageLookupByLibrary.simpleMessage("Total Contests"),
     "You_cant_open_programming_contest_now":
         MessageLookupByLibrary.simpleMessage(
           "You can\'t open programming contest now",
@@ -203,7 +206,6 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "join": MessageLookupByLibrary.simpleMessage("join"),
     "leader": MessageLookupByLibrary.simpleMessage("Leader Board"),
-    "leaderbord": MessageLookupByLibrary.simpleMessage("not participant"),
     "learn_path_info": MessageLookupByLibrary.simpleMessage("About this Path"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Logout"),
@@ -215,6 +217,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+    "notparticipant": MessageLookupByLibrary.simpleMessage("not participant"),
     "old_password": MessageLookupByLibrary.simpleMessage("Old Password"),
     "or_login": MessageLookupByLibrary.simpleMessage("or login"),
     "participant": MessageLookupByLibrary.simpleMessage("participant"),

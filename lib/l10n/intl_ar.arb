@@ -168,13 +168,16 @@
     "add_watch_later":"اضافة للمشاهدة لاحقاً",
  
   "leader": "لائحة الصدارة",
-  "leaderbord": "لست مشاركا",
+  "notparticipant": "لست مشاركا",
   "notifications": "الاشعارات",
   "remove_path_status":"ازالة حالة المسار",
   "Are_you_sure_you_want_to_log_out":"هل أنت متأكد أنك تريد تسجيل الخروج؟",
   "contest_already_participate":"مشارك بالمسابقة سابقا",
   "change_path_status":"تغيير حالة المسار",
-  "balance":"الرصيد" 
+  "balance":"الرصيد" ,
+    "Total_Contests":"مجموع الدورات",
+  "Total_Paths":"مجموع المسارات",
+  "Total_Courses":"مجموع المسابقات"
 
 
 

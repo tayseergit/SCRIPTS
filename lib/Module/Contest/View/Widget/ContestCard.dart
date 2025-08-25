@@ -128,6 +128,7 @@ class Contestcard extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                   ),
                                   onTap: () {
+                                    // CacheHelper.removeAllData();
                                     if (CacheHelper.getToken() == null) {
                                       showNoAuthDialog(context);
                                     } else {

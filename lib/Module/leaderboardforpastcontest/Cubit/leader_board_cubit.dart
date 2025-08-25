@@ -10,7 +10,7 @@ import 'package:lms/Module/leaderboardforpastcontest/Model/leader_board_for_past
 
 class LeaderBoardCubit extends Cubit<LeaderBoardState> {
   LeaderBoardCubit() : super(LeaderBoardInitial());
-  
+
   QuizResultModel? _allResult;
   QuizResultModel? _friendsResult;
 

@@ -84,7 +84,9 @@ dependencies:
   url_launcher: ^6.3.2
   flutter_web_auth_2: ^4.1.0
   gallery_saver_plus: ^3.2.8
-    # flutter_stripe: ^11.5.0
+  # stripe_sdk: ^5.0.0
+  flutter_stripe: ^11.5.0
+
 
  
 

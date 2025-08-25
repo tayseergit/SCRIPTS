@@ -24,7 +24,7 @@ class TeacherLearnpathGridview extends StatelessWidget {
       );
     }
     return Container(
-      height: 505.h,
+      height: 350.h,
       color: appColors.pageBackground,
       child: GridView.builder(
         itemCount: LearnPathlist.length,

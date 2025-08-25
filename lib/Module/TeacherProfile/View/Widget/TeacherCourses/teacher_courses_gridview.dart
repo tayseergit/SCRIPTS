@@ -30,7 +30,7 @@ class Teachercoursesgridview extends StatelessWidget {
     }
 
     return Container(
-      height: 510.h,
+      height: 350.h,
       color: appColors.pageBackground,
       child: GridView.builder(
         itemCount: list.length,

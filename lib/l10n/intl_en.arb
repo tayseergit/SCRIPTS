@@ -168,13 +168,16 @@
     "add_watch_later":"add watch later",
   
   "leader":"Leader Board",
-  "leaderbord":"not participant",
+  "notparticipant":"not participant",
   "notifications":"Notifications",
   "remove_path_status":"remove path status",
   "Are_you_sure_you_want_to_log_out":"Are you sure you want to log out?",
   "contest_already_participate":"contest already participate",
   "change_path_status":"change path status",
-  "balance":"balance" 
+  "balance":"balance" ,
+  "Total_Contests":"Total Contests",
+  "Total_Paths":"Total Contests",
+  "Total_Courses":"Total Contests"
 
 
 

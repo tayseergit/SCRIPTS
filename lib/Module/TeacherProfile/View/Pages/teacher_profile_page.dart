@@ -7,6 +7,7 @@ import 'package:lms/Module/TeacherProfile/Model/teacher_profile_model.dart';
 import 'package:lms/Module/TeacherProfile/View/Widget/TeacherContest/teacher_contest_gridview.dart';
 import 'package:lms/Module/TeacherProfile/View/Widget/TeacherCourses/teacher_courses_gridview.dart';
 import 'package:lms/Module/TeacherProfile/View/Widget/TeacherLearnPath/teacher_learnpath_gridview.dart';
+import 'package:lms/Module/TeacherProfile/View/Widget/main_header_teacher.dart';
 import 'package:lms/Module/TeacherProfile/cubit/TeacherContast/teacher_contest_cubit.dart';
 import 'package:lms/Module/TeacherProfile/cubit/TeacherContast/teacher_contest_state.dart';
 import 'package:lms/Module/TeacherProfile/cubit/TeacherCourse/teacher_courses_cubit.dart';
@@ -24,6 +25,7 @@ import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/loading_container.dart';
+import 'package:lms/generated/l10n.dart';
 
 class TeacherProfilePage extends StatelessWidget {
   final UserData? userData;
@@ -34,6 +36,7 @@ class TeacherProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var lang = S.of(context);
     print("📦 userData is: $userData");
     print("📦 userData?.id is: ${userData?.id}");
 
@@ -78,122 +81,8 @@ class TeacherProfilePage extends StatelessWidget {
               print(user.image);
               return ListView(
                 children: [
-                  Stack(
-                    children: [
-                      Image.network(
-                        user.image ?? '',
-                        width: double.infinity,
-                        height: 380,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Image.asset(
-                            Images.allProject,
-                            width: double.infinity,
-                            height: 380,
-                            fit: BoxFit.cover,
-                          );
-                        },
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20.h, right: 15.w),
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: OnBoardingContainer(
-                            width: 90,
-                            height: 25,
-                            color: appColors.darkText,
-                            widget: AuthText(
-                              text: 'Edit Profile',
-                              size: 14,
-                              color: appColors.mainText,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 16,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              OnBoardingContainer(
-                                width: 220,
-                                height: 80,
-                                color: appColors.primary,
-                                widget: Column(
-                                  children: [
-                                    AuthText(
-                                      text: user.name ?? '',
-                                      size: 24,
-                                      color: appColors.mainText,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                    AuthText(
-                                      text: user.email ?? '',
-                                      size: 14,
-                                      color: appColors.pageBackground,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                    AuthText(
-                                      text: user.joined ?? '',
-                                      size: 14,
-                                      color: appColors.pageBackground,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(width: 10.w),
-                              Column(
-                                children: [
-                                  OnBoardingContainer(
-                                    width: 110,
-                                    height: 35,
-                                    color: appColors.orang,
-                                    widget: Align(
-                                      alignment: Alignment.center,
-                                      child: AuthText(
-                                        text: 'Intermediate',
-                                        size: 12,
-                                        color: appColors.mainText,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 5.h),
-                                  OnBoardingContainer(
-                                    width: 110,
-                                    height: 35,
-                                    color: appColors.darkText,
-                                    widget: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          Images.github,
-                                          height: 20.h,
-                                          width: 20.w,
-                                          color: appColors.mainText,
-                                        ),
-                                        SizedBox(width: 15.w),
-                                        AuthText(
-                                          text: 'GitHub',
-                                          color: appColors.mainText,
-                                          size: 12,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                  MainHeader(
+                    user: user,
                   ),
                   SizedBox(height: 12.h),
                   Padding(
@@ -202,15 +91,15 @@ class TeacherProfilePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Profilestate(
-                          title: 'Total Courses',
+                          title: lang.Total_Courses,
                           value: (userData?.created_courses ?? 0).toString(),
                         ),
                         Profilestate(
-                          title: 'Total Paths',
+                          title: lang.Total_Paths,
                           value: (userData?.created_paths ?? 0).toString(),
                         ),
                         Profilestate(
-                          title: 'Total Contests',
+                          title: lang.Total_Contests,
                           value: (userData?.created_contests ?? 0).toString(),
                         ),
                       ],

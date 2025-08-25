@@ -5,6 +5,7 @@ import 'package:lms/Module/TeacherProfile/cubit/tab_teacher_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
+import 'package:lms/generated/l10n.dart';
 
 class Tabteacher extends StatelessWidget {
   const Tabteacher({super.key});
@@ -14,7 +15,7 @@ class Tabteacher extends StatelessWidget {
     ThemeState appColors = context.watch<ThemeCubit>().state;
     final selectedTab = context.watch<Tabteachercubit>().state;
 
-    final labels = ['Courses', 'Paths', 'Contest'];
+    final labels = ["${S.of(context).courses}", "${S.of(context).Learn_Path}", "${S.of(context).Contest}"];
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -30,7 +31,9 @@ class Tabteacher extends StatelessWidget {
               child: OnBoardingContainer(
                 width: (labels[index].length * 17).w,
                 height: 40.h,
-                color: isSelected ? appColors.primary : appColors.fieldBackground,
+                color: isSelected
+                    ? appColors.blackGreen
+                    : appColors.fieldBackground,
                 widget: Text(
                   labels[index],
                   style: TextStyle(

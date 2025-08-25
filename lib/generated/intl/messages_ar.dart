@@ -55,6 +55,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "Timeisfinishedtocopmletetest": MessageLookupByLibrary.simpleMessage(
       "انتهى الوقت , لا يمكنك متابعة الاختبار",
     ),
+    "Total_Contests": MessageLookupByLibrary.simpleMessage("مجموع الدورات"),
+    "Total_Courses": MessageLookupByLibrary.simpleMessage("مجموع المسابقات"),
+    "Total_Paths": MessageLookupByLibrary.simpleMessage("مجموع المسارات"),
     "You_cant_open_programming_contest_now":
         MessageLookupByLibrary.simpleMessage(
           "لا يمكنك فتح مسابقة البرمجة الآن",
@@ -202,7 +205,6 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "join": MessageLookupByLibrary.simpleMessage("انضمام"),
     "leader": MessageLookupByLibrary.simpleMessage("لائحة الصدارة"),
-    "leaderbord": MessageLookupByLibrary.simpleMessage("لست مشاركا"),
     "learn_path_info": MessageLookupByLibrary.simpleMessage("حول هذا المسار"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
@@ -214,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "newPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
     "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
+    "notparticipant": MessageLookupByLibrary.simpleMessage("لست مشاركا"),
     "old_password": MessageLookupByLibrary.simpleMessage("كلمة المرور القديمة"),
     "or_login": MessageLookupByLibrary.simpleMessage("أو تسجيل الدخول"),
     "participant": MessageLookupByLibrary.simpleMessage("مشارك"),

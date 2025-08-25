@@ -4,12 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Helper/cach_helper.dart';
+import 'package:lms/Module/Auth/View/Login.dart';
 import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
 import 'package:lms/Module/Auth/cubit/auth_state.dart';
 import 'package:lms/Module/Edit_profile/Cubit/edite_profile_cubit.dart';
 import 'package:lms/Module/Edit_profile/View/Pages/edite_profile_page.dart';
 import 'package:lms/Module/Localization/localization.dart';
 import 'package:lms/Module/Setting/NotificationSwitchCubit.dart';
+import 'package:lms/Module/Stripe/stripe_page.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
@@ -183,6 +185,10 @@ class Settingpage extends StatelessWidget {
                         ),
                       ),
                       child: OnBoardingContainerMore(
+                          onTap: () {
+                            // makePayment();
+                            pushTo(context: context, toPage: PaymentPage());
+                          },
                           width: 330,
                           height: 60,
                           color: appColors.pageBackground,
@@ -328,11 +334,18 @@ class Settingpage extends StatelessWidget {
                                     ),
                                     TextButton(
                                       onPressed: () {
+                                        CacheHelper.removeAllData();
+
                                         Navigator.pop(context);
                                         context
                                             .read<AuthCubit>()
                                             .logOut(context);
-                                        Navigator.pop(context);
+                                        WidgetsBinding.instance
+                                            .addPostFrameCallback((_) {
+                                          pushReplacement(
+                                              context: context,
+                                              toPage: Login());
+                                        });
                                       },
                                       child: AuthText(
                                         text: lang.logout,
