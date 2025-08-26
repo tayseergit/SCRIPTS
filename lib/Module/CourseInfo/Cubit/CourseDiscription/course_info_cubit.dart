@@ -47,6 +47,8 @@ class CourseInfoCubit extends Cubit<CourseInfoState> {
           emit(CouresDescriptionSuccess());
         } else if (value.statusCode == 422) {
           emit(CouresUnUthunticatedError(message: 'Make Rigister Or Log In '));
+          CacheHelper.removeData(key: "token");
+          // CacheHelper.removeData(key: key);
         }
         print(value.data['message']);
       }).catchError((e) {
@@ -78,7 +80,7 @@ class CourseInfoCubit extends Cubit<CourseInfoState> {
           courseDescriptionResponse!.data.status = "enroll";
           courseDescriptionResponse!.data.studentPaid =
               courseDescriptionResponse!.data.price;
-
+          getCourseDescription();
           emit(EnrollCouresSuccess(message: value.data['message']));
         } else if (value.statusCode == 401) {
           emit(CouresUnUthunticatedError(

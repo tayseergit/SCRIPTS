@@ -23,7 +23,7 @@ class CourseData {
   final String title;
   final String description;
   final String rate;
-  final String image;
+  final String ?image;
   final String price;
   final String level;
     String? status;

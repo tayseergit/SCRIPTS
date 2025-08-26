@@ -12,7 +12,7 @@ import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/generated/l10n.dart';
 
 class MainHeader extends StatelessWidget {
-  final UserData  user;
+  final UserData user;
 
   const MainHeader({super.key, required this.user});
 
@@ -67,20 +67,20 @@ class MainHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AuthText(
-                  text: user.name??"",
+                  text: user.name ?? "",
                   size: 18.sp,
                   color: appColors.mainText,
                   fontWeight: FontWeight.bold,
                 ),
                 SizedBox(height: 10.h),
                 AuthText(
-                  text: user.email??"",
+                  text: user.email ?? "",
                   size: 12.sp,
                   color: appColors.secondText,
                 ),
                 SizedBox(height: 10.h),
                 AuthText(
-                  text: user.joined??"",
+                  text: user.joined ?? "",
                   size: 12.sp,
                   color: appColors.secondText,
                 ),
@@ -101,8 +101,7 @@ class MainHeader extends StatelessWidget {
                 OnBoardingContainer(
                   onTap: () {
                     if (user.gitHubAccount != null) {
-                      GlobalFunc.launchURL(
-                          user.gitHubAccount!);
+                      GlobalFunc.launchURL(user.gitHubAccount!);
                     }
                   },
                   widget: Row(
@@ -129,10 +128,13 @@ class MainHeader extends StatelessWidget {
                       Icon(Icons.wallet_outlined,
                           size: 28.sp, color: appColors.mainIconColor),
                       SizedBox(width: 4.w),
-                      AuthText(
-                        text: "${user.balance ?? ""} \$",
-                        size: 20.sp,
-                        color: appColors.ok,
+                      Container(
+                        width: 120.w,
+                        child: AuthText(
+                          text: "${user.balance ?? ""} \$",
+                          size: 20.sp,
+                          color: appColors.ok,
+                        ),
                       ),
                     ],
                   ),

@@ -81,7 +81,7 @@ class ThemeState {
       seocndIconColor: const Color(0xFF81B9DE),
       border: const Color.fromARGB(138, 58, 143, 255),
       iconSearsh: Color(0xff8C8E98),
-      darkText: Color(0xFFCED2E6),
+      darkText: Color.fromARGB(255, 35, 35, 35),
       orang: Color(0xFFFF6E40),
       strongPrimer: const Color.fromARGB(255, 24, 112, 163),
       blackGreen: const Color(0xFF1B4965),
@@ -114,9 +114,9 @@ class ThemeState {
   factory ThemeState.dark() {
     return ThemeState(
       isDarkMode: true,
-      primary: const Color(0xFF3D5CFF),
+      primary: const Color(0xFF6BC8FF),
       fieldBackground: const Color(0x0F9CEF0F),
-      pageBackground: const Color(0xff000000),
+      pageBackground: const Color.fromARGB(255, 28, 27, 27),
       whiteText: const Color(0xFFffffff),
       mainText: const Color(0xFFffffff),
       secondText: const Color.fromARGB(255, 197, 197, 197),
@@ -124,9 +124,9 @@ class ThemeState {
       ok: const Color(0xFF19EC67),
       darkGreen: const Color(0xFF4DC9D1),
       red: const Color(0xFFFF3B30),
-      mainIconColor: const Color.fromARGB(255, 165, 185, 208),
+      mainIconColor: const Color.fromARGB(255, 244, 244, 245),
       seocndIconColor: const Color(0xFF81B9DE),
-      border: const Color.fromARGB(171, 123, 145, 255),
+      border: const Color.fromARGB(171, 123, 202, 255),
       iconSearsh: Color(0xff8C8E98),
       darkText: Color(0xFFCED2E6),
       orang: Color(0xFFFF6E40),
@@ -138,27 +138,24 @@ class ThemeState {
       lightfieldBackground: Color.fromARGB(255, 68, 72, 72),
 
       //
-      lightGray: const Color.fromARGB(135, 221, 221, 221),
+      lightGray: const Color.fromARGB(134, 189, 189, 189),
       lihgtPrimer: const Color(0x803D5DFF),
 
       // Gradients
       linerContainer: const LinearGradient(
-        begin: Alignment.bottomCenter,
-        end: Alignment.topCenter,
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
         colors: [Color(0xFFFFFFFF), Color(0xFF248BF5)],
       ),
-      linear: LinearGradient(
+      linear: const LinearGradient(
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter,
-        colors: [
-          Color(0xFFFFFFFF),
-          Color(0xFF3D5CFF),
-        ],
+        colors: [Color(0xFFFFFFFF), Color.fromARGB(255, 107, 201, 255)],
       ),
       linerImage: const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [Color(0x00FFFFFF), Color(0xB3248BF5)],
+        colors: [Color(0x00FFFFFF), Color.fromARGB(179, 70, 162, 253)],
       ),
     );
   }

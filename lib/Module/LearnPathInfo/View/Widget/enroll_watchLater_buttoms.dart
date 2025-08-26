@@ -10,6 +10,7 @@ import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/Module/mainWidget/no_auth.dart';
 import 'package:lms/generated/l10n.dart';
 
 class EnrollWatchLaterButtons extends StatelessWidget {
@@ -45,6 +46,7 @@ class EnrollWatchLaterButtons extends StatelessWidget {
           if (state is LearnPathInfoError) {
             return Container();
           }
+
           return Column(
             children: [
               AuthText(

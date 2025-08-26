@@ -26,17 +26,23 @@ class UnAuthUser extends LearnPathInfoState {
   final String masseg;
   UnAuthUser({required this.masseg});
 }
+
 class UpdateStatusSuccess extends LearnPathInfoState {}
+
 class UpdateEnrollStatusLoading extends LearnPathInfoState {}
+
 class UpdateLaterStatusLoading extends LearnPathInfoState {}
+
 class UpdateStatusError extends LearnPathInfoState {
-    final String masseg;
-  UpdateStatusError({required this.masseg});
+  final String massage;
+  UpdateStatusError({required this.massage});
 }
 
 class DeleteStatusLoading extends LearnPathInfoState {}
+
 class DeleteStatusSuccess extends LearnPathInfoState {}
+
 class DeleteStatusError extends LearnPathInfoState {
-    final String masseg;
-  DeleteStatusError({required this.masseg});
+  final String message;
+  DeleteStatusError({required this.message});
 }

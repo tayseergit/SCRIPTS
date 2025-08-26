@@ -19,9 +19,21 @@ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/no_auth.dart';
 
-class StudentProfilePage extends StatelessWidget {
-  StudentProfilePage({super.key});
+class StudentProfilePage extends StatefulWidget {
+  StudentProfilePage({super.key,required this .userid});
+  int userid;
+
+  @override
+  State<StudentProfilePage> createState() => _StudentProfilePageState();
+}
+
+class _StudentProfilePageState extends State<StudentProfilePage> {
   StudentProfileModel? studentProfileModel;
+  void initState() {
+    super.initState();
+    // استدعاء الدالة عند تحميل الصفحة
+    context.read<StudentProfileCubit>().getProfile(widget.userid);
+  }
   @override
   Widget build(BuildContext context) {
     final appColors = context.read<ThemeCubit>().state;
@@ -62,7 +74,6 @@ class StudentProfilePage extends StatelessWidget {
                 } else if (state is NoAuth) {
                   return Center(
                     child: SizedBox(
-                      
                       child: NoAuthUser(),
                     ),
                   );

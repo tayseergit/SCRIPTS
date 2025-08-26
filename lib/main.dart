@@ -27,6 +27,7 @@ import 'package:lms/Module/More/more_page.dart';
 import 'package:lms/Module/NavigationBarWidged/navigationBarWidget.dart';
 import 'package:lms/Module/Project/View/Page/projectPage.dart';
 import 'package:lms/Module/Setting/SettingPage.dart';
+import 'package:lms/Module/Startup/View/Screen/splash_screen.dart';
 import 'package:lms/Module/Stripe/stripe_page.dart';
 // import 'package:lms/Module/Stripe/stripe_page.dart';
 import 'package:lms/Module/StudentsProfile/View/Pages/student_profile_page.dart';
@@ -83,8 +84,9 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
-        BlocProvider(create: (_) => AuthCubit()),
-        BlocProvider(create: (_) => StudentProfileCubit()..getProfile()),
+        BlocProvider(create: (_) => AuthCubit()
+        ),
+        BlocProvider(create: (_) => StudentProfileCubit()..getProfile(CacheHelper.getUserId())),
         BlocProvider(create: (_) => LocaleCubit()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
@@ -109,7 +111,7 @@ class _MyAppState extends State<MyApp> {
                       theme: themeState.isDarkMode
                           ? ThemeData.dark()
                           : ThemeData.light(),
-                      home: NavigationBarwidget()
+                      home: SplashScreen()
                       // home: CourseInfoPage(
                       //   testId: 1,
                       // courseId: 1,

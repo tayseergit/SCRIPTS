@@ -16,24 +16,24 @@ part 'student_profile_state.dart';
 class StudentProfileCubit extends Cubit<StudentProfileState> {
   StudentProfileCubit() : super(StudentProfileInitial());
   // BuildContext context;
-  
+
   late StudentProfileModel studentProfileModel;
   CertificateResponse? certificateResponse;
   ContestResponse? contestResponse;
   late AchievementResponse achievementResponse;
   final token = CacheHelper.getData(key: "token");
-  final userId = CacheHelper.getData(key: "user_id");
+   var userId = CacheHelper.getData(key: "user_id");
 
   final labels = ['Certificates', 'Achievement', 'My Contest'];
 
   int selectedTab = 0;
 
-  List<String> getLabels(BuildContext context ) {
+  List<String> getLabels(BuildContext context) {
     return [
       S.of(context).certificates,
       S.of(context).achievement,
       S.of(context).my_contest,
-     ];
+    ];
   }
 
   void changeTab(int index) {
@@ -44,18 +44,19 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
   }
 
 ////////
-  void getProfile() async {
+  void getProfile(int id) async {
     if (token == null) {
       emit(NoAuth());
       return;
     }
     print("sssssssssssss");
     print(userId);
+    userId = id;
     print(token);
     emit(ProfileLoading());
     try {
       final response = await DioHelper.getData(
-        url: "users/$userId",
+        url: "users/$id",
         headers: {
           "Accept": "application/json",
           "Authorization": "Bearer $token",

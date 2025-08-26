@@ -55,30 +55,33 @@ class ReviewCubit extends Cubit<ReviewState> {
           "Accept": "application/json",
           "Authorization": "Bearer $token",
         },
-      );
+      ).then((response) {
+        print(response.statusCode);
+        if (response.statusCode == 200) {
+          final newReviews = ReviewResponse.fromJson(response.data);
+          hasMorePages = newReviews.data.hasMorePages;
 
-      final newReviews = ReviewResponse.fromJson(response.data);
-      hasMorePages = newReviews.data.hasMorePages;
-      print(hasMorePages);
+          if (hasMorePages) currentPage++;
+          if (newReviews.data.reviews.isNotEmpty) {
+            allReviews.addAll(newReviews.data.reviews);
+          }
+          if (allReviews.isNotEmpty && allReviews[0].yourReview) {
+            HasYourReview = true;
+          } else {
+            HasYourReview = false;
+          }
 
-      if (hasMorePages) currentPage++;
-      if (newReviews.data.reviews.isNotEmpty) {
-        allReviews.addAll(newReviews.data.reviews);
-      }
-      if (allReviews.isNotEmpty && allReviews[0].yourReview) {
-        HasYourReview = true;
-      } else {
-        HasYourReview = false;
-      }
-
-      emit(ReviewSuccess());
-    } on DioException catch (e) {
-      final message = e.response?.data['message'] ?? 'Network error';
-      emit(ReviewError(message: message));
+          emit(ReviewSuccess());
+        } else {
+          emit(ReviewError(message: response.data['message']));
+        }
+      }).catchError((response) {
+        emit(ReviewError(message: "error_occurred"));
+      });
     } catch (e) {
       print(e.toString());
       print("xxxxxxxxxxx");
-      emit(ReviewError(message: 'Unexpected error occurred'));
+      emit(ReviewError(message: "error in server"));
     }
   }
 
@@ -106,17 +109,29 @@ class ReviewCubit extends Cubit<ReviewState> {
           "Accept": "application/json",
           "Authorization": "Bearer $token",
         },
-      );
+      ).then((response) {
+        if (response.statusCode == 200) {
+          // final addReviewResponse = AddReviewResponse.fromJson(response.data);
+          emit(AddReviewSuccess());
+          reset();
+          getCourseReview();
+        }else if (response.statusCode == 401){
+      emit(AddReviewError(message: 'Login or signup'));
 
-      final addReviewResponse = AddReviewResponse.fromJson(response.data);
-      emit(AddReviewSuccess());
-      reset();
-      getCourseReview();
-    } on DioException {
+        }
+        
+         else {
+          print(response.statusCode);
+        }
+      }).catchError((response){
       emit(AddReviewError(message: 'Unexpected error occurred'));
-    } catch (e) {
+
+      });
+
+      
+    }   catch (e) {
       print(e.toString());
-      emit(AddReviewError(message: 'Unexpected error occurred'));
+      emit(AddReviewError(message: 'error in server'));
     }
   }
 

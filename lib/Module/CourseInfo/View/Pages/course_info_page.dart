@@ -86,12 +86,18 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
             body: ListView(
               padding: EdgeInsets.zero,
               children: [
-                Image.asset(
-                  Images.contest1,
-                  width: double.infinity,
-                  height: 300.h,
-                  fit: BoxFit.cover,
-                ),
+                courseInfoData.image == null
+                    ? Image.asset(
+                        // color: appColors.pageBackground,
+                        Images.noImage,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.network(
+                        courseInfoData.image!,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            Image.asset(Images.noImage, fit: BoxFit.cover),
+                      ),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -477,7 +483,7 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                           ),
                           onTap: () {
                             pushTo(
-                                context: context, toPage: TeacherProfilePage());
+                                context: context, toPage: TeacherProfilePage(teacherid:courseInfoData.teacherId ,));
                           },
                         ),
                       ],
@@ -489,128 +495,142 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Expanded(
-                          child: courseInfoData.status == "enrolled"
-                              ? OnBoardingContainer(
-                                  // width: 160,
-                                  height: 50,
-                                  color: appColors.blackGreen,
-                                  widget: AuthText(
-                                    text: lang.watch,
-                                    size: 16,
-                                    color: appColors.whiteText,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  onTap: () {
-                                    pushReplacement(
-                                        context: context,
-                                        toPage: CourseContentPage(
-                                            courseId: courseInfoData.id));
-                                    print(courseInfoData.id);
-                                  },
-                                )
-                              : courseInfoData.status != "enrolled" &&
-                                      (courseInfoData.studentPaid == "0.00" ||
-                                          courseInfoData.studentPaid == null)
-                                  ? OnBoardingContainer(
-                                      // width: 160,
-                                      height: 50,
-                                      color: appColors.blackGreen,
-                                      widget: AuthText(
-                                        text: lang.enroll,
-                                        size: 16,
-                                        color: appColors.whiteText,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      onTap: () {
-                                        courseInfoCubit.postEnrollCourse();
-                                      },
-                                    )
-                                  : (courseInfoData.studentPaid == "0.00" ||
-                                              courseInfoData.studentPaid ==
-                                                  null) &&
-                                          courseInfoData.price != "0.00"
-                                      ? OnBoardingContainer(
-                                          // width: 180,
-                                          height: 50,
-                                          color: appColors.ok.withOpacity(0.8),
-                                          widget: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              AuthText(
-                                                text: lang.buy_now,
-                                                size: 16,
-                                                color: appColors.mainText,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                              AuthText(
-                                                text:
-                                                    '  \$${courseInfoData.price}',
-                                                size: 16,
-                                                color: appColors.orang,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ],
-                                          ),
-                                          onTap: () {
-                                            courseInfoCubit.postEnrollCourse();
-                                          },
-                                        )
-                                      : Container()),
-                      /////
-                      /// watch later button
-                      SizedBox(
-                        width: 10.h,
-                      ),
-                      (courseInfoData.status != 'enroll' &&
-                                  courseInfoData.studentPaid == null) ||
-                              courseInfoData.status == "watch_later"
-                          ? Expanded(
-                              child: courseInfoData.status != 'enroll' &&
-                                      courseInfoData.studentPaid == null
-                                  ? OnBoardingContainer(
-                                      // width: 120,
-                                      height: 50,
-                                      color: appColors.blackGreen,
-                                      widget: AuthText(
-                                        text: lang.add_watch_later,
-                                        size: 16,
-                                        color: appColors.whiteText,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      onTap: () {
-                                        print(
-                                            " status  ${courseInfoData.status}");
-                                        courseInfoCubit.addWatchLater();
-                                      },
-                                    )
-                                  : courseInfoData.status == "watch_later"
-                                      ? OnBoardingContainer(
-                                          // width: 120,
-                                          height: 50,
-                                          color: appColors.blackGreen,
-                                          widget: AuthText(
-                                            text: lang.remove_watch_later,
-                                            size: 16,
-                                            color: appColors.whiteText,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                          onTap: () {
-                                            print(
-                                                " status  ${courseInfoData.status}");
+                  child: Builder(builder: (context) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                            child: courseInfoData.status == "enrolled"
+                                ? OnBoardingContainer(
+                                    // width: 160,
+                                    height: 50,
+                                    color: appColors.blackGreen,
+                                    widget: AuthText(
+                                      text: lang.watch,
+                                      size: 16,
+                                      color: appColors.whiteText,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    onTap: () {
+                                      pushReplacement(
+                                          context: context,
+                                          toPage: CourseContentPage(
+                                              courseId: courseInfoData.id));
+                                      print(courseInfoData.id);
+                                    },
+                                  )
+                                : courseInfoData.status != "enrolled" &&
+                                        (courseInfoData.studentPaid == "0.00" ||
+                                            courseInfoData.studentPaid ==
+                                                null) &&
+                                        courseInfoData.price != "0.00"
+                                    ? OnBoardingContainer(
+                                        // width: 160,
+                                        height: 50,
+                                        color: appColors.blackGreen,
+                                        widget: AuthText(
+                                          text: state is EnrollCouresLoading
+                                              ? lang.loading
+                                              : lang.enroll,
+                                          size: 16,
+                                          color: appColors.whiteText,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        onTap: () {
+                                          courseInfoCubit.postEnrollCourse();
+                                        },
+                                      )
+                                    : (courseInfoData.studentPaid == "0.00" ||
+                                                courseInfoData.studentPaid ==
+                                                    null) &&
+                                            courseInfoData.price != "0.00"
+                                        ? OnBoardingContainer(
+                                            // width: 180,
+                                            height: 50,
+                                            color:
+                                                appColors.ok.withOpacity(0.8),
+                                            widget: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                AuthText(
+                                                  text: lang.buy_now,
+                                                  size: 16,
+                                                  color: appColors.mainText,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                                AuthText(
+                                                  text:
+                                                      '  \$${courseInfoData.price}',
+                                                  size: 16,
+                                                  color: appColors.orang,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ],
+                                            ),
+                                            onTap: () {
+                                              courseInfoCubit
+                                                  .postEnrollCourse();
+                                            },
+                                          )
+                                        : Container()),
+                        /////
+                        /// watch later button
+                        SizedBox(
+                          width: 10.h,
+                        ),
+                        (courseInfoData.status != 'enroll' &&
+                                    courseInfoData.studentPaid == null) ||
+                                courseInfoData.status == "watch_later"
+                            ? Expanded(
+                                child: courseInfoData.status != 'enroll' &&
+                                        courseInfoData.studentPaid == null
+                                    ? OnBoardingContainer(
+                                        // width: 120,
+                                        height: 50,
+                                        color: appColors.blackGreen,
+                                        widget: AuthText(
+                                          text: state is AddWatchLaterLoading
+                                              ? lang.loading
+                                              : lang.add_watch_later,
+                                          size: 16,
+                                          color: appColors.whiteText,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        onTap: () {
+                                          print(
+                                              " status  ${courseInfoData.status}");
+                                          courseInfoCubit.addWatchLater();
+                                        },
+                                      )
+                                    : courseInfoData.status == "watch_later"
+                                        ? OnBoardingContainer(
+                                            // width: 120,
+                                            height: 50,
+                                            color: appColors.blackGreen,
+                                            widget: AuthText(
+                                              text: state
+                                                      is RemoveWatchLaterLoading
+                                                  ? lang.loading
+                                                  : lang.remove_watch_later,
+                                              size: 16,
+                                              color: appColors.whiteText,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                            onTap: () {
+                                              print(
+                                                  " status  ${courseInfoData.status}");
 
-                                            courseInfoCubit.removeWatchLater();
-                                          },
-                                        )
-                                      : SizedBox.shrink(),
-                            )
-                          : Container(),
-                    ],
-                  ),
+                                              courseInfoCubit
+                                                  .removeWatchLater();
+                                            },
+                                          )
+                                        : SizedBox.shrink(),
+                              )
+                            : Container(),
+                      ],
+                    );
+                  }),
                 )
               ],
             ),

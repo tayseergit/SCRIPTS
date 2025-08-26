@@ -29,9 +29,11 @@ import 'package:lms/generated/l10n.dart';
 
 class TeacherProfilePage extends StatelessWidget {
   final UserData? userData;
-  const TeacherProfilePage({
+  int teacherid;
+    TeacherProfilePage({
     super.key,
     this.userData,
+    required this.teacherid
   });
 
   @override
@@ -48,7 +50,7 @@ class TeacherProfilePage extends StatelessWidget {
           create: (_) {
             print("🔥 Value of userData.id in Cubit Provider: ${userData?.id}");
             return TeacherProfileCubit()
-              ..fetchTeacherProfile(userData?.id ?? 0);
+              ..fetchTeacherProfile(teacherid);
           },
         ),
         BlocProvider(create: (_) => Tabteachercubit()),

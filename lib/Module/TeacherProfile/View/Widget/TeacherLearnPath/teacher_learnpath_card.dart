@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/LearnPath/View/Widget/TopWaveClipper.dart';
+import 'package:lms/Module/LearnPathInfo/Cubit/learn_path_info_cubit.dart';
+import 'package:lms/Module/LearnPathInfo/Cubit/learn_path_info_state.dart';
 import 'package:lms/Module/LearnPathInfo/View/Page/learn_path_info_page.dart';
 import 'package:lms/Module/TeacherProfile/Model/teacher_learnpath_model.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
@@ -11,6 +13,8 @@ import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/generated/l10n.dart';
 
 class TeacherLearnpathCard extends StatelessWidget {
   final TeacherLearnpathModel teacherLearnpathModel;
@@ -182,7 +186,52 @@ class TeacherLearnpathCard extends StatelessWidget {
                   )),
             ],
           ),
-          onTap: () {},
+          onTap: () async {
+            final cubit = LearnPathInfoCubit();
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (_) => Center(
+                child: Loading(),
+              ),
+            );
+
+            try {
+              await cubit.fetchAllLearnPathData(teacherLearnpathModel.id);
+
+              // أغلق Dialog التحميل بعد اكتمال العملية
+              if (Navigator.canPop(context)) {
+                Navigator.pop(context);
+              }
+
+              if (cubit.state is LearnPathAllDataSuccess) {
+                final data = cubit.state as LearnPathAllDataSuccess;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LearnPathInfoPage(
+                      learningPathInfoData: data.info.data,
+                      learningPathInfoModel: data.courses,
+                    ),
+                  ),
+                );
+              } else if (cubit.state is LearnPathInfoError) {
+                print(cubit.state);
+                customSnackBar(
+                  context: context,
+                  success: 0,
+                  message: "cubit.state.masseg",
+                );
+              }
+            } catch (e) {
+              print("❌ Error during navigation: $e");
+              customSnackBar(
+                context: context,
+                success: 0,
+                message: S.of(context).error_occurred,
+              );
+            }
+          },
         ),
       ),
     );

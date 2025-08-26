@@ -809,10 +809,10 @@ class S {
     return Intl.message('Dark Mode', name: 'dark_mode', desc: '', args: []);
   }
 
-  /// `Add a payment method`
+  /// `charge balance`
   String get add_a_payment_method {
     return Intl.message(
-      'Add a payment method',
+      'charge balance',
       name: 'add_a_payment_method',
       desc: '',
       args: [],
@@ -1402,6 +1402,11 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Loading`
+  String get loading {
+    return Intl.message('Loading', name: 'loading', desc: '', args: []);
   }
 }
 

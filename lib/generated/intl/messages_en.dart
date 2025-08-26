@@ -67,7 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "achievement": MessageLookupByLibrary.simpleMessage("Achievement"),
     "active": MessageLookupByLibrary.simpleMessage("active"),
     "add_a_payment_method": MessageLookupByLibrary.simpleMessage(
-      "Add a payment method",
+      "charge balance",
     ),
     "add_comment": MessageLookupByLibrary.simpleMessage("add comment"),
     "add_image": MessageLookupByLibrary.simpleMessage("Add Image"),
@@ -208,6 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "join": MessageLookupByLibrary.simpleMessage("join"),
     "leader": MessageLookupByLibrary.simpleMessage("Leader Board"),
     "learn_path_info": MessageLookupByLibrary.simpleMessage("About this Path"),
+    "loading": MessageLookupByLibrary.simpleMessage("Loading"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "mentor": MessageLookupByLibrary.simpleMessage("Mentor"),

@@ -55,7 +55,7 @@ class _EditProfileState extends State<EditProfile> {
                   SnackBar(content: Text(lang.profile_updated)),
                 );
                 Navigator.pop(context);
-                context.read<StudentProfileCubit>().getProfile();
+                context.read<StudentProfileCubit>().getProfile(CacheHelper.getUserId());
               } else if (state is EditeProfileError) {
                 print("❌ Error: ${state.message}");
                 ScaffoldMessenger.of(context).showSnackBar(

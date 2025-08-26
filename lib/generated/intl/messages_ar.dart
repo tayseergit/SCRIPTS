@@ -66,9 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "about_this_course": MessageLookupByLibrary.simpleMessage("عن هذه الدورة"),
     "achievement": MessageLookupByLibrary.simpleMessage("الإنجازات"),
     "active": MessageLookupByLibrary.simpleMessage("نشط"),
-    "add_a_payment_method": MessageLookupByLibrary.simpleMessage(
-      "إضافة طريقة دفع",
-    ),
+    "add_a_payment_method": MessageLookupByLibrary.simpleMessage("شحن الرصيد"),
     "add_comment": MessageLookupByLibrary.simpleMessage("أضف تعليق"),
     "add_image": MessageLookupByLibrary.simpleMessage("إضافة صورة"),
     "add_new_project": MessageLookupByLibrary.simpleMessage("إضافة مشروع"),
@@ -207,6 +205,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "join": MessageLookupByLibrary.simpleMessage("انضمام"),
     "leader": MessageLookupByLibrary.simpleMessage("لائحة الصدارة"),
     "learn_path_info": MessageLookupByLibrary.simpleMessage("حول هذا المسار"),
+    "loading": MessageLookupByLibrary.simpleMessage("يتم التحميل"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "mentor": MessageLookupByLibrary.simpleMessage("المدرب"),

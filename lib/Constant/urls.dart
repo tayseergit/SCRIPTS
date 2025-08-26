@@ -2,7 +2,7 @@
 
 class Urls {
   static String ip = "https://lms-master-ikaitb.laravel.cloud";
-  static String baseUrl = "https://lms-master-ikaitb.laravel.cloud/api";
+  static String baseUrl = "";
 
   static String teacher = '$baseUrl/users';
   static String update = '$baseUrl/me/update';

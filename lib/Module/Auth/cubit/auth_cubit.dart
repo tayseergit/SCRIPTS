@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -18,7 +19,9 @@ import 'package:lms/Module/Auth/cubit/auth_state.dart';
 import 'package:lms/generated/l10n.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthInitial());
+  AuthCubit() : super(AuthInitial()) {
+    _startTokenRefreshTimer();
+  }
   static AuthCubit get(BuildContext context) => BlocProvider.of(context);
   UserAuthModel? userAuthModel;
   File? pickedImage;
@@ -51,6 +54,20 @@ class AuthCubit extends Cubit<AuthState> {
 
 //////////////   validation
   ///
+  Timer? _timer;
+
+  // Start timer when the cubit is created
+  void _startTokenRefreshTimer() {
+    print("timer start"); // this should print immediately
+    _timer = Timer.periodic(Duration(minutes: 10), (_) async {
+      print("Timer tick"); // this will print every minute
+      try {
+        await refreshAccessToken();
+      } catch (e) {
+        print("Refresh token error: $e");
+      }
+    });
+  }
 
   void setPickedImage(File image) {
     pickedImage = image;
@@ -274,7 +291,7 @@ class AuthCubit extends Cubit<AuthState> {
 
       if (response.statusCode == 200) {
         await CacheHelper.saveData(key: 'token', value: response.data['token']);
-
+        print('refresh');
         return true;
       }
     } catch (e) {
@@ -323,18 +340,21 @@ class AuthCubit extends Cubit<AuthState> {
     final redirectUri = "myapp://callback";
     final scope = "read:user,user:email";
     final state = "random_state_string"; // generate securely
+    try {
+      final result = await FlutterWebAuth2.authenticate(
+        url:
+            "https://github.com/login/oauth/authorize?client_id=$clientId&redirect_uri=$redirectUri&scope=$scope&state=$state",
+        callbackUrlScheme: "myapp",
+      );
+      print("ccccccccccccccccccc");
+      // Extrprintact code
+      final code = Uri.parse(result).queryParameters['code'];
+      print("GitHub Auth Code: $code");
+      // setState(() => _authCode = code ?? "No code");
 
-    // Step 1: Open GitHub login page
-    final result = await FlutterWebAuth2.authenticate(
-      url: "https://github.com/login/oauth/authorize"
-          "?client_id=$clientId"
-          "&redirect_uri=$redirectUri"
-          "&scope=$scope",
-      callbackUrlScheme: "myapp",
-    );
-
-    // Step 2: Extract authorization code
-    final code = Uri.parse(result).queryParameters['code'];
-    print("Auth Code: $code");
+      // Send this code to backend to exchange for access token
+    } catch (e) {
+      print("GitHub login error: $e");
+    }
   }
 }

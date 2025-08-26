@@ -18,11 +18,6 @@ class LearnPathInfoCubit extends Cubit<LearnPathInfoState> {
       final token = CacheHelper.getData(key: 'token') ?? '';
       final userId = CacheHelper.getData(key: 'user_id');
 
-      if (token.isEmpty || userId == null) {
-        emit(LearnPathInfoError(masseg: 'User is not authenticated'));
-        return;
-      }
-
       print("🔄 Fetching learn path info from: ${Urls.learnPathInfo(id)}");
       final infoResponse = await DioHelper.getData(
         url: Urls.learnPathInfo(id),
@@ -34,6 +29,8 @@ class LearnPathInfoCubit extends Cubit<LearnPathInfoState> {
 
       if (infoResponse.statusCode != 200) {
         emit(LearnPathInfoError(masseg: 'Failed to fetch path info'));
+        print(infoResponse.data["message"]);
+
         return;
       }
 
@@ -51,7 +48,10 @@ class LearnPathInfoCubit extends Cubit<LearnPathInfoState> {
       );
       print(coursesResponse.statusCode);
       if (coursesResponse.statusCode != 200) {
+        print(coursesResponse.data["message"]);
+
         emit(LearnPathInfoError(masseg: 'Failed to fetch path courses'));
+        print(coursesResponse.data["message"]);
         return;
       }
 
@@ -64,6 +64,7 @@ class LearnPathInfoCubit extends Cubit<LearnPathInfoState> {
     } catch (e) {
       print("❌ Error while fetching data: $e");
       emit(LearnPathInfoError(masseg: 'Exception occurred: $e'));
+      print(e);
     }
   }
 
@@ -98,14 +99,14 @@ class LearnPathInfoCubit extends Cubit<LearnPathInfoState> {
         } else if (value.statusCode == 401) {
           emit(UnAuthUser(masseg: S.of(context).Login_or_SignUp));
         } else {
-          emit(UpdateStatusError(masseg: S.of(context).error_occurred));
+          emit(UpdateStatusError(massage: S.of(context).error_occurred));
         }
       }).catchError((onError) {
-        emit(UpdateStatusError(masseg: S.of(context).error_occurred));
+        emit(UpdateStatusError(massage: S.of(context).error_occurred));
       });
     } catch (e) {
       print("❌ Error while fetching data: $e");
-      emit(UpdateStatusError(masseg: S.of(context).error_in_server));
+      emit(UpdateStatusError(massage: S.of(context).error_in_server));
     }
   }
 
@@ -133,14 +134,14 @@ class LearnPathInfoCubit extends Cubit<LearnPathInfoState> {
         } else if (value.statusCode == 401) {
           emit(UnAuthUser(masseg: S.of(context).Login_or_SignUp));
         } else {
-          emit(DeleteStatusError(masseg: S.of(context).error_occurred));
+          emit(DeleteStatusError(message: S.of(context).error_occurred));
         }
       }).catchError((onError) {
-        emit(DeleteStatusError(masseg: S.of(context).error_occurred));
+        emit(DeleteStatusError(message: S.of(context).error_occurred));
       });
     } catch (e) {
       print("❌ Error while fetching data: $e");
-      emit(DeleteStatusError(masseg: S.of(context).error_in_server));
+      emit(DeleteStatusError(message: S.of(context).error_in_server));
     }
   }
 }

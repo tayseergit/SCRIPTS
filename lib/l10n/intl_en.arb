@@ -97,7 +97,7 @@
   "More": "More",
   "push_notifications": "Push notifications",
   "dark_mode": "Dark Mode",
-  "add_a_payment_method": "Add a payment method",
+  "add_a_payment_method": "charge balance",
   "delete_history": "Delete history",
   "change_language": "Change language",
   "logout": "Logout",
@@ -178,7 +178,8 @@
   "balance":"balance" ,
   "Total_Contests":"Total Contests",
   "Total_Paths":"Total Contests",
-  "Total_Courses":"Total Contests"
+  "Total_Courses":"Total Contests",
+  "loading":"Loading"
 
 
 

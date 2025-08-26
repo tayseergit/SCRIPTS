@@ -11,7 +11,7 @@ class StudentProfileModel {
   final String role;
   final String level;
   final String joined;
-  final double ? balance;
+  final dynamic  balance;
   final int points;
   final int currentStreak;
   final int completedCourses;

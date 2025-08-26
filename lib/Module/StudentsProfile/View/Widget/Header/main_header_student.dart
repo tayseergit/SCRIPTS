@@ -127,10 +127,13 @@ class MainHeader extends StatelessWidget {
                       Icon(Icons.wallet_outlined,
                           size: 28.sp, color: appColors.mainIconColor),
                       SizedBox(width: 4.w),
-                      AuthText(
-                        text: "${cubit.studentProfileModel.balance ?? ""} \$",
-                        size: 20.sp,
-                        color: appColors.ok,
+                      Container(
+                        width: 120.w,
+                        child: AuthText(
+                          text: "${cubit.studentProfileModel.balance ?? ""} \$",
+                          size: 20.sp,
+                          color: appColors.ok,
+                        ),
                       ),
                     ],
                   ),

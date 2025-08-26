@@ -13,6 +13,7 @@ import 'package:lms/Module/LearnPath/Model/learn_path_reaponse.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/generated/l10n.dart';
 
 class LearnpathCard extends StatelessWidget {
@@ -187,8 +188,22 @@ class LearnpathCard extends StatelessWidget {
       ),
       onTap: () async {
         final cubit = LearnPathInfoCubit();
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) => Center(
+            child: Loading(),
+          ),
+        );
+
         try {
           await cubit.fetchAllLearnPathData(learnPath.id);
+
+          // أغلق Dialog التحميل بعد اكتمال العملية
+          if (Navigator.canPop(context)) {
+            Navigator.pop(context);
+          }
+
           if (cubit.state is LearnPathAllDataSuccess) {
             final data = cubit.state as LearnPathAllDataSuccess;
             Navigator.push(
@@ -200,11 +215,12 @@ class LearnpathCard extends StatelessWidget {
                 ),
               ),
             );
-          } else {
+          } else if (cubit.state is LearnPathInfoError) {
+            print(cubit.state);
             customSnackBar(
               context: context,
               success: 0,
-              message: lang.error_in_server,
+              message: "cubit.state.masseg",
             );
           }
         } catch (e) {

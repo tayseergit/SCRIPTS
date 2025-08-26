@@ -1,5 +1,5 @@
 class AddReviewResponse {
-  final bool successful;
+  final bool? successful;
   final String message;
   final ReviewData data;
 
@@ -23,7 +23,7 @@ class ReviewData {
   final String comment;
   final int rate;
   final String createdAt;
-  final bool yourReview;
+  final bool? yourReview;
   final Student student;
 
   ReviewData({

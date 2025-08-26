@@ -8,14 +8,14 @@ class NotificationSwitchPushNotificationsCubit extends Cubit<bool> {
     emit(value);
   }
 }
-
 class NotificationSwitchDarkModeCubit extends Cubit<bool> {
-  NotificationSwitchDarkModeCubit()
-      : super(false);
+  NotificationSwitchDarkModeCubit() : super(_getInitialSwitch());
 
-  void toggleSwitch(bool value) {
-    emit(value);
-    CacheHelper.saveData(key: "lightMode", value: value);
-    print(CacheHelper.getData(key: "lightMode"));
+  static bool _getInitialSwitch() {
+    final isLight = CacheHelper.getData(key: "lightMode");
+    if (isLight == null) return true; // الوضع الافتراضي Dark
+    return !isLight; // true إذا كان LightMode
   }
+
+  void toggleSwitch(bool value) => emit(value);
 }

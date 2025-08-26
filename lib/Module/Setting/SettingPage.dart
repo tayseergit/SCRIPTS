@@ -64,131 +64,22 @@ class Settingpage extends StatelessWidget {
               Padding(
                 padding:
                     EdgeInsets.symmetric(vertical: 130.h, horizontal: 20.w),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: appColors.secondText,
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(25.r),
-                        ),
-                      ),
-                      child: OnBoardingContainerMore(
-                        width: 330,
-                        height: 60,
-                        color: appColors.pageBackground,
-                        widget: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 14.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              AuthText(
-                                text: lang.push_notifications,
-                                size: 18,
-                                color: appColors.mainText,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              BlocBuilder<
-                                  NotificationSwitchPushNotificationsCubit,
-                                  bool>(
-                                builder: (context, isSwitched) {
-                                  return Switch(
-                                    value: isSwitched,
-                                    onChanged: (value) {
-                                      context
-                                          .read<
-                                              NotificationSwitchPushNotificationsCubit>()
-                                          .toggleSwitch(value);
-                                    },
-                                    activeColor: appColors.pageBackground,
-                                    activeTrackColor: appColors.seocndIconColor,
-                                    inactiveThumbColor:
-                                        appColors.pageBackground,
-                                    inactiveTrackColor: appColors.secondText,
-                                  );
-                                },
-                              ),
-                            ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: appColors.secondText,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(25.r),
                           ),
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: appColors.secondText,
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(25.r),
-                        ),
-                      ),
-                      child: OnBoardingContainerMore(
-                        width: 330,
-                        height: 60,
-                        color: appColors.pageBackground,
-                        widget: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 14.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              AuthText(
-                                text: lang.dark_mode,
-                                size: 18,
-                                color: appColors.mainText,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              BlocBuilder<NotificationSwitchDarkModeCubit,
-                                  bool>(
-                                builder: (context, isSwitched) {
-                                  return Switch(
-                                    value: isSwitched,
-                                    onChanged: (value) {
-                                      context.read<ThemeCubit>().toggleTheme();
-                                      context
-                                          .read<
-                                              NotificationSwitchDarkModeCubit>()
-                                          .toggleSwitch(value);
-                                    },
-                                    activeColor: appColors.pageBackground,
-                                    activeTrackColor: appColors.seocndIconColor,
-                                    inactiveThumbColor:
-                                        appColors.pageBackground,
-                                    inactiveTrackColor: appColors.secondText,
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: appColors.secondText,
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(25.r),
-                        ),
-                      ),
-                      child: OnBoardingContainerMore(
-                          onTap: () {
-                            // makePayment();
-                            pushTo(context: context, toPage: PaymentPage());
-                          },
+                        child: OnBoardingContainerMore(
                           width: 330,
                           height: 60,
                           color: appColors.pageBackground,
@@ -198,189 +89,313 @@ class Settingpage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 AuthText(
-                                    text: lang.add_a_payment_method,
-                                    size: 18,
-                                    color: appColors.mainText,
-                                    fontWeight: FontWeight.w400),
-                                Image.asset(
-                                  Images.addapaymentmethod,
-                                  width: 35,
-                                  height: 35,
-                                )
-                              ],
-                            ),
-                          )),
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: appColors.secondText,
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(25.r),
-                        ),
-                      ),
-                      child: OnBoardingContainerMore(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => BlocProvider(
-                                  create: (_) => EditeProfileCubit(),
-                                  child: EditProfile(),
+                                  text: lang.push_notifications,
+                                  size: 18,
+                                  color: appColors.mainText,
+                                  fontWeight: FontWeight.w400,
                                 ),
-                              ),
-                            );
-                          },
-                          width: 330,
-                          height: 60,
-                          color: appColors.pageBackground,
-                          widget: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 14.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                AuthText(
-                                    text: lang.edit_profile,
-                                    size: 18,
-                                    color: appColors.mainText,
-                                    fontWeight: FontWeight.w400),
-                                Image.asset(
-                                  Images.editProfile,
-                                  width: 35,
-                                  height: 35,
-                                )
-                              ],
-                            ),
-                          )),
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: appColors.secondText,
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(25.r),
-                        ),
-                      ),
-                      child: OnBoardingContainerMore(
-                          onTap: () {
-                            context.read<LocaleCubit>().toggleLocale();
-                          },
-                          width: 330,
-                          height: 60,
-                          color: appColors.pageBackground,
-                          widget: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 14.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                AuthText(
-                                    text: lang.change_language,
-                                    size: 18,
-                                    color: appColors.mainText,
-                                    fontWeight: FontWeight.w400),
-                                Image.asset(
-                                  Images.language,
-                                  width: 35,
-                                  height: 35,
-                                )
-                              ],
-                            ),
-                          )),
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: appColors.secondText,
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(25.r),
-                        ),
-                      ),
-                      child: OnBoardingContainerMore(
-                          onTap: () async {
-                            if (CacheHelper.getToken() == null)
-                              showNoAuthDialog(context);
-                            else {
-                              showDialog<bool>(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  content: AuthText(
-                                      maxLines: 2,
-                                      size: 15,
-                                      text: lang
-                                          .Are_you_sure_you_want_to_log_out),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(context), // cancel
-                                      child: AuthText(
-                                        text: lang.cancel,
-                                        size: 15,
-                                      ),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        CacheHelper.removeAllData();
-
-                                        Navigator.pop(context);
+                                BlocBuilder<
+                                    NotificationSwitchPushNotificationsCubit,
+                                    bool>(
+                                  builder: (context, isSwitched) {
+                                    return Switch(
+                                      value: isSwitched,
+                                      onChanged: (value) {
                                         context
-                                            .read<AuthCubit>()
-                                            .logOut(context);
-                                        WidgetsBinding.instance
-                                            .addPostFrameCallback((_) {
-                                          pushReplacement(
-                                              context: context,
-                                              toPage: Login());
-                                        });
+                                            .read<
+                                                NotificationSwitchPushNotificationsCubit>()
+                                            .toggleSwitch(value);
                                       },
-                                      child: AuthText(
-                                        text: lang.logout,
-                                        color: appColors.red,
-                                        size: 15,
-                                      ),
-                                    ),
-                                  ],
+                                      activeColor: appColors.pageBackground,
+                                      activeTrackColor:
+                                          appColors.seocndIconColor,
+                                      inactiveThumbColor:
+                                          appColors.pageBackground,
+                                      inactiveTrackColor: appColors.secondText,
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: appColors.secondText,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(25.r),
+                          ),
+                        ),
+                        child: OnBoardingContainerMore(
+                          width: 330,
+                          height: 60,
+                          color: appColors.pageBackground,
+                          widget: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 14.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                AuthText(
+                                  text: lang.dark_mode,
+                                  size: 18,
+                                  color: appColors.mainText,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                BlocBuilder<NotificationSwitchDarkModeCubit,
+                                    bool>(
+                                  builder: (context, isSwitched) {
+                                    return Switch(
+                                      value: isSwitched,
+                                      onChanged: (value) {
+                                        print(value);
+                                        // تغيير الثيم في ThemeCubit
+                                        context
+                                            .read<ThemeCubit>()
+                                            .toggleTheme();
+
+                                        // تحديث حالة الـ Switch
+                                        context
+                                            .read<
+                                                NotificationSwitchDarkModeCubit>()
+                                            .toggleSwitch(value);
+                                      },
+                                      activeColor: appColors.pageBackground,
+                                      activeTrackColor:
+                                          appColors.seocndIconColor,
+                                      inactiveThumbColor:
+                                          appColors.pageBackground,
+                                      inactiveTrackColor: appColors.secondText,
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: appColors.secondText,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(25.r),
+                          ),
+                        ),
+                        child: OnBoardingContainerMore(
+                            onTap: () {
+                              // makePayment();
+                              // pushTo(context: context, toPage: PaymentPage());
+                              showAmountDialog(context);
+                            },
+                            width: 330,
+                            height: 60,
+                            color: appColors.pageBackground,
+                            widget: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 14.w),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  AuthText(
+                                      text: lang.add_a_payment_method,
+                                      size: 18,
+                                      color: appColors.mainText,
+                                      fontWeight: FontWeight.w400),
+                                  Image.asset(
+                                    Images.addapaymentmethod,
+                                    width: 35,
+                                    height: 35,
+                                  )
+                                ],
+                              ),
+                            )),
+                      ),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: appColors.secondText,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(25.r),
+                          ),
+                        ),
+                        child: OnBoardingContainerMore(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => BlocProvider(
+                                    create: (_) => EditeProfileCubit(),
+                                    child: EditProfile(),
+                                  ),
                                 ),
                               );
-                            }
-                          },
-                          width: 330,
-                          height: 60,
-                          color: appColors.pageBackground,
-                          widget: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 14.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                AuthText(
-                                    text: lang.logout,
-                                    size: 18,
-                                    color: appColors.mainText,
-                                    fontWeight: FontWeight.w400),
-                                Image.asset(
-                                  Images.logout,
-                                  width: 35,
-                                  height: 35,
-                                )
-                              ],
-                            ),
-                          )),
-                    ),
-                  ],
+                            },
+                            width: 330,
+                            height: 60,
+                            color: appColors.pageBackground,
+                            widget: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 14.w),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  AuthText(
+                                      text: lang.edit_profile,
+                                      size: 18,
+                                      color: appColors.mainText,
+                                      fontWeight: FontWeight.w400),
+                                  Image.asset(
+                                    Images.editProfile,
+                                    width: 35,
+                                    height: 35,
+                                  )
+                                ],
+                              ),
+                            )),
+                      ),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: appColors.secondText,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(25.r),
+                          ),
+                        ),
+                        child: OnBoardingContainerMore(
+                            onTap: () {
+                              context.read<LocaleCubit>().toggleLocale();
+                            },
+                            width: 330,
+                            height: 60,
+                            color: appColors.pageBackground,
+                            widget: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 14.w),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  AuthText(
+                                      text: lang.change_language,
+                                      size: 18,
+                                      color: appColors.mainText,
+                                      fontWeight: FontWeight.w400),
+                                  Image.asset(
+                                    Images.language,
+                                    width: 35,
+                                    height: 35,
+                                  )
+                                ],
+                              ),
+                            )),
+                      ),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: appColors.secondText,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(25.r),
+                          ),
+                        ),
+                        child: OnBoardingContainerMore(
+                            onTap: () async {
+                              if (CacheHelper.getToken() == null)
+                                showNoAuthDialog(context);
+                              else {
+                                showDialog<bool>(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    content: AuthText(
+                                        maxLines: 2,
+                                        size: 15,
+                                        text: lang
+                                            .Are_you_sure_you_want_to_log_out),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context), // cancel
+                                        child: AuthText(
+                                          text: lang.cancel,
+                                          size: 15,
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          CacheHelper.removeAllData();
+
+                                          Navigator.pop(context);
+                                          context
+                                              .read<AuthCubit>()
+                                              .logOut(context);
+                                          WidgetsBinding.instance
+                                              .addPostFrameCallback((_) {
+                                            pushReplacement(
+                                                context: context,
+                                                toPage: Login());
+                                          });
+                                        },
+                                        child: AuthText(
+                                          text: lang.logout,
+                                          color: appColors.red,
+                                          size: 15,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }
+                            },
+                            width: 330,
+                            height: 60,
+                            color: appColors.pageBackground,
+                            widget: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 14.w),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  AuthText(
+                                      text: lang.logout,
+                                      size: 18,
+                                      color: appColors.mainText,
+                                      fontWeight: FontWeight.w400),
+                                  Image.asset(
+                                    Images.logout,
+                                    width: 35,
+                                    height: 35,
+                                  )
+                                ],
+                              ),
+                            )),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

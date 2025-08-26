@@ -16,12 +16,12 @@ class ChatCubit extends Cubit<ChatState> {
     print("📡 [fetchChatMessages] Started...");
 
     try {
-      final token = CacheHelper.getData(key: 'token') ?? '';
+      final token = CacheHelper.getToken();
       final userId = CacheHelper.getData(key: 'user_id');
       print("🌍 [DeletFriend] إرسال طلب DELETE إلى: ${Urls.getChat}");
       print("🔑 [fetchChatMessages] Token: $token");
 
-      if (token.isEmpty || userId == null) {
+      if (token == null || userId == null) {
         print("❌ [fetchChatMessages] No token found, user not authenticated.");
         emit(ChatError(message: 'User is not authenticated'));
         return;
@@ -131,41 +131,39 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   Future<void> DeletFriend() async {
-  try {
-    emit(ChatLoding());
+    try {
+      emit(ChatLoding());
 
-    final token = CacheHelper.getData(key: 'token') ?? '';
-    if (token.isEmpty) {
-      emit(ChatError(message: 'User is not authenticated'));
-      return;
+      final token = CacheHelper.getData(key: 'token') ?? '';
+      if (token.isEmpty) {
+        emit(ChatError(message: 'User is not authenticated'));
+        return;
+      }
+
+      print("🌍 [DeletFriend] Sending DELETE request to: ${Urls.deletAi}");
+
+      final response = await DioHelper.deleteData(
+        url: Urls.deletAi,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Accept': 'application/json',
+        },
+      );
+
+      print("📥 [DeletFriend] Response status: ${response.statusCode}");
+      print("📥 [DeletFriend] Response data: ${response.data}");
+
+      if (response.statusCode == 200 && response.data['status'] == true) {
+        _chatResponse = ChatResponse(status: true, messages: []);
+        emit(ChatLoaded(chatResponse: _chatResponse!));
+      } else {
+        emit(ChatError(
+          message: response.data['message'] ?? 'Failed to delete chat',
+        ));
+      }
+    } catch (e) {
+      print("🔥 [DeletFriend] Exception: $e");
+      emit(ChatError(message: 'An error occurred while deleting chat'));
     }
-
-    print("🌍 [DeletFriend] Sending DELETE request to: ${Urls.deletAi}");
-
-    final response = await DioHelper.deleteData(
-      url: Urls.deletAi,
-      headers: {
-        'Authorization': 'Bearer $token',
-        'Accept': 'application/json',
-      },
-    );
-
-    print("📥 [DeletFriend] Response status: ${response.statusCode}");
-    print("📥 [DeletFriend] Response data: ${response.data}");
-
-    if (response.statusCode == 200 && response.data['status'] == true) {
-      
-      _chatResponse = ChatResponse(status: true, messages: []);
-      emit(ChatLoaded(chatResponse: _chatResponse!));
-    } else {
-      emit(ChatError(
-        message: response.data['message'] ?? 'Failed to delete chat',
-      ));
-    }
-  } catch (e) {
-    print("🔥 [DeletFriend] Exception: $e");
-    emit(ChatError(message: 'An error occurred while deleting chat'));
   }
-}
-
 }

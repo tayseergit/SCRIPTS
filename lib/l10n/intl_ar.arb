@@ -93,7 +93,7 @@
   "More": "المزيد",
   "push_notifications": "إشعارات الدفع",
   "dark_mode": "الوضع الداكن",
-  "add_a_payment_method": "إضافة طريقة دفع",
+  "add_a_payment_method": "شحن الرصيد",
   "delete_history": "حذف السجل",
   "change_language": "تغيير اللغة",
   "logout": "تسجيل الخروج",
@@ -178,7 +178,8 @@
   "balance":"الرصيد" ,
     "Total_Contests":"مجموع الدورات",
   "Total_Paths":"مجموع المسارات",
-  "Total_Courses":"مجموع المسابقات"
+  "Total_Courses":"مجموع المسابقات",
+  "loading":"يتم التحميل"
 
 
 

@@ -88,11 +88,11 @@ class More extends StatelessWidget {
                                         "teacher")
                                       pushTo(
                                           context: context,
-                                          toPage: TeacherProfilePage());
+                                          toPage: TeacherProfilePage(teacherid: CacheHelper.getUserId(),));
                                     else
                                       pushTo(
                                           context: context,
-                                          toPage: StudentProfilePage());
+                                          toPage: StudentProfilePage(userid: CacheHelper.getUserId(),));
                                   } else {
                                     showNoAuthDialog(context);
                                   }

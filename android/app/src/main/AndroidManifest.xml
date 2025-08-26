@@ -37,6 +37,8 @@
                 <data android:scheme="myapp" android:host="callback" />
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+    <data android:scheme="myapp" android:host="callback" />
+
             </intent-filter>
         </activity>
  
