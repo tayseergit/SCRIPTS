@@ -10,6 +10,7 @@ import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/generated/l10n.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainHeader extends StatelessWidget {
   final UserData user;
@@ -104,21 +105,33 @@ class MainHeader extends StatelessWidget {
                       GlobalFunc.launchURL(user.gitHubAccount!);
                     }
                   },
-                  widget: Row(
-                    children: [
-                      Image.asset(
-                        Images.github,
-                        height: 20.h,
-                        width: 20.w,
-                      ),
-                      SizedBox(width: 10.w),
-                      AuthText(
-                        text: 'GitHub Account',
-                        size: 12.sp,
-                        color: appColors.mainText,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ],
+                  widget: InkWell(
+                    onTap: () async {
+                     if (user.gitHubAccount != null) {
+                        final Uri url = Uri.parse(
+                          user.gitHubAccount!); // ضع الرابط المطلوب
+                      if (!await launchUrl(url,
+                          mode: LaunchMode.externalApplication)) {
+                        throw 'Could not launch $url';
+                      }
+                     }
+                    },
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          Images.github,
+                          height: 20.h,
+                          width: 20.w,
+                        ),
+                        SizedBox(width: 10.w),
+                        AuthText(
+                          text: 'GitHub Account',
+                          size: 12.sp,
+                          color: appColors.mainText,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(height: 10.h),

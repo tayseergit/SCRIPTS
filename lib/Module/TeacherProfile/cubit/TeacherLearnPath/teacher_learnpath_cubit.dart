@@ -16,20 +16,19 @@ class TeacherLearnPathCubit extends Cubit<TeacherLearnpathState> {
       print("1️⃣ Before fetching token");
 
       final token = CacheHelper.getData(key: 'token') ?? '';
-      final userId = CacheHelper.getData(key: 'user_id');
 
-      print("🔄 Fetching profile from: ${Urls.teacherLearnPath(userId)}");
+      print("🔄 Fetching profile from: ${Urls.teacherLearnPath(id)}");
 
       print("2️⃣ Got token: $token");
 
-      if (token.isEmpty || userId == null) {
+      if (token.isEmpty || id == null) {
         emit(TeacherLearnPathError(masseg: 'User is not authenticated'));
         return;
       }
 
       print("3️⃣ Sending GET request with DioHelper");
       final response = await DioHelper.getData(
-        url: Urls.teacherLearnPath(userId),
+        url: Urls.teacherLearnPath(id),
         headers: {
           'Authorization': 'Bearer $token',
           'Accept': 'application/json',

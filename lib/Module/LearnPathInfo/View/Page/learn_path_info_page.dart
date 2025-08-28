@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/LearnPathInfo/Cubit/learn_path_info_cubit.dart';
 import 'package:lms/Module/LearnPathInfo/Cubit/learn_path_info_state.dart';
 import 'package:lms/Module/LearnPathInfo/Model/learn_path_info_courses_model.dart';
@@ -9,6 +10,7 @@ import 'package:lms/Module/LearnPathInfo/Model/learn_path_info_model.dart';
 import 'package:lms/Module/LearnPathInfo/View/Widget/enroll_watchLater_buttoms.dart';
 import 'package:lms/Module/LearnPathInfo/View/Widget/gridview_learn_info.dart';
 import 'package:lms/Module/LearnPathInfo/Cubit/main_cubit.dart';
+import 'package:lms/Module/TeacherProfile/View/Pages/teacher_profile_page.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
@@ -99,8 +101,7 @@ class LearnPathInfoPage extends StatelessWidget {
                                   Row(
                                     children: [
                                       AuthText(
-                                        text:
-                                            '${S.of(context).total_points} : ',
+                                        text: '${S.of(context).total_price} : ',
                                         size: 15,
                                         color: appColors.secondText,
                                         fontWeight: FontWeight.w700,
@@ -310,27 +311,38 @@ class LearnPathInfoPage extends StatelessWidget {
                                                         SizedBox(
                                                           height: 5.h,
                                                         ),
-                                                        Container(
-                                                          height: 40.h,
-                                                          width:
-                                                              double.infinity.w,
-                                                          decoration: BoxDecoration(
-                                                              color: appColors
-                                                                  .blackGreen,
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          30.r))),
-                                                          child: Center(
-                                                            child: AuthText(
-                                                              text:
-                                                                  lang.profile,
-                                                              size: 15,
-                                                              color: appColors
-                                                                  .whiteText,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                        InkWell(
+                                                          onTap: () {
+                                                            pushTo(
+                                                                context:
+                                                                    context,
+                                                                toPage: TeacherProfilePage(
+                                                                    teacherid:
+                                                                        learningPathInfoData
+                                                                            .teacherId));
+                                                          },
+                                                          child: Container(
+                                                            height: 40.h,
+                                                            width: double
+                                                                .infinity.w,
+                                                            decoration: BoxDecoration(
+                                                                color: appColors
+                                                                    .blackGreen,
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            30.r))),
+                                                            child: Center(
+                                                              child: AuthText(
+                                                                text: lang
+                                                                    .profile,
+                                                                size: 15,
+                                                                color: appColors
+                                                                    .whiteText,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
@@ -362,7 +374,7 @@ class LearnPathInfoPage extends StatelessWidget {
                     ),
                     SizedBox(height: 10.h),
                     EnrollWatchLaterButtons(
-                      learningPathInfoData: learningPathInfoData,
+                      cubit: context.read<LearnPathInfoCubit>(),
                     ),
                   ],
                 ),

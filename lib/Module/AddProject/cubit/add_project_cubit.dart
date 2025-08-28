@@ -80,8 +80,8 @@ class AddProjectCubit extends Cubit<AddProjectState> {
   void AddProjects(BuildContext context) async {
     if (titleController.text.isEmpty ||
         descriptionController.text.isEmpty ||
-        selectedTag == null ||
-        imageFile == null) {
+        selectedTag == null 
+        ) {
       emit(FieldRrequired());
       return;
     }

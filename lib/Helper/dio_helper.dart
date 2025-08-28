@@ -7,21 +7,22 @@ class DioHelper {
   static late final Dio _dio;
 
   static Future<void> init() async {
-    final ip = dotenv.env['API_IP'];
-    if (ip == null || ip.isEmpty) {
-      throw Exception('❌ API_IP not found in .env file');
-    }
+    // // final ip = dotenv.env['API_IP'];
+    // if (ip == null || ip.isEmpty) {
+    //   throw Exception('❌ API_IP not found in .env file');a
+    // }
 
-    final baseUrl = ip;
+    final baseUrl = "https://lms-master-ikaitb.laravel.cloud";
+;
     final baseUrlApi = "$baseUrl/api/";
 print("Base URL: $baseUrl");
 
     _dio = Dio(
       BaseOptions(
         baseUrl: baseUrlApi,
-        connectTimeout: const Duration(seconds: 10),
-        receiveTimeout: const Duration(seconds: 10),
-        sendTimeout: const Duration(seconds: 10),
+        connectTimeout: const Duration(seconds: 120),
+        receiveTimeout: const Duration(seconds: 120),
+        sendTimeout: const Duration(seconds: 120),
         headers: {
           HttpHeaders.acceptHeader: "application/json",
         },

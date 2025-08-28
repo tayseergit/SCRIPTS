@@ -345,26 +345,37 @@ class Settingpage extends StatelessWidget {
                                           size: 15,
                                         ),
                                       ),
-                                      TextButton(
-                                        onPressed: () {
-                                          CacheHelper.removeAllData();
+                                      BlocBuilder<AuthCubit, AuthState>(
+                                        builder: (context, state) {
+                                          return TextButton(
+                                            onPressed: () {
+                                              context
+                                                  .read<AuthCubit>()
+                                                  .logOut(context);
+                                              print(state);
+                                              if (state is UnAuth) {
+                                                showNoAuthDialog(context);
+                                              }
+                                              if (state is LogOutError) {
+                                                showNoAuthDialog(context);
+                                              }
 
-                                          Navigator.pop(context);
-                                          context
-                                              .read<AuthCubit>()
-                                              .logOut(context);
-                                          WidgetsBinding.instance
-                                              .addPostFrameCallback((_) {
-                                            pushReplacement(
-                                                context: context,
-                                                toPage: Login());
-                                          });
+                                              Navigator.pop(context);
+
+                                              WidgetsBinding.instance
+                                                  .addPostFrameCallback((_) {
+                                                pushAndRemoveUntilTo(
+                                                    context: context,
+                                                    toPage: Login());
+                                              });
+                                            },
+                                            child: AuthText(
+                                              text: lang.logout,
+                                              color: appColors.red,
+                                              size: 15,
+                                            ),
+                                          );
                                         },
-                                        child: AuthText(
-                                          text: lang.logout,
-                                          color: appColors.red,
-                                          size: 15,
-                                        ),
                                       ),
                                     ],
                                   ),

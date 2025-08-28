@@ -21,7 +21,8 @@ class Userfriendcard extends StatelessWidget {
     return Center(
       child: InkWell(
         onTap: () {
-          pushTo(context: context, toPage: StudentProfilePage(userid: friend.id));
+          pushTo(
+              context: context, toPage: StudentProfilePage(userid: friend.id));
         },
         child: Container(
           width: 180.w,
@@ -110,7 +111,7 @@ class Userfriendcard extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text(
-                            friend.level,
+                            friend.level! ?? "",
                             style: TextStyle(
                               color: friend.level == "beginner"
                                   ? appColors.darkGreen

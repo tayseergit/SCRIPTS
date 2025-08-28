@@ -20,7 +20,7 @@ import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/no_auth.dart';
 
 class StudentProfilePage extends StatefulWidget {
-  StudentProfilePage({super.key,required this .userid});
+  StudentProfilePage({super.key, required this.userid});
   int userid;
 
   @override
@@ -34,57 +34,51 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
     // استدعاء الدالة عند تحميل الصفحة
     context.read<StudentProfileCubit>().getProfile(widget.userid);
   }
+
   @override
   Widget build(BuildContext context) {
     final appColors = context.read<ThemeCubit>().state;
     return BlocConsumer<StudentProfileCubit, StudentProfileState>(
-      listener: (context, state) {
-        if (state is ProfileError) {}
-        if (state is ProfileSuccess) {
-          studentProfileModel = state.student;
-          print(studentProfileModel?.name);
-        }
-      },
-      builder: (context, state) {
-        StudentProfileCubit studentProfileCubit =
-            context.read<StudentProfileCubit>();
+        listener: (context, state) {
+      if (state is ProfileError) {}
+      if (state is ProfileSuccess) {
+        studentProfileModel = state.student;
+        print(studentProfileModel?.name);
+      }
+    }, builder: (context, state) {
+      StudentProfileCubit studentProfileCubit =
+          context.read<StudentProfileCubit>();
 
-        return Container(
-          color: appColors.pageBackground,
-          child: SafeArea(
-              child: Scaffold(
-            backgroundColor: appColors.pageBackground,
-            body: Builder(
-              builder: (context) {
-                if (state is ProfileLoading) {
-                  return Center(
-                    child: SizedBox(
-                      height: 80.h,
-                      child: Loading(height: 50.h, width: 50.w),
-                    ),
-                  );
-                } else if (state is ProfileError) {
-                  return Center(
-                    child: SizedBox(
-                      height: 100.h,
-                      width: 100.w,
-                      child: NoConnection(),
-                    ),
-                  );
-                } else if (state is NoAuth) {
-                  return Center(
-                    child: SizedBox(
-                      child: NoAuthUser(),
-                    ),
-                  );
-                }
+      return Container(
+        child: Builder(
+          builder: (context) {
+            if (state is ProfileLoading) {
+              return Center(
+                child: SizedBox(
+                  height: 80.h,
+                  child: Loading(height: 50.h, width: 50.w),
+                ),
+              );
+            } else if (state is ProfileError) {
+              return Center(
+                child: SizedBox(
+                  height: 100.h,
+                  width: 100.w,
+                  child: NoConnection(),
+                ),
+              );
+            } else if (state is NoAuth) {
+              return Center(
+                child: SizedBox(
+                  child: NoAuthUser(),
+                ),
+              );
+            }
 
-                return BuildProfileContent(cubit: studentProfileCubit);
-              },
-            ),
-          )),
-        );
-      },
-    );
+            return BuildProfileContent(cubit: studentProfileCubit);
+          },
+        ),
+      );
+    });
   }
 }

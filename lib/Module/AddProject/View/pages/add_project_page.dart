@@ -81,9 +81,9 @@ class _AddProjectPageState extends State<AddProjectPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          FileUploadCard(
-                            cubit: cubit,
-                          ),
+                          // FileUploadCard(
+                          //   cubit: cubit,
+                          // ),
                           SizedBox(height: 20.h),
                           CustomTextField(
                             controller: cubit.titleController,
@@ -126,18 +126,22 @@ class _AddProjectPageState extends State<AddProjectPage> {
                           SizedBox(
                             height: 10.h,
                           ),
-                          OnBoardingContainer(
-                              onTap: () {
-                                cubit.AddProjects(context);
-                              },
-                              radius: 20.r,
-                              height: 60.h,
-                              color: appColor.primary,
-                              widget: AuthText(
-                                  text: lang.next,
-                                  size: 20.sp,
-                                  color: appColor.mainText,
-                                  fontWeight: FontWeight.w600))
+                          state is AddProjectLoading
+                              ? Center(
+                                  child:
+                                      SizedBox(height: 50.h, child: Loading()))
+                              : OnBoardingContainer(
+                                  onTap: () {
+                                    cubit.AddProjects(context);
+                                  },
+                                  radius: 20.r,
+                                  height: 60.h,
+                                  color: appColor.primary,
+                                  widget: AuthText(
+                                      text: lang.next,
+                                      size: 20.sp,
+                                      color: appColor.mainText,
+                                      fontWeight: FontWeight.w600))
                         ],
                       ),
                     ),

@@ -56,13 +56,13 @@ class TeacherProfilePage extends StatelessWidget {
         BlocProvider(create: (_) => Tabteachercubit()),
         BlocProvider(
             create: (_) =>
-                TeacherCoursesCubit()..fetchTeacherCourse(userData?.id ?? 0)),
+                TeacherCoursesCubit()..fetchTeacherCourse(teacherid )),
         BlocProvider(
             create: (_) => TeacherLearnPathCubit()
-              ..fetchTeacherLearnPath(userData?.id ?? 0)),
+              ..fetchTeacherLearnPath(teacherid)),
         BlocProvider(
             create: (_) =>
-                TeacherContestCubit()..fetchTeacherContest(userData?.id ?? 0)),
+                TeacherContestCubit()..fetchTeacherContest(teacherid)),
       ],
       child: Scaffold(
         backgroundColor: appColors.pageBackground,

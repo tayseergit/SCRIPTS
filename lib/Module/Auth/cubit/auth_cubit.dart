@@ -158,13 +158,13 @@ class AuthCubit extends Cubit<AuthState> {
   ///
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: <String>[
-      'openid',
-      'email',
-      'profile',
-    ],
-    clientId: dotenv.env['GOOGLE_CLIENT_ID'],
-  );
+      scopes: <String>[
+        'openid',
+        'email',
+        'profile',
+      ],
+      clientId:
+          "510480483026-cnd0tbmgomdo70n6u2i6uo3nm073t39h.apps.googleusercontent.com");
 
   Future<void> loginWithGoogle(BuildContext context) async {
     emit(LogInLoading());
@@ -318,13 +318,15 @@ class AuthCubit extends Cubit<AuthState> {
         CacheHelper.removeData(key: "user_id");
 
         print('token: ${userAuthModel?.token}');
-        emit(LogOutSuccess());
-      } else if (response.statusCode == 422 || response.statusCode == 401) {
         print('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccccccccccccccb');
+        emit(LogOutSuccess());
+      } else if (response.statusCode == 401) {
+        print(response.data['message']);
         emit(UnAuth());
       } else {
+        print(response.data['message']);
+
         emit(LogOutError(message: S.of(context).error_occurred));
-        print('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbeeeeeeeeeeeeeeb');
       }
     } catch (e) {
       print("Login Exception: $e");
@@ -336,7 +338,8 @@ class AuthCubit extends Cubit<AuthState> {
   ///// github
 
   Future<void> loginWithGithub() async {
-    final clientId = dotenv.env['GITHUB_CLIENT_ID'];
+    final clientId = "Ov23liYeQk2Aowky4z3Z";
+
     final redirectUri = "myapp://callback";
     final scope = "read:user,user:email";
     final state = "random_state_string"; // generate securely

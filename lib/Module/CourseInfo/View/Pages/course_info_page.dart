@@ -477,7 +477,7 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                             child: AuthText(
                               text: lang.profile,
                               size: 13,
-                              color: appColors.pageBackground,
+                              color: appColors.whiteText,
                               fontWeight: FontWeight.w600,
                             ),
                           ),

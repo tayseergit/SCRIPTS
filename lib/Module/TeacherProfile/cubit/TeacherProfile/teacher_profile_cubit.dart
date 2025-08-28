@@ -14,32 +14,24 @@ class TeacherProfileCubit extends Cubit<TeacherProfileState> {
 
     try {
       print("1️⃣ Before fetching token");
-      
-    final token = CacheHelper.getData(key: 'token') ?? '';
-    final userId = CacheHelper.getData(key: 'user_id');
+
+      final token = CacheHelper.getData(key: 'token') ?? '';
 
       print("🔄 Fetching profile from: ${Urls.teacherProfile(id)}");
 
-      
-
       print("2️⃣ Got token: $token");
-
-      if (token.isEmpty || userId == null) {
-      emit(TeacherProfileError(masseg: 'User is not authenticated'));
-      return;
-    }
 
       print("3️⃣ Sending GET request with DioHelper");
       final response = await DioHelper.getData(
-        url: Urls.teacherProfile(userId),
+        url: Urls.teacherProfile(id),
         headers: {
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer ${CacheHelper.getToken()}',
           'Accept': 'application/json',
         },
       );
 
       print("4️⃣ Response received: ${response.data}");
-      print("✅ Response status code: ${response.statusCode}");
+      print("✅ Response status code: ${response.data["message"]}");
 
       if (response.statusCode == 200) {
         print("📦 Full response data: ${response.data}");

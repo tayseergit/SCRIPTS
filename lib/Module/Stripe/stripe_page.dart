@@ -123,7 +123,8 @@ void showAmountDialog(BuildContext context) {
 }
 
 Future<void> initStripe() async {
-  Stripe.publishableKey = dotenv.env["STRIPE_KEY"]!;
+  Stripe.publishableKey ="pk_test_51RYjLOQ1mFBEYLmCGWfyJ9LtonbLOyrFDLHerfOu8hOfLR1uvFXwifdZFrVEU5O6SVP4j2oixQXcZagfACUG491O00zD5Xkwwr";
+;
   Stripe.merchantIdentifier = 'merchant.com.yourapp';
   Stripe.urlScheme = 'flutterstripe';
   await Stripe.instance.applySettings();

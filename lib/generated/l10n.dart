@@ -944,6 +944,11 @@ class S {
     );
   }
 
+  /// `Total price`
+  String get total_price {
+    return Intl.message('Total price', name: 'total_price', desc: '', args: []);
+  }
+
   /// `Certificates`
   String get certificates {
     return Intl.message(

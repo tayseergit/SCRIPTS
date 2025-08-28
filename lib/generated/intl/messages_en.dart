@@ -280,6 +280,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "technologies": MessageLookupByLibrary.simpleMessage("Technologies"),
     "test": MessageLookupByLibrary.simpleMessage("TEST"),
     "total_points": MessageLookupByLibrary.simpleMessage("Total Points"),
+    "total_price": MessageLookupByLibrary.simpleMessage("Total price"),
     "update": MessageLookupByLibrary.simpleMessage("update"),
     "verify_code": MessageLookupByLibrary.simpleMessage("Verify Code"),
     "videos": MessageLookupByLibrary.simpleMessage("videos"),

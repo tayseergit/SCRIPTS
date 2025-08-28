@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,15 +38,16 @@ import 'package:lms/Module/CourseTest/View/Pages/course_Test_Page.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/Course_content/View/Pages/course_conten_page.dart';
+import 'package:lms/firebase_options.dart';
 
 // Import your generated localization file
 import 'generated/l10n.dart';
 
 // Import the locale cubit you will create:
-
+ 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+  // await dotenv.load(fileName: "assets/.env");
   await CacheHelper.init();
   await Firebase.initializeApp();
   await requestNotificationPermission();
@@ -52,10 +55,24 @@ void main() async {
   await DioHelper.init();
 
   await getFcmToken();
-  // Stripe.publishableKey = dotenv.env['STRIPE_KEY'] ?? '';
-  // await Stripe.instance.applySettings();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+ await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
-  runApp(const MyApp());
+  // التعامل مع أخطاء Flutter
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+runZonedGuarded(() {
+    FlutterError.onError = (FlutterErrorDetails details) {
+       FlutterError.presentError(details);  
+    };
+
+    runApp(const MyApp());
+  }, (error, stack) {
+         FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+
+   });
 }
 
 class MyApp extends StatefulWidget {

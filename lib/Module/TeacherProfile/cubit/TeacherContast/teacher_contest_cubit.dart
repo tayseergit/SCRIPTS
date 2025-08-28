@@ -15,21 +15,16 @@ class TeacherContestCubit extends Cubit<TeacherContestState> {
     try {
       print("1️⃣ Before fetching token");
 
-      final token = CacheHelper.getData(key: 'token') ?? '';
-      final userId = CacheHelper.getData(key: 'user_id');
-
-      print("🔄 Fetching profile from: ${Urls.teacherContest(userId)}");
+      final token = CacheHelper.getData(key: 'token') ;
+ 
+      print("🔄 Fetching profile from: ${Urls.teacherContest(id)}");
 
       print("2️⃣ Got token: $token");
-
-      if (token.isEmpty || userId == null) {
-        emit(TeacherContestError(masseg: 'User is not authenticated'));
-        return;
-      }
+ 
 
       print("3️⃣ Sending GET request with DioHelper");
       final response = await DioHelper.getData(
-        url: Urls.teacherContest(userId),
+        url: Urls.teacherContest(id),
         headers: {
           'Authorization': 'Bearer $token',
           'Accept': 'application/json',

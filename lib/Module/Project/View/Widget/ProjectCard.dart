@@ -124,7 +124,7 @@ class Projectcard extends StatelessWidget {
                         Expanded(
                           child: OnBoardingContainer(
                             onTap: () {
-                              //  GlobalFunc. launchURL( projectModel.);
+                            
                             },
                             height: 30,
                             color: appColors.primary,
@@ -149,3 +149,8 @@ class Projectcard extends StatelessWidget {
     );
   }
 }
+  // if (cubit.studentProfileModel.gitHubAccount !=
+                              //     null) {
+                              //   GlobalFunc.launchURL(
+                              //       cubit.studentProfileModel.gitHubAccount!);
+                              // }

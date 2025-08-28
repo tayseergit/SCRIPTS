@@ -4,26 +4,29 @@ class FriendsResponse {
   final List<Friend> friends;
   final Meta meta;
 
-  FriendsResponse( {
-    required this.total,
+  FriendsResponse({
     required this.status,
+    required this.total,
     required this.friends,
     required this.meta,
   });
 
   factory FriendsResponse.fromJson(Map<String, dynamic> json) {
     return FriendsResponse(
-      total: json['total'],
-      status: json['status'],
-      friends: List<Friend>.from(json['friends'].map((x) => Friend.fromJson(x))),
-      meta: Meta.fromJson(json['meta']),
+      status: json['status'] ?? false,
+      total: json['total'] ?? 0,
+      friends: (json['friends'] as List<dynamic>?)
+              ?.map((x) => Friend.fromJson(x))
+              .toList() ??
+          [],
+      meta: Meta.fromJson(json['meta'] ?? {}),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'total':total,
       'status': status,
+      'total': total,
       'friends': friends.map((x) => x.toJson()).toList(),
       'meta': meta.toJson(),
     };
@@ -33,32 +36,32 @@ class FriendsResponse {
 class Friend {
   final int id;
   final String name;
-  final String email;
+  final String? email;
   final String? image;
-  final String gitHubAccount;
-  final String bio;
-  final String lastOnline;
-  final String role;
-  final String joined;
-  final int age;
+  final String? gitHubAccount;
+  final String? bio;
+  final String? lastOnline;
+  final String? role;
+  final String? joined;
+  final int? age;
   final int points;
   final String level;
   final int currentStreak;
   final int completedCourses;
   final int completedLearningPaths;
-  final int? isFriend;
+  final int isFriend;
 
   Friend({
     required this.id,
     required this.name,
-    required this.email,
-    required this.image,
-    required this.gitHubAccount,
-    required this.bio,
-    required this.lastOnline,
-    required this.role,
-    required this.joined,
-    required this.age,
+    this.email,
+    this.image,
+    this.gitHubAccount,
+    this.bio,
+    this.lastOnline,
+    this.role,
+    this.joined,
+    this.age,
     required this.points,
     required this.level,
     required this.currentStreak,
@@ -69,8 +72,8 @@ class Friend {
 
   factory Friend.fromJson(Map<String, dynamic> json) {
     return Friend(
-      id: json['id'],
-      name: json['name'],
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
       email: json['email'],
       image: json['image'],
       gitHubAccount: json['gitHub_account'],
@@ -79,12 +82,12 @@ class Friend {
       role: json['role'],
       joined: json['joined'],
       age: json['age'],
-      points: json['points'],
-      level: json['level'],
-      currentStreak: json['current_streak'],
-      completedCourses: json['completed_courses'],
-      completedLearningPaths: json['completed_learning_paths'],
-      isFriend: json['is_friend'],
+      points: json['points'] ?? 0,
+      level: json['level'] ?? '',
+      currentStreak: json['current_streak'] ?? 0,
+      completedCourses: json['completed_courses'] ?? 0,
+      completedLearningPaths: json['completed_learning_paths'] ?? 0,
+      isFriend: json['is_friend'] ?? 0,
     );
   }
 
@@ -125,10 +128,10 @@ class Meta {
 
   factory Meta.fromJson(Map<String, dynamic> json) {
     return Meta(
-      currentPage: json['current_page'],
-      lastPage: json['last_page'],
-      perPage: json['per_page'],
-      total: json['total'],
+      currentPage: json['current_page'] ?? 1,
+      lastPage: json['last_page'] ?? 1,
+      perPage: json['per_page'] ?? 15,
+      total: json['total'] ?? 0,
     );
   }
 

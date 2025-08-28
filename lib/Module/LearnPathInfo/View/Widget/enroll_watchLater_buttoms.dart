@@ -16,13 +16,14 @@ import 'package:lms/generated/l10n.dart';
 class EnrollWatchLaterButtons extends StatelessWidget {
   EnrollWatchLaterButtons({
     Key? key,
-    required this.learningPathInfoData,
+    required this.cubit,
   });
 
-  LearningPathInfoData learningPathInfoData;
+  LearnPathInfoCubit cubit;
   // LearnPathInfoCubit learnPathInfoCubit;
   @override
   Widget build(BuildContext context) {
+    var learningPathInfoData = cubit.learningPathInfoModel!.data;
     var lang = S.of(context);
     ThemeState appColors = context.watch<ThemeCubit>().state;
     return Padding(
@@ -67,7 +68,9 @@ class EnrollWatchLaterButtons extends StatelessWidget {
                               radius: 20.r,
                               // width: 160,
                               height: 50,
-                              color: appColors.blackGreen,
+                              color: learningPathInfoData.status == "enroll"
+                                  ? appColors.lightfieldBackground
+                                  : appColors.blackGreen,
                               widget: AuthText(
                                 text: lang.enroll,
                                 // size: 16,
@@ -75,10 +78,11 @@ class EnrollWatchLaterButtons extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                               ),
                               onTap: () {
-                                cubit.updatePathStatus(
-                                    context, learningPathInfoData.id, "enroll");
-                              },
-                            )),
+                                if (learningPathInfoData.status != "enroll") {
+                                  cubit.updatePathStatus(context,
+                                      learningPathInfoData.id, "enroll");
+                                }
+                              })),
                   /////
                   /// watch later button
                   SizedBox(
@@ -92,7 +96,10 @@ class EnrollWatchLaterButtons extends StatelessWidget {
                               radius: 20.r,
 
                               height: 50,
-                              color: appColors.blackGreen,
+                              color:
+                                  learningPathInfoData.status == "watch_later"
+                                      ? appColors.lightfieldBackground
+                                      : appColors.blackGreen,
                               widget: AuthText(
                                 text: lang.watchLater,
                                 // size: 16,
@@ -100,8 +107,11 @@ class EnrollWatchLaterButtons extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                               ),
                               onTap: () {
-                                cubit.updatePathStatus(context,
-                                    learningPathInfoData.id, "watch_later");
+                                if (learningPathInfoData.status !=
+                                    "watch_later") {
+                                  cubit.updatePathStatus(context,
+                                      learningPathInfoData.id, "watch_later");
+                                }
                               },
                             )),
                   SizedBox(
@@ -115,7 +125,9 @@ class EnrollWatchLaterButtons extends StatelessWidget {
                               radius: 20.r,
 
                               height: 50,
-                              color: appColors.blackGreen,
+                              color: learningPathInfoData.status == null
+                                  ? appColors.lightfieldBackground
+                                  : appColors.blackGreen,
                               widget: AuthText(
                                 text: lang.remove_path_status,
                                 // size: 16,
@@ -123,8 +135,9 @@ class EnrollWatchLaterButtons extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                               ),
                               onTap: () {
-                                cubit.deletePathStatus(
-                                    context, learningPathInfoData.id);
+                                if (learningPathInfoData.status != null)
+                                  cubit.deletePathStatus(
+                                      context, learningPathInfoData.id);
                               },
                             ))
                 ],
