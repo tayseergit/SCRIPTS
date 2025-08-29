@@ -23,7 +23,6 @@ class EnrollWatchLaterButtons extends StatelessWidget {
   // LearnPathInfoCubit learnPathInfoCubit;
   @override
   Widget build(BuildContext context) {
-    var learningPathInfoData = cubit.learningPathInfoModel!.data;
     var lang = S.of(context);
     ThemeState appColors = context.watch<ThemeCubit>().state;
     return Padding(
@@ -40,14 +39,16 @@ class EnrollWatchLaterButtons extends StatelessWidget {
         builder: (context, state) {
           print(state);
           var cubit = context.read<LearnPathInfoCubit>();
-
-          if (state is LearnPathInfoLoading) {
+          // if (cubit.learningPathInfoModel == null) {
+          //   return Text('data'); 
+          // }
+          if (state is LearnPathInfoLoading || cubit.learningPathInfoModel == null) {
             return Loading();
           }
           if (state is LearnPathInfoError) {
             return Container();
           }
-
+          var learningPathInfoData = cubit.learningPathInfoModel!.data;
           return Column(
             children: [
               AuthText(
@@ -65,7 +66,7 @@ class EnrollWatchLaterButtons extends StatelessWidget {
                       child: cubit.state is UpdateEnrollStatusLoading
                           ? Loading()
                           : OnBoardingContainer(
-                              radius: 20.r,
+                              radius: 20,
                               // width: 160,
                               height: 50,
                               color: learningPathInfoData.status == "enroll"
@@ -93,7 +94,7 @@ class EnrollWatchLaterButtons extends StatelessWidget {
                           ? Loading()
                           : OnBoardingContainer(
                               // width: 120,
-                              radius: 20.r,
+                              radius: 20,
 
                               height: 50,
                               color:

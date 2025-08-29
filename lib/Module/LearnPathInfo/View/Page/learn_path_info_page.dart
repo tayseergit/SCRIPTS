@@ -373,8 +373,10 @@ class LearnPathInfoPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 10.h),
-                    EnrollWatchLaterButtons(
-                      cubit: context.read<LearnPathInfoCubit>(),
+                    Expanded(
+                      child: EnrollWatchLaterButtons(
+                        cubit: context.read<LearnPathInfoCubit>(),
+                      ),
                     ),
                   ],
                 ),
