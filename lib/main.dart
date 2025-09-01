@@ -44,35 +44,34 @@ import 'package:lms/firebase_options.dart';
 import 'generated/l10n.dart';
 
 // Import the locale cubit you will create:
- 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await dotenv.load(fileName: "assets/.env");
+  await dotenv.load(fileName: ".env");
   await CacheHelper.init();
   await Firebase.initializeApp();
   await requestNotificationPermission();
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await DioHelper.init();
 
   await getFcmToken();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
- await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
   // التعامل مع أخطاء Flutter
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
-runZonedGuarded(() {
+  runZonedGuarded(() {
     FlutterError.onError = (FlutterErrorDetails details) {
-       FlutterError.presentError(details);  
+      FlutterError.presentError(details);
     };
 
     runApp(const MyApp());
   }, (error, stack) {
-         FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-
-   });
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+  });
 }
 
 class MyApp extends StatefulWidget {
@@ -101,9 +100,7 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
-        BlocProvider(create: (_) => AuthCubit()
-        ),
-        BlocProvider(create: (_) => StudentProfileCubit()..getProfile(CacheHelper.getUserId())),
+        BlocProvider(create: (_) => AuthCubit()),
         BlocProvider(create: (_) => LocaleCubit()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
@@ -128,7 +125,7 @@ class _MyAppState extends State<MyApp> {
                       theme: themeState.isDarkMode
                           ? ThemeData.dark()
                           : ThemeData.light(),
-                      home: SplashScreen()
+                      home: NavigationBarwidget()
                       // home: CourseInfoPage(
                       //   testId: 1,
                       // courseId: 1,

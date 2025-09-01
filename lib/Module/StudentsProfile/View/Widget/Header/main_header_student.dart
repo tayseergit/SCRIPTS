@@ -60,84 +60,90 @@ class MainHeader extends StatelessWidget {
           SizedBox(width: 16.w),
           // Profile Info
           Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AuthText(
-                  text: cubit.studentProfileModel.name,
-                  size: 18.sp,
-                  color: appColors.mainText,
-                  fontWeight: FontWeight.bold,
-                ),
-                SizedBox(height: 10.h),
-                AuthText(
-                  text: cubit.studentProfileModel.email,
-                  size: 12.sp,
-                  color: appColors.secondText,
-                ),
-                SizedBox(height: 10.h),
-                AuthText(
-                  text: cubit.studentProfileModel.joined,
-                  size: 12.sp,
-                  color: appColors.secondText,
-                ),
-                SizedBox(height: 10.h),
-                Row(
-                  children: [
-                    Icon(Icons.school,
-                        size: 14.sp, color: appColors.orang.withOpacity(0.8)),
-                    SizedBox(width: 4.w),
-                    AuthText(
-                      text: cubit.studentProfileModel.level,
-                      size: 12.sp,
-                      color: appColors.orang,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10.h),
-                OnBoardingContainer(
-                  onTap: () {
-                    if (cubit.studentProfileModel.gitHubAccount != null) {
-                      GlobalFunc.launchURL(
-                          cubit.studentProfileModel.gitHubAccount!);
-                    }
-                  },
-                  widget: Row(
-                    children: [
-                      Image.asset(
-                        Images.github,
-                        height: 20.h,
-                        width: 20.w,
-                      ),
-                      SizedBox(width: 10.w),
-                      AuthText(
-                        text: 'GitHub Account',
-                        size: 12.sp,
-                        color: appColors.mainText,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ],
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AuthText(
+                    text: cubit.studentProfileModel.name,
+                    size: 18.sp,
+                    color: appColors.mainText,
+                    fontWeight: FontWeight.bold,
                   ),
-                ),
-                SizedBox(height: 10.h),
-                if (cubit.studentProfileModel.balance != null)
+                  SizedBox(height: 10.h),
+                  AuthText(
+                    text: cubit.studentProfileModel.email,
+                    size: 12.sp,
+                    maxLines: 2,
+                    color: appColors.secondText,
+                  ),
+                  SizedBox(height: 10.h),
+                  AuthText(
+                    text: cubit.studentProfileModel.joined,
+                    size: 12.sp,
+                    color: appColors.secondText,
+                  ),
+                  SizedBox(height: 10.h),
                   Row(
                     children: [
-                      Icon(Icons.wallet_outlined,
-                          size: 28.sp, color: appColors.mainIconColor),
+                      Icon(Icons.school,
+                          size: 14.sp, color: appColors.orang.withOpacity(0.8)),
                       SizedBox(width: 4.w),
-                      Container(
-                        width: 120.w,
-                        child: AuthText(
-                          text: "${cubit.studentProfileModel.balance ?? ""} \$",
-                          size: 20.sp,
-                          color: appColors.ok,
-                        ),
+                      AuthText(
+                        text: cubit.studentProfileModel.level,
+                        size: 12.sp,
+                        color: appColors.orang,
                       ),
                     ],
                   ),
-              ],
+                  SizedBox(height: 10.h),
+                  OnBoardingContainer(
+                    onTap: () {
+                      if (cubit.studentProfileModel.gitHubAccount != null) {
+                        GlobalFunc.launchURL(
+                            cubit.studentProfileModel.gitHubAccount!);
+                      }
+                    },
+                    widget: Row(
+                      children: [
+                        Image.asset(
+                          Images.github,
+                          height: 20.h,
+                          width: 20.w,
+                          color: appColors.mainIconColor,
+                        ),
+                        SizedBox(width: 10.w),
+                        AuthText(
+                          text: 'GitHub Account',
+                          size: 12.sp,
+                          color: appColors.mainText,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10.h),
+                  if (cubit.studentProfileModel.balance != null)
+                    Row(
+                      children: [
+                        Icon(Icons.wallet_outlined,
+                            size: 28.sp, color: appColors.mainIconColor),
+                        SizedBox(width: 4.w),
+                        Container(
+                          width: 120.w,
+                          child: AuthText(
+                            text:
+                                "${cubit.studentProfileModel.balance ?? ""} \$",
+                            size: 20.sp,
+                            color: appColors.ok,
+                          ),
+                        ),
+                      ],
+                    ),
+                ],
+              ),
             ),
           ),
         ],

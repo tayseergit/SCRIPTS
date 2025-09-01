@@ -58,7 +58,6 @@ class LearnPathInfoCubit extends Cubit<LearnPathInfoState> {
       final courses =
           LearnPathInfoCourseResponse.fromJson(coursesResponse.data);
       print("✅ Courses fetched");
-
       emit(LearnPathAllDataSuccess(
           info: learningPathInfoModel!, courses: courses));
     } catch (e) {
@@ -93,9 +92,9 @@ class LearnPathInfoCubit extends Cubit<LearnPathInfoState> {
       ).then((value) {
         print(value.data['message']);
         if (value.statusCode == 200) {
-          learningPathInfoModel = LearningPathInfoModel.fromJson(value.data);
+      fetchAllLearnPathData(id);
 
-          emit(UpdateStatusSuccess());
+            emit(UpdateStatusSuccess());
         } else if (value.statusCode == 401) {
           emit(UnAuthUser(masseg: S.of(context).Login_or_SignUp));
         } else {
@@ -128,8 +127,8 @@ class LearnPathInfoCubit extends Cubit<LearnPathInfoState> {
         },
       ).then((value) {
         if (value.statusCode == 200) {
-          learningPathInfoModel!.data.status = null;
-
+      fetchAllLearnPathData(id);
+ 
           emit(DeleteStatusSuccess());
         } else if (value.statusCode == 401) {
           emit(UnAuthUser(masseg: S.of(context).Login_or_SignUp));

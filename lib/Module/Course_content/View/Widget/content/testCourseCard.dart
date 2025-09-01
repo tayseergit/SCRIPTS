@@ -4,8 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/CourseTest/View/Pages/course_Test_Page.dart';
+import 'package:lms/Module/Course_content/Cubit/VideoCubit/VideoCubit.dart';
 import 'package:lms/Module/Course_content/Model/ContentModel/course_content_response.dart';
- import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
+import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/generated/l10n.dart';
@@ -23,6 +24,12 @@ class TestCourseCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 4.0.h),
       child: InkWell(
         onTap: () {
+          final youtubeController =
+              context.read<VideoCubit>().youtubeController;
+          if (youtubeController != null && youtubeController.value.isPlaying) {
+            youtubeController.pause();
+            
+          }
           pushTo(
               context: context,
               toPage: CourseTestPage(testId: testItem.id, courseId: courseId));

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
+import 'package:lms/Constant/public_constant.dart';
 import 'package:lms/Module/Course_content/Cubit/CommentCubit/comment_state.dart';
 import 'package:lms/Module/Course_content/Cubit/ContentCubit/course_content_state.dart';
 import 'package:lms/Module/Course_content/View/Widget/comment/add_comment_field.dart';
@@ -61,14 +62,12 @@ class CourseContentPage extends StatelessWidget {
                         size: 20,
                       ));
                     } else if (state is VideoErrorYoutube) {
-                      return Center(
-                          child: AuthText(text: S.of(context).error_occurred));
+                      return Center(child: AuthText(text: state.message));
                     }
                     final cubit = context.read<VideoCubit>();
                     return Column(
                       children: [
                         YoutubePlayer(
-                        
                           controller: cubit.youtubeController!,
                           showVideoProgressIndicator: true,
                         ),
@@ -126,10 +125,17 @@ class CourseContentPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 17.w),
               child: BlocConsumer<CommentCubit, CommentState>(
-                listener: (context, commentState) {},
+                listener: (context, commentState) {
+                  if (commentState is CommentErrorState) {
+                    customSnackBar(
+                      context: context,
+                      success: 0,
+                      message: commentState.message,
+                    );
+                  }
+                },
                 builder: (context, commentState) {
                   var commentCubit = context.read<CommentCubit>();
-                  // if (commentState is CommentLoading )
 
                   return AnimatedSize(
                     duration: const Duration(milliseconds: 1000),
@@ -175,7 +181,8 @@ class CourseContentPage extends StatelessWidget {
                             Builder(
                               builder: (context) {
                                 print(commentState);
-                                if (commentState is CommentLoading) {
+                                if (commentState is CommentLoading ||
+                                    commentState is CommentInitial) {
                                   return Loading();
                                 }
                                 if (commentState is CommentError) {
@@ -239,8 +246,7 @@ class CourseContentPage extends StatelessWidget {
                       context.read<CourseContentCubit>();
                   if (state is CourseContentSuccess) {
                     print("ffffffffffffff");
-                    print(courseContentCubit
-                        .courseContentResponse!.data!.allContents.isNotEmpty);
+
                     if (courseContentCubit
                         .courseContentResponse!.data!.allContents.isNotEmpty) {
                       context.read<VideoCubit>().loadVideoFromApi(

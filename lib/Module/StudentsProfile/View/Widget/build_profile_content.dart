@@ -14,41 +14,39 @@ class BuildProfileContent extends StatelessWidget {
   StudentProfileCubit cubit;
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          MainHeader(
-            cubit: cubit,
-          ),
-          SizedBox(height: 12.h),
-          InfoTabs(
-            cubit: cubit,
-          ),
-          SizedBox(height: 12.h),
-          TabButtonsProfile(),
-          SizedBox(height: 12.h),
-          BlocBuilder<StudentProfileCubit, StudentProfileState>(
-            builder: (context, state) {
-              // return Container();
-              switch (cubit.selectedTab) {
-                case 0:
-                  return CirtificateGridview(
-                    cubit: cubit,
-                  );
-                case 1:
-                  return AchievementGridview(cubit: cubit);
-                case 2:
-                  return ContestHistoryCard(
-                    cubit: cubit,
-                  );
+    return Column(
+      children: [
+        MainHeader(
+          cubit: cubit,
+        ),
+        SizedBox(height: 12.h),
+        InfoTabs(
+          cubit: cubit,
+        ),
+        SizedBox(height: 12.h),
+        TabButtonsProfile(),
+        SizedBox(height: 12.h),
+        BlocBuilder<StudentProfileCubit, StudentProfileState>(
+          builder: (context, state) {
+            // return Container();
+            switch (cubit.selectedTab) {
+              case 0:
+                return CirtificateGridview(
+                  cubit: cubit,
+                );
+              case 1:
+                return AchievementGridview(cubit: cubit);
+              case 2:
+                return ContestHistoryCard(
+                  cubit: cubit,
+                );
 
-                default:
-                  return const SizedBox.shrink();
-              }
-            },
-          ),
-        ],
-      ),
+              default:
+                return const SizedBox.shrink();
+            }
+          },
+        ),
+      ],
     );
   }
 }

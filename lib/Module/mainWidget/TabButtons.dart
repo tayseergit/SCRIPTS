@@ -65,46 +65,45 @@ class TabButtonsProfile extends StatelessWidget {
     final StudentProfileCubit studentProfileCubit =
         context.watch<StudentProfileCubit>();
 
+    final labels = studentProfileCubit.getLabels(context);
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 6.h),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(studentProfileCubit.getLabels(context).length,
-            (index) {
+        children: List.generate(labels.length, (index) {
           final isSelected = studentProfileCubit.selectedTab == index;
-          final label = studentProfileCubit.getLabels(context)[index];
+          final label = labels[index];
 
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+          // Wrap each tab in Expanded so they share space equally
+          return Expanded(
             child: InkWell(
               onTap: () => studentProfileCubit.changeTab(index),
-              child: Expanded(
-                child: Column(
-                  // mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AnimatedDefaultTextStyle(
-                      duration: const Duration(milliseconds: 800),
-                      curve: Curves.easeInOut,
-                      style: TextStyle(
-                        fontSize: isSelected ? 16.sp : 14.sp,
-                        fontWeight:
-                            isSelected ? FontWeight.bold : FontWeight.w300,
-                        color: appColors.mainText,
-                      ),
-                      child: Text(label),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AnimatedDefaultTextStyle(
+                    duration: const Duration(milliseconds: 800),
+                    curve: Curves.easeInOut,
+                    style: TextStyle(
+                      fontSize: isSelected ? 16.sp : 14.sp,
+                      fontWeight:
+                          isSelected ? FontWeight.bold : FontWeight.w300,
+                      color: appColors.mainText,
                     ),
-                    SizedBox(height: 4.h),
-
-                    // Optional underline animation for extra emphasis
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                      height: 2.h,
-                      width: isSelected ? 20.w : 0,
-                      color: appColors.primary,
+                    child: Text(
+                      label,
+                      textAlign: TextAlign.center,
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 4.h),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    height: 2.h,
+                    width: isSelected ? 20.w : 0,
+                    color: appColors.primary,
+                  ),
+                ],
               ),
             ),
           );

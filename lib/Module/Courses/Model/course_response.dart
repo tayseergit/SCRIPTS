@@ -48,7 +48,7 @@ class Course {
   final String titleOfCourse;
   final String descriptionOfCourse;
   final dynamic rate;
-  final String ?imageOfCourse;
+  final String? imageOfCourse;
   final String courseDuration;
   final int numberOfVideo;
   final String videoProgress;
@@ -58,7 +58,7 @@ class Course {
   final int price;
   final int teacherId;
   final String teacherName;
-  final String ?teacherImage;
+  final String? teacherImage;
   final String? status;
   final dynamic studentPaid;
   final List<LearningPath> learningPaths;
@@ -124,7 +124,7 @@ class Course {
 class LearningPath {
   final int id;
   final String name;
-  final String image;
+  final String? image;
 
   LearningPath({
     required this.id,

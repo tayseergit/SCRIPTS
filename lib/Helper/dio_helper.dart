@@ -7,22 +7,23 @@ class DioHelper {
   static late final Dio _dio;
 
   static Future<void> init() async {
-    // // final ip = dotenv.env['API_IP'];
-    // if (ip == null || ip.isEmpty) {
-    //   throw Exception('❌ API_IP not found in .env file');a
-    // }
+    final ip = dotenv.env['API_IP'];
+    if (ip == null || ip.isEmpty) {
+      throw Exception('❌ API_IP not found in .env file');
+    }
 
-    final baseUrl = "https://lms-master-ikaitb.laravel.cloud";
-;
+    // final baseUrl = "https://lms-master-ikaitb.laravel.cloud";
+    final baseUrl = ip;
+
     final baseUrlApi = "$baseUrl/api/";
-print("Base URL: $baseUrl");
+    print("Base URL: $baseUrl");
 
     _dio = Dio(
       BaseOptions(
         baseUrl: baseUrlApi,
-        connectTimeout: const Duration(seconds: 120),
-        receiveTimeout: const Duration(seconds: 120),
-        sendTimeout: const Duration(seconds: 120),
+        connectTimeout: const Duration(seconds: 25),
+        receiveTimeout: const Duration(seconds: 25),
+        sendTimeout: const Duration(seconds: 25),
         headers: {
           HttpHeaders.acceptHeader: "application/json",
         },
@@ -61,12 +62,14 @@ print("Base URL: $baseUrl");
     try {
       return await _dio.get(
         url,
-        options: Options(headers: headers, validateStatus: (status) {
+        options: Options(
+          headers: headers,
+          validateStatus: (status) {
             // Allow Dio to return 422, 401, etc. as normal responses
             return status != null && status <= 500;
-          },),
+          },
+        ),
         queryParameters: params,
-        
       );
     } catch (error) {
       print("❌ Dio GET Error: $error");
@@ -90,7 +93,7 @@ print("Base URL: $baseUrl");
         options: Options(
           headers: headers,
           validateStatus: (status) {
-             return status != null && status <= 500;
+            return status != null && status <= 500;
           },
         ),
       );
@@ -99,39 +102,38 @@ print("Base URL: $baseUrl");
       rethrow;
     }
   }
-static Future<Response> postFormData({
-  required String url,
-  required FormData postData,
-  Map<String, String>? headers,
-}) async {
-  try {
-    return await _dio.post(
-      url,
-      data: postData,
-      options: Options(
-        headers: headers,
-        contentType: Headers.formUrlEncodedContentType,
-         validateStatus: (status) {
+
+  static Future<Response> postFormData({
+    required String url,
+    required FormData postData,
+    Map<String, String>? headers,
+  }) async {
+    try {
+      return await _dio.post(
+        url,
+        data: postData,
+        options: Options(
+          headers: headers,
+          contentType: Headers.formUrlEncodedContentType,
+          validateStatus: (status) {
             // Allow Dio to return 422, 401, etc. as normal responses
             return status != null && status < 500;
           },
-      ),
-    );
-
-      
-  } on DioError catch (dioError) {
-    if (dioError.response != null) {
-      print("❌ DioError: Status ${dioError.response?.statusCode}");
-      print("❌ Response data: ${dioError.response?.data}");
-    } else {
-      print("❌ DioError: ${dioError.message}");
+        ),
+      );
+    } on DioError catch (dioError) {
+      if (dioError.response != null) {
+        print("❌ DioError: Status ${dioError.response?.statusCode}");
+        print("❌ Response data: ${dioError.response?.data}");
+      } else {
+        print("❌ DioError: ${dioError.message}");
+      }
+      rethrow;
+    } catch (error) {
+      print("❌ Unexpected error: $error");
+      rethrow;
     }
-    rethrow;
-  } catch (error) {
-    print("❌ Unexpected error: $error");
-    rethrow;
   }
-}
 
   // ✅ PUT with exception handled
   static Future<Response> putData({

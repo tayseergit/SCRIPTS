@@ -29,6 +29,6 @@ class VideoErrorYoutube extends VideoState {
       : super(selectedVideo: selectedVideo);
 }
 
-class VideoProgressUpdated extends VideoState {
- 
-}
+class VideoProgressUpdated extends VideoState {}
+
+class Update extends VideoState {}

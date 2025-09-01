@@ -44,6 +44,7 @@ class LearnPathInfoPage extends StatelessWidget {
               if (state is UnAuthUser) {
                 showNoAuthDialog(context);
               }
+              var cubit = context.read<LearnPathInfoCubit>();
               return Scaffold(
                 backgroundColor: appColors.pageBackground,
                 body: Column(
@@ -373,8 +374,18 @@ class LearnPathInfoPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 10.h),
-                    EnrollWatchLaterButtons(
-                      cubit: context.read<LearnPathInfoCubit>(),
+                    // Container(
+                    //   height: 100,
+                    //   width: 100,
+                    //   color: appColors.blackGreen,
+                    // ),
+                    BlocBuilder<LearnPathInfoCubit, LearnPathInfoState>(
+                      builder: (context, state) {
+                        print(learningPathInfoData);
+                        return EnrollWatchLaterButtons(
+                          learningPathInfoModel: learningPathInfoData!,
+                        );
+                      },
                     ),
                   ],
                 ),

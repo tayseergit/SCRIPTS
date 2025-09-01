@@ -163,8 +163,8 @@ class AuthCubit extends Cubit<AuthState> {
         'email',
         'profile',
       ],
-      clientId:
-          "510480483026-cnd0tbmgomdo70n6u2i6uo3nm073t39h.apps.googleusercontent.com");
+      clientId:"${dotenv.env['510480483026-cnd0tbmgomdo70n6u2i6uo3nm073t39h.apps.googleusercontent.com']}"
+          );
 
   Future<void> loginWithGoogle(BuildContext context) async {
     emit(LogInLoading());
@@ -338,7 +338,7 @@ class AuthCubit extends Cubit<AuthState> {
   ///// github
 
   Future<void> loginWithGithub() async {
-    final clientId = "Ov23liYeQk2Aowky4z3Z";
+    final clientId = dotenv.env['GITHUB_CLIENT_ID'];
 
     final redirectUri = "myapp://callback";
     final scope = "read:user,user:email";

@@ -248,7 +248,7 @@ class ContestGrid extends StatelessWidget {
                   text: TextSpan(
                     style: TextStyle(
                       fontSize: 13.sp,
-                      color: Colors.black87,
+                      color: appColors.secondText,
                     ),
                     children: [
                       const TextSpan(text: 'Total Points: '),
