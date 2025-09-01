@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 class Urls {
-  static String ip = "https://lms-master-ikaitb.laravel.cloud";
+  // static String ip = "10.224.237.38";
   static String baseUrl = "";
 
   static String teacher = '$baseUrl/users';

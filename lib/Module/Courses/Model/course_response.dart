@@ -124,7 +124,7 @@ class Course {
 class LearningPath {
   final int id;
   final String name;
-  final String image;
+  final String? image; 
 
   LearningPath({
     required this.id,
@@ -136,7 +136,8 @@ class LearningPath {
     return LearningPath(
       id: json['id'],
       name: json['name'],
-      image: json['image'],
+      image: json['image'], 
     );
   }
 }
+

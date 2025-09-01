@@ -109,7 +109,7 @@ class MainHeader extends StatelessWidget {
                     onTap: () async {
                      if (user.gitHubAccount != null) {
                         final Uri url = Uri.parse(
-                          user.gitHubAccount!); // ضع الرابط المطلوب
+                          user.gitHubAccount!); 
                       if (!await launchUrl(url,
                           mode: LaunchMode.externalApplication)) {
                         throw 'Could not launch $url';

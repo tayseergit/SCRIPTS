@@ -103,10 +103,9 @@ class TeacherLearnpathCard extends StatelessWidget {
                 child: SizedBox(
                   width: double.infinity,
                   height: 200.h,
-                  child: (teacherLearnpathModel.image == null &&
-                          teacherLearnpathModel.image.isNotEmpty)
+                  child: (teacherLearnpathModel.image != null )
                       ? Image.network(
-                          teacherLearnpathModel.image,
+                          teacherLearnpathModel.image!,
                           width: double.infinity,
                           height: 100.h,
                           fit: BoxFit.cover,

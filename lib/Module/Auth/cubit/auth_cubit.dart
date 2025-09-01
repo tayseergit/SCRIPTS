@@ -122,6 +122,9 @@ class AuthCubit extends Cubit<AuthState> {
     emit(LogInLoading());
 
     try {
+      final fullUrl = "${DioHelper.dio.options.baseUrl}login";
+      print("🔗 Full URL: $fullUrl");
+
       final response = await DioHelper.postData(
         url: "login",
         postData: {
@@ -133,6 +136,8 @@ class AuthCubit extends Cubit<AuthState> {
       );
 
       print("Status Code: ${response.statusCode}");
+      print("Base URL from Dio: ${DioHelper.dio.options.baseUrl}");
+
       print("Response Data: ${response.data}");
 
       if (response.statusCode == 200) {
@@ -164,23 +169,28 @@ class AuthCubit extends Cubit<AuthState> {
         'profile',
       ],
       clientId:
-          "510480483026-cnd0tbmgomdo70n6u2i6uo3nm073t39h.apps.googleusercontent.com");
+          "${dotenv.env['GOOGLE_CLIENT_ID']}");
 
   Future<void> loginWithGoogle(BuildContext context) async {
     emit(LogInLoading());
 
     try {
+      debugPrint("🔄 تسجيل خروج من Google (لتجنب جلسة قديمة)...");
       await _googleSignIn.signOut();
+       debugPrint("📌 بدء عملية تسجيل الدخول بحساب Google...");
 
       final GoogleSignInAccount? account = await _googleSignIn.signIn();
+       debugPrint("🔑 Tokens من Google:");
+    
 
       if (account == null) {
         debugPrint('🔸 المستخدم ألغى العملية.');
         return;
       }
-
+debugPrint("✅ المستخدم اختار الحساب: ${account.email} - ID: ${account.id}");
+debugPrint("🌐 إرسال الطلب إلى السيرفر Laravel...");
       final auth = await account.authentication;
-      // debugPrint('✅ ID‑Token: ${auth.idToken}');
+      debugPrint('✅ ID‑Token: ${auth.idToken}');
       debugPrint('✅ Access‑Token: ${auth.accessToken}');
       final response = await DioHelper.postData(
         url: "auth/google",
@@ -190,6 +200,7 @@ class AuthCubit extends Cubit<AuthState> {
         },
         headers: {"Accept": "application/json"},
       ).then((value) {
+        debugPrint("📥 رد السيرفر وصل (StatusCode: ${value.statusCode})");
         print(value.statusCode);
         if (value.statusCode == 200) {
           userAuthModel = UserAuthModel.fromJson(value.data);
@@ -199,7 +210,8 @@ class AuthCubit extends Cubit<AuthState> {
 
           print('token: ${userAuthModel?.token}');
           emit(LogInsucess());
-        } else {
+        }
+         else {
           emit(LogInError(message: S.of(context).error_occurred));
         }
       }).catchError((value) {
@@ -338,7 +350,7 @@ class AuthCubit extends Cubit<AuthState> {
   ///// github
 
   Future<void> loginWithGithub() async {
-    final clientId = "Ov23liYeQk2Aowky4z3Z";
+    final clientId = dotenv.env['GITHUB_CLIENT_ID'];
 
     final redirectUri = "myapp://callback";
     final scope = "read:user,user:email";

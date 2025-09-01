@@ -55,8 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "time is finish , test over",
     ),
     "Total_Contests": MessageLookupByLibrary.simpleMessage("Total Contests"),
-    "Total_Courses": MessageLookupByLibrary.simpleMessage("Total Contests"),
-    "Total_Paths": MessageLookupByLibrary.simpleMessage("Total Contests"),
+    "Total_Courses": MessageLookupByLibrary.simpleMessage("Total Courses"),
+    "Total_Paths": MessageLookupByLibrary.simpleMessage("Total Paths"),
     "You_cant_open_programming_contest_now":
         MessageLookupByLibrary.simpleMessage(
           "You can\'t open programming contest now",

@@ -123,7 +123,7 @@ class LearnPathInfoCourse {
 class LearningPath {
   final int id;
   final String name;
-  final String image;
+  final String? image;
 
   LearningPath({
     required this.id,
@@ -133,9 +133,9 @@ class LearningPath {
 
   factory LearningPath.fromJson(Map<String, dynamic> json) {
     return LearningPath(
-      id: json['id'] ?? 0,
-      name: json['name'] ?? '',
-      image: json['image'] ?? '',
+      id: json['id'],
+      name: json['name'],
+      image: json['image'],
     );
   }
 

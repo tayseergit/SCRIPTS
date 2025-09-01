@@ -28,7 +28,7 @@ if (teacherContest.isEmpty) {
 
 
     return Container(
-      height: 500.h,
+      height: 340.h,
       color: appColors.pageBackground,
       child: GridView.builder(
         itemCount: teacherContest.length,

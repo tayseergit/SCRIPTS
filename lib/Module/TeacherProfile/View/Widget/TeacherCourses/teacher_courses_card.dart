@@ -41,10 +41,9 @@ class Teachercoursescard extends StatelessWidget {
                     height: 100.h,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5.r),
-                      child: (teacherCoursesModel.imageOfCourse == null &&
-                              teacherCoursesModel.imageOfCourse.isNotEmpty)
+                      child: (teacherCoursesModel.imageOfCourse != null)
                           ? Image.network(
-                              teacherCoursesModel.imageOfCourse,
+                              teacherCoursesModel.imageOfCourse!,
                               width: double.infinity,
                               height: 100.h,
                               fit: BoxFit.cover,

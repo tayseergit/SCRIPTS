@@ -27,8 +27,8 @@ class ContainerTest extends StatelessWidget {
       color: context.read<ContestTestCubit>().answers[questionId.toString()] ==
               options.id
           ? appColors.lightGray
-          : appColors.fieldBackground,
-      boarderColor: appColors.blackGreen,
+          : appColors.blackGreenDisable,
+      // boarderColor: appColors.blackGreen,
       radius: 20,
       widget: AuthText(
         text: options.answer,

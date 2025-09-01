@@ -79,8 +79,8 @@ class ContestTestPage extends StatelessWidget {
                                   color: appColors.mainText,
                                   fontWeight: FontWeight.w700),
                               ContestTestTimer(
-                                // secondsLeft: testCubit.remainingSeconds!,
-                                secondsLeft: 15,
+                                secondsLeft: testCubit.remainingSeconds!,
+                                // secondsLeft: 15,
                                 onTimeFinished: () {
                                   showDialog(
                                     context: context,

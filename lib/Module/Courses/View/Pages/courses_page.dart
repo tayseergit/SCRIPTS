@@ -24,7 +24,7 @@ class CoursesPage extends StatelessWidget {
 
     return SafeArea(
       child: BlocProvider(
-        create: (_) => CourseCubit(context:context )..getAllCourse(),
+        create: (_) => CourseCubit(context: context)..getAllCourse(),
         child: Scaffold(
           backgroundColor: appColors.pageBackground,
           appBar: AppBar(
@@ -58,8 +58,9 @@ class CoursesPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
                 children: [
                   Customtextfieldsearsh(
-                    onSubmit: () {
-                      cubit.getAllCourse();
+                    onChanged: (value) {
+                      final cubit = context.read<CourseCubit>();
+                      cubit.onSearchChanged(value);
                     },
                     controller: cubit.searchController,
                     hintText: S.of(context).choose_course,

@@ -31,7 +31,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
   StudentProfileModel? studentProfileModel;
   void initState() {
     super.initState();
-    // استدعاء الدالة عند تحميل الصفحة
+
     context.read<StudentProfileCubit>().getProfile(widget.userid);
   }
 
@@ -49,35 +49,39 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
       StudentProfileCubit studentProfileCubit =
           context.read<StudentProfileCubit>();
 
-      return Container(
-        child: Builder(
-          builder: (context) {
-            if (state is ProfileLoading) {
-              return Center(
-                child: SizedBox(
-                  height: 80.h,
-                  child: Loading(height: 50.h, width: 50.w),
-                ),
-              );
-            } else if (state is ProfileError) {
-              return Center(
-                child: SizedBox(
-                  height: 100.h,
-                  width: 100.w,
-                  child: NoConnection(),
-                ),
-              );
-            } else if (state is NoAuth) {
-              return Center(
-                child: SizedBox(
-                  child: NoAuthUser(),
-                ),
-              );
-            }
-
-            return BuildProfileContent(cubit: studentProfileCubit);
-          },
-        ),
+      return Column(
+        children: [
+          Expanded(
+            child: Builder(
+              builder: (context) {
+                if (state is ProfileLoading) {
+                  return Center(
+                    child: SizedBox(
+                      height: 80.h,
+                      child: Loading(height: 50.h, width: 50.w),
+                    ),
+                  );
+                } else if (state is ProfileError) {
+                  return Center(
+                    child: SizedBox(
+                      height: 100.h,
+                      width: 100.w,
+                      child: NoConnection(),
+                    ),
+                  );
+                } else if (state is NoAuth) {
+                  return Center(
+                    child: SizedBox(
+                      child: NoAuthUser(),
+                    ),
+                  );
+                }
+            
+                return BuildProfileContent(cubit: studentProfileCubit);
+              },
+            ),
+          ),
+        ],
       );
     });
   }

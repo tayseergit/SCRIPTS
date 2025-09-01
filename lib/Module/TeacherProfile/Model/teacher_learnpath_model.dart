@@ -24,7 +24,7 @@ class TeacherLearnpathModel {
   final int id;
   final String title;
   final String description;
-  final String image;
+  final String? image;
   final double rate;
   final int coursesCount;
   final int teacherId;
@@ -52,7 +52,7 @@ class TeacherLearnpathModel {
       id: json['id'],
       title: json['title'],
       description: json['description'],
-      image: json['image'],
+      image: json['image']?? '',
       rate: (json['rate'] as num).toDouble(),
       coursesCount: json['courses_count'],
       teacherId: json['teacher_id'],

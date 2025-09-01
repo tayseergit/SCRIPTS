@@ -88,7 +88,7 @@ class CourseData {
 class LearningPath {
   final int id;
   final String title;
-  final String image;
+  final String? image;
 
   LearningPath({
     required this.id,

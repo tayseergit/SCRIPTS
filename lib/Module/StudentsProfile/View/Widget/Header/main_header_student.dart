@@ -96,28 +96,30 @@ class MainHeader extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 10.h),
-                OnBoardingContainer(
-                  onTap: () {
-                    if (cubit.studentProfileModel.gitHubAccount != null) {
-                      GlobalFunc.launchURL(
-                          cubit.studentProfileModel.gitHubAccount!);
-                    }
-                  },
-                  widget: Row(
-                    children: [
-                      Image.asset(
-                        Images.github,
-                        height: 20.h,
-                        width: 20.w,
-                      ),
-                      SizedBox(width: 10.w),
-                      AuthText(
-                        text: 'GitHub Account',
-                        size: 12.sp,
-                        color: appColors.mainText,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ],
+                Material(
+                  child: OnBoardingContainer(
+                    onTap: () {
+                      if (cubit.studentProfileModel.gitHubAccount != null) {
+                        GlobalFunc.launchURL(
+                            cubit.studentProfileModel.gitHubAccount!);
+                      }
+                    },
+                    widget: Row(
+                      children: [
+                        Image.asset(
+                          Images.github,
+                          height: 20.h,
+                          width: 20.w,
+                        ),
+                        SizedBox(width: 10.w),
+                        AuthText(
+                          text: 'GitHub Account',
+                          size: 12.sp,
+                          color: appColors.mainText,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(height: 10.h),

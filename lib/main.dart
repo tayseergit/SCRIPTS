@@ -47,7 +47,7 @@ import 'generated/l10n.dart';
  
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await dotenv.load(fileName: "assets/.env");
+  await dotenv.load(fileName: ".env");
   await CacheHelper.init();
   await Firebase.initializeApp();
   await requestNotificationPermission();

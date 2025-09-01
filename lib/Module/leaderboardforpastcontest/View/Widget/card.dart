@@ -70,7 +70,7 @@ class CardLeader extends StatelessWidget {
                               CircleAvatar(
                                 radius: 25.r,
                                 backgroundImage: student.image.isNotEmpty
-                                    ? NetworkImage(student.image)
+                                    ? NetworkImage(student.image!)
                                     : AssetImage(Images.noImage) as ImageProvider,
                               ),
                               SizedBox(width: 12.w),

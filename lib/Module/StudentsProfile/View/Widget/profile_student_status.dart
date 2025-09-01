@@ -30,27 +30,29 @@ class Profilestate extends StatelessWidget {
               ),
             ],
           ),
-          child: OnBoardingContainer(
-            height: 55,
-            color: appColors.blackGreen
-                .withOpacity(0.05), // container already has gradient
-            widget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AuthText(
-                  text: title,
-                  size: 8.sp,
-                  color: appColors.mainText,
-                  fontWeight: FontWeight.w600,
-                ),
-                SizedBox(height: 4.h),
-                AuthText(
-                  text: value,
-                  size: 12.sp,
-                  color: appColors.mainText,
-                  fontWeight: FontWeight.bold,
-                ),
-              ],
+          child: Material(
+            child: OnBoardingContainer(
+              height: 55,
+              color: appColors.blackGreen
+                  .withOpacity(0.05), 
+              widget: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AuthText(
+                    text: title,
+                    size: 8.sp,
+                    color: appColors.mainText,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  SizedBox(height: 4.h),
+                  AuthText(
+                    text: value,
+                    size: 12.sp,
+                    color: appColors.mainText,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
