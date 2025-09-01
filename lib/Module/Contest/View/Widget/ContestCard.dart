@@ -128,7 +128,6 @@ class Contestcard extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                   ),
                                   onTap: () {
-                                    // CacheHelper.removeAllData();
                                     if (CacheHelper.getToken() == null) {
                                       showNoAuthDialog(context);
                                     } else {
@@ -196,6 +195,10 @@ class Contestcard extends StatelessWidget {
             ),
           ),
           onTap: () {
+            if (CacheHelper.getToken() == null) {
+              showNoAuthDialog(context);
+              return;
+            }
             if (contest.type == "programming" || contest.alreadyParticipate!) {
               showDialog(
                 context: context,

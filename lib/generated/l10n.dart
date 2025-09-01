@@ -1389,20 +1389,15 @@ class S {
     );
   }
 
-  /// `Total Contests`
+  /// `Total Paths`
   String get Total_Paths {
-    return Intl.message(
-      'Total Contests',
-      name: 'Total_Paths',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Total Paths', name: 'Total_Paths', desc: '', args: []);
   }
 
-  /// `Total Contests`
+  /// `Total Courses`
   String get Total_Courses {
     return Intl.message(
-      'Total Contests',
+      'Total Courses',
       name: 'Total_Courses',
       desc: '',
       args: [],

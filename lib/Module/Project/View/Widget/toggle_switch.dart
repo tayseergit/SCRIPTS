@@ -2,10 +2,12 @@ import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Module/Project/Cubit/project_cubit.dart';
 import 'package:lms/Module/Project/Cubit/project_state.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
+import 'package:lms/Module/mainWidget/no_auth.dart';
 import 'package:lms/generated/l10n.dart';
 
 class ToggleExample extends StatelessWidget {
@@ -49,7 +51,11 @@ class ToggleExample extends StatelessWidget {
               );
             },
             onChanged: (i) {
-              projectCubit.changeKind(i, context); // Notify cubit
+              if (i == 1 && CacheHelper.getToken() == null) {
+                showNoAuthDialog(context);
+                return; // لا تغيّر الحالة
+              }
+              projectCubit.changeKind(i, context);
             },
           ),
         );

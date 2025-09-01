@@ -80,8 +80,7 @@ class AddProjectCubit extends Cubit<AddProjectState> {
   void AddProjects(BuildContext context) async {
     if (titleController.text.isEmpty ||
         descriptionController.text.isEmpty ||
-        selectedTag == null 
-        ) {
+        selectedTag == null) {
       emit(FieldRrequired());
       return;
     }
@@ -100,18 +99,39 @@ class AddProjectCubit extends Cubit<AddProjectState> {
         );
       }
 
+      print("✅ Technologies to send:");
+selectedTechnologies.asMap().forEach((i, tech) {
+  print("technologies[$i] = $tech");
+});
+
+
       final formData = FormData.fromMap({
         "title": titleController.text,
         "image": multipartImage, // هنا يمكن أن تكون null
         "description": descriptionController.text,
-        "technologies": selectedTechnologies,
-        "links": {
-          "gitHub_url": gitHubController.text.trim(),
-          "demo": demoController.text.trim(),
-          "steam": steamController.text.trim(),
-        },
+        for (int i = 0; i < selectedTechnologies.length; i++)
+          "technologies[$i]": selectedTechnologies[i],
+
+        "links": [
+          {"gitHub_url": gitHubController.text.trim()},
+          {"demo": demoController.text.trim()},
+          {"steam": steamController.text.trim()},
+        ],
         "tag_id": selectedTag!.id,
       });
+
+      print("📤 Data to send:");
+      print("Title: ${titleController.text}");
+      print("Description: ${descriptionController.text}");
+      print("Tag ID: ${selectedTag!.id}");
+      print("Technologies: ${selectedTechnologies}");
+      print("Links: ${[
+        {"gitHub_url": gitHubController.text.trim()},
+        {"demo": demoController.text.trim()},
+        {"steam": steamController.text.trim()},
+      ]}");
+      print("Image: ${imageFile?.path}");
+
       // print(formData);
       final response = await DioHelper.postFormData(
         url: "projects",
@@ -121,6 +141,7 @@ class AddProjectCubit extends Cubit<AddProjectState> {
           "Authorization": "Bearer ${CacheHelper.getToken()}",
         },
       );
+
       print("ddddddddddd");
       print(response.data);
       final status = response.data['status'];

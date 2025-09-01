@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +18,7 @@ class ContestCubit extends Cubit<ContestState> {
   final userId = CacheHelper.getData(key: "user_id");
 
   final searchController = TextEditingController();
+  Timer? _debounce;
 
   final labels = [
     'ended',
@@ -50,6 +53,16 @@ class ContestCubit extends Cubit<ContestState> {
     emit(Selected());
     getContest();
   }
+
+void onSearchChanged(String value) {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+
+    _debounce = Timer(const Duration(seconds: 1), () {
+      resetPagination();
+      getContest();
+    });
+  }
+
 
   Future<void> getContest( ) async {
      if (!hasMorePages || isLoading) return;

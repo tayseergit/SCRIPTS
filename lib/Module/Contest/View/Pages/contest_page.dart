@@ -74,7 +74,9 @@ class _ContestPageState extends State<ContestPage> {
             ),
           ),
           body: BlocConsumer<ContestCubit, ContestState>(
-            listener: (context, state) {},
+            listener: (context, state) {
+              
+            },
             builder: (context, state) {
               final contestCubit = context.watch<ContestCubit>();
               return Padding(
@@ -82,9 +84,10 @@ class _ContestPageState extends State<ContestPage> {
                 child: ListView(
                   children: [
                     Customtextfieldsearsh(
-                      onSubmit: () {
-                        contestCubit.getContest();
-                      },
+                     onChanged: (value) {
+                      final cubit = context.read<ContestCubit>();
+                      cubit.onSearchChanged(value);
+                    },
                       controller: contestCubit.searchController,
                       hintText: S.of(context).choose_contest,
                     ),

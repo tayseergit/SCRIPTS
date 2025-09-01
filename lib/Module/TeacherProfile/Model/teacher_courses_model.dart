@@ -23,7 +23,7 @@ class TeacherCourse {
   final String titleOfCourse;
   final String descriptionOfCourse;
   final String rate;
-  final String imageOfCourse;
+  final String? imageOfCourse;
   final int numberOfVideo;
   final int numberOfTest;
   final String price;

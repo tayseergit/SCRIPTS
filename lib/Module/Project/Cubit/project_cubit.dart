@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +27,7 @@ class ProjectCubit extends Cubit<ProjectState> {
 
   final token = CacheHelper.getData(key: "token");
   final userId = CacheHelper.getData(key: "user_id");
+  Timer? _debounce;
 
   final searchController = TextEditingController();
   List<String> imageLabel = [
@@ -53,6 +56,15 @@ class ProjectCubit extends Cubit<ProjectState> {
     emit(Selected());
     resetProjects();
     getProjects(context);
+  }
+
+  void onSearchChanged(String value, BuildContext context) {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+
+    _debounce = Timer(const Duration(seconds: 1), () {
+      resetProjects();
+      getProjects(context);
+    });
   }
 
   void changeKind(int index, BuildContext context) {
@@ -101,7 +113,7 @@ class ProjectCubit extends Cubit<ProjectState> {
 
     if (currentPage == 1) emit(ProjectLoading());
 
-     try {
+    try {
       final response = await DioHelper.getData(url: "projects", headers: {
         "Accept": "application/json",
         "Authorization": "Bearer $token",

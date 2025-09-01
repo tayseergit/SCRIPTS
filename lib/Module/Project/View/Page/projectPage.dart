@@ -116,8 +116,9 @@ class ProjectPage extends StatelessWidget {
                           SizedBox(
                             width: 220.w,
                             child: Customtextfieldsearsh(
-                              onSubmit: () {
-                                projectCubit.getProjects(context);
+                              onChanged: (value) {
+                                final cubit = context.read<ProjectCubit>();
+                                cubit.onSearchChanged(value, context);
                               },
                               controller: projectCubit.searchController,
                               hintText: lang.search_project,

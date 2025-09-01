@@ -52,8 +52,9 @@ class LearnpathPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
                 children: [
                   Customtextfieldsearsh(
-                    onSubmit: () {
-                      cubit.getAllLearnPath();
+                    onChanged: (value) {
+                      final cubit = context.read<LearnPathCubit>();
+                      cubit.onSearchChanged(value);
                     },
                     controller: cubit.searchController,
                     hintText: S.of(context).choose_learn_path,

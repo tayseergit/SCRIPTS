@@ -34,17 +34,31 @@ class LearnPathInfoPage extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => AboutthisPathCubit()),
         BlocProvider(create: (_) => TeacherCubit()),
-        BlocProvider(create: (_) => LearnPathInfoCubit()),
+        BlocProvider(
+            create: (_) => LearnPathInfoCubit()
+              ..fetchAllLearnPathData(learningPathInfoData.id)),
       ],
       child: Directionality(
         textDirection: TextDirection.ltr,
         child: SafeArea(
-          child: BlocBuilder<LearnPathInfoCubit, LearnPathInfoState>(
-            builder: (context, state) {
+          child: BlocConsumer<LearnPathInfoCubit, LearnPathInfoState>(
+            listener: (context, state) {
+              // أي أكشن جانبي يجب أن يكون هنا
               if (state is UnAuthUser) {
-                showNoAuthDialog(context);
+                showNoAuthDialog(context); // هنا آمن لأنه بعد build
+              } else if (state is UpdateStatusSuccess ||
+                  state is DeleteStatusSuccess) {
+                customSnackBar(
+                    context: context, success: 1, message: S.of(context).done);
+              } else if (state is UpdateStatusError ||
+                  state is DeleteStatusError) {
+                customSnackBar(
+                    context: context,
+                    success: 0,
+                    message: S.of(context).error_occurred);
               }
-              var cubit = context.read<LearnPathInfoCubit>();
+            },
+            builder: (context, state) {
               return Scaffold(
                 backgroundColor: appColors.pageBackground,
                 body: Column(
@@ -59,7 +73,7 @@ class LearnPathInfoPage extends StatelessWidget {
                               child: (learningPathInfoData.image != null &&
                                       learningPathInfoData.image.isNotEmpty)
                                   ? Image.network(
-                                      learningPathInfoData.image,
+                                      learningPathInfoData.image!,
                                       width: double.infinity.w,
                                       height: 250.h,
                                       fit: BoxFit.cover,
@@ -374,6 +388,10 @@ class LearnPathInfoPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 10.h),
+                    Expanded(
+                      child: EnrollWatchLaterButtons(
+                        cubit: context.read<LearnPathInfoCubit>(),
+                      ),
                     // Container(
                     //   height: 100,
                     //   width: 100,

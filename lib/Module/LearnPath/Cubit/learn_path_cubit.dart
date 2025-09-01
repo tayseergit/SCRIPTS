@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
@@ -20,7 +21,7 @@ class LearnPathCubit extends Cubit<LearnPathState> {
   final TextEditingController searchController = TextEditingController();
   final token = CacheHelper.getData(key: "token");
   final userId = CacheHelper.getData(key: "user_id");
-
+  Timer? _debounce;
   final labels = ['All', 'Enroll', 'Watch later'];
   int selectedTab = 0;
 
@@ -38,6 +39,15 @@ class LearnPathCubit extends Cubit<LearnPathState> {
       S.of(context).enroll,
       S.of(context).watchLater,
     ];
+  }
+
+  void onSearchChanged(String value) {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+
+    _debounce = Timer(const Duration(seconds: 1), () {
+      reset();
+      getAllLearnPath();
+    });
   }
 
   void reset() {

@@ -237,6 +237,10 @@ class Settingpage extends StatelessWidget {
                         ),
                         child: OnBoardingContainerMore(
                             onTap: () {
+                              if (CacheHelper.getToken() == null) {
+                                showNoAuthDialog(context);
+                                return; 
+                              }
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

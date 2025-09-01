@@ -483,7 +483,10 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                           ),
                           onTap: () {
                             pushTo(
-                                context: context, toPage: TeacherProfilePage(teacherid:courseInfoData.teacherId ,));
+                                context: context,
+                                toPage: TeacherProfilePage(
+                                  teacherid: courseInfoData.teacherId,
+                                ));
                           },
                         ),
                       ],
@@ -521,11 +524,8 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                                   )
                                 : courseInfoData.status != "enrolled" &&
                                         (courseInfoData.studentPaid == "0.00" ||
-                                            courseInfoData.studentPaid ==
-                                                null) &&
-                                        courseInfoData.price != "0.00"
+                                            courseInfoData.studentPaid == null)
                                     ? OnBoardingContainer(
-                                        // width: 160,
                                         height: 50,
                                         color: appColors.blackGreen,
                                         widget: AuthText(
@@ -537,7 +537,33 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                                           fontWeight: FontWeight.w500,
                                         ),
                                         onTap: () {
-                                          courseInfoCubit.postEnrollCourse();
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: Text(lang.enroll),
+                                                content: Text(
+                                                  'Are you sure to buy this course?',
+                                                ),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Text(lang.cancel),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                      courseInfoCubit
+                                                          .postEnrollCourse();
+                                                    },
+                                                    child: Text('Yes'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
                                         },
                                       )
                                     : (courseInfoData.studentPaid == "0.00" ||

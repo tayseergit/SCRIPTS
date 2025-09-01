@@ -20,7 +20,7 @@ class QuizResultModel {
       status: json['status'] ?? false,
       message: json['message'] ?? '',
       yourOrder: json['your_order'],
-      questionCount: json['question_count'] ?? 0,
+      questionCount: int.tryParse(json['question_count']?.toString() ?? '0') ?? 0,
       students: (json['students'] as List<dynamic>?)
               ?.map((e) => Studentss.fromJson(e))
               .toList() ??
@@ -62,13 +62,13 @@ class Studentss {
 
   factory Studentss.fromJson(Map<String, dynamic> json) {
     return Studentss(
-      id: json['id'] ?? 0,
-      name: json['name'] ?? '',
-      endTime: json['end_time'] ?? '',
-      correctAnswers: json['correct_answers'] ?? 0,
-      gainedPoints: json['gained_points'] ?? 0,
-      rank: json['rank'] ?? 0,
-      image: json['image'] ?? '',
+      id: int.tryParse(json['id']?.toString() ?? '0') ?? 0,
+      name: json['name']?.toString() ?? '',
+      endTime: json['end_time']?.toString() ?? '',
+      correctAnswers: int.tryParse(json['correct_answers']?.toString() ?? '0') ?? 0,
+      gainedPoints: int.tryParse(json['gained_points']?.toString() ?? '0') ?? 0,
+      rank: int.tryParse(json['rank']?.toString() ?? '0') ?? 0,
+      image: json['image']?.toString() ?? '',
     );
   }
 
@@ -100,10 +100,10 @@ class Meta {
 
   factory Meta.fromJson(Map<String, dynamic> json) {
     return Meta(
-      currentPage: json['current_page'] ?? 0,
-      lastPage: json['last_page'] ?? 0,
-      perPage: json['per_page'] ?? 0,
-      total: json['total'] ?? 0,
+      currentPage: int.tryParse(json['current_page']?.toString() ?? '0') ?? 0,
+      lastPage: int.tryParse(json['last_page']?.toString() ?? '0') ?? 0,
+      perPage: int.tryParse(json['per_page']?.toString() ?? '0') ?? 0,
+      total: int.tryParse(json['total']?.toString() ?? '0') ?? 0,
     );
   }
 

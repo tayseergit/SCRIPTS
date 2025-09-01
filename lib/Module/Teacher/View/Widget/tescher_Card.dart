@@ -38,13 +38,13 @@ class Teschercard extends StatelessWidget {
                   children: [
                     teacherModel.image != null
                         ? Image.network(
-                            teacherModel.image!, // رابط افتراضي إذا كان null
+                            teacherModel.image!, 
                             width: double.infinity,
                             height: double.infinity,
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {
                               return Image.asset(
-                                Images.noProfile, // صورة افتراضية محلية
+                                Images.noProfile, 
                                 width: double.infinity,
                                 height: double.infinity,
                                 fit: BoxFit.cover,

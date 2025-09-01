@@ -5,7 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DioHelper {
   static late final Dio _dio;
-
+static Dio get dio => _dio;
   static Future<void> init() async {
     final ip = dotenv.env['API_IP'];
     if (ip == null || ip.isEmpty) {

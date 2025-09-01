@@ -30,11 +30,7 @@ import 'package:lms/generated/l10n.dart';
 class TeacherProfilePage extends StatelessWidget {
   final UserData? userData;
   int teacherid;
-    TeacherProfilePage({
-    super.key,
-    this.userData,
-    required this.teacherid
-  });
+  TeacherProfilePage({super.key, this.userData, required this.teacherid});
 
   @override
   Widget build(BuildContext context) {
@@ -49,17 +45,16 @@ class TeacherProfilePage extends StatelessWidget {
         BlocProvider(
           create: (_) {
             print("🔥 Value of userData.id in Cubit Provider: ${userData?.id}");
-            return TeacherProfileCubit()
-              ..fetchTeacherProfile(teacherid);
+            return TeacherProfileCubit()..fetchTeacherProfile(teacherid);
           },
         ),
         BlocProvider(create: (_) => Tabteachercubit()),
         BlocProvider(
             create: (_) =>
-                TeacherCoursesCubit()..fetchTeacherCourse(teacherid )),
+                TeacherCoursesCubit()..fetchTeacherCourse(teacherid)),
         BlocProvider(
-            create: (_) => TeacherLearnPathCubit()
-              ..fetchTeacherLearnPath(teacherid)),
+            create: (_) =>
+                TeacherLearnPathCubit()..fetchTeacherLearnPath(teacherid)),
         BlocProvider(
             create: (_) =>
                 TeacherContestCubit()..fetchTeacherContest(teacherid)),
@@ -80,6 +75,9 @@ class TeacherProfilePage extends StatelessWidget {
               return Center(child: NoConnection());
             } else if (state is TeacherProfileSuccess) {
               final user = state.userModel.user;
+              print("🔥 user created_courses: ${user.created_courses}");
+              print("🔥 user created_paths: ${user.created_paths}");
+              print("🔥 user created_contests: ${user.created_contests}");
               print(user.image);
               return ListView(
                 children: [
@@ -94,15 +92,15 @@ class TeacherProfilePage extends StatelessWidget {
                       children: [
                         Profilestate(
                           title: lang.Total_Courses,
-                          value: (userData?.created_courses ?? 0).toString(),
+                          value: (user.created_courses ?? 0).toString(),
                         ),
                         Profilestate(
                           title: lang.Total_Paths,
-                          value: (userData?.created_paths ?? 0).toString(),
+                          value: (user.created_paths ?? 0).toString(),
                         ),
                         Profilestate(
                           title: lang.Total_Contests,
-                          value: (userData?.created_contests ?? 0).toString(),
+                          value: (user.created_contests ?? 0).toString(),
                         ),
                       ],
                     ),
@@ -219,8 +217,10 @@ class TeacherProfilePage extends StatelessWidget {
                       },
                     ),
                   ),
+                  SizedBox(height: 10.h,)
                 ],
               );
+              
             }
 
             return const SizedBox.shrink();
