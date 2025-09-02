@@ -20,3 +20,4 @@ class ParticpantsError extends ParticipantsState {
 class ParticpantsAddSuccess extends ParticipantsState {}
 
 class ParticpantsLoadingCards extends ParticipantsState {}
+class UnAuth extends ParticipantsState {}

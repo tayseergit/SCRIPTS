@@ -1408,6 +1408,41 @@ class S {
   String get loading {
     return Intl.message('Loading', name: 'loading', desc: '', args: []);
   }
+
+  /// `watch content`
+  String get watch_content {
+    return Intl.message(
+      'watch content',
+      name: 'watch_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `confirm`
+  String get confirm {
+    return Intl.message('confirm', name: 'confirm', desc: '', args: []);
+  }
+
+  /// `Payment Confirmation`
+  String get payment_confirmation {
+    return Intl.message(
+      'Payment Confirmation',
+      name: 'payment_confirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure to buy this course?`
+  String get buy_course_message {
+    return Intl.message(
+      'Are you sure to buy this course?',
+      name: 'buy_course_message',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

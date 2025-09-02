@@ -15,6 +15,7 @@ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/no_auth.dart';
 import 'package:lms/generated/l10n.dart';
 
@@ -59,6 +60,8 @@ class LearnPathInfoPage extends StatelessWidget {
               }
             },
             builder: (context, state) {
+              var cubit = context.read<LearnPathInfoCubit>();
+
               return Scaffold(
                 backgroundColor: appColors.pageBackground,
                 body: Column(
@@ -71,7 +74,7 @@ class LearnPathInfoPage extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(12.r),
                               child: (learningPathInfoData.image != null &&
-                                      learningPathInfoData.image.isNotEmpty)
+                                      learningPathInfoData.image!.isNotEmpty)
                                   ? Image.network(
                                       learningPathInfoData.image!,
                                       width: double.infinity.w,
@@ -259,14 +262,17 @@ class LearnPathInfoPage extends StatelessWidget {
                                                           height: 5.h,
                                                         ),
                                                         CircleAvatar(
+                                                          backgroundColor: appColors
+                                                              .lightfieldBackground,
                                                           radius: 40,
-                                                          backgroundColor:
-                                                              Colors.grey[200],
+                                                          backgroundImage:
+                                                              null, // نشيله ونستخدم child بدالها
                                                           child: ClipOval(
                                                             child:
                                                                 Image.network(
                                                               learningPathInfoData
-                                                                  .teacherImage, // network image
+                                                                      .teacherImage ??
+                                                                  "", // إذا null يرجع ""
                                                               fit: BoxFit.cover,
                                                               width: 80,
                                                               height: 80,
@@ -274,11 +280,10 @@ class LearnPathInfoPage extends StatelessWidget {
                                                                   (context,
                                                                       error,
                                                                       stackTrace) {
-                                                                // fallback if network fails
                                                                 return Image
                                                                     .asset(
                                                                   Images
-                                                                      .studentIcon,
+                                                                      .noProfile, // صورتك الافتراضية
                                                                   fit: BoxFit
                                                                       .cover,
                                                                   width: 80,
@@ -388,23 +393,142 @@ class LearnPathInfoPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 10.h),
-                    Expanded(
-                      child: EnrollWatchLaterButtons(
-                        cubit: context.read<LearnPathInfoCubit>(),
+                    Container(
+                        child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child:
+                          BlocConsumer<LearnPathInfoCubit, LearnPathInfoState>(
+                        listener: (context, state) {
+                          if (state is UpdateStatusSuccess ||
+                              state is DeleteStatusSuccess) {
+                            customSnackBar(
+                              context: context,
+                              success: 1,
+                              message: S.of(context).done,
+                            );
+                          } else if (state is UpdateStatusError ||
+                              state is DeleteStatusError) {
+                            customSnackBar(
+                              context: context,
+                              success: 0,
+                              message: S.of(context).error_occurred,
+                            );
+                          }
+                        },
+                        builder: (context, state) {
+                          var cubit = context.watch<LearnPathInfoCubit>();
+                          if (state is LearnPathInfoInitial ||
+                              state is LearnPathInfoLoading) {
+                            return Loading();
+                          }
+                          if (state is LearnPathInfoError) {
+                            return AuthText(
+                              text: state.masseg,
+                              color: appColors.mainText,
+                            );
+                          }
+
+                          var data = cubit.learningPathInfoModel!.data;
+                          return Column(
+                            children: [
+                              AuthText(
+                                text: "${S.of(context).change_path_status}",
+                                color: appColors.mainText,
+                                size: 15,
+                              ),
+                              SizedBox(height: 10.h),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  // Enroll Button
+                                  Expanded(
+                                    child: state is UpdateEnrollStatusLoading
+                                        ? Loading()
+                                        : OnBoardingContainer(
+                                            radius: 20.r,
+                                            height: 50,
+                                            color: data.status == "enroll"
+                                                ? appColors.secondText
+                                                : appColors.blackGreen,
+                                            widget: AuthText(
+                                              text: S.of(context).enroll,
+                                              color: appColors.whiteText,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                            onTap: () {
+                                              if (data.status != "enroll") {
+                                                cubit.updatePathStatus(
+                                                    context, data.id, "enroll");
+                                              }
+                                            },
+                                          ),
+                                  ),
+
+                                  SizedBox(width: 10.w),
+
+                                  // Watch Later Button
+                                  Expanded(
+                                    child: state is UpdateLaterStatusLoading
+                                        ? Loading()
+                                        : OnBoardingContainer(
+                                            radius: 20.r,
+                                            height: 50,
+                                            color: data.status == "watch_later"
+                                                ? appColors.secondText
+                                                : appColors.blackGreen,
+                                            widget: AuthText(
+                                              text: S.of(context).watchLater,
+                                              color: appColors.whiteText,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                            onTap: () {
+                                              if (data.status !=
+                                                  "watch_later") {
+                                                cubit.updatePathStatus(
+                                                  context,
+                                                  data.id,
+                                                  "watch_later",
+                                                );
+                                              }
+                                            },
+                                          ),
+                                  ),
+
+                                  SizedBox(width: 10.w),
+
+                                  // Remove Button
+                                  Expanded(
+                                    child: state is DeleteStatusLoading
+                                        ? Loading()
+                                        : OnBoardingContainer(
+                                            radius: 20.r,
+                                            height: 50,
+                                            color: data.status != null
+                                                ? appColors.blackGreen
+                                                : appColors.secondText,
+                                            widget: AuthText(
+                                              text: S
+                                                  .of(context)
+                                                  .remove_path_status,
+                                              color: appColors.whiteText,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                            onTap: () {
+                                              if (data.status != null) {
+                                                cubit.deletePathStatus(
+                                                    context, data.id);
+                                              }
+                                            },
+                                          ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        },
                       ),
-                    // Container(
-                    //   height: 100,
-                    //   width: 100,
-                    //   color: appColors.blackGreen,
-                    // ),
-                    BlocBuilder<LearnPathInfoCubit, LearnPathInfoState>(
-                      builder: (context, state) {
-                        print(learningPathInfoData);
-                        return EnrollWatchLaterButtons(
-                          learningPathInfoModel: learningPathInfoData!,
-                        );
-                      },
-                    ),
+                    ))
                   ],
                 ),
               );

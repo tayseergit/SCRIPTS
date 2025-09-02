@@ -5,7 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DioHelper {
   static late final Dio _dio;
-static Dio get dio => _dio;
+  static Dio get dio => _dio;
   static Future<void> init() async {
     final ip = dotenv.env['API_IP'];
     if (ip == null || ip.isEmpty) {
@@ -21,9 +21,9 @@ static Dio get dio => _dio;
     _dio = Dio(
       BaseOptions(
         baseUrl: baseUrlApi,
-        connectTimeout: const Duration(seconds: 25),
-        receiveTimeout: const Duration(seconds: 25),
-        sendTimeout: const Duration(seconds: 25),
+        connectTimeout: const Duration(seconds: 100),
+        receiveTimeout: const Duration(seconds: 100),
+        sendTimeout: const Duration(seconds: 100),
         headers: {
           HttpHeaders.acceptHeader: "application/json",
         },

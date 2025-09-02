@@ -27,6 +27,7 @@ class Cursescard extends StatelessWidget {
         print(course.imageOfCourse);
         // pushTo(context: context, toPage: CourseInfoPage(courseId: course.id));
         pushTo(context: context, toPage: CourseInfoPage(courseId: course.id));
+        FocusScope.of(context).unfocus();
       },
       child: Container(
         width: 180.w,
@@ -125,7 +126,7 @@ class Cursescard extends StatelessWidget {
                         children: [
                           AuthText(
                             text: course.titleOfCourse,
-                            color: appColors.whiteText,
+                            color: appColors.mainText,
                             size: 18.sp,
                             fontWeight: FontWeight.w700,
                             maxLines: 1,

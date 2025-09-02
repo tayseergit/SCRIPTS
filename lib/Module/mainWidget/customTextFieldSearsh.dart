@@ -57,6 +57,8 @@ class Customtextfieldsearsh extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius.r),
       ),
       child: TextField(
+        autofocus: false, // مهم جداً
+
         controller: controller,
         obscureText: obscureText,
         keyboardType: keyboardType,

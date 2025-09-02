@@ -180,56 +180,63 @@ class PercentindIcatorCourseTestPage extends StatelessWidget {
 
                     // Buttons Row
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // Restart Quiz Button
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: appColors.primary,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 25.w, vertical: 12.h),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.r),
+                        if (testCubit.courseTestQuestion!.bestResult < 60)
+                          Expanded(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: appColors.primary,
+                                padding: EdgeInsets.symmetric(vertical: 12.h),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                              ),
+                              onPressed: () {
+                                pushReplacement(
+                                  context: context,
+                                  toPage: CourseTestPage(
+                                    courseId: courseId,
+                                    testId: testId,
+                                  ),
+                                );
+                              },
+                              child: AuthText(
+                                text: lang.restart_quiz,
+                                size: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
-                          onPressed: () {
-                            pushReplacement(
-                                context: context,
-                                toPage: CourseTestPage(
-                                  courseId: courseId,
-                                  testId: testId,
-                                ));
-                          },
-                          child: AuthText(
-                            text: lang.restart_quiz,
-                            size: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(width: 15.w),
-                        // Back Button
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: appColors.ok,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 25.w, vertical: 12.h),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.r),
+                        if (testCubit.courseTestQuestion!.bestResult < 60)
+                          SizedBox(
+                              width:
+                                  15.w), // spacing only if both buttons exist
+
+                        // Back Button (always appears)
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: appColors.ok,
+                              padding: EdgeInsets.symmetric(vertical: 12.h),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.r),
+                              ),
                             ),
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: AuthText(
-                            text: lang.back_to_video,
-                            size: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: AuthText(
+                              text: lang.back_to_video,
+                              size: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),

@@ -56,7 +56,7 @@ class More extends StatelessWidget {
               child: AuthText(
                   text: S.of(context).More,
                   size: 30,
-                  color: appColors.mainText,
+                      color: appColors.blackGreen,
                   fontWeight: FontWeight.bold),
             ),
             Padding(

@@ -7,6 +7,7 @@ import 'package:lms/Module/ChatGpt/Model/chat_model.dart';
 import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/Module/mainWidget/no_auth.dart';
 import 'package:lms/Module/mainWidget/shake_animation.dart';
 
 class ChatPage extends StatelessWidget {
@@ -35,6 +36,9 @@ class ChatPage extends StatelessWidget {
               fillColor: appColors.red,
               message: state.message,
             );
+          }
+          if (state is UnAuth) {
+            showNoAuthDialog(context);
           }
         },
         builder: (context, state) {
@@ -153,18 +157,6 @@ class ChatPage extends StatelessWidget {
                                 size: 48.sp,
                               ),
                               SizedBox(height: 16.h),
-                              Text(
-                                state.message,
-                                style: TextStyle(color: appColors.red),
-                                textAlign: TextAlign.center,
-                              ),
-                              SizedBox(height: 16),
-                              ElevatedButton(
-                                onPressed: () {
-                                  context.read<ChatCubit>().fetchChatMessages();
-                                },
-                                child: Text("Retry"),
-                              ),
                             ],
                           ),
                         );

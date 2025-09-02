@@ -75,7 +75,7 @@ class CourseTestPage extends StatelessWidget {
                           AuthText(
                               text: lang.test,
                               size: 27,
-                              color: appColors.mainText,
+                              color: appColors.blackGreen,
                               fontWeight: FontWeight.w700),
                           SizedBox(
                             height: 70.h,

@@ -180,7 +180,12 @@
     "Total_Contests":"مجموع الدورات",
   "Total_Paths":"مجموع المسارات",
   "Total_Courses":"مجموع المسابقات",
-  "loading":"يتم التحميل"
+  "loading":"يتم التحميل",
+  "watch_content":"رؤية المحتوى",
+  "confirm":"تأكيد",
+    "payment_confirmation": "تأكيد الدفع",
+    "buy_course_message": "هل أنت متأكد من شراء هذا الدورة؟"
+
 
 
 

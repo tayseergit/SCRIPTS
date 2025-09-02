@@ -24,7 +24,11 @@ class ParticipantsCard extends StatelessWidget {
       body: Center(
         child: InkWell(
           onTap: () {
-            pushTo(context: context, toPage: StudentProfilePage(userid:teacherModel.id ,));
+            pushTo(
+                context: context,
+                toPage: StudentProfilePage(
+                  userid: teacherModel.id,
+                ));
           },
           child: Container(
             width: 180.w,
@@ -67,7 +71,7 @@ class ParticipantsCard extends StatelessWidget {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              appColors.mainIconColor.withOpacity(0),
+                              appColors.mainIconColor.withOpacity(0.2),
                               appColors.primary.withOpacity(0.8),
                             ],
                           ),
@@ -84,7 +88,7 @@ class ParticipantsCard extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               horizontal: 8.w, vertical: 6.h),
                           decoration: BoxDecoration(
-                            color: appColors.mainText.withOpacity(0.7),
+                            color: appColors.blackGreen,
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                           child: Row(

@@ -30,17 +30,17 @@ class LearningPathInfoData {
   final int id;
   final String title;
   final String description;
-  final String image;
+  final String? image;
   final double rate;
   final int coursesCount;
   final String totalCoursesPrice;
   final String totalDuration;
   final int teacherId;
   final String teacherName;
-  final String teacherImage;
+  final String? teacherImage;
   final String teacherBio;
   final int teacherCoursesCount;
-    String? status;
+  String? status;
 
   LearningPathInfoData({
     required this.id,

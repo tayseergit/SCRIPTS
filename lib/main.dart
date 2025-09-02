@@ -51,7 +51,7 @@ void main() async {
   await CacheHelper.init();
   await Firebase.initializeApp();
   await requestNotificationPermission();
-  // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await DioHelper.init();
 
   await getFcmToken();
@@ -88,9 +88,9 @@ class _MyAppState extends State<MyApp> {
     initStripe();
     setupForegroundMessageListener();
     setupOnMessageOpenedAppListener();
-    // SystemChrome.setEnabledSystemUIMode(
-    //   SystemUiMode.leanBack,
-    // );
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
+
     print("token : ${CacheHelper.getToken()}");
     print("userid : ${CacheHelper.getUserId()}");
   }
@@ -125,7 +125,7 @@ class _MyAppState extends State<MyApp> {
                       theme: themeState.isDarkMode
                           ? ThemeData.dark()
                           : ThemeData.light(),
-                      home: NavigationBarwidget()
+                      home: SplashScreen()
                       // home: CourseInfoPage(
                       //   testId: 1,
                       // courseId: 1,

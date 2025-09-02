@@ -44,6 +44,8 @@ class ChatCubit extends Cubit<ChatState> {
         _chatResponse = chat;
         print("✅ [fetchChatMessages] Messages loaded: ${chat.messages.length}");
         emit(ChatLoaded(chatResponse: chat));
+      } else if (response.statusCode == 401) {
+        emit(UnAuth());
       } else {
         print(
             "❌ [fetchChatMessages] Failed with status: ${response.statusCode}");

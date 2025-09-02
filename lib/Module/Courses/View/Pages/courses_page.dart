@@ -15,9 +15,15 @@ import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/generated/l10n.dart';
 
-class CoursesPage extends StatelessWidget {
+class CoursesPage extends StatefulWidget {
   const CoursesPage({super.key});
 
+  @override
+  State<CoursesPage> createState() => _CoursesPageState();
+}
+
+class _CoursesPageState extends State<CoursesPage> {
+  
   @override
   Widget build(BuildContext context) {
     final appColors = context.watch<ThemeCubit>().state;

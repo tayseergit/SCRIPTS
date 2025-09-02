@@ -180,7 +180,11 @@
   "Total_Contests":"Total Contests",
   "Total_Paths":"Total Paths",
   "Total_Courses":"Total Courses",
-  "loading":"Loading"
+  "loading":"Loading",
+  "watch_content":"watch content",
+  "confirm":"confirm",
+   "payment_confirmation": "Payment Confirmation",
+    "buy_course_message": "Are you sure to buy this course?"
 
 
 

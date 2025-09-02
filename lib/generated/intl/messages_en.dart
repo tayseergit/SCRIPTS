@@ -94,6 +94,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Basic Information",
     ),
     "bio": MessageLookupByLibrary.simpleMessage("Bio"),
+    "buy_course_message": MessageLookupByLibrary.simpleMessage(
+      "Are you sure to buy this course?",
+    ),
     "buy_now": MessageLookupByLibrary.simpleMessage("Buy Now"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cant_send_more_in_month": MessageLookupByLibrary.simpleMessage(
@@ -124,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "complete_as_browser": MessageLookupByLibrary.simpleMessage(
       "complete in browser mode",
     ),
+    "confirm": MessageLookupByLibrary.simpleMessage("confirm"),
     "confirmNewPassword": MessageLookupByLibrary.simpleMessage(
       "Confirm New Password",
     ),
@@ -229,6 +233,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwords_do_not_match": MessageLookupByLibrary.simpleMessage(
       "Passwords do not match",
     ),
+    "payment_confirmation": MessageLookupByLibrary.simpleMessage(
+      "Payment Confirmation",
+    ),
     "profile": MessageLookupByLibrary.simpleMessage("Profile"),
     "profile_updated": MessageLookupByLibrary.simpleMessage("Profile Updated"),
     "project_content": MessageLookupByLibrary.simpleMessage("Project Content"),
@@ -290,6 +297,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "watch": MessageLookupByLibrary.simpleMessage("Watch"),
     "watchLater": MessageLookupByLibrary.simpleMessage("Watch later"),
+    "watch_content": MessageLookupByLibrary.simpleMessage("watch content"),
     "your_best_score": MessageLookupByLibrary.simpleMessage("Your best Score"),
   };
 }

@@ -14,6 +14,7 @@ import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/customTextFieldSearsh.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/loading_container.dart';
+import 'package:lms/Module/mainWidget/no_auth.dart';
 import 'package:lms/generated/l10n.dart';
 
 class ParticipantsPage extends StatelessWidget {
@@ -32,7 +33,11 @@ class ParticipantsPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: appColors.pageBackground,
         body: BlocConsumer<ParticipantsCubit, ParticipantsState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is UnAuth) {
+              showNoAuthDialog(context);
+            }
+          },
           builder: (context, state) {
             if (state is ParticpantsLoding &&
                 context.read<ParticipantsCubit>().lastUsers == null) {
@@ -64,7 +69,7 @@ class ParticipantsPage extends StatelessWidget {
                     child: AuthText(
                       text: S.of(context).participants,
                       size: 30,
-                      color: appColors.mainText,
+                      color: appColors.blackGreen,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

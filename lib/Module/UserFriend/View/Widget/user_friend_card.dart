@@ -136,7 +136,7 @@ class Userfriendcard extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                             horizontal: 8.w, vertical: 6.h),
                         decoration: BoxDecoration(
-                          color: appColors.mainText.withOpacity(0.7),
+                          color: appColors.blackGreen.withOpacity(0.7),
                           borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Row(

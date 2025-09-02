@@ -32,3 +32,4 @@ class VideoErrorYoutube extends VideoState {
 class VideoProgressUpdated extends VideoState {}
 
 class Update extends VideoState {}
+class UnAuth extends VideoState {}

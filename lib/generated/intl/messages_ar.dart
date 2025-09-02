@@ -92,6 +92,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "المعلومات الأساسية",
     ),
     "bio": MessageLookupByLibrary.simpleMessage("نبذة"),
+    "buy_course_message": MessageLookupByLibrary.simpleMessage(
+      "هل أنت متأكد من شراء هذا الدورة؟",
+    ),
     "buy_now": MessageLookupByLibrary.simpleMessage("اشترِ الآن"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "cant_send_more_in_month": MessageLookupByLibrary.simpleMessage(
@@ -122,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "complete_as_browser": MessageLookupByLibrary.simpleMessage(
       "المتابعة كمتصفح",
     ),
+    "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
     "confirmNewPassword": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور الجديدة",
     ),
@@ -228,6 +232,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwords_do_not_match": MessageLookupByLibrary.simpleMessage(
       "كلمات المرور غير متطابقة",
     ),
+    "payment_confirmation": MessageLookupByLibrary.simpleMessage("تأكيد الدفع"),
     "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "profile_updated": MessageLookupByLibrary.simpleMessage(
       "تم تحديث الملف الشخصي",
@@ -289,6 +294,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "watch": MessageLookupByLibrary.simpleMessage("مشاهدة"),
     "watchLater": MessageLookupByLibrary.simpleMessage("شاهد لاحقاً"),
+    "watch_content": MessageLookupByLibrary.simpleMessage("رؤية المحتوى"),
     "your_best_score": MessageLookupByLibrary.simpleMessage("افضل نتيجة"),
   };
 }

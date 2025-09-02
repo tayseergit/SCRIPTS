@@ -61,7 +61,7 @@ class CourseInfoCubit extends Cubit<CourseInfoState> {
 
   // /////////////
 
-  void postEnrollCourse() async {
+  void postEnrollCourse(int courseId) async {
     emit(EnrollCouresLoading());
     try {
       final response = await DioHelper.postData(

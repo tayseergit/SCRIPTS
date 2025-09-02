@@ -36,7 +36,7 @@ class CourseTestCubit extends Cubit<CourseTestState> {
           courseTestQuestion = CourseTestQuestion.fromJson(value.data);
           // Record start time when test is loaded
           startTime = DateTime.now().toString().substring(0, 19);
-
+          
           emit(TestSuccess());
         } else {
           emit(TestError(message: S.of(context).error_occurred));

@@ -105,6 +105,8 @@ class ParticipantsCubit extends Cubit<ParticipantsState> {
       if (response.statusCode == 200) {
         emit(ParticpantsAddSuccess());
         await fetchAllParticipants();
+      } else if (response.statusCode == 401) {
+        emit(UnAuth());
       } else {
         emit(ParticpantsError(
           masseg: 'Failed with status code: ${response.statusCode}',

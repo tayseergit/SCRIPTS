@@ -124,8 +124,9 @@ class Course {
 class LearningPath {
   final int id;
   final String name;
-  final String?? image; 
-
+ 
+  final String? image; 
+ 
   LearningPath({
     required this.id,
     required this.name,

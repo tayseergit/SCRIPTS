@@ -5,6 +5,7 @@ abstract class ChatState {}
 class ChatInitial extends ChatState {}
 
 class ChatLoding extends ChatState {}
+class UnAuth extends ChatState {}
 
 class ChatDeleteSuccess extends ChatState {
   final ChatResponse chatResponse;
