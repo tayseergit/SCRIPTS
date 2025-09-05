@@ -36,11 +36,24 @@ class PercentindIcatorCourseTestPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: appColors.pageBackground,
         body: BlocConsumer<CourseTestCubit, CourseTestState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is TestSuccess) {
+              if (context
+                      .read<CourseTestCubit>()
+                      .courseTestQuestion!
+                      .bestResult >=
+                  60) {
+                customSnackBar(
+                    context: context,
+                    success: 1,
+                    message: lang.earned_certification);
+              }
+            }
+          },
           builder: (context, state) {
             var testCubit = context.read<CourseTestCubit>();
 
-            if (state is TestLoading) return PercentIndicatorShimmer();
+            if (state is TestLoading || state is CourseTestInitial || state is TestSubmitLoading) return PercentIndicatorShimmer();
             if (state is TestError)
               return Center(
                 child: NoConnection(),

@@ -7,6 +7,7 @@ class CourseTestInitial extends CourseTestState {}
 class TestLoading extends CourseTestState {}
 
 class TestSuccess extends CourseTestState {}
+class UnAuth extends CourseTestState {}
 
 class TestError extends CourseTestState {
   final String message;

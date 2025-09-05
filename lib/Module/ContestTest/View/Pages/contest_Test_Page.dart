@@ -78,35 +78,36 @@ class ContestTestPage extends StatelessWidget {
                                   size: 27,
                                   color: appColors.mainText,
                                   fontWeight: FontWeight.w700),
-                              ContestTestTimer(
-                                secondsLeft: testCubit.remainingSeconds!,
-                                // secondsLeft: 15,
-                                onTimeFinished: () {
-                                  showDialog(
-                                    context: context,
-                                    barrierDismissible: false,
-                                    builder: (context) {
-                                      Future.delayed(const Duration(seconds: 3),
-                                          () {
-                                        Navigator.of(context)
-                                            .pop(); // close dialog
+                              testCubit.remainingSeconds! > 0
+                                  ? ContestTestTimer(
+                                      secondsLeft: testCubit.remainingSeconds!,
+                                      // secondsLeft: 5,
+                                      onTimeFinished: () {
                                         Navigator.of(context).pop(); // go back
-                                      });
-                                      return AlertDialog(
-                                        backgroundColor:
-                                            appColors.orang ,
-                                        title: AuthText(
-                                            textAlign: TextAlign.center,
-                                            text: lang
-                                                .Timeisfinishedtocopmletetest,
-                                            size: 15.sp,
-                                            color: appColors.mainText,
-                                            fontWeight: FontWeight.bold),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
+                                        showDialog(
+                                          context: context,
+                                          barrierDismissible: false,
+                                          builder: (context) {
+                                            Future.delayed(
+                                                const Duration(seconds: 3), () {
+                                              Navigator.of(context)
+                                                  .pop(); // close dialog
+                                            });
+                                            return AlertDialog(
+                                              backgroundColor: appColors.orang,
+                                              title: AuthText(
+                                                  textAlign: TextAlign.center,
+                                                  text: lang
+                                                      .Timeisfinishedtocopmletetest,
+                                                  size: 15.sp,
+                                                  color: appColors.mainText,
+                                                  fontWeight: FontWeight.bold),
+                                            );
+                                          },
+                                        );
+                                      },
+                                    )
+                                  : Container(),
                             ],
                           ),
                           SizedBox(

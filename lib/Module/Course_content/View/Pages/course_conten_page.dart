@@ -95,15 +95,22 @@ class _CourseContentPageState extends State<CourseContentPage> {
                         ),
                       ),
                     );
+                  } else if (state is UnAuth) {
+                    return SizedBox(
+                      height: 275.h,
+                      child: Center(
+                        child: AuthText(
+                          text: S.of(context).NoItem,
+                          size: 20,
+                        ),
+                      ),
+                    );
                   } else if (state is VideoErrorYoutube) {
                     return SizedBox(
                       height: 275.h,
                       child: Center(child: AuthText(text: state.message)),
                     );
-                  } else if (state is UnAuth)
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      showNoAuthDialog(context);
-                    });
+                  }
 
                   if (videoCubit.youtubeController == null)
                     return const SizedBox.shrink();
@@ -115,7 +122,7 @@ class _CourseContentPageState extends State<CourseContentPage> {
                       showVideoProgressIndicator: true,
                       onEnded: (metaData) {
                         videoCubit.sendProgressToApi(1.0);
-                        videoCubit.youtubeController!  .pause();
+                        videoCubit.youtubeController!.pause();
                         final allContents = courseContentCubit
                             .courseContentResponse!.data!.allContents;
                         courseContentCubit
@@ -202,8 +209,10 @@ class _CourseContentPageState extends State<CourseContentPage> {
               child: BlocConsumer<CommentCubit, CommentState>(
                 listener: (context, commentState) {
                   if (commentState is CommentErrorState) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(commentState.message)));
+                    customSnackBar(
+                        context: context,
+                        success: 0,
+                        message: commentState.message);
                   }
                 },
                 builder: (context, commentState) {

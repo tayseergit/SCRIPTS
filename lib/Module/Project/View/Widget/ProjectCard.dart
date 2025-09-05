@@ -55,7 +55,7 @@ class Projectcard extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: ReadMoreInlineTextProject(
                         text: projectModel.description,
-                        trimLength: 15,
+                        trimLength: 10,
                       ),
                     ),
                     SizedBox(height: 5.h),
@@ -110,6 +110,12 @@ class Projectcard extends StatelessWidget {
                       children: [
                         Expanded(
                           child: OnBoardingContainer(
+                            onTap: () {
+                              if (projectModel.links!.gitHubUrl != null) {
+                                GlobalFunc.launchURL(
+                                    projectModel.links!.gitHubUrl!);
+                              }
+                            },
                             height: 30,
                             color: appColors.blackGreen,
                             widget: AuthText(
@@ -124,7 +130,9 @@ class Projectcard extends StatelessWidget {
                         Expanded(
                           child: OnBoardingContainer(
                             onTap: () {
-                            
+                              if (projectModel.links!.demo != null) {
+                                GlobalFunc.launchURL(projectModel.links!.demo!);
+                              }
                             },
                             height: 30,
                             color: appColors.primary,

@@ -18,7 +18,7 @@ class CourseContentResponse {
   }
 }
 
-class CourseData {  
+class CourseData {
   int id;
   String title;
   String description;
@@ -64,7 +64,7 @@ class ContentItem {
   bool? isFree; // for videos
   bool? watched; // for videos
   bool? isFinal; // for tests
-  bool ? completed; // for tests
+  bool completed; // for tests
 
   ContentItem({
     required this.id,
@@ -75,20 +75,19 @@ class ContentItem {
     this.isFree,
     this.watched,
     this.isFinal,
-     this.completed,
+    required this.completed,
   });
 
   factory ContentItem.fromJson(Map<String, dynamic> json) {
     return ContentItem(
-      id: json['id'] ?? 0,
-      title: json['title'] ?? '',
-      type: json['type'] ?? '',
-      order: json['order'] ?? 0,
-      progress: json['progress'],
-      isFree: json['is_free'],
-      watched: json['watched'],
-      isFinal: json['is_final'],
-      completed: json['completed'],
-    );
+        id: json['id'] ?? 0,
+        title: json['title'] ?? '',
+        type: json['type'] ?? '',
+        order: json['order'] ?? 0,
+        progress: json['progress'],
+        isFree: json['is_free'],
+        watched: json['watched'],
+        isFinal: json['is_final'],
+        completed: json['completed'] ?? false);
   }
 }

@@ -12,6 +12,7 @@ import 'package:lms/Module/mainWidget/Errors/no_connection.dart';
 import 'package:lms/Module/mainWidget/TopWave_more_Clipper.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/Module/mainWidget/no_auth.dart';
 import 'package:lms/generated/l10n.dart';
 
 class NotificationPage extends StatelessWidget {
@@ -25,7 +26,11 @@ class NotificationPage extends StatelessWidget {
       create: (context) => NotificationCubit()..fetchNotifications(),
       child: Scaffold(
         body: BlocConsumer<NotificationCubit, NotificationState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is UnAuth) {
+              showNoAuthDialog(context);
+            }
+          },
           builder: (context, state) {
             if (state is NotificationLoding) {
               return Center(

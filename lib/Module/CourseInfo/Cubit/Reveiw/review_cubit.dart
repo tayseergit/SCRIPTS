@@ -5,12 +5,14 @@ import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Module/CourseInfo/Model/Review/add_review_response.dart';
 import 'package:lms/Module/CourseInfo/Model/Review/review_response.dart';
+import 'package:lms/generated/l10n.dart';
 import 'package:meta/meta.dart';
 
 part 'review_state.dart';
 
 class ReviewCubit extends Cubit<ReviewState> {
-  ReviewCubit({required this.courseId}) : super(ReviewInitial());
+  ReviewCubit({required this.courseId,required this .context}) : super(ReviewInitial());
+  BuildContext context;
   TextEditingController addReviewController = TextEditingController();
   final token = CacheHelper.getData(key: "token");
   final userId = CacheHelper.getData(key: "user_id");
@@ -76,12 +78,12 @@ class ReviewCubit extends Cubit<ReviewState> {
           emit(ReviewError(message: response.data['message']));
         }
       }).catchError((response) {
-        emit(ReviewError(message: "error_occurred"));
+        emit(ReviewError(message: S.of(context).error_occurred));
       });
     } catch (e) {
       print(e.toString());
       print("xxxxxxxxxxx");
-      emit(ReviewError(message: "error in server"));
+      emit(ReviewError(message: S.of(context).error_in_server));
     }
   }
 
@@ -115,21 +117,15 @@ class ReviewCubit extends Cubit<ReviewState> {
           emit(AddReviewSuccess());
           reset();
           getCourseReview();
-        }else if (response.statusCode == 401){
-      emit(AddReviewError(message: 'Login or signup'));
-
-        }
-        
-         else {
+        } else if (response.statusCode == 401) {
+          emit(AddReviewError(message: 'Login or signup'));
+        } else {
           print(response.statusCode);
         }
-      }).catchError((response){
-      emit(AddReviewError(message: 'Unexpected error occurred'));
-
+      }).catchError((response) {
+        emit(AddReviewError(message: 'Unexpected error occurred'));
       });
-
-      
-    }   catch (e) {
+    } catch (e) {
       print(e.toString());
       emit(AddReviewError(message: 'error in server'));
     }

@@ -65,6 +65,10 @@ class VideoCubit extends Cubit<VideoState> {
           flags: YoutubePlayerFlags(
             autoPlay: true,
             mute: false,
+             disableDragSeek: true, 
+             controlsVisibleAtStart: false,
+                hideThumbnail: true,           // hide thumbnail overlay
+
           ),
         );
         emit(VideoSuccessYouTube(

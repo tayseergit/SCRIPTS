@@ -97,16 +97,19 @@ class ParticipantsCubit extends Cubit<ParticipantsState> {
       final response = await DioHelper.postData(
         url: Urls.deletFriend(teacher.id),
         headers: {
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer ${CacheHelper.getToken()}',
           'Accept': 'application/json',
         },
       );
-
+      print(response.statusCode);
       if (response.statusCode == 200) {
         emit(ParticpantsAddSuccess());
         await fetchAllParticipants();
       } else if (response.statusCode == 401) {
         emit(UnAuth());
+      }
+       else if (response.statusCode == 400) {
+        emit(ParticpantsErrorAlreadyFriend());
       } else {
         emit(ParticpantsError(
           masseg: 'Failed with status code: ${response.statusCode}',

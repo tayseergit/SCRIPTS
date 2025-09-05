@@ -26,7 +26,7 @@ class ProjectModel {
   final int userId;
   final String description;
   final dynamic technologies;
-  final dynamic links;
+  final Links? links; // <-- changed from dynamic to Links?
   final int likes;
   final String status;
   final int tagId;
@@ -58,7 +58,9 @@ class ProjectModel {
       userId: json['user_id'],
       description: json['description'],
       technologies: json['technologies'],
-      links: json['links'],
+      links: (json['links'] != null && json['links'] is Map)
+          ? Links.fromJson(json['links'])
+          : null,
       likes: json['likes'],
       status: json['status'],
       tagId: json['tag_id'],
@@ -90,5 +92,29 @@ class Meta {
       perPage: json['per_page'],
       total: json['total'],
     );
+  }
+}
+
+class Links {
+  final String? gitHubUrl;
+  final String? demo;
+  final String? steam;
+
+  Links({this.gitHubUrl, this.demo, this.steam});
+
+  factory Links.fromJson(Map<String, dynamic> json) {
+    return Links(
+      gitHubUrl: json['gitHub_url'],
+      demo: json['demo'],
+      steam: json['steam'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'gitHub_url': gitHubUrl,
+      'demo': demo,
+      'steam': steam,
+    };
   }
 }

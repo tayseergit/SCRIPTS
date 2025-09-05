@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "about_this_course": MessageLookupByLibrary.simpleMessage("عن هذه الدورة"),
     "achievement": MessageLookupByLibrary.simpleMessage("الإنجازات"),
     "active": MessageLookupByLibrary.simpleMessage("نشط"),
+    "add": MessageLookupByLibrary.simpleMessage("إضافة"),
     "add_a_payment_method": MessageLookupByLibrary.simpleMessage("شحن الرصيد"),
     "add_comment": MessageLookupByLibrary.simpleMessage("أضف تعليق"),
     "add_image": MessageLookupByLibrary.simpleMessage("إضافة صورة"),
@@ -77,6 +78,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "all_fields_required": MessageLookupByLibrary.simpleMessage(
       "جميع الحقول مطلوبة",
+    ),
+    "already_friend": MessageLookupByLibrary.simpleMessage(
+      "هذا المستخدم موجود بالفعل في قائمة أصدقائك",
     ),
     "an_error_occurred": MessageLookupByLibrary.simpleMessage("حدث خطأ"),
     "at_least_8_char_lower_upper_symbols": MessageLookupByLibrary.simpleMessage(
@@ -129,6 +133,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmNewPassword": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور الجديدة",
     ),
+    "confirm_addition": MessageLookupByLibrary.simpleMessage("تأكيد الإضافة"),
     "confirm_password": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور",
     ),
@@ -148,8 +153,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_history": MessageLookupByLibrary.simpleMessage("حذف السجل"),
     "demo_url": MessageLookupByLibrary.simpleMessage("رابط العرض التجريبي"),
     "details": MessageLookupByLibrary.simpleMessage("تفاصيل"),
+    "do_you_want_add": MessageLookupByLibrary.simpleMessage("هل تريد إضافة"),
     "done": MessageLookupByLibrary.simpleMessage("تم"),
     "dont_have_account": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
+    "earned_certification": MessageLookupByLibrary.simpleMessage(
+      "لقد حصلت على شهادة في هذا الكورس",
+    ),
     "edit_profile": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
     "edit_your_review": MessageLookupByLibrary.simpleMessage("تعديل تقييمك"),
     "edite_image": MessageLookupByLibrary.simpleMessage("تحديث الصورة"),
@@ -173,6 +182,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "أدخل عنوان مشروعك",
     ),
     "enter_steam_url": MessageLookupByLibrary.simpleMessage("أدخل رابط Steam"),
+    "enter_valid_amount": MessageLookupByLibrary.simpleMessage(
+      "ادخل قيمة متاحة",
+    ),
     "error_code": MessageLookupByLibrary.simpleMessage("كود خاطئ"),
     "error_deleting": MessageLookupByLibrary.simpleMessage("خطأ في الحذف"),
     "error_in_server": MessageLookupByLibrary.simpleMessage(
@@ -180,7 +192,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "error_occurred": MessageLookupByLibrary.simpleMessage("حدث خطأ"),
     "error_old_password": MessageLookupByLibrary.simpleMessage(
-      "كلمة المرور غير صحيحة",
+      "يجب أن تكون كلمة المرور الجديدة والقديمة مختلفة",
     ),
     "fetch_video_failed": MessageLookupByLibrary.simpleMessage(
       "فشل جلب بيانات الفيديو",
@@ -193,6 +205,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "forget_password": MessageLookupByLibrary.simpleMessage(
       "نسيت كلمة المرور؟",
+    ),
+    "friend_added_success": MessageLookupByLibrary.simpleMessage(
+      "تمت إضافة الصديق بنجاح ",
     ),
     "friends": MessageLookupByLibrary.simpleMessage("الاصدقاء"),
     "github_account": MessageLookupByLibrary.simpleMessage("حساب GitHub"),
@@ -283,6 +298,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "teachers": MessageLookupByLibrary.simpleMessage("معلمون"),
     "technologies": MessageLookupByLibrary.simpleMessage("التقنيات"),
     "test": MessageLookupByLibrary.simpleMessage("اختبار"),
+    "to_friend_list": MessageLookupByLibrary.simpleMessage(
+      "إلى قائمة الأصدقاء؟",
+    ),
     "total_points": MessageLookupByLibrary.simpleMessage("إجمالي النقاط"),
     "total_price": MessageLookupByLibrary.simpleMessage("اجمالي السعر"),
     "update": MessageLookupByLibrary.simpleMessage("تحديث"),

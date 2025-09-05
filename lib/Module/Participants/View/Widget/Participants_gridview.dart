@@ -40,7 +40,7 @@ class ParticipantsGridview extends StatelessWidget {
         return false;
       },
       child: Container(
-        height: 610,
+        height: 600.h,
         color: appColors.pageBackground,
         child: GridView.builder(
           padding: EdgeInsets.only(top: 17.h),

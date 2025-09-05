@@ -12,6 +12,7 @@ class NotificationSuccess extends NotificationState {
 }
 
 class NotificationLoding extends NotificationState {}
+class UnAuth extends NotificationState {}
 
 class NotificationError extends NotificationState {
   final String masseg;

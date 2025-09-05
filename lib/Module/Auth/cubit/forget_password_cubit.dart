@@ -33,6 +33,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
       isEmail = false;
       showIsNotEmail = true;
     }
+    emit(Validate());
   }
 
   void passwordValid({required String password}) {
@@ -41,6 +42,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     } else {
       isPassWord = true;
     }
+    emit(Validate());
   }
 
   void passwordConfValid({required String password}) {
@@ -85,10 +87,12 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
         }
       } else {
         print("Connection Error: $e");
-        emit(ForgetPasswordErrorConnection(message: S.of(context).connection_error));
+        emit(ForgetPasswordErrorConnection(
+            message: S.of(context).connection_error));
       }
     } catch (e) {
-      emit(ForgetPasswordErrorConnection(message: S.of(context).connection_error));
+      emit(ForgetPasswordErrorConnection(
+          message: S.of(context).connection_error));
     }
   }
 
@@ -131,10 +135,12 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
         }
       } else {
         print("Connection Error: $e");
-        emit(ForgetPasswordErrorConnection(message: S.of(context).connection_error));
+        emit(ForgetPasswordErrorConnection(
+            message: S.of(context).connection_error));
       }
     } catch (e) {
-      emit(ForgetPasswordErrorConnection(message: S.of(context).connection_error));
+      emit(ForgetPasswordErrorConnection(
+          message: S.of(context).connection_error));
     }
   }
 }

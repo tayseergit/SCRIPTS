@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
-import 'package:lms/Module/Auth/View/resetPassword.dart';
+import 'package:lms/Module/Auth/View/resetPassword_page.dart';
+import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
 import 'package:lms/Module/Auth/cubit/forget_password_cubit.dart';
 import 'package:lms/Module/Courses/Cubit/cubit/course_cubit.dart';
 import 'package:lms/Module/Courses/View/Pages/courses_page.dart';
@@ -39,14 +40,13 @@ class Verify extends StatelessWidget {
           if (state is VerifySucsses) {
             var verifyCubit = context.read<VerifyCubit>();
             registretion == 1
-                ?  WidgetsBinding.instance.addPostFrameCallback((_) {
+                ? WidgetsBinding.instance.addPostFrameCallback((_) {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) => BlocProvider.value(
-                          value: NavigationCubit(),
-                          child: NavigationBarwidget()
-                        ),
+                            value: NavigationCubit(),
+                            child: NavigationBarwidget()),
                       ),
                       (route) => false, // Remove all previous routes
                     );
@@ -118,13 +118,14 @@ class Verify extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         fieldHeight: 50.h,
                         fieldWidth: 40.w,
-                        activeFillColor: appColors.fieldBackground,
+                        activeFillColor: appColors.ok.withOpacity(0.5),
                         selectedColor: appColors.primary,
                         selectedFillColor: appColors.fieldBackground,
                         inactiveColor: appColors.primary,
                         inactiveFillColor: appColors.fieldBackground,
                         activeColor: appColors.primary,
                       ),
+                      cursorColor: appColors.mainText,
                       // backgroundColor: appColors.fieldBackground,
                       textStyle: TextStyle(
                         color: appColors.mainText,
@@ -164,7 +165,9 @@ class Verify extends StatelessWidget {
                 ),
                 SizedBox(height: 54.h),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    context.read<AuthCubit>().signUp(context);
+                  },
                   child: Align(
                     alignment: Alignment.center,
                     child: AuthText(

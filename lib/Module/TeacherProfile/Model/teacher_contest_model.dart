@@ -29,9 +29,10 @@ class TeacherContestData {
   final String level;
   final String status;
   final String startAt;
-  final String requestStatus;
   final int studentsCount;
   final int teacherId;
+  final String teacherName;
+  final bool alreadyParticipate;
 
   TeacherContestData({
     required this.id,
@@ -42,9 +43,10 @@ class TeacherContestData {
     required this.level,
     required this.status,
     required this.startAt,
-    required this.requestStatus,
     required this.studentsCount,
     required this.teacherId,
+    required this.teacherName,
+    required this.alreadyParticipate,
   });
 
   factory TeacherContestData.fromJson(Map<String, dynamic> json) {
@@ -57,14 +59,13 @@ class TeacherContestData {
       level: json['level'],
       status: json['status'],
       startAt: json['start_at'],
-      requestStatus: json['request_status'],
       studentsCount: json['students_count'],
       teacherId: json['teacher_id'],
+      teacherName: json['teacher_name'],
+      alreadyParticipate: json['alreadyParticipate'] ?? false,
     );
   }
 }
-
-
 
 class MetaData {
   final int currentPage;

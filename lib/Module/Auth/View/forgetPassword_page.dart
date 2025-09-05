@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
-import 'package:lms/Module/Auth/View/resetPassword.dart';
+import 'package:lms/Module/Auth/View/resetPassword_page.dart';
 import 'package:lms/Module/Auth/cubit/forget_password_cubit.dart';
 import 'package:lms/Module/Verify/Cubite/cubit/verfiy_cubit.dart';
-import 'package:lms/Module/Verify/View/verify.dart';
+import 'package:lms/Module/Verify/View/verify_page.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/CustomTextField.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
@@ -81,7 +81,9 @@ class Forgetpassword extends StatelessWidget {
                   height: 10.h,
                 ),
                 CustomTextField(
-                  onChanged: cubit.validEmail,
+                  onChanged: (value) {
+                    cubit.validEmail(value);
+                  },
                   controller: cubit.emailctrl,
                   borderRadius: 5,
                   keyboardType: TextInputType.emailAddress,

@@ -18,8 +18,8 @@ import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Helper/firebase_fun.dart';
 import 'package:lms/Module/AddProject/View/pages/add_project_page.dart';
 import 'package:lms/Module/Auth/View/Login.dart';
-import 'package:lms/Module/Auth/View/register.dart';
-import 'package:lms/Module/Auth/View/resetPassword.dart';
+import 'package:lms/Module/Auth/View/register_page.dart';
+import 'package:lms/Module/Auth/View/resetPassword_page.dart';
 import 'package:lms/Module/Auth/cubit/auth_cubit.dart';
 import 'package:lms/Module/Auth/cubit/forget_password_cubit.dart';
 import 'package:lms/Module/CourseInfo/View/Pages/course_info_page.dart';
@@ -49,15 +49,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await CacheHelper.init();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+   
+    initLocalNotifications();
   await requestNotificationPermission();
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await DioHelper.init();
 
   await getFcmToken();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
   await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
   // التعامل مع أخطاء Flutter

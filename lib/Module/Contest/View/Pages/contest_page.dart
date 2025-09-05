@@ -32,7 +32,7 @@ class _ContestPageState extends State<ContestPage> {
   @override
   void initState() {
     super.initState();
-    contestCubit = ContestCubit()..getContest();
+    contestCubit = ContestCubit(context: context)..getContest();
 
     scrollController.addListener(() {
       if (scrollController.position.pixels >=
@@ -54,7 +54,7 @@ class _ContestPageState extends State<ContestPage> {
     ThemeState appColors = context.watch<ThemeCubit>().state;
 
     return BlocProvider(
-      create: (context) => ContestCubit()..getContest(),
+      create: (context) => ContestCubit(context: context)..getContest(),
       child: SafeArea(
         child: Scaffold(
           backgroundColor: appColors.pageBackground,
@@ -74,9 +74,7 @@ class _ContestPageState extends State<ContestPage> {
             ),
           ),
           body: BlocConsumer<ContestCubit, ContestState>(
-            listener: (context, state) {
-              
-            },
+            listener: (context, state) {},
             builder: (context, state) {
               final contestCubit = context.watch<ContestCubit>();
               return Padding(
@@ -84,10 +82,10 @@ class _ContestPageState extends State<ContestPage> {
                 child: ListView(
                   children: [
                     Customtextfieldsearsh(
-                     onChanged: (value) {
-                      final cubit = context.read<ContestCubit>();
-                      cubit.onSearchChanged(value);
-                    },
+                      onChanged: (value) {
+                        final cubit = context.read<ContestCubit>();
+                        cubit.onSearchChanged(value);
+                      },
                       controller: contestCubit.searchController,
                       hintText: S.of(context).choose_contest,
                     ),

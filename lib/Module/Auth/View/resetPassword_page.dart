@@ -129,7 +129,7 @@ class ResetPassword extends StatelessWidget {
                 SizedBox(height: 64.h),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 45.w),
-                  child: state is SendCodeLoading
+                  child: state is ResetPasswordLoading
                       ? Center(
                           child: Loading(
                             height: 50,

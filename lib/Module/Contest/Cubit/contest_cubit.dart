@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +11,10 @@ import 'package:lms/generated/l10n.dart';
 import 'contest_state.dart';
 
 class ContestCubit extends Cubit<ContestState> {
-  ContestCubit() : super(ContestInitial());
+  ContestCubit({required this .context}) : super(ContestInitial());
 
   ContestsResponse? contestResponse;
-
+  BuildContext context;
   final token = CacheHelper.getData(key: "token");
   final userId = CacheHelper.getData(key: "user_id");
 
@@ -28,7 +29,7 @@ class ContestCubit extends Cubit<ContestState> {
   int selectedTab = 0;
 
   List<Contest> allContests = [];
-   int currentPage = 1;
+  int currentPage = 1;
   bool hasMorePages = true;
   bool isLoading = false;
 
@@ -39,22 +40,23 @@ class ContestCubit extends Cubit<ContestState> {
       S.of(context).coming,
     ];
   }
- 
+
   void resetPagination() {
     currentPage = 1;
     hasMorePages = true;
     isLoading = false;
     allContests.clear();
   }
+
   void changeTab(int index) {
     selectedTab = index;
-        resetPagination();
+    resetPagination();
 
     emit(Selected());
     getContest();
   }
 
-void onSearchChanged(String value) {
+  void onSearchChanged(String value) {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
 
     _debounce = Timer(const Duration(seconds: 1), () {
@@ -63,12 +65,10 @@ void onSearchChanged(String value) {
     });
   }
 
-
-  Future<void> getContest( ) async {
-     if (!hasMorePages || isLoading) return;
+  Future<void> getContest() async {
+    if (!hasMorePages || isLoading) return;
     isLoading = true;
     if (currentPage == 1) emit(ContestLoading());
-
 
     try {
       final response = await DioHelper.getData(
@@ -88,16 +88,24 @@ void onSearchChanged(String value) {
 
       if (response.statusCode == 200) {
         contestResponse = ContestsResponse.fromJson(response.data);
- allContests.addAll(contestResponse!.contests);
-  final meta = contestResponse!.meta;
-          hasMorePages = meta.currentPage < meta.lastPage;
-          currentPage = meta.currentPage + 1;
-          if (hasMorePages) currentPage++;
+        allContests.addAll(contestResponse!.contests);
+        final meta = contestResponse!.meta;
+        hasMorePages = meta.currentPage < meta.lastPage;
+        currentPage = meta.currentPage + 1;
+        if (hasMorePages) currentPage++;
 
         emit(ContestSuccess());
+      } else {
+        emit(ContestError(message: S.of(context).error_occurred));
       }
+    } on SocketException {
+      emit(ContestError(message: S.of(context).error_in_server));
     } on DioException catch (e) {
-      emit(ContestError(message: "Connection Error"));
+      emit(ContestError(
+        message: "حدث خطأ في السيرفر: ${e.response?.statusCode ?? ''}",
+      ));
+    } catch (_) {
+      emit(ContestError(message: S.of(context).error_in_server));
     } finally {
       isLoading = false;
     }

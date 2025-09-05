@@ -7,6 +7,7 @@ import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/CustomTextField.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
+import 'package:lms/Module/mainWidget/no_auth.dart';
 import 'package:lms/generated/l10n.dart'; // adjust import path of your localization
 
 import 'package:lms/Module/ResetPassword.dart/cubit/reset_password_cubit.dart';
@@ -133,13 +134,18 @@ void showPasswordResetDialog(BuildContext context) {
               child: Text(S.of(context).cancel,
                   style: TextStyle(fontSize: 16.sp, color: appColors.mainText)),
             ),
-            BlocBuilder<PasswordResetCubit, PasswordResetState>(
+            BlocConsumer<PasswordResetCubit, PasswordResetState>(
+              listener: (context, state) {
+                if (state is UnAuth) {
+                  Navigator.pop(context); // إغلاق الـ dialog
+                  showNoAuthDialog(context); // عرض Dialog لا يوجد صلاحية
+                }
+              },
               builder: (context, state) {
                 final cubit = context.read<PasswordResetCubit>();
                 return ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        appColors.blackGreen, // Change to your desired color
+                    backgroundColor: appColors.blackGreen,
                   ),
                   onPressed: state is PasswordResetLoading
                       ? null
@@ -149,9 +155,11 @@ void showPasswordResetDialog(BuildContext context) {
                         },
                   child: state is PasswordResetLoading
                       ? Center(child: Loading(height: 50, width: 50))
-                      : Text(S.of(context).submit,
+                      : Text(
+                          S.of(context).submit,
                           style: TextStyle(
-                              fontSize: 16.sp, color: appColors.whiteText)),
+                              fontSize: 16.sp, color: appColors.whiteText),
+                        ),
                 );
               },
             ),

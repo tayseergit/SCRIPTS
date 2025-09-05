@@ -17,9 +17,9 @@ class ContestTab extends StatelessWidget {
     ThemeState appColors = context.watch<ThemeCubit>().state;
 
     final icons = [
+      Images.contest3,
       Images.contest2,
       Images.contest1,
-      Images.contest3,
     ];
 
     return Row(
@@ -68,8 +68,16 @@ class ContestTab extends StatelessWidget {
                       : Image.asset(
                           icons[index],
                           key: ValueKey('icon_$index'),
-                          width: index == 2 ? 26 : 18,
-                          height: index == 2 ? 26 : 18,
+                          width: index == 0
+                              ? 30
+                              : index == 1
+                                  ? 26
+                                  : 18,
+                          height: index == 0
+                              ? 30
+                              : index == 1
+                                  ? 26
+                                  : 18,
                           color: appColors.darkGreen,
                         ),
                 ),

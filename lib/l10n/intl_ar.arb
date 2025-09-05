@@ -61,7 +61,7 @@
   "friends": "الاصدقاء",
   "participants": "المشاركون",
   "teachers": "معلمون",
-  "error_old_password":"كلمة المرور غير صحيحة",
+  "error_old_password":"يجب أن تكون كلمة المرور الجديدة والقديمة مختلفة",
   "check_info":"تاكد من المعلومات",
   "add_new_project": "إضافة مشروع",
   "fill_details": "الرجاء تعبئة الحقول المطلوبة",
@@ -184,7 +184,18 @@
   "watch_content":"رؤية المحتوى",
   "confirm":"تأكيد",
     "payment_confirmation": "تأكيد الدفع",
-    "buy_course_message": "هل أنت متأكد من شراء هذا الدورة؟"
+    "buy_course_message": "هل أنت متأكد من شراء هذا الدورة؟",
+    "earned_certification":"لقد حصلت على شهادة في هذا الكورس",
+    "enter_valid_amount":"ادخل قيمة متاحة",
+     "confirm_addition": "تأكيد الإضافة",
+  "do_you_want_add": "هل تريد إضافة",
+  "to_friend_list": "إلى قائمة الأصدقاء؟",
+   "add": "إضافة",
+  "friend_added_success": "تمت إضافة الصديق بنجاح ",
+    "already_friend": "هذا المستخدم موجود بالفعل في قائمة أصدقائك"
+
+ 
+
 
 
 

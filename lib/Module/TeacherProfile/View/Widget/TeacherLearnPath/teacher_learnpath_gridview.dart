@@ -37,7 +37,7 @@ class TeacherLearnpathGridview extends StatelessWidget {
         itemBuilder: (ctx, index) {
           final learnPath = LearnPathlist[index];
           return TeacherLearnpathCard(
-            teacherLearnpathModel: learnPath,
+            learnPath: learnPath,
           );
         },
       ),

@@ -43,3 +43,4 @@ class PasswordError extends ForgetPasswordState {
   final String message;
   PasswordError({required this.message});
 }
+class Validate extends ForgetPasswordState {}

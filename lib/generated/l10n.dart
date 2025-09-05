@@ -509,10 +509,10 @@ class S {
     return Intl.message('Teachers', name: 'teachers', desc: '', args: []);
   }
 
-  /// `wrong password`
+  /// `new password and old must be different`
   String get error_old_password {
     return Intl.message(
-      'wrong password',
+      'new password and old must be different',
       name: 'error_old_password',
       desc: '',
       args: [],
@@ -1439,6 +1439,81 @@ class S {
     return Intl.message(
       'Are you sure to buy this course?',
       name: 'buy_course_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `you have get a certification for this course`
+  String get earned_certification {
+    return Intl.message(
+      'you have get a certification for this course',
+      name: 'earned_certification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `enter valid amount`
+  String get enter_valid_amount {
+    return Intl.message(
+      'enter valid amount',
+      name: 'enter_valid_amount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm addition`
+  String get confirm_addition {
+    return Intl.message(
+      'Confirm addition',
+      name: 'confirm_addition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to add`
+  String get do_you_want_add {
+    return Intl.message(
+      'Do you want to add',
+      name: 'do_you_want_add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `to your friend list?`
+  String get to_friend_list {
+    return Intl.message(
+      'to your friend list?',
+      name: 'to_friend_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add`
+  String get add {
+    return Intl.message('Add', name: 'add', desc: '', args: []);
+  }
+
+  /// `Friend added successfully`
+  String get friend_added_success {
+    return Intl.message(
+      'Friend added successfully',
+      name: 'friend_added_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This user is already your friend`
+  String get already_friend {
+    return Intl.message(
+      'This user is already your friend',
+      name: 'already_friend',
       desc: '',
       args: [],
     );

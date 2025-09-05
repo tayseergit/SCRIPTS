@@ -15,3 +15,4 @@ class PasswordResetError extends PasswordResetState {
 }
 
 class ChangePassword extends PasswordResetState {}
+class UnAuth extends PasswordResetState {}

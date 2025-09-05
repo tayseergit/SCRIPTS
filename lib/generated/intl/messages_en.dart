@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "achievement": MessageLookupByLibrary.simpleMessage("Achievement"),
     "active": MessageLookupByLibrary.simpleMessage("active"),
+    "add": MessageLookupByLibrary.simpleMessage("Add"),
     "add_a_payment_method": MessageLookupByLibrary.simpleMessage(
       "charge balance",
     ),
@@ -77,6 +78,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_watch_later": MessageLookupByLibrary.simpleMessage("add watch later"),
     "all_fields_required": MessageLookupByLibrary.simpleMessage(
       "All fields are required",
+    ),
+    "already_friend": MessageLookupByLibrary.simpleMessage(
+      "This user is already your friend",
     ),
     "an_error_occurred": MessageLookupByLibrary.simpleMessage(
       "An error occurred",
@@ -131,6 +135,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmNewPassword": MessageLookupByLibrary.simpleMessage(
       "Confirm New Password",
     ),
+    "confirm_addition": MessageLookupByLibrary.simpleMessage(
+      "Confirm addition",
+    ),
     "confirm_password": MessageLookupByLibrary.simpleMessage(
       "Confirm Password",
     ),
@@ -152,9 +159,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_history": MessageLookupByLibrary.simpleMessage("Delete history"),
     "demo_url": MessageLookupByLibrary.simpleMessage("Demo URL"),
     "details": MessageLookupByLibrary.simpleMessage("Details"),
+    "do_you_want_add": MessageLookupByLibrary.simpleMessage(
+      "Do you want to add",
+    ),
     "done": MessageLookupByLibrary.simpleMessage("Done"),
     "dont_have_account": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account?",
+    ),
+    "earned_certification": MessageLookupByLibrary.simpleMessage(
+      "you have get a certification for this course",
     ),
     "edit_profile": MessageLookupByLibrary.simpleMessage("Edit profile"),
     "edit_your_review": MessageLookupByLibrary.simpleMessage(
@@ -179,6 +192,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Enter your project title",
     ),
     "enter_steam_url": MessageLookupByLibrary.simpleMessage("Enter Steam link"),
+    "enter_valid_amount": MessageLookupByLibrary.simpleMessage(
+      "enter valid amount",
+    ),
     "error_code": MessageLookupByLibrary.simpleMessage("wrong code"),
     "error_deleting": MessageLookupByLibrary.simpleMessage("Error deleting"),
     "error_in_server": MessageLookupByLibrary.simpleMessage(
@@ -186,7 +202,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "error_occurred": MessageLookupByLibrary.simpleMessage("An error occurred"),
     "error_old_password": MessageLookupByLibrary.simpleMessage(
-      "wrong password",
+      "new password and old must be different",
     ),
     "fetch_video_failed": MessageLookupByLibrary.simpleMessage(
       "Failed to fetch video data",
@@ -198,6 +214,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please fill required fields",
     ),
     "forget_password": MessageLookupByLibrary.simpleMessage("Forget Password?"),
+    "friend_added_success": MessageLookupByLibrary.simpleMessage(
+      "Friend added successfully",
+    ),
     "friends": MessageLookupByLibrary.simpleMessage("Friends"),
     "git_hub": MessageLookupByLibrary.simpleMessage("GitHub"),
     "github_account": MessageLookupByLibrary.simpleMessage("GitHub Account"),
@@ -286,6 +305,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "teachers": MessageLookupByLibrary.simpleMessage("Teachers"),
     "technologies": MessageLookupByLibrary.simpleMessage("Technologies"),
     "test": MessageLookupByLibrary.simpleMessage("TEST"),
+    "to_friend_list": MessageLookupByLibrary.simpleMessage(
+      "to your friend list?",
+    ),
     "total_points": MessageLookupByLibrary.simpleMessage("Total Points"),
     "total_price": MessageLookupByLibrary.simpleMessage("Total price"),
     "update": MessageLookupByLibrary.simpleMessage("update"),

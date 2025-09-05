@@ -15,8 +15,7 @@ class TeacherContestGridview extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeState appColors = context.watch<ThemeCubit>().state;
 
-
-if (teacherContest.isEmpty) {
+    if (teacherContest.isEmpty) {
       return Center(
         heightFactor: 1.5,
         child: SizedBox(
@@ -26,7 +25,6 @@ if (teacherContest.isEmpty) {
       );
     }
 
-
     return Container(
       height: 340.h,
       color: appColors.pageBackground,
@@ -34,14 +32,14 @@ if (teacherContest.isEmpty) {
         itemCount: teacherContest.length,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 400.w,
-          childAspectRatio: 2.w/1.4.h,
+          childAspectRatio: 2.w / 1.5.h,
           mainAxisSpacing: 20.h,
           crossAxisSpacing: 20.w,
         ),
         itemBuilder: (ctx, index) {
-          final contest=teacherContest[index];
+          final contest = teacherContest[index];
           return TeacherContestCard(
-            teacherContestData: contest,
+            contest: contest,
           );
         },
       ),

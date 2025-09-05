@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
+import 'package:lms/Module/Contest/View/Widget/ReadMoreInlineText.dart';
 import 'package:lms/Module/LearnPath/View/Widget/TopWaveClipper.dart';
 import 'package:lms/Module/LearnPathInfo/Cubit/learn_path_info_cubit.dart';
 import 'package:lms/Module/LearnPathInfo/Cubit/learn_path_info_state.dart';
@@ -17,222 +18,217 @@ import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/generated/l10n.dart';
 
 class TeacherLearnpathCard extends StatelessWidget {
-  final TeacherLearnpathModel teacherLearnpathModel;
+  final TeacherLearnpathModel learnPath;
   TeacherLearnpathCard({
     super.key,
-    required this.teacherLearnpathModel,
+    required this.learnPath,
   });
 
   @override
   Widget build(BuildContext context) {
-    ThemeState appColors = context.watch<ThemeCubit>().state;
+    final ThemeState appColors = context.watch<ThemeCubit>().state;
+    final lang = S.of(context);
 
-    return InkWell(
-      onTap: () {
-        //   pushTo(
-        //       context: context,
-        //       toPage: LearnPathInfoPage(
-        //           learningPathInfoData: learningPathInfoData,
-        //           learningPathInfoModel: learningPathInfoModel));
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: appColors.border, width: 3),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: OnBoardingContainer(
-          width: 180.w,
-          height: 10.h,
-          color: appColors.pageBackground,
-          widget: Column(
+    return OnBoardingContainer(
+      radius: 30,
+      width: double.infinity,
+      height: 400.h, // Increased height for bigger image + description
+      color: appColors.lightGray.withOpacity(0.5),
+      boarderColor: appColors.border,
+      widget: Column(
+        children: [
+          // Top Image + Title
+          Stack(
             children: [
-              SizedBox(
+              Container(
+                height: 170.h, // Increased image height
                 width: double.infinity,
-                height: 70.h,
-                child: Stack(
-                  children: [
-                    ClipPath(
-                      clipper: TopWaveClipper(),
-                      child: Container(
-                        height: 100.h,
-                        width: double.infinity.w,
-                        color: appColors.lihgtPrimer,
-                      ),
+                decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(30.r)),
+                    gradient: appColors.linerImage.withOpacity(0.4)),
+              ),
+              if (learnPath.image != null && learnPath.image!.isNotEmpty)
+                ClipRRect(
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(30.r)),
+                  child: Image.network(
+                    learnPath.image!,
+                    height: 170.h,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Image.asset(
+                      Images.noImage,
+                      height: 170.h,
+                      width: double.infinity,
+                      fit: BoxFit.contain,
                     ),
-                    Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15.w),
-                        child: Container(
-                          height: 60.h,
-                          width: 225.w,
-                          child: Center(
-                            child: AuthText(
-                                text: teacherLearnpathModel.title,
-                                size: 14,
-                                color: appColors.mainText,
-                                maxLines: 2,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        )),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 25, right: 10),
-                      child: Align(
-                        alignment: Alignment.topRight,
-                        child: OnBoardingContainer(
-                          width: 60,
-                          height: 40,
-                          color: teacherLearnpathModel.totalCoursesPrice == 0
-                              ? appColors.ok
-                              : appColors.orang,
-                          widget: AuthText(
-                            text: teacherLearnpathModel.totalCoursesPrice == 0
-                                ? 'Free'
-                                : "${teacherLearnpathModel.totalCoursesPrice} \$",
-                            size: 12,
-                            color: appColors.mainText,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
+                  ),
+                ),
+              Positioned(
+                top: 10.h,
+                right: 10.w,
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+                  decoration: BoxDecoration(
+                    color: learnPath.totalCoursesPrice == 0
+                        ? appColors.ok
+                        : appColors.orang,
+                    borderRadius: BorderRadius.circular(20.r),
+                  ),
+                  child: AuthText(
+                    text: learnPath.totalCoursesPrice == 0
+                        ? 'Free'
+                        : "${learnPath.totalCoursesPrice}\$",
+                    size: 12,
+                    color: appColors.pageBackground,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          SizedBox(height: 10.h),
+
+          // TeachPositioned(
+          AuthText(
+            text: learnPath.title,
+            size: 16,
+            color: appColors.mainText,
+            fontWeight: FontWeight.w700,
+            maxLines: 2,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.w),
+            child: Row(
+              children: [
+                SizedBox(width: 10.w),
+                AuthText(
+                  text: learnPath.teacherName ?? 'Unknown',
+                  size: 14,
+                  color: appColors.mainText,
+                  fontWeight: FontWeight.w600,
+                ),
+              ],
+            ),
+          ),
+
+          SizedBox(height: 10.h),
+
+          // Description
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.w),
+            child: ReadMoreInlineText(
+              text: learnPath.description ,
+              trimLength: 30,
+            ),
+          ),
+
+          SizedBox(height: 10.h),
+
+          // Courses Info + Rating
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.video_collection_sharp,
+                        size: 18.h, color: appColors.primary),
+                    SizedBox(width: 5.w),
+                    AuthText(
+                      text: "${learnPath.coursesCount} ${lang.courses}",
+                      size: 14,
+                      color: appColors.mainText,
+                      fontWeight: FontWeight.w600,
                     ),
                   ],
                 ),
-              ),
-              SizedBox(height: 16.h),
-              Padding(
-                padding: EdgeInsets.only(left: 10.w, right: 10.w),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 200.h,
-                  child: (teacherLearnpathModel.image != null )
-                      ? Image.network(
-                          teacherLearnpathModel.image!,
-                          width: double.infinity,
-                          height: 100.h,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Image.asset(
-                              Images.noImage,
-                              width: double.infinity,
-                              height: 100.h,
-                              fit: BoxFit.contain,
-                            );
-                          },
-                        )
-                      : Image.asset(
-                          Images.noImage,
-                          width: double.infinity,
-                          height: 100.h,
-                          fit: BoxFit.fill,
-                        ),
+                RatingBarIndicator(
+                  rating: learnPath.rate,
+                  itemCount: 5,
+                  itemSize: 18.h,
+                  direction: Axis.horizontal,
+                  itemBuilder: (context, _) => Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          SizedBox(height: 10.h),
+
+          // View Button
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.w),
+            child: OnBoardingContainer(
+              radius: 20,
+              width: double.infinity,
+              height: 40.h,
+              color: appColors.primary,
+              widget: Center(
+                child: AuthText(
+                  text: lang.view,
+                  size: 14,
+                  color: appColors.pageBackground,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              SizedBox(height: 15.h),
-              Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      OnBoardingContainer(
-                        radius: 20,
-                        width: 130,
-                        height: 40,
-                        color: appColors.primary,
-                        widget: AuthText(
-                          text: 'View Path',
-                          size: 16,
-                          color: appColors.pageBackground,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      OnBoardingContainer(
-                        radius: 20,
-                        width: 100,
-                        height: 40,
-                        color: appColors.purple,
-                        widget: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 7.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Image.asset(
-                                Images.courses2,
-                                width: 18.w,
-                                height: 18.h,
-                                color: appColors.mainText,
-                              ),
-                              AuthText(
-                                text:
-                                    '${teacherLearnpathModel.coursesCount} courses',
-                                color: appColors.mainText,
-                                fontWeight: FontWeight.w600,
-                                size: 12,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      RatingBarIndicator(
-                        rating: teacherLearnpathModel.rate,
-                        itemCount: 5,
-                        itemSize: 15.0, // star size
-                        direction: Axis.horizontal,
-                        itemBuilder: (context, _) => Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                      ),
-                    ],
-                  )),
-            ],
+            ),
           ),
-          onTap: () async {
-            final cubit = LearnPathInfoCubit();
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (_) => Center(
-                child: Loading(),
+        ],
+      ),
+      onTap: () async {
+        final cubit = LearnPathInfoCubit();
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) => Center(
+            child: Loading(),
+          ),
+        );
+
+        try {
+          await cubit.fetchAllLearnPathData(learnPath.id);
+
+          // أغلق Dialog التحميل بعد اكتمال العملية
+          if (Navigator.canPop(context)) {
+            Navigator.pop(context);
+          }
+
+          if (cubit.state is LearnPathAllDataSuccess) {
+            final data = cubit.state as LearnPathAllDataSuccess;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LearnPathInfoPage(
+                  learningPathInfoData: data.info.data,
+                  learningPathInfoModel: data.courses,
+                ),
               ),
             );
-
-            try {
-              await cubit.fetchAllLearnPathData(teacherLearnpathModel.id);
-
-              // أغلق Dialog التحميل بعد اكتمال العملية
-              if (Navigator.canPop(context)) {
-                Navigator.pop(context);
-              }
-
-              if (cubit.state is LearnPathAllDataSuccess) {
-                final data = cubit.state as LearnPathAllDataSuccess;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LearnPathInfoPage(
-                      learningPathInfoData: data.info.data,
-                      learningPathInfoModel: data.courses,
-                    ),
-                  ),
-                );
-              } else if (cubit.state is LearnPathInfoError) {
-                print(cubit.state);
-                customSnackBar(
-                  context: context,
-                  success: 0,
-                  message: "cubit.state.masseg",
-                );
-              }
-            } catch (e) {
-              print("❌ Error during navigation: $e");
-              customSnackBar(
-                context: context,
-                success: 0,
-                message: S.of(context).error_occurred,
-              );
-            }
-          },
-        ),
-      ),
+          } else if (cubit.state is LearnPathInfoError) {
+            print(cubit.state);
+            customSnackBar(
+              context: context,
+              success: 0,
+              message: "cubit.state.masseg",
+            );
+          }
+        } catch (e) {
+          print("❌ Error during navigation: $e");
+          customSnackBar(
+            context: context,
+            success: 0,
+            message: lang.error_occurred,
+          );
+        }
+      },
     );
   }
 }

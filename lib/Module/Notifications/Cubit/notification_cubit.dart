@@ -7,6 +7,7 @@ import 'package:lms/Module/Notifications/Cubit/notification_state.dart';
 import 'package:lms/Module/Notifications/Model/notification_model.dart';
 import 'package:lms/Module/UserFriend/Cubit/user_friend_state.dart';
 import 'package:lms/Module/UserFriend/Model/user_frind_model.dart';
+import 'package:lms/generated/l10n.dart';
 
 class NotificationCubit extends Cubit<NotificationState> {
   NotificationCubit() : super(NotificationInitial());
@@ -46,6 +47,8 @@ class NotificationCubit extends Cubit<NotificationState> {
         final notification = NotificationResponse.fromJson(response.data);
 
         emit(NotificationSuccess(notificationResponse: notification));
+      } else if (response.statusCode == 401) {
+        emit(UnAuth());
       } else {
         emit(NotificationError(
           masseg: 'Failed with status code: ${response.statusCode}',

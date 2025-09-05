@@ -45,12 +45,24 @@ class PasswordResetCubit extends Cubit<PasswordResetState> {
     final newPassword = newPasswordCtrl.text.trim();
     final confirmPassword = confirmNewPasswordCtrl.text.trim();
 
-    if (!isPassword ||
-        !isConfirmationPassword ||
-        oldPassword.isEmpty ||
-        newPassword.isEmpty ||
-        confirmPassword.isEmpty) {
+    if (oldPassword.isEmpty || newPassword.isEmpty || confirmPassword.isEmpty) {
       emit(PasswordResetError(S.of(context).check_info));
+      return;
+    }
+
+    if (!isPassword) {
+      emit(PasswordResetError(
+          S.of(context).at_least_8_char_lower_upper_symbols));
+      return;
+    }
+
+    if (newPassword == oldPassword) {
+      emit(PasswordResetError(S.of(context).error_old_password));
+      return;
+    }
+
+    if (newPassword != confirmPassword) {
+      emit(PasswordResetError(S.of(context).passwords_do_not_match));
       return;
     }
 
@@ -65,16 +77,22 @@ class PasswordResetCubit extends Cubit<PasswordResetState> {
         },
         headers: {
           "Accept": "application/json",
-          "Authorization": "Bearer $token",
+          "Authorization": "Bearer ${CacheHelper.getToken()}",
         },
       );
-
+      print(response.data);
+      print(response.statusCode);
       if (response.statusCode == 200) {
         emit(PasswordResetSuccess(S.of(context).done));
-      } else if (response.statusCode == 422 ||response.statusCode == 401) {
+      } else if (response.statusCode == 422) {
         emit(PasswordResetError(S.of(context).error_old_password));
-      }
-      else  {
+      } else if (response.statusCode == 401 &&
+          response.data['message'] == "Unauthenticated.") {
+        emit(UnAuth());
+      } else if (response.statusCode == 401 &&
+          response.data['message'] == "Wrong old password!") {
+        emit(PasswordResetError(S.of(context).error_old_password));
+      } else {
         emit(PasswordResetError(S.of(context).error_occurred));
       }
     } catch (e) {

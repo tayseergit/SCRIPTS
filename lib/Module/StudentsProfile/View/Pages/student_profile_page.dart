@@ -32,7 +32,7 @@ class StudentProfilePage extends StatelessWidget {
     final appColors = context.read<ThemeCubit>().state;
     return BlocProvider(
       create: (context) =>
-          StudentProfileCubit()..getProfile(CacheHelper.getUserId()),
+          StudentProfileCubit()..getProfile(userid),
       child: BlocConsumer<StudentProfileCubit, StudentProfileState>(
         listener: (context, state) {
           if (state is ProfileError) {}

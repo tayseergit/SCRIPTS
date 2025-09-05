@@ -74,10 +74,11 @@ class TeacherProfilePage extends StatelessWidget {
             } else if (state is TeacherProfileError) {
               return Center(child: NoConnection());
             } else if (state is TeacherProfileSuccess) {
+              print("teacher id ${state.userModel.user.id}");
               final user = state.userModel.user;
-              print("🔥 user created_courses: ${user.created_courses}");
-              print("🔥 user created_paths: ${user.created_paths}");
-              print("🔥 user created_contests: ${user.created_contests}");
+              // print("🔥 user created_courses: ${user.created_courses}");
+              // print("🔥 user created_paths: ${user.created_paths}");
+              // print("🔥 user created_contests: ${user.created_contests}");
               print(user.image);
               return ListView(
                 children: [
@@ -217,10 +218,11 @@ class TeacherProfilePage extends StatelessWidget {
                       },
                     ),
                   ),
-                  SizedBox(height: 10.h,)
+                  SizedBox(
+                    height: 10.h,
+                  )
                 ],
               );
-              
             }
 
             return const SizedBox.shrink();

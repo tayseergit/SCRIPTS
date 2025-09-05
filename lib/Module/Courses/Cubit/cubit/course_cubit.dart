@@ -37,7 +37,7 @@ class CourseCubit extends Cubit<CourseState> {
     ];
   }
 
-   void onSearchChanged(String value) {
+  void onSearchChanged(String value) {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
 
     _debounce = Timer(const Duration(seconds: 1), () {
@@ -110,7 +110,7 @@ class CourseCubit extends Cubit<CourseState> {
         emit(CourseSuccess());
       } else {
         debugPrint("⚠️ خطأ في الاستجابة: ${response.statusCode}");
-        emit(CourseError(message: "خطأ في الاستجابة: ${response.statusCode}"));
+        emit(CourseError(message: S.of(context).an_error_occurred));
       }
     } on SocketException catch (e) {
       debugPrint("❌ SocketException: $e");
@@ -124,7 +124,7 @@ class CourseCubit extends Cubit<CourseState> {
         debugPrint(
             "⚠️ استجابة السيرفر: ${e.response?.statusCode} - ${e.response?.data}");
         emit(CourseError(
-            message: "حدث خطأ في السيرفر: ${e.response?.statusCode}"));
+            message: "${e.response?.data['message']}"));
       } else {
         emit(CourseError(message: S.of(context).error_in_server));
       }
@@ -138,20 +138,4 @@ class CourseCubit extends Cubit<CourseState> {
     }
   }
 }
-/** on SocketException catch (e) {
-      debugPrint('SocketException: $e');
-      emit(
-        CourseError(
-          message: S.of(context).error_in_server,
-        ),
-      );
-    } on DioException catch (e) {
-      if (e.type == DioExceptionType.connectionTimeout) {
-        emit(CourseError(message: S.of(context).error_in_server));
-      } else if (e.response != null) {
-        emit(CourseError(
-            message: "حدث خطأ في السيرفر: ${e.response?.statusCode}"));
-      } else {
-        emit(CourseError(message: S.of(context).error_in_server));
-      }
-    } */
+ 

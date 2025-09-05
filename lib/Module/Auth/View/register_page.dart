@@ -6,9 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lms/Constant/images.dart';
 import 'package:lms/Constant/public_constant.dart';
+import 'package:lms/Helper/image_picker.dart';
 import 'package:lms/Module/Localization/localization.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
-import 'package:lms/Module/Verify/View/verify.dart';
+import 'package:lms/Module/Verify/View/verify_page.dart';
 import 'package:lms/Module/mainWidget/Container.dart';
 import 'package:lms/Module/mainWidget/CustomTextField.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
@@ -35,11 +36,8 @@ class Register extends StatelessWidget {
           listener: (context, state) {
             AuthCubit authCubit = context.read<AuthCubit>();
             if (state is SignUpSuccess) {
-              // CustomSnackbar.show(
-              //   fillColor: appColors.ok,
-              //   context: context,
-              //   message: lang.code_sent,
-              // );
+              customSnackBar(
+                  context: context, success: 1, message: lang.code_sent);
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 pushTo(
                     context: context,
@@ -106,63 +104,64 @@ class Register extends StatelessWidget {
                   SizedBox(
                     height: 20.h,
                   ),
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Transform.rotate(
-                        angle: 3.95.r,
-                        child: SizedBox(
-                          width: 120.w,
-                          height: 120.h,
-                          child: CircularProgressIndicator(
-                            value: 0.80.r,
-                            strokeWidth: 8.r,
-                            backgroundColor: Colors.transparent,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              appColors.primary,
-                            ),
-                          ),
-                        ),
-                      ),
-                      CircleAvatar(
-                        radius: 50.r,
-                        backgroundColor: Colors.grey.shade200,
-                        backgroundImage: authCubit.pickedImage != null
-                            ? FileImage(File(authCubit.pickedImage!.path))
-                            : null,
-                        child: authCubit.pickedImage == null
-                            ? Icon(Icons.person,
-                                size: 40.sp, color: Colors.grey)
-                            : null,
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 110),
-                    child: OnBoardingContainer(
-                        width: 100,
-                        height: 40,
-                        color: appColors.primary,
-                        widget: AuthText(
-                          text: lang.add_image,
-                          color: appColors.mainText,
-                          size: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        onTap: () async {
-                          // final xfile = await ImageService()
-                          //     .pickImageFromGallery(context);
-                          // if (xfile != null) {
-                          //   final file =
-                          //       File(xfile.path); // ✅ correct conversion
-                          //   selectedImage = file;
-                          //   authCubit.setPickedImage(file);
-                          //   print('Picked: ${file.path}');
-                          // }
-                        }),
-                  ),
+                  // Stack(
+                  //   alignment: Alignment.center,
+                  //   children: [
+                  //     Transform.rotate(
+                  //       angle: 3.95.r,
+                  //       child: SizedBox(
+                  //         width: 120.w,
+                  //         height: 120.h,
+                  //         child: CircularProgressIndicator(
+                  //           value: 0.80.r,
+                  //           strokeWidth: 8.r,
+                  //           backgroundColor: Colors.transparent,
+                  //           valueColor: AlwaysStoppedAnimation<Color>(
+                  //             appColors.primary,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     CircleAvatar(
+                  //       radius: 50.r,
+                  //       backgroundColor: Colors.grey.shade200,
+                  //       backgroundImage: authCubit.rigesterImage != null
+                  //           ? FileImage(File(authCubit.rigesterImage!.path))
+                  //           : null,
+                  //       child: authCubit.rigesterImage == null
+                  //           ? Icon(Icons.person,
+                  //               size: 40.sp, color: Colors.grey)
+                  //           : null,
+                  //     )
+                  //   ],
+                  // ),
+                  // SizedBox(height: 20),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 110),
+                  //   child: OnBoardingContainer(
+                  //       width: 100,
+                  //       height: 40,
+                  //       color: appColors.primary,
+                  //       widget: AuthText(
+                  //         text: lang.add_image,
+                  //         color: appColors.mainText,
+                  //         size: 14,
+                  //         fontWeight: FontWeight.w700,
+                  //       ),
+                  //       onTap: () async {
+                  //         final xfile =
+                  //             await ImageService().pickImageFromGallery();
+                  //         if (xfile != null) {
+                  //           final file =
+                  //               File(xfile.path); // ✅ correct conversion
+                  //           authCubit.setPickedImage(file);
+                  //           print('Picked: ${file.path}');
+                  //         }
+                  //       }),
+                  // ),
+                  Image.asset(Images.baseLogo, height: 150.h, width: 200.w),
                   SizedBox(height: 36.h),
+
                   Directionality(
                     textDirection: TextDirection.ltr,
                     child: Row(

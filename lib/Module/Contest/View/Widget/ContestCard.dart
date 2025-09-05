@@ -199,7 +199,7 @@ class Contestcard extends StatelessWidget {
               showNoAuthDialog(context);
               return;
             }
-            if (contest.type == "programming" || contest.alreadyParticipate!) {
+            if (contest.type == "programming" || contest.alreadyParticipate! ) {
               showDialog(
                 context: context,
                 builder: (context) {

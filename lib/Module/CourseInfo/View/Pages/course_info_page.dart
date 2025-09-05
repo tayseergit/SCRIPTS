@@ -39,7 +39,7 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
     super.initState();
     courseInfoCubit =
         CourseInfoCubit(courseId: widget.courseId, context: context);
-    reviewCubit = ReviewCubit(courseId: widget.courseId);
+    reviewCubit = ReviewCubit(courseId: widget.courseId, context: context);
 
     // Call first API
     courseInfoCubit.getCourseDescription();
@@ -539,8 +539,25 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                                       print(courseInfoData.id);
                                     },
                                   )
-                                : courseInfoData.status != "enrolled"
+                                : courseInfoData.status != "enrolled" &&
+                                        courseInfoData.price == 0
                                     ? OnBoardingContainer(
+                                        height: 50,
+                                        color: appColors.blackGreen,
+                                        widget: AuthText(
+                                          text: lang.enroll,
+                                          size: 16,
+                                          color: appColors.whiteText,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        onTap: () {
+                                          context
+                                              .read<CourseInfoCubit>()
+                                              .postEnrollCourse(
+                                                  courseInfoData.id);
+                                        },
+                                      )
+                                    : OnBoardingContainer(
                                         height: 50,
                                         color: appColors.blackGreen,
                                         widget: AuthText(
@@ -560,19 +577,15 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                                             ),
                                           );
                                         },
-                                      )
-                                    : Container()),
+                                      )),
                         /////
                         /// watch later button
                         SizedBox(
                           width: 10.h,
                         ),
-                        (courseInfoData.status != 'enroll' &&
-                                    courseInfoData.studentPaid == null) ||
-                                courseInfoData.status == "watch_later"
+                        courseInfoData.status != 'enrolled'
                             ? Expanded(
-                                child: courseInfoData.status != 'enroll' &&
-                                        courseInfoData.studentPaid == null
+                                child: courseInfoData.status != "watch_later"
                                     ? OnBoardingContainer(
                                         // width: 120,
                                         height: 50,

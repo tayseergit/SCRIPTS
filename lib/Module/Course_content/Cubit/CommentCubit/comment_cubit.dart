@@ -106,14 +106,14 @@ class CommentCubit extends Cubit<CommentState> {
       }).catchError((error) {
         if (error is DioException) {
           final message =
-              error.response?.data['message'] ?? S.of(context).error_in_server;
+              error.response?.data['message'] ?? S.of(context).error_occurred;
           emit(CommentError(message: message));
         } else {
           emit(CommentError(message: S.of(context).error_occurred));
         }
       });
     } catch (e) {
-      emit(CommentError(message: S.of(context).error_occurred));
+      emit(CommentError(message: S.of(context).error_in_server));
       print(e.toString());
     }
   }
@@ -142,6 +142,9 @@ class CommentCubit extends Cubit<CommentState> {
           addCommentController.text = "";
           print("ok");
           emit(AddCommentSuccess());
+        }else{
+
+          emit(AddCommentError(message: response.data['message']));
         }
 
         // print("adddddcommmmeeennntt");
@@ -180,15 +183,15 @@ class CommentCubit extends Cubit<CommentState> {
         reset();
         getAllComments();
       } else {
-        emit(UpdateCommentError(message: S.of(context).error_occurred));
+        emit(UpdateCommentError(message: response.data['message']));
       }
     }).catchError((error) {
       if (error is DioException) {
         final message =
-            error.response?.data['message'] ?? S.of(context).error_in_server;
+            error.response?.data['message'] ?? S.of(context).error_occurred;
         emit(UpdateCommentError(message: message));
       } else {
-        emit(UpdateCommentError(message: S.of(context).error_occurred));
+        emit(UpdateCommentError(message: S.of(context).error_in_server));
       }
     });
   }

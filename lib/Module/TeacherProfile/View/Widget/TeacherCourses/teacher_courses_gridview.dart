@@ -36,14 +36,14 @@ class Teachercoursesgridview extends StatelessWidget {
         itemCount: list.length,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 180.w,
-          childAspectRatio: 180.w / 250.h,
+          childAspectRatio: 180.w / 300.h,
           mainAxisSpacing: 12.h,
           crossAxisSpacing: 12.w,
         ),
         itemBuilder: (ctx, index) {
           final courses = list[index];
           return Teachercoursescard(
-            teacherCoursesModel: courses,
+            course: courses,
           );
         },
       ),

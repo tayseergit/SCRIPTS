@@ -24,7 +24,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
   static AuthCubit get(BuildContext context) => BlocProvider.of(context);
   UserAuthModel? userAuthModel;
-  File? pickedImage;
+  File? rigesterImage;
   // LOGIN
   TextEditingController emailLogctrl = TextEditingController(
     text: "eng.tayseermatar@gmail.com",
@@ -54,12 +54,12 @@ class AuthCubit extends Cubit<AuthState> {
 
 //////////////   validation
   ///
-  Timer? _timer;
 
   // Start timer when the cubit is created
+  Timer? _timer;
   void _startTokenRefreshTimer() {
     print("timer start"); // this should print immediately
-    _timer = Timer.periodic(Duration(minutes: 10), (_) async {
+    _timer = Timer.periodic(Duration(minutes: 15), (_) async {
       print("Timer tick"); // this will print every minute
       try {
         await refreshAccessToken();
@@ -70,7 +70,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void setPickedImage(File image) {
-    pickedImage = image;
+    rigesterImage = image;
     emit(PickedImageUpdated()); // create this state if needed
   }
 
@@ -162,14 +162,11 @@ class AuthCubit extends Cubit<AuthState> {
 //// google login
   ///
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-      scopes: <String>[
-        'openid',
-        'email',
-        'profile',
-      ],
-      clientId:
-          "${dotenv.env['GOOGLE_CLIENT_ID']}");
+  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: <String>[
+    'openid',
+    'email',
+    'profile',
+  ], clientId: "${dotenv.env['GOOGLE_CLIENT_ID']}");
 
   Future<void> loginWithGoogle(BuildContext context) async {
     emit(LogInLoading());
@@ -177,18 +174,18 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       debugPrint("🔄 تسجيل خروج من Google (لتجنب جلسة قديمة)...");
       await _googleSignIn.signOut();
-       debugPrint("📌 بدء عملية تسجيل الدخول بحساب Google...");
+      debugPrint("📌 بدء عملية تسجيل الدخول بحساب Google...");
 
       final GoogleSignInAccount? account = await _googleSignIn.signIn();
-       debugPrint("🔑 Tokens من Google:");
-    
+      debugPrint("🔑 Tokens من Google:");
 
       if (account == null) {
         debugPrint('🔸 المستخدم ألغى العملية.');
         return;
       }
-debugPrint("✅ المستخدم اختار الحساب: ${account.email} - ID: ${account.id}");
-debugPrint("🌐 إرسال الطلب إلى السيرفر Laravel...");
+      debugPrint(
+          "✅ المستخدم اختار الحساب: ${account.email} - ID: ${account.id}");
+      debugPrint("🌐 إرسال الطلب إلى السيرفر Laravel...");
       final auth = await account.authentication;
       debugPrint('✅ ID‑Token: ${auth.idToken}');
       debugPrint('✅ Access‑Token: ${auth.accessToken}');
@@ -210,8 +207,7 @@ debugPrint("🌐 إرسال الطلب إلى السيرفر Laravel...");
 
           print('token: ${userAuthModel?.token}');
           emit(LogInsucess());
-        }
-         else {
+        } else {
           emit(LogInError(message: S.of(context).error_occurred));
         }
       }).catchError((value) {
@@ -230,54 +226,53 @@ debugPrint("🌐 إرسال الطلب إلى السيرفر Laravel...");
   Future<void> signUp(BuildContext context) async {
     emit(SignUpLoading());
     try {
-      // Build map without "image" first
-      // final Map<String, dynamic> data = {
-      //   "name": nameCtrl.text.trim(),
-      //   "email": emailRegCtrl.text.trim(),
-      //   "password": passwordRegCtrl.text.trim(),
-      //   "password_confirmation": confirmPasswordCtrl.text.trim(),
-      //   "gitHub_account": githubAccount.text.trim(),
-      //   "bio": bioCtrl.text.trim(),
-      //   "fcm_token": CacheHelper.getData(key: "fcm"),
-      //   "image": ""
-      // };
+      Map<String, dynamic> dataMap = {
+        "name": nameCtrl.text.trim(),
+        "email": emailRegCtrl.text.trim(),
+        "password": passwordRegCtrl.text.trim(),
+        "password_confirmation": confirmPasswordCtrl.text.trim(),
+        "gitHub_account": githubAccount.text.trim(),
+        "bio": bioCtrl.text.trim(),
+        "fcm_token": CacheHelper.getData(key: "fcm"),
+        "image": ""
+      };
+      print(
+        rigesterImage!.path,
+      );
+      print("ddddddd");
+      if (rigesterImage != null) {
+        String extension = rigesterImage!.path.split('.').last.toLowerCase();
+        String mimeType =
+            extension == 'png' ? 'png' : 'jpeg'; // adjust if needed
 
-      // // Add image only if pickedImage is not null
-      // if (pickedImage != null) {
-      //   data["image"] = await MultipartFile.fromFile(
-      //     pickedImage!.path,
-      //     filename: pickedImage!.path.split('/').last,
-      //     // or 'png'
-      //   );
-      // }
+        dataMap["image"] = await MultipartFile.fromFile(
+          rigesterImage!.path,
+          filename: rigesterImage!.path.split('/').last,
+          contentType: MediaType('image', mimeType),
+        );
+      }
+      FormData formData = FormData.fromMap(dataMap);
+      formData.fields.forEach((f) => print("Field: ${f.key} = ${f.value}"));
+      formData.files
+          .forEach((f) => print("File: ${f.key} = ${f.value.filename}"));
 
-      // print(
-      //   pickedImage!.path,
-      // );
-      // print("fffffssssssssssss");
-
-      final response = await DioHelper.postData(
+      final response = await DioHelper.postFormData(
         url: "register",
-        postData: {
-          "name": nameCtrl.text.trim(),
-          "email": emailRegCtrl.text.trim(),
-          "password": passwordRegCtrl.text.trim(),
-          "password_confirmation": confirmPasswordCtrl.text.trim(),
-          "gitHub_account": githubAccount.text.trim(),
-          "bio": bioCtrl.text.trim(),
-          "fcm_token": CacheHelper.getData(key: "fcm"),
-          "image": ""
-        },
+        postData: formData,
         headers: {
-          'Accept': 'application/json',
+          "Accept": "application/json",
+          // "Authorization": "Bearer $token",
         },
       );
+      // print();
+      print(response.data['errors']);
+
       if (response.statusCode == 200) {
         emit(SignUpSuccess());
         print(state);
         print(response.data);
       } else if (response.statusCode == 422) {
-        emit(SignUpError(message: S.of(context).email_already_exist));
+        emit(SignUpError(message: "${response.data['errors']}"));
       } else {
         emit(SignUpError(message: S.of(context).error_occurred));
         print(response.data['message']);
@@ -351,23 +346,30 @@ debugPrint("🌐 إرسال الطلب إلى السيرفر Laravel...");
 
   Future<void> loginWithGithub() async {
     final clientId = dotenv.env['GITHUB_CLIENT_ID'];
-
-    final redirectUri = "myapp://callback";
+    final redirectUri = "myapp://callback"; // must match GitHub OAuth
     final scope = "read:user,user:email";
-    final state = "random_state_string"; // generate securely
+    final state =
+        DateTime.now().millisecondsSinceEpoch.toString(); // unique state
+
     try {
+      // Open GitHub login
       final result = await FlutterWebAuth2.authenticate(
         url:
             "https://github.com/login/oauth/authorize?client_id=$clientId&redirect_uri=$redirectUri&scope=$scope&state=$state",
         callbackUrlScheme: "myapp",
       );
-      print("ccccccccccccccccccc");
-      // Extrprintact code
-      final code = Uri.parse(result).queryParameters['code'];
-      print("GitHub Auth Code: $code");
-      // setState(() => _authCode = code ?? "No code");
 
-      // Send this code to backend to exchange for access token
+      // Extract the code from the callback URL
+      final code = Uri.parse(result).queryParameters['code'];
+      final returnedState = Uri.parse(result).queryParameters['state'];
+
+      if (code == null || returnedState != state) {
+        throw Exception("OAuth failed or state mismatch!");
+      }
+
+      print("GitHub Auth Code: $code");
+
+      // TODO: Send `code` to your backend to exchange for an access token
     } catch (e) {
       print("GitHub login error: $e");
     }

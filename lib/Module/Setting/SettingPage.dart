@@ -17,7 +17,10 @@ import 'package:lms/Module/Them/cubit/app_color_cubit.dart';
 import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/mainWidget/TopWave_more_Clipper.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
+import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/no_auth.dart';
+import 'package:lms/Module/payment/cubit/payment_state.dart';
+import 'package:lms/Module/payment/cubit/puyment_cubit.dart';
 import 'package:lms/generated/l10n.dart';
 
 class Settingpage extends StatelessWidget {
@@ -32,6 +35,9 @@ class Settingpage extends StatelessWidget {
         BlocProvider(
             create: (context) => NotificationSwitchPushNotificationsCubit()),
         BlocProvider(create: (context) => NotificationSwitchDarkModeCubit()),
+        BlocProvider(
+          create: (_) => PaymentCubit(),
+        )
       ],
       child: Builder(builder: (context) {
         return Scaffold(
@@ -159,35 +165,61 @@ class Settingpage extends StatelessWidget {
                       SizedBox(
                         height: 30.h,
                       ),
-                      OnBoardingContainerMore(
-                          onTap: () {
-                            // makePayment();
-                            // pushTo(context: context, toPage: PaymentPage());
-                            showAmountDialog(context);
-                          },
-                          width: 330,
-                          height: 60,
-                          color: appColors.pageBackground,
-                          borderColor: appColors.blackGreen,
-                          widget: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 14.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                AuthText(
-                                  text: lang.add_a_payment_method,
-                                  color: appColors.mainText,
-                                  size: 19,
-                                  fontWeight: FontWeight.w600,
+                      BlocConsumer<PaymentCubit, PaymentState>(
+                        listener: (context, state) {
+                          if (state is PaymentFailure) {
+                            customSnackBar(
+                                context: context,
+                                success: 0,
+                                message: lang.error_occurred);
+                          } else if (state is PaymentSuccess) {
+                            customSnackBar(
+                                context: context,
+                                success: 1,
+                                message: lang.done);
+                          } else if (state is PaymentAmountFailure) {
+                            customSnackBar(
+                                context: context,
+                                success: 2,
+                                message: lang.enter_valid_amount);
+                          }
+                        },
+                        builder: (context, state) {
+                          if (state is PaymentLoading) return Loading();
+                          final cubit = context.read<PaymentCubit>();
+
+                          return OnBoardingContainerMore(
+                              onTap: () {
+                                showAmountDialog(
+                                  context,
+                                );
+                              },
+                              width: 330,
+                              height: 60,
+                              color: appColors.pageBackground,
+                              borderColor: appColors.blackGreen,
+                              widget: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 14.w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    AuthText(
+                                      text: lang.add_a_payment_method,
+                                      color: appColors.mainText,
+                                      size: 19,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    Image.asset(
+                                      Images.addapaymentmethod,
+                                      width: 35,
+                                      height: 35,
+                                    )
+                                  ],
                                 ),
-                                Image.asset(
-                                  Images.addapaymentmethod,
-                                  width: 35,
-                                  height: 35,
-                                )
-                              ],
-                            ),
-                          )),
+                              ));
+                        },
+                      ),
                       SizedBox(
                         height: 30.h,
                       ),

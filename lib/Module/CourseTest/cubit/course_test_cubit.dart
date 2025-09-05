@@ -30,14 +30,16 @@ class CourseTestCubit extends Cubit<CourseTestState> {
           "Accept": "application/json",
           "Authorization": "Bearer ${CacheHelper.getToken()}",
         },
-      ).then((value) {
-        if (value.statusCode == 200) {
+      ).then((response) {
+        if (response.statusCode == 200) {
           print("dvvvvvvvv");
-          courseTestQuestion = CourseTestQuestion.fromJson(value.data);
+          courseTestQuestion = CourseTestQuestion.fromJson(response.data);
           // Record start time when test is loaded
           startTime = DateTime.now().toString().substring(0, 19);
-          
+
           emit(TestSuccess());
+        } else if (response.statusCode == 401) {
+          emit(UnAuth());
         } else {
           emit(TestError(message: S.of(context).error_occurred));
         }

@@ -62,7 +62,7 @@
   "friends": "Friends",
   "participants": "Participants",
   "teachers": "Teachers",
-  "error_old_password":"wrong password",
+  "error_old_password":"new password and old must be different",
   "check_info":"check information",
   "add_new_project": "Add Project",
   "fill_details": "Please fill required fields",
@@ -184,8 +184,18 @@
   "watch_content":"watch content",
   "confirm":"confirm",
    "payment_confirmation": "Payment Confirmation",
-    "buy_course_message": "Are you sure to buy this course?"
+    "buy_course_message": "Are you sure to buy this course?",
+    "earned_certification":"you have get a certification for this course",
+    "enter_valid_amount":"enter valid amount",
+     "confirm_addition": "Confirm addition",
+  "do_you_want_add": "Do you want to add",
+  "to_friend_list": "to your friend list?",
+  
+  "add": "Add",
+  "friend_added_success": "Friend added successfully",
+    "already_friend": "This user is already your friend"
 
+ 
 
 
 

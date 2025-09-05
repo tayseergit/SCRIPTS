@@ -50,9 +50,9 @@ class LearnpathCard extends StatelessWidget {
                       BorderRadius.vertical(top: Radius.circular(30.r)),
                   child: Image.network(
                     learnPath.image!,
-                    height: 150.h,
+                    height: 170.h,
                     width: double.infinity,
-                    fit: BoxFit.contain,
+                    fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) => Image.asset(
                       Images.noImage,
                       height: 170.h,
