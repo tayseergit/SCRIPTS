@@ -17,3 +17,5 @@ class CourseContentSuccess extends CourseContentState {
   final CourseContentResponse courseContentResponse;
   CourseContentSuccess(this.courseContentResponse);
 }
+ 
+

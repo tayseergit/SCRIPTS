@@ -21,9 +21,9 @@ class DioHelper {
     _dio = Dio(
       BaseOptions(
         baseUrl: baseUrlApi,
-        connectTimeout: const Duration(seconds: 120),
-        receiveTimeout: const Duration(seconds: 120),
-        sendTimeout: const Duration(seconds: 120),
+        connectTimeout: const Duration(seconds: 50),
+        receiveTimeout: const Duration(seconds: 50),
+        sendTimeout: const Duration(seconds: 50),
         headers: {
           HttpHeaders.acceptHeader: "application/json",
         },

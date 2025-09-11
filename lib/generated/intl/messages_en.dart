@@ -99,7 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "bio": MessageLookupByLibrary.simpleMessage("Bio"),
     "buy_course_message": MessageLookupByLibrary.simpleMessage(
-      "Are you sure to buy this course?",
+      "Are you sure to buy this course ",
     ),
     "buy_now": MessageLookupByLibrary.simpleMessage("Buy Now"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -214,6 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please fill required fields",
     ),
     "forget_password": MessageLookupByLibrary.simpleMessage("Forget Password?"),
+    "free_enroll": MessageLookupByLibrary.simpleMessage("free enroll"),
     "friend_added_success": MessageLookupByLibrary.simpleMessage(
       "Friend added successfully",
     ),

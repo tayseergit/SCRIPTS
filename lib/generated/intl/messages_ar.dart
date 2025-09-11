@@ -97,7 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "bio": MessageLookupByLibrary.simpleMessage("نبذة"),
     "buy_course_message": MessageLookupByLibrary.simpleMessage(
-      "هل أنت متأكد من شراء هذا الدورة؟",
+      "هل أنت متأكد من شراء هذا الدورة",
     ),
     "buy_now": MessageLookupByLibrary.simpleMessage("اشترِ الآن"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
@@ -206,6 +206,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "forget_password": MessageLookupByLibrary.simpleMessage(
       "نسيت كلمة المرور؟",
     ),
+    "free_enroll": MessageLookupByLibrary.simpleMessage("اشترك مجانا"),
     "friend_added_success": MessageLookupByLibrary.simpleMessage(
       "تمت إضافة الصديق بنجاح ",
     ),

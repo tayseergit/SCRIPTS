@@ -65,10 +65,9 @@ class VideoCubit extends Cubit<VideoState> {
           flags: YoutubePlayerFlags(
             autoPlay: true,
             mute: false,
-             disableDragSeek: true, 
-             controlsVisibleAtStart: false,
-                hideThumbnail: true,           // hide thumbnail overlay
-
+            disableDragSeek: true,
+            controlsVisibleAtStart: false,
+            hideThumbnail: true, // hide thumbnail overlay
           ),
         );
         emit(VideoSuccessYouTube(
@@ -103,7 +102,7 @@ class VideoCubit extends Cubit<VideoState> {
           description: data["description"] ?? "",
         ));
       } else if (response.statusCode == 401) {
-        emit(UnAuth());
+        emit(UnAuthVideo());
         return;
       } else {
         emit(VideoErrorYoutube(

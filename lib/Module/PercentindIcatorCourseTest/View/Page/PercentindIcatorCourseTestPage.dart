@@ -39,10 +39,16 @@ class PercentindIcatorCourseTestPage extends StatelessWidget {
           listener: (context, state) {
             if (state is TestSuccess) {
               if (context
-                      .read<CourseTestCubit>()
-                      .courseTestQuestion!
-                      .bestResult >=
-                  60) {
+                          .read<CourseTestCubit>()
+                          .courseTestQuestion!
+                          .bestResult >=
+                      60 &&
+                  context
+                          .read<CourseTestCubit>()
+                          .courseTestQuestion!
+                          .test
+                          .isFinal ==
+                      1) {
                 customSnackBar(
                     context: context,
                     success: 1,
@@ -53,7 +59,9 @@ class PercentindIcatorCourseTestPage extends StatelessWidget {
           builder: (context, state) {
             var testCubit = context.read<CourseTestCubit>();
 
-            if (state is TestLoading || state is CourseTestInitial || state is TestSubmitLoading) return PercentIndicatorShimmer();
+            if (state is TestLoading ||
+                state is CourseTestInitial ||
+                state is TestSubmitLoading) return PercentIndicatorShimmer();
             if (state is TestError)
               return Center(
                 child: NoConnection(),

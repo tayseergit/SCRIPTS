@@ -1434,10 +1434,10 @@ class S {
     );
   }
 
-  /// `Are you sure to buy this course?`
+  /// `Are you sure to buy this course `
   String get buy_course_message {
     return Intl.message(
-      'Are you sure to buy this course?',
+      'Are you sure to buy this course ',
       name: 'buy_course_message',
       desc: '',
       args: [],
@@ -1517,6 +1517,11 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `free enroll`
+  String get free_enroll {
+    return Intl.message('free enroll', name: 'free_enroll', desc: '', args: []);
   }
 }
 

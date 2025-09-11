@@ -77,7 +77,7 @@ class _CourseContentPageState extends State<CourseContentPage> {
               width: double.infinity.w,
               child: BlocConsumer<VideoCubit, VideoState>(
                 listener: (context, state) {
-                  if (state is UnAuth) showNoAuthDialog(context);
+                  if (state is UnAuthVideo) showNoAuthDialog(context);
                 },
                 builder: (context, state) {
                   if (state is VideoLoadingYouTube) {
@@ -95,7 +95,7 @@ class _CourseContentPageState extends State<CourseContentPage> {
                         ),
                       ),
                     );
-                  } else if (state is UnAuth) {
+                  } else if (state is UnAuthVideo) {
                     return SizedBox(
                       height: 275.h,
                       child: Center(

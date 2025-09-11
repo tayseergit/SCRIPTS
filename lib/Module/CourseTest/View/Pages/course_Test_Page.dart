@@ -32,21 +32,23 @@ class CourseTestPage extends StatelessWidget {
           backgroundColor: appColors.pageBackground,
           body: BlocConsumer<CourseTestCubit, CourseTestState>(
             listener: (context, state) {
-              if(state is TestSubmitLoading){
-                
-              }
+              print(state);
+              if (state is TestSubmitLoading) {}
               if (state is TestSubmitError) {
                 customSnackBar(
                     context: context, success: 2, message: state.message);
               }
               if (state is TestSubmitSuccess) {
+                // context.read<CourseContentCubit>().getCourseContent(context);
+
                 pushReplacement(
-                    context: context,
-                    toPage: PercentindIcatorCourseTestPage(
-                      courseId: courseId,
-                      testId: testId,
-                      message: state.message,
-                    ));
+                  context: context,
+                  toPage: PercentindIcatorCourseTestPage(
+                    courseId: courseId,
+                    testId: testId,
+                    message: state.message,
+                  ),
+                );
               }
               if (state is UnAuth) {
                 Navigator.pop(context);
@@ -180,43 +182,62 @@ class CourseTestPage extends StatelessWidget {
                           if (testCubit.currentIndex > 0) SizedBox(width: 10.w),
 
                           // Next / Submit button
-                          Flexible(
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut,
-                              width: double.infinity, // Flexible handles width
-                              child: OnBoardingContainer(
-                                onTap: testCubit
-                                        .hasSelectedAnswerForCurrentQuestion
-                                    ? () {
-                                        if (testCubit.currentIndex ==
-                                            testCubit.courseTestQuestion!.test
-                                                    .questions.length -
-                                                1) {
-                                          testCubit.submitTest(context);
-                                        } else {
-                                          testCubit.nextQuestion();
-                                        }
-                                      }
-                                    : null,
-                                height: 50,
-                                color: testCubit
-                                        .hasSelectedAnswerForCurrentQuestion
-                                    ? appColors.seocndIconColor
-                                    : Colors.grey,
-                                widget: AuthText(
-                                  text: testCubit.currentIndex ==
-                                          testCubit.courseTestQuestion!.test
-                                                  .questions.length -
-                                              1
-                                      ? lang.submit
-                                      : lang.next,
-                                  size: 20,
-                                  color: appColors.pageBackground,
-                                  fontWeight: FontWeight.w600,
+                          BlocConsumer<CourseTestCubit, CourseTestState>(
+                            listener: (context, state) {
+                              // TODO: implement listener
+                            },
+                            builder: (context, state) {
+                              final testCubit = context.read<CourseTestCubit>();
+
+                              return Flexible(
+                                child: AnimatedContainer(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                  width:
+                                      double.infinity, // Flexible handles width
+                                  child: state is TestSubmitLoading
+                                      ? Loading()
+                                      : OnBoardingContainer(
+                                          onTap: testCubit
+                                                  .hasSelectedAnswerForCurrentQuestion
+                                              ? () {
+                                                  if (testCubit.currentIndex ==
+                                                      testCubit
+                                                              .courseTestQuestion!
+                                                              .test
+                                                              .questions
+                                                              .length -
+                                                          1) {
+                                                    testCubit
+                                                        .submitTest(context);
+                                                  } else {
+                                                    testCubit.nextQuestion();
+                                                  }
+                                                }
+                                              : null,
+                                          height: 50,
+                                          color: testCubit
+                                                  .hasSelectedAnswerForCurrentQuestion
+                                              ? appColors.seocndIconColor
+                                              : Colors.grey,
+                                          widget: AuthText(
+                                            text: testCubit.currentIndex ==
+                                                    testCubit
+                                                            .courseTestQuestion!
+                                                            .test
+                                                            .questions
+                                                            .length -
+                                                        1
+                                                ? lang.submit
+                                                : lang.next,
+                                            size: 20,
+                                            color: appColors.pageBackground,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
                                 ),
-                              ),
-                            ),
+                              );
+                            },
                           ),
                         ],
                       ),

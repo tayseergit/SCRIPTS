@@ -66,6 +66,7 @@ class CourseContentCubit extends Cubit<CourseContentState> {
 
   void markTestAsCompleted(int testId) {
     if (courseContentResponse != null) {
+      // Update the completion status for the matching test
       final updatedContents =
           courseContentResponse!.data!.allContents.map((item) {
         if (item.id == testId) {
@@ -74,7 +75,10 @@ class CourseContentCubit extends Cubit<CourseContentState> {
         return item;
       }).toList();
 
+      // Replace the old list with the updated one
       courseContentResponse!.data!.allContents = updatedContents;
+
+      // Emit the updated state so UI rebuilds
       emit(CourseContentSuccess(courseContentResponse!));
     }
   }

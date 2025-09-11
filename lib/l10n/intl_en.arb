@@ -184,7 +184,7 @@
   "watch_content":"watch content",
   "confirm":"confirm",
    "payment_confirmation": "Payment Confirmation",
-    "buy_course_message": "Are you sure to buy this course?",
+    "buy_course_message": "Are you sure to buy this course ",
     "earned_certification":"you have get a certification for this course",
     "enter_valid_amount":"enter valid amount",
      "confirm_addition": "Confirm addition",
@@ -193,7 +193,9 @@
   
   "add": "Add",
   "friend_added_success": "Friend added successfully",
-    "already_friend": "This user is already your friend"
+    "already_friend": "This user is already your friend",
+    "free_enroll":"free enroll"
+  
 
  
 

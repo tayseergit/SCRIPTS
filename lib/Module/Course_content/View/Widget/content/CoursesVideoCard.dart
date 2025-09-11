@@ -53,11 +53,17 @@ class Coursesvideocard extends StatelessWidget {
                   showConfirmDialog(
                     context: context,
                     title: S.of(context).payment_confirmation,
-                    content: S.of(context).buy_course_message,
-                    onConfirm: () {
-                      context
-                          .read<CourseInfoCubit>()
-                          .postEnrollCourse(courseId);
+                    content:
+                        "${S.of(context).buy_course_message} ${context.read<CourseInfoCubit>().courseDescriptionResponse!.data.price}  \$",
+                    onConfirm: () async {
+                      final courseInfoCubit = context.read<CourseInfoCubit>();
+                      final courseContentCubit =
+                          context.read<CourseContentCubit>();
+
+                      courseInfoCubit.postEnrollCourse(courseId);
+
+                      // After successful enrollment, refresh the course content
+                      courseContentCubit.getCourseContent(context);
                     },
                   );
                 }

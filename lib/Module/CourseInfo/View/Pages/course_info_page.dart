@@ -540,12 +540,12 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                                     },
                                   )
                                 : courseInfoData.status != "enrolled" &&
-                                        courseInfoData.price == 0
+                                        courseInfoData.price == "0.00"
                                     ? OnBoardingContainer(
                                         height: 50,
                                         color: appColors.blackGreen,
                                         widget: AuthText(
-                                          text: lang.enroll,
+                                          text: lang.free_enroll,
                                           size: 16,
                                           color: appColors.whiteText,
                                           fontWeight: FontWeight.w500,
