@@ -91,17 +91,23 @@ class TeacherProfilePage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Profilestate(
-                          title: lang.Total_Courses,
-                          value: (user.created_courses ?? 0).toString(),
+                        Expanded(
+                          child: Profilestate(
+                            title: lang.Total_Courses,
+                            value: (user.created_courses ?? 0).toString(),
+                          ),
                         ),
-                        Profilestate(
-                          title: lang.Total_Paths,
-                          value: (user.created_paths ?? 0).toString(),
+                        Expanded(
+                          child: Profilestate(
+                            title: lang.Total_Paths,
+                            value: (user.created_paths ?? 0).toString(),
+                          ),
                         ),
-                        Profilestate(
-                          title: lang.Total_Contests,
-                          value: (user.created_contests ?? 0).toString(),
+                        Expanded(
+                          child: Profilestate(
+                            title: lang.Total_Contests,
+                            value: (user.created_contests ?? 0).toString(),
+                          ),
                         ),
                       ],
                     ),

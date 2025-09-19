@@ -99,12 +99,12 @@ class MainHeader extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 10.h),
+                  cubit.studentProfileModel.gitHubAccount != null?
                   OnBoardingContainer(
                     onTap: () {
-                      if (cubit.studentProfileModel.gitHubAccount != null) {
-                        GlobalFunc.launchURL(
+                     GlobalFunc.launchURL(
                             cubit.studentProfileModel.gitHubAccount!);
-                      }
+                      
                     },
                     widget: Row(
                       children: [
@@ -123,7 +123,7 @@ class MainHeader extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
+                  ):Container(),
                   SizedBox(height: 10.h),
                   if (cubit.studentProfileModel.balance != null)
                     Row(

@@ -5,8 +5,7 @@ import 'package:lms/Helper/cach_helper.dart';
 import 'package:lms/Helper/dio_helper.dart';
 import 'package:lms/Module/Notifications/Cubit/notification_state.dart';
 import 'package:lms/Module/Notifications/Model/notification_model.dart';
-import 'package:lms/Module/UserFriend/Cubit/user_friend_state.dart';
-import 'package:lms/Module/UserFriend/Model/user_frind_model.dart';
+ import 'package:lms/Module/UserFriend/Model/user_frind_model.dart';
 import 'package:lms/generated/l10n.dart';
 
 class NotificationCubit extends Cubit<NotificationState> {

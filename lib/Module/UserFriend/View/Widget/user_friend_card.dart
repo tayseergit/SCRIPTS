@@ -9,6 +9,7 @@ import 'package:lms/Module/Them/cubit/app_color_state.dart';
 import 'package:lms/Module/UserFriend/Cubit/user_friend_cubit.dart';
 import 'package:lms/Module/UserFriend/Model/user_frind_model.dart';
 import 'package:lms/Module/mainWidget/shake_animation.dart';
+import 'package:lms/generated/l10n.dart';
 
 class Userfriendcard extends StatelessWidget {
   final Friend friend;
@@ -168,28 +169,22 @@ class Userfriendcard extends StatelessWidget {
                                       showDialog(
                                         context: innerContext,
                                         builder: (context) => AlertDialog(
-                                          title: const Text('تأكيد الحذف'),
+                                          title:   Text(S.of(context).delete_confirmation),
                                           content: Text(
-                                              'هل تريد حذف ${friend.name} من قائمة الأصدقاء؟'),
+                                              S.of(context).delete_message),
                                           actions: [
                                             TextButton(
                                               onPressed: () =>
                                                   Navigator.pop(context),
-                                              child: const Text('إلغاء'),
+                                              child: Text(S.of(context).cancel),
                                             ),
                                             TextButton(
                                               onPressed: () {
                                                 cubit.DeletFriend(friend);
                                                 Navigator.pop(context);
-                                                CustomSnackbar.show(
-                                                  context: context,
-                                                  duration: 5,
-                                                  fillColor: appColors.ok,
-                                                  message:
-                                                      "Remove Friend Successful",
-                                                );
+                                                 
                                               },
-                                              child: const Text('حذف',
+                                              child:   Text(S.of(context).delete,
                                                   style: TextStyle(
                                                       color: Colors.red)),
                                             ),

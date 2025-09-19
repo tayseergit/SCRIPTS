@@ -18,3 +18,4 @@ class UserFriendError extends UserFriendState {
 }
 
 class UserFriendDeletSuccess extends UserFriendState {}
+class UnAuth extends UserFriendState {}

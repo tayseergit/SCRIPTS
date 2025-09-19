@@ -13,6 +13,7 @@ import 'package:lms/Module/mainWidget/TopWave_more_Clipper.dart';
 import 'package:lms/Module/mainWidget/authText.dart';
 import 'package:lms/Module/mainWidget/loading.dart';
 import 'package:lms/Module/mainWidget/loading_container.dart';
+import 'package:lms/Module/mainWidget/no_auth.dart';
 import 'package:lms/generated/l10n.dart';
 
 class UserFriendPage extends StatelessWidget {
@@ -37,7 +38,11 @@ class UserFriendPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: appColors.pageBackground,
         body: BlocConsumer<UserFriendCubit, UserFriendState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is UnAuth) {
+              showNoAuthDialog(context);
+            }
+          },
           builder: (context, state) {
             if (state is UserFriendLoading) {
               return Center(

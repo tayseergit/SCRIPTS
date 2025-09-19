@@ -194,7 +194,10 @@
   "add": "Add",
   "friend_added_success": "Friend added successfully",
     "already_friend": "This user is already your friend",
-    "free_enroll":"free enroll"
+    "free_enroll":"free enroll",
+    "delete_confirmation": "Delete Confirmation",
+  "delete_message": "Do you want to delete from the friends list?",
+   "delete": "Delete"
   
 
  

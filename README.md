@@ -50,10 +50,10 @@ The app creates a gamified and interactive environment with achievements, leader
 - Real-time **leaderboard** to rank participants  
 
 ### 🚀 Projects
-
+<p>
 <img src="assets/screenshots/add_project.jpg" alt="Courses Feature" width="150"/>
 <img src="assets/screenshots/project.jpg" alt="Courses Feature" width="150"/>
-
+</p>
 - Showcase programming projects added by users  
 - Projects are **imported from GitHub** with description & demo link  
 - Users can **submit their own projects** directly to the platform  

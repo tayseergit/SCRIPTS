@@ -1523,6 +1523,31 @@ class S {
   String get free_enroll {
     return Intl.message('free enroll', name: 'free_enroll', desc: '', args: []);
   }
+
+  /// `Delete Confirmation`
+  String get delete_confirmation {
+    return Intl.message(
+      'Delete Confirmation',
+      name: 'delete_confirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to delete from the friends list?`
+  String get delete_message {
+    return Intl.message(
+      'Do you want to delete from the friends list?',
+      name: 'delete_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message('Delete', name: 'delete', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

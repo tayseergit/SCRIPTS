@@ -193,7 +193,10 @@
    "add": "إضافة",
   "friend_added_success": "تمت إضافة الصديق بنجاح ",
     "already_friend": "هذا المستخدم موجود بالفعل في قائمة أصدقائك",
-    "free_enroll":"اشترك مجانا"
+    "free_enroll":"اشترك مجانا",
+     "delete_confirmation": "تأكيد الحذف",
+  "delete_message": "هل تريد حذف {name} من قائمة الأصدقاء؟",
+   "delete": "حذف"
 
  
 

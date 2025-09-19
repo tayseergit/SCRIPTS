@@ -11,7 +11,7 @@ import 'package:lms/generated/l10n.dart';
 import 'contest_state.dart';
 
 class ContestCubit extends Cubit<ContestState> {
-  ContestCubit({required this .context}) : super(ContestInitial());
+  ContestCubit({required this.context}) : super(ContestInitial());
 
   ContestsResponse? contestResponse;
   BuildContext context;
@@ -93,7 +93,7 @@ class ContestCubit extends Cubit<ContestState> {
         hasMorePages = meta.currentPage < meta.lastPage;
         currentPage = meta.currentPage + 1;
         if (hasMorePages) currentPage++;
-
+        print(contestResponse!.contests);
         emit(ContestSuccess());
       } else {
         emit(ContestError(message: S.of(context).error_occurred));
@@ -102,7 +102,7 @@ class ContestCubit extends Cubit<ContestState> {
       emit(ContestError(message: S.of(context).error_in_server));
     } on DioException catch (e) {
       emit(ContestError(
-        message: "حدث خطأ في السيرفر: ${e.response?.statusCode ?? ''}",
+        message: S.of(context).error_occurred,
       ));
     } catch (_) {
       emit(ContestError(message: S.of(context).error_in_server));

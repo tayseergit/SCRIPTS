@@ -100,6 +100,8 @@ class UserFriendCubit extends Cubit<UserFriendState> {
       if (response.statusCode == 200) {
         emit(UserFriendDeletSuccess());
         await fetchAllFriend(userId);
+      } else if (response.statusCode == 401) {
+        emit(UnAuth());
       } else {
         emit(UserFriendError(
           masseg: 'Failed with status code: ${response.statusCode}',

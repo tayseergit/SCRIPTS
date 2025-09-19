@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(Active, Ended) =>
       "{status, select, active {نشط} ended {منتهية} coming {قريباً}";
 
+  static String m1(name) => "هل تريد حذف ${name} من قائمة الأصدقاء؟";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "About_this_course": MessageLookupByLibrary.simpleMessage("عن هذه الدورة"),
@@ -150,7 +152,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "current_streak": MessageLookupByLibrary.simpleMessage("السلسلة الحالية"),
     "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
     "days": MessageLookupByLibrary.simpleMessage("أيام"),
+    "delete": MessageLookupByLibrary.simpleMessage("حذف"),
+    "delete_confirmation": MessageLookupByLibrary.simpleMessage("تأكيد الحذف"),
     "delete_history": MessageLookupByLibrary.simpleMessage("حذف السجل"),
+    "delete_message": m1,
     "demo_url": MessageLookupByLibrary.simpleMessage("رابط العرض التجريبي"),
     "details": MessageLookupByLibrary.simpleMessage("تفاصيل"),
     "do_you_want_add": MessageLookupByLibrary.simpleMessage("هل تريد إضافة"),

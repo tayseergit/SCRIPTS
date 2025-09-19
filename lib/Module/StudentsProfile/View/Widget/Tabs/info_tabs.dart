@@ -18,7 +18,8 @@ class InfoTabs extends StatelessWidget {
           Expanded(
             child: Profilestate(
                 title: lang.current_streak,
-                value: '${cubit.studentProfileModel.points} ${lang.days}'),
+                value:
+                    '${cubit.studentProfileModel.currentStreak} ${lang.days}'),
           ),
           Expanded(
             child: Profilestate(
@@ -30,7 +31,6 @@ class InfoTabs extends StatelessWidget {
                 title: lang.total_points,
                 value: "${cubit.studentProfileModel.points}"),
           ),
-           
         ],
       ),
     );

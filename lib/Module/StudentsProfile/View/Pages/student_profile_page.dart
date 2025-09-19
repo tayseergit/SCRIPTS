@@ -31,8 +31,7 @@ class StudentProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final appColors = context.read<ThemeCubit>().state;
     return BlocProvider(
-      create: (context) =>
-          StudentProfileCubit()..getProfile(userid),
+      create: (context) => StudentProfileCubit()..getProfile(userid),
       child: BlocConsumer<StudentProfileCubit, StudentProfileState>(
         listener: (context, state) {
           if (state is ProfileError) {}
@@ -47,6 +46,7 @@ class StudentProfilePage extends StatelessWidget {
 
           return SafeArea(
             child: Scaffold(
+              backgroundColor: appColors.pageBackground,
               body: Builder(
                 builder: (context) {
                   if (state is ProfileLoading) {

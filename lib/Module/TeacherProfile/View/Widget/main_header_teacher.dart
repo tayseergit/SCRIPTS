@@ -99,41 +99,29 @@ class MainHeader extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 10.h),
-                OnBoardingContainer(
-                  onTap: () {
-                    if (user.gitHubAccount != null) {
-                      GlobalFunc.launchURL(user.gitHubAccount!);
-                    }
-                  },
-                  widget: InkWell(
-                    onTap: () async {
-                     if (user.gitHubAccount != null) {
-                        final Uri url = Uri.parse(
-                          user.gitHubAccount!); 
-                      if (!await launchUrl(url,
-                          mode: LaunchMode.externalApplication)) {
-                        throw 'Could not launch $url';
-                      }
-                     }
-                    },
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          Images.github,
-                          height: 20.h,
-                          width: 20.w,
+                user.gitHubAccount != null
+                    ? OnBoardingContainer(
+                        onTap: () {
+                          GlobalFunc.launchURL(user.gitHubAccount!);
+                        },
+                        widget: Row(
+                          children: [
+                            Image.asset(
+                              Images.github,
+                              height: 20.h,
+                              width: 20.w,
+                            ),
+                            SizedBox(width: 10.w),
+                            AuthText(
+                              text: 'GitHub Account',
+                              size: 12.sp,
+                              color: appColors.mainText,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ],
                         ),
-                        SizedBox(width: 10.w),
-                        AuthText(
-                          text: 'GitHub Account',
-                          size: 12.sp,
-                          color: appColors.mainText,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                      )
+                    : Container(),
                 SizedBox(height: 10.h),
                 if (user.balance != null)
                   Row(

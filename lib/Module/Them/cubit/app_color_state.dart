@@ -67,7 +67,7 @@ class ThemeState {
   factory ThemeState.light() {
     return ThemeState(
       isDarkMode: false,
-      primary: const Color.from(alpha: 1, red: 0.729, green: 0.729, blue: 0.729),
+      primary: const Color(0xFF6BC8FF),
       fieldBackground: const Color(0x0F0F9CEF),
       pageBackground: const Color(0xFFFFFFFF),
       whiteText: const Color(0xFFFFFFFF),
