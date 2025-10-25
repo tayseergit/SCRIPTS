@@ -113,7 +113,7 @@ The **Flutter app** follows a modular and scalable architecture.
 - <a href="https://www.linkedin.com/in/abd-alrzaq-najieb-7357b3341?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">Abd Alrzaq Najib</a>  
 - <a href="https://www.linkedin.com/in/abdalrhim-sarhan-33903a383?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">Abd Alrahim Sarhan</a>
 
-### 📱 Mobile Front-end (Flutter)
+### 📱 Mobile App (Flutter)
 - <a href="https://www.linkedin.com/in/tayseer-matar-7b3a83333?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">Tayseer Matar</a>  
 - <a href="https://www.linkedin.com/in/baraa-alkhateb-3b50b5352?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">Bara’ Al-Khatib</a>
 
