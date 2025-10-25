@@ -6,9 +6,11 @@ The app creates a gamified and interactive environment with achievements, leader
 ---
 ## 🔗 Links
 
-- 📱 **Backend Repo** → [Go to Repo](https://github.com/ABDALRZAQ345/Scripts)
-- 🌐 **Linkedin Post** → [Visit](https://www.linkedin.com/posts/abd-alrzaq-najieb-7357b3341_%D9%8A%D8%B3%D8%B9%D8%AF%D9%86%D8%A7-%D9%86%D8%B4%D8%A7%D8%B1%D9%83%D9%83%D9%85%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D9%86%D8%A7-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF-scripts-ugcPost-7371841744121851904-KeZv?utm_source=share&utm_medium=member_android&rcm=ACoAAFP8iLcBFIhC-C5I9GaaPzH8-7bu5aBXaIk)
- ---
+- 📱 **Backend Repo** → <a href="https://github.com/ABDALRZAQ345/Scripts" target="_blank">Go to Repo</a>  
+- 🌐 **LinkedIn Post** → <a href="https://www.linkedin.com/posts/abd-alrzaq-najieb-7357b3341_%D9%8A%D8%B3%D8%B9%D8%AF%D9%86%D8%A7-%D9%86%D8%B4%D8%A7%D8%B1%D9%83%D9%83%D9%85%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D9%86%D8%A7-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF-scripts-ugcPost-7371841744121851904-KeZv?utm_source=share&utm_medium=member_android&rcm=ACoAAFP8iLcBFIhC-C5I9GaaPzH8-7bu5aBXaIk" target="_blank">Visit</a>
+
+---
+ 
 ## ✨ Main Features
 
 ### 🔑 Login & Register
@@ -103,3 +105,20 @@ The app creates a gamified and interactive environment with achievements, leader
 
 ## 🏗️ Flutter Project Architecture
 The **Flutter app** follows a modular and scalable architecture.
+---
+
+## 👥 Team Members
+
+### 🔧 Back-end (Laravel)
+- <a href="https://www.linkedin.com/in/abd-alrzaq-najieb-7357b3341?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">Abd Alrzaq Najib</a>  
+- <a href="https://www.linkedin.com/in/abdalrhim-sarhan-33903a383?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">Abd Alrahim Sarhan</a>
+
+### 📱 Mobile Front-end (Flutter)
+- <a href="https://www.linkedin.com/in/tayseer-matar-7b3a83333?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">Tayseer Matar</a>  
+- <a href="https://www.linkedin.com/in/baraa-alkhateb-3b50b5352?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">Bara’ Al-Khatib</a>
+
+### 💻 Web Front-end (React)
+- <a href="https://www.linkedin.com/in/bilallmustafaa?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">Bilal Khubayeh</a>
+
+---
+
